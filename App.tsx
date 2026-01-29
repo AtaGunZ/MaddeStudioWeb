@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Language, Page } from './types';
+import { Page } from './types';
 import { Navbar } from './components/Navbar';
 import { Menu } from './components/Menu';
 import { Hero } from './components/Hero';
@@ -10,29 +10,11 @@ import { Fragments } from './components/Fragments';
 import { Contact } from './components/Contact';
 import { TEXTS } from './constants';
 import { AnimatePresence, motion } from 'framer-motion';
+import { useApp } from './contexts/AppContext';
 
 const App: React.FC = () => {
-  const [language, setLanguage] = useState<Language>(Language.EN);
-  const [darkMode, setDarkMode] = useState<boolean>(false);
+  const { language, darkMode, page } = useApp();
   const [loading, setLoading] = useState(true);
-  
-  // Navigation State
-  const [page, setPage] = useState<Page>(Page.HOME);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // Initialize theme class on body
-  useEffect(() => {
-    if (darkMode) {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [darkMode]);
-
-  // Scroll to top on page change
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [page]);
 
   // Fake Loading Screen
   useEffect(() => {
@@ -44,7 +26,7 @@ const App: React.FC = () => {
 
   if (loading) {
     return (
-      <div className={`fixed inset-0 z-[100] flex items-center justify-center transition-colors duration-300 ${darkMode ? 'bg-madde-black text-white' : 'bg-madde-white text-black'}`}>
+      <div className="fixed inset-0 z-[100] flex items-center justify-center transition-colors duration-300 bg-madde-white text-madde-black dark:bg-madde-black dark:text-madde-white">
          <motion.div
             initial={{ scale: 0.8, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
@@ -57,23 +39,8 @@ const App: React.FC = () => {
 
   return (
     <div className="min-h-screen w-full relative selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
-      <Navbar 
-        language={language} 
-        setLanguage={setLanguage}
-        darkMode={darkMode}
-        setDarkMode={setDarkMode}
-        isMenuOpen={isMenuOpen}
-        setIsMenuOpen={setIsMenuOpen}
-        setPage={setPage}
-      />
-
-      <Menu 
-        isOpen={isMenuOpen} 
-        setIsOpen={setIsMenuOpen} 
-        setPage={setPage} 
-        currentPage={page}
-        language={language}
-      />
+      <Navbar />
+      <Menu />
 
       <main className="w-full">
         <AnimatePresence mode='wait'>

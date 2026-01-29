@@ -1,16 +1,10 @@
 import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Language, Page } from '../types';
+import { useApp } from '../contexts/AppContext';
 
-interface MenuProps {
-  isOpen: boolean;
-  setIsOpen: (open: boolean) => void;
-  setPage: (page: Page) => void;
-  currentPage: Page;
-  language: Language;
-}
-
-export const Menu: React.FC<MenuProps> = ({ isOpen, setIsOpen, setPage, currentPage, language }) => {
+export const Menu: React.FC = () => {
+  const { isMenuOpen, setIsMenuOpen, setPage, page, language } = useApp();
   const menuItems = [
     { page: Page.HOME, label: { [Language.EN]: "Index", [Language.TR]: "İndeks" } },
     { page: Page.FRAGMENTS, label: { [Language.EN]: "Fragments", [Language.TR]: "Parçalar" } },
@@ -19,7 +13,7 @@ export const Menu: React.FC<MenuProps> = ({ isOpen, setIsOpen, setPage, currentP
 
   return (
     <AnimatePresence>
-      {isOpen && (
+      {isMenuOpen && (
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
@@ -37,9 +31,9 @@ export const Menu: React.FC<MenuProps> = ({ isOpen, setIsOpen, setPage, currentP
                 transition={{ duration: 0.5, delay: 0.1 }}
                 onClick={() => {
                   setPage(item.page);
-                  setIsOpen(false);
+                  setIsMenuOpen(false);
                 }}
-                className={`text-5xl md:text-8xl font-bold tracking-tighter text-left transition-colors duration-300 hover:text-madde-gray ${currentPage === item.page ? 'opacity-100' : 'opacity-30 hover:opacity-100'}`}
+                className={`text-5xl md:text-8xl font-bold tracking-tighter text-left transition-colors duration-300 hover:text-madde-gray ${page === item.page ? 'opacity-100' : 'opacity-30 hover:opacity-100'}`}
               >
                 {item.label[language]}
               </motion.button>

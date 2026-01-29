@@ -1,26 +1,10 @@
 import React from 'react';
 import { Language, Page } from '../types';
 import { motion } from 'framer-motion';
+import { useApp } from '../contexts/AppContext';
 
-interface NavbarProps {
-  language: Language;
-  setLanguage: (lang: Language) => void;
-  darkMode: boolean;
-  setDarkMode: (dark: boolean) => void;
-  isMenuOpen: boolean;
-  setIsMenuOpen: (open: boolean) => void;
-  setPage: (page: Page) => void;
-}
-
-export const Navbar: React.FC<NavbarProps> = ({ 
-  language, 
-  setLanguage, 
-  darkMode, 
-  setDarkMode,
-  isMenuOpen,
-  setIsMenuOpen,
-  setPage
-}) => {
+export const Navbar: React.FC = () => {
+  const { language, setLanguage, darkMode, setDarkMode, isMenuOpen, setIsMenuOpen, setPage } = useApp();
   return (
     <motion.nav 
       initial={{ y: -100 }}
