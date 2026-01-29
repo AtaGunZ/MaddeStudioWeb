@@ -5,7 +5,9 @@ export enum Language {
 
 export enum Page {
   HOME = 'Home',
+  WORKS = 'Works',
   FRAGMENTS = 'Fragments',
+  STUDIO = 'Studio',
   CONTACT = 'Contact'
 }
 

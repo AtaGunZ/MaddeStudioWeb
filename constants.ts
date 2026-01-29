@@ -47,14 +47,28 @@ export const TEXTS = {
       [Language.TR]: "Stüdyo olmaktan kültürel aktöre."
     }
   },
-  contact: {
-    title: {
-      [Language.EN]: "Let's give form to an idea.",
-      [Language.TR]: "Bir fikre form verelim."
+    contact: {
+      title: {
+        [Language.EN]: "Let's give form to an idea.",
+        [Language.TR]: "Bir fikre form verelim."
+      },
+      mail: "info@maddestudio.com"
     },
-    mail: "hello@maddestudio.com"
-  }
-};
+    footer: {
+      inquiries: {
+        [Language.EN]: "Inquiries",
+        [Language.TR]: "İletişim"
+      },
+      connect: {
+        [Language.EN]: "Connect",
+        [Language.TR]: "Bağlantıda Kalın"
+      },
+      backToTop: {
+        [Language.EN]: "Back to top",
+        [Language.TR]: "Başa dön"
+      }
+    }
+  };
 
 export const SERVICES: Service[] = [
   {

@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { Page } from './types';
 import { Navbar } from './components/Navbar';
-import { Menu } from './components/Menu';
 import { Hero } from './components/Hero';
 import { Manifesto } from './components/Manifesto';
 import { Services } from './components/Services';
 import { Works } from './components/Works';
+import { WorksPage } from './components/WorksPage';
+import { Studio } from './components/Studio';
 import { Fragments } from './components/Fragments';
 import { Contact } from './components/Contact';
+import { Footer } from './components/Footer';
 import { TEXTS } from './constants';
 import { AnimatePresence, motion } from 'framer-motion';
 import { useApp } from './contexts/AppContext';
@@ -40,7 +42,6 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen w-full relative selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
       <Navbar />
-      <Menu />
 
       <main className="w-full">
         <AnimatePresence mode='wait'>
@@ -58,6 +59,14 @@ const App: React.FC = () => {
             </motion.div>
           )}
 
+          {page === Page.WORKS && (
+            <WorksPage key="works" language={language} />
+          )}
+
+          {page === Page.STUDIO && (
+            <Studio key="studio" language={language} />
+          )}
+
           {page === Page.FRAGMENTS && (
             <Fragments key="fragments" language={language} />
           )}
@@ -67,6 +76,8 @@ const App: React.FC = () => {
           )}
         </AnimatePresence>
       </main>
+
+      <Footer />
 
       {/* Smooth Scroll Noise Overlay (Optional Texture) */}
       <div className="fixed inset-0 opacity-[0.03] pointer-events-none z-[30]" style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")' }} />

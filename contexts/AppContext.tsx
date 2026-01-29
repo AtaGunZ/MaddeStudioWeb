@@ -8,8 +8,6 @@ interface AppContextType {
   setDarkMode: (dark: boolean) => void;
   page: Page;
   setPage: (page: Page) => void;
-  isMenuOpen: boolean;
-  setIsMenuOpen: (open: boolean) => void;
 }
 
 const AppContext = createContext<AppContextType | undefined>(undefined);
@@ -30,7 +28,6 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
   const [language, setLanguage] = useState<Language>(Language.EN);
   const [darkMode, setDarkMode] = useState<boolean>(false);
   const [page, setPage] = useState<Page>(Page.HOME);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   // Initialize theme class on body
   useEffect(() => {
@@ -53,8 +50,6 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     setDarkMode,
     page,
     setPage,
-    isMenuOpen,
-    setIsMenuOpen,
   };
 
   return <AppContext.Provider value={value}>{children}</AppContext.Provider>;
