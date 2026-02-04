@@ -5,7 +5,10 @@ import { Hero } from './components/Hero';
 import { Manifesto } from './components/Manifesto';
 import { Services } from './components/Services';
 import { Works } from './components/Works';
+import { Clients } from './components/Clients';
 import { WorksPage } from './components/WorksPage';
+import { ProjectDetail } from './components/ProjectDetail';
+import { FragmentDetail } from './components/FragmentDetail';
 import { Studio } from './components/Studio';
 import { Fragments } from './components/Fragments';
 import { Contact } from './components/Contact';
@@ -29,12 +32,12 @@ const App: React.FC = () => {
   if (loading) {
     return (
       <div className="fixed inset-0 z-[100] flex items-center justify-center transition-colors duration-300 bg-madde-white text-madde-black dark:bg-madde-black dark:text-madde-white">
-         <motion.div
-            initial={{ scale: 0.8, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            className="w-12 h-12 bg-current animate-spin"
-            style={{ borderRadius: "20%" }} 
-         />
+        <motion.div
+          initial={{ scale: 0.8, opacity: 0 }}
+          animate={{ scale: 1, opacity: 1 }}
+          className="w-12 h-12 bg-current animate-spin"
+          style={{ borderRadius: "20%" }}
+        />
       </div>
     );
   }
@@ -55,12 +58,21 @@ const App: React.FC = () => {
               <Hero text={TEXTS.hero.slogan} currentLang={language} />
               <Manifesto language={language} />
               <Services language={language} />
+              <Clients language={language} />
               <Works language={language} />
             </motion.div>
           )}
 
           {page === Page.WORKS && (
             <WorksPage key="works" language={language} />
+          )}
+
+          {page === Page.PROJECT_DETAIL && (
+            <ProjectDetail key="project-detail" language={language} />
+          )}
+
+          {page === Page.FRAGMENT_DETAIL && (
+            <FragmentDetail key="fragment-detail" language={language} />
           )}
 
           {page === Page.STUDIO && (

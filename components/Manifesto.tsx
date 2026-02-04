@@ -28,7 +28,7 @@ export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
 
   return (
     <section className="py-24 md:py-48 px-6 md:px-12 max-w-5xl mx-auto flex flex-col justify-center min-h-[50vh]">
-      <motion.div 
+      <motion.div
         ref={ref}
         variants={container}
         initial="hidden"
@@ -38,7 +38,7 @@ export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
         <motion.p variants={item} className="mb-8">
           {TEXTS.manifesto.p1[language]}
         </motion.p>
-        <motion.p variants={item} className="mb-8 md:pl-24">
+        <motion.p variants={item} className="mb-8 md:pl-24 text-madde-black/60 dark:text-madde-white/60">
           {TEXTS.manifesto.p2[language]}
         </motion.p>
         <motion.p variants={item} className="md:pl-48 text-madde-gray dark:text-gray-400">

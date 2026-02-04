@@ -8,7 +8,9 @@ export enum Page {
   WORKS = 'Works',
   FRAGMENTS = 'Fragments',
   STUDIO = 'Studio',
-  CONTACT = 'Contact'
+  CONTACT = 'Contact',
+  PROJECT_DETAIL = 'ProjectDetail',
+  FRAGMENT_DETAIL = 'FragmentDetail'
 }
 
 export interface ContentText {
@@ -21,11 +23,18 @@ export interface Project {
   title: string;
   description: ContentText;
   image: string;
+  client: string;
+  year: string;
+  services: string[];
+  challenge: ContentText;
+  solution: ContentText;
+  gallery: string[];
 }
 
 export interface Service {
-  title: string;
+  title: ContentText;
   process: ContentText;
+  image: string;
 }
 
 export interface Fragment {
@@ -34,4 +43,11 @@ export interface Fragment {
   type: 'News' | 'Sketch';
   date: string;
   image: string;
+  content?: ContentText;
+}
+
+export interface Client {
+  id: string;
+  name: string;
+  logo: string;
 }
