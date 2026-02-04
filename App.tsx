@@ -21,11 +21,11 @@ const App: React.FC = () => {
   const { language, darkMode, page } = useApp();
   const [loading, setLoading] = useState(true);
 
-  // Fake Loading Screen
+  // Loading Screen Duration
   useEffect(() => {
     const timer = setTimeout(() => {
       setLoading(false);
-    }, 2000);
+    }, 1500); // Shorter loading for smoother transition
     return () => clearTimeout(timer);
   }, []);
 
@@ -36,7 +36,6 @@ const App: React.FC = () => {
           initial={{ scale: 0.8, opacity: 0 }}
           animate={{ scale: 1, opacity: 1 }}
           className="w-12 h-12 bg-current animate-spin"
-          style={{ borderRadius: "20%" }}
         />
       </div>
     );
