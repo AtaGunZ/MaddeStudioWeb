@@ -1,13 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Language } from '../types';
 import { TEXTS, SERVICES } from '../constants';
+import { useApp } from '../contexts/AppContext';
 
 interface StudioProps {
   language: Language;
 }
 
+// Skills with their associated disciplines (some overlap)
+// Format: { en, tr, categories[] }
+const ALL_SKILLS = [
+  { en: '3D Modeling', tr: '3D Modelleme', categories: ['realisticVis', 'dynamicMotion'] },
+  { en: '3D Rendering', tr: '3D Render', categories: ['realisticVis'] },
+  { en: 'Animation', tr: 'Animasyon', categories: ['dynamicMotion', 'storyProcess'] },
+  { en: 'Architectural Visualization', tr: 'Mimari Görselleştirme', categories: ['realisticVis'] },
+  { en: 'Art Direction', tr: 'Sanat Yönetmenliği', categories: ['storyProcess', 'realisticVis'] },
+  { en: 'Brand Strategy', tr: 'Marka Stratejisi', categories: ['storyProcess'] },
+  { en: 'Concept Development', tr: 'Konsept Geliştirme', categories: ['storyProcess', 'dynamicMotion'] },
+  { en: 'Creative Direction', tr: 'Yaratıcı Yönetmenlik', categories: ['storyProcess'] },
+  { en: 'Kinetic Typography', tr: 'Kinetik Tipografi', categories: ['dynamicMotion'] },
+  { en: 'Lighting Design', tr: 'Aydınlatma Tasarımı', categories: ['realisticVis', 'dynamicMotion'] },
+  { en: 'Material Design', tr: 'Malzeme Tasarımı', categories: ['realisticVis'] },
+  { en: 'Motion Graphics', tr: 'Motion Graphics', categories: ['dynamicMotion'] },
+  { en: 'Photorealistic CGI', tr: 'Fotorealistik CGI', categories: ['realisticVis'] },
+  { en: 'Product Visualization', tr: 'Ürün Görselleştirme', categories: ['realisticVis'] },
+  { en: 'Storyboarding', tr: 'Storyboard', categories: ['storyProcess', 'dynamicMotion'] },
+  { en: 'UI/UX Design', tr: 'UI/UX Tasarım', categories: ['storyProcess'] },
+  { en: 'VFX', tr: 'VFX', categories: ['dynamicMotion', 'realisticVis'] },
+  { en: 'Video Production', tr: 'Video Prodüksiyon', categories: ['dynamicMotion'] },
+  { en: 'Visual Effects', tr: 'Görsel Efektler', categories: ['dynamicMotion'] },
+];
+
 export const Studio: React.FC<StudioProps> = ({ language }) => {
+  const [hoveredCard, setHoveredCard] = useState<string | null>(null);
+  const { darkMode } = useApp();
+
+  // Map service index to category
+  const getCategoryFromIndex = (index: number): string => {
+    const categories = ['realisticVis', 'dynamicMotion', 'storyProcess'];
+    return categories[index] || '';
+  };
+
   return (
     <motion.div
       key="studio"
@@ -95,38 +129,140 @@ export const Studio: React.FC<StudioProps> = ({ language }) => {
         </div>
       </section>
 
-      {/* DISCIPLINES SECTION */}
+      {/* DISCIPLINES SECTION - Redesigned */}
       <section className="py-32 md:py-48 px-6 md:px-12 border-t border-black/10 dark:border-white/10">
         <div className="max-w-[1920px] mx-auto">
-          <div className="flex flex-col md:flex-row justify-between items-baseline mb-24">
-            <h2 className="text-xs font-mono uppercase tracking-widest text-madde-gray mb-8 md:mb-0">
-              {TEXTS.studio.disciplines[language]}
-            </h2>
-          </div>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24">
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-px bg-black/10 dark:bg-white/10 border border-black/10 dark:border-white/10 bg-opacity-50">
-            {SERVICES.map((service, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, scale: 0.95 }}
-                whileInView={{ opacity: 1, scale: 1 }}
+            {/* Left Side - Title and Skills */}
+            <div className="lg:col-span-5">
+              {/* Big Title */}
+              <motion.h2
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, duration: 0.5 }}
-                className="bg-madde-white dark:bg-madde-black p-12 h-[400px] flex flex-col justify-between group hover:bg-gray-50 dark:hover:bg-gray-900 transition-colors duration-500"
+                transition={{ duration: 0.8 }}
+                className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-16"
               >
-                <span className="text-xs font-mono text-madde-gray">0{index + 1}</span>
+                {TEXTS.studio.disciplines[language]}
+              </motion.h2>
 
-                <div>
-                  <h3 className="text-3xl font-light mb-4 group-hover:translate-x-2 transition-transform duration-500">
-                    {service.title[language]}
-                  </h3>
-                  <div className="w-12 h-px bg-black dark:bg-white my-6 opacity-20 group-hover:w-full transition-all duration-700" />
-                  <p className="text-sm font-mono text-madde-gray uppercase tracking-widest">
-                    {service.process[language]}
-                  </p>
-                </div>
+              {/* Skills List */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+                className="flex flex-wrap gap-x-6 gap-y-3"
+              >
+                {ALL_SKILLS.map((skill, index) => {
+                  const isActive = hoveredCard ? skill.categories.includes(hoveredCard) : false;
+                  return (
+                    <motion.span
+                      key={index}
+                      initial={false}
+                      animate={{
+                        fontWeight: isActive ? 700 : 400,
+                        opacity: hoveredCard && !isActive ? 0.3 : 1,
+                        scale: isActive ? 1.05 : 1,
+                        color: isActive ? (darkMode ? '#FFFFFF' : '#000000') : (darkMode ? '#A1A1AA' : '#71717A')
+                      }}
+                      transition={{
+                        type: "spring",
+                        stiffness: 80,
+                        damping: 25,
+                        mass: 1
+                      }}
+                      className="text-sm leading-relaxed whitespace-nowrap cursor-default origin-left"
+                    >
+                      {language === Language.EN ? skill.en : skill.tr}
+                    </motion.span>
+                  );
+                })}
               </motion.div>
-            ))}
+            </div>
+
+            {/* Right Side - Cards */}
+            <div className="lg:col-span-7">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                {SERVICES.map((service, index) => {
+                  const category = getCategoryFromIndex(index);
+                  const isHovered = hoveredCard === category;
+
+                  return (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, y: 30 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: index * 0.1, duration: 0.5 }}
+                      onMouseEnter={() => setHoveredCard(category)}
+                      onMouseLeave={() => setHoveredCard(null)}
+                      className="relative h-[400px] md:h-[500px] overflow-hidden cursor-pointer group"
+                    >
+                      {/* Background Image */}
+                      <div
+                        className="absolute inset-0 bg-cover bg-center transition-all duration-700"
+                        style={{
+                          backgroundImage: `url(${service.image})`,
+                          filter: isHovered ? 'grayscale(0%) brightness(1)' : 'grayscale(100%) brightness(0.7)',
+                          transform: isHovered ? 'scale(1.1)' : 'scale(1)',
+                        }}
+                      />
+
+                      {/* Overlay */}
+                      <div
+                        className="absolute inset-0 transition-all duration-500"
+                        style={{
+                          background: isHovered
+                            ? 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0.2) 50%, transparent 100%)'
+                            : 'linear-gradient(to top, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.4) 100%)',
+                        }}
+                      />
+
+                      {/* Content */}
+                      <div className="absolute inset-0 p-6 flex flex-col justify-end text-white">
+                        <motion.span
+                          className="text-xs font-mono uppercase tracking-widest mb-2 opacity-70"
+                          animate={{ y: isHovered ? -10 : 0 }}
+                          transition={{ duration: 0.3 }}
+                        >
+                          0{index + 1}
+                        </motion.span>
+
+                        <motion.h3
+                          className="text-2xl md:text-3xl font-bold tracking-tight mb-3"
+                          animate={{ y: isHovered ? -10 : 0 }}
+                          transition={{ duration: 0.3, delay: 0.05 }}
+                        >
+                          {service.title[language]}
+                        </motion.h3>
+
+                        <motion.p
+                          className="text-xs font-mono uppercase tracking-widest opacity-60"
+                          animate={{
+                            y: isHovered ? -10 : 0,
+                            opacity: isHovered ? 1 : 0.6,
+                          }}
+                          transition={{ duration: 0.3, delay: 0.1 }}
+                        >
+                          {service.process[language]}
+                        </motion.p>
+
+                        {/* Hover indicator line */}
+                        <motion.div
+                          className="mt-4 h-px bg-white"
+                          initial={{ width: 0 }}
+                          animate={{ width: isHovered ? '100%' : '0%' }}
+                          transition={{ duration: 0.5 }}
+                        />
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
