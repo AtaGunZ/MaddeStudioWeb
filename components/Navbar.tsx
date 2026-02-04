@@ -214,10 +214,11 @@ export const Navbar: React.FC = () => {
                   </button>
                 ))}
                 <button
+                  key="contact"
                   onClick={() => handleMobileNavClick(Page.CONTACT)}
                   className="text-madde-black dark:text-madde-white hover:opacity-70 transition-opacity"
                 >
-                  Contact
+                  {TEXTS.navigation.contact[language]}
                 </button>
               </nav>
 
@@ -245,7 +246,7 @@ export const Navbar: React.FC = () => {
                       <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor" stroke="none">
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                       </svg>
-                      <span>Dark Mode</span>
+                      <span>{language === Language.EN ? 'Dark Mode' : 'Karanlık Mod'}</span>
                     </>
                   ) : (
                     <>
@@ -260,7 +261,7 @@ export const Navbar: React.FC = () => {
                         <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
                         <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                       </svg>
-                      <span>Light Mode</span>
+                      <span>{language === Language.EN ? 'Light Mode' : 'Aydınlık Mod'}</span>
                     </>
                   )}
                 </button>
