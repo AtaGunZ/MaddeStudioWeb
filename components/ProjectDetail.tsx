@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { PROJECTS, TEXTS } from '../constants';
+import { PROJECTS, TEXTS, SERVICE_TRANSLATIONS } from '../constants';
 import { Language, Page } from '../types';
 import { useApp } from '../contexts/AppContext';
 
@@ -51,89 +51,161 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
 
             {/* Hero Section */}
             <div className="px-6 md:px-12 mb-24 md:mb-48">
-                <div className="max-w-[1920px] mx-auto">
-                    <motion.h1
-                        initial={{ y: 20, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        className="text-6xl md:text-8xl lg:text-[10rem] font-bold tracking-tighter leading-none mb-12 lg:-ml-2"
+                {/* Fixed Hero Background */}
+                {/* Fixed Hero Background */}
+                {/* Fixed Hero Background */}
+                <div className="fixed top-0 left-0 w-full h-[80vh] z-0 overflow-hidden pointer-events-none">
+                    {/* 1. The Image Layer: Grayscale and dark for both modes, slightly lighter opacity in light mode to maintain visibility against text */}
+                    <img
+                        src={project.image}
+                        alt=""
+                        className="absolute inset-0 w-full h-full object-cover opacity-40 dark:opacity-40 grayscale"
+                    />
+                    {/* 2. The Gradient Mask: Fades out the bottom */}
+                    <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/80 to-madde-white dark:via-black/80 dark:to-madde-black" />
+                </div>
+
+                <div className="relative z-10 pt-32 md:pt-48 pb-12 md:pb-24 px-6 md:px-12 max-w-[1920px] mx-auto">
+                    <motion.div
+                        initial={{ opacity: 0, y: 50 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.8 }}
+                        className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24 mb-24 md:mb-32"
                     >
-                        {project.title}
-                    </motion.h1>
+                        {/* Title and Metadata */}
+                        <div className="md:col-span-12 flex flex-col items-center text-center relative z-20">
+                            <h1 className="text-6xl md:text-9xl font-bold tracking-tighter mb-8 md:mb-12">
+                                {project.title}
+                            </h1>
 
-                    <div className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8 border-t border-black/10 dark:border-white/10 pt-8">
-                        {/* Column 1: Metadata */}
-                        <div className="col-span-1 md:col-span-3 flex flex-col gap-8">
-                            <div>
-                                <span className="block text-xs text-madde-gray uppercase tracking-widest mb-2">{TEXTS.projectDetail.client[language]}</span>
-                                <span className="text-lg md:text-xl font-medium">{project.client}</span>
-                            </div>
-                            <div>
-                                <span className="block text-xs text-madde-gray uppercase tracking-widest mb-2">{TEXTS.projectDetail.year[language]}</span>
-                                <span className="text-lg md:text-xl font-medium">{project.year}</span>
-                            </div>
-                            <div>
-                                <span className="block text-xs text-madde-gray uppercase tracking-widest mb-2">{TEXTS.projectDetail.services[language]}</span>
-                                <ul className="flex flex-col gap-1">
-                                    {project.services?.map((s, i) => (
-                                        <li key={i} className="text-lg md:text-xl font-medium">{s}</li>
-                                    ))}
-                                </ul>
+                            <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 text-sm font-mono uppercase tracking-widest text-madde-gray dark:text-gray-400">
+                                {project.clientLogo ? (
+                                    <img
+                                        src={project.clientLogo}
+                                        alt={project.client}
+                                        className="h-6 md:h-8 w-auto object-contain dark:invert opacity-90"
+                                    />
+                                ) : (
+                                    <span>{project.client}</span>
+                                )}
+                                <span>{project.year}</span>
+                                <span>
+                                    {project.services.map(s => SERVICE_TRANSLATIONS[s]?.[language] || s).join(' / ')}
+                                </span>
                             </div>
                         </div>
 
-                        {/* Column 2: Challenge & Solution */}
-                        <div className="col-span-1 md:col-span-6 md:col-start-6 flex flex-col gap-16">
-                            <div>
-                                <span className="block text-xs text-madde-gray uppercase tracking-widest mb-4">{TEXTS.projectDetail.challenge[language]}</span>
-                                <p className="text-2xl md:text-3xl lg:text-4xl font-light leading-tight">
-                                    {project.challenge?.[language]}
-                                </p>
-                            </div>
-
-                            <div>
-                                <span className="block text-xs text-madde-gray uppercase tracking-widest mb-4">{TEXTS.projectDetail.solution[language]}</span>
-                                <p className="text-xl md:text-2xl leading-relaxed text-madde-gray dark:text-gray-300">
-                                    {project.solution?.[language]}
-                                </p>
+                        {/* Left Column: Challenge */}
+                        <div className="md:col-span-5 md:col-start-2">
+                            <div className="space-y-8">
+                                <div>
+                                    <h3 className="text-xs font-bold uppercase tracking-widest mb-4 text-madde-red dark:text-madde-red">
+                                        {language === Language.EN ? 'The Challenge' : 'Zorluk'}
+                                    </h3>
+                                    <p className="text-xl md:text-2xl leading-relaxed text-madde-black dark:text-madde-white font-light">
+                                        {project.challenge?.[language]}
+                                    </p>
+                                </div>
                             </div>
                         </div>
-                    </div>
+
+                        {/* Right Column: Solution */}
+                        <div className="md:col-span-5">
+                            <div className="space-y-8">
+                                <div>
+                                    <h3 className="text-xs font-bold uppercase tracking-widest mb-4 text-madde-red dark:text-madde-red">
+                                        {language === Language.EN ? 'The Solution' : 'Çözüm'}
+                                    </h3>
+                                    <p className="text-xl md:text-2xl leading-relaxed text-madde-gray dark:text-gray-300">
+                                        {project.solution?.[language]}
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
                 </div>
             </div>
 
             {/* Full Image Hero */}
-            <div className="w-full h-[60vh] md:h-[80vh] overflow-hidden mb-24 md:mb-48 px-6 md:px-12">
+            <div className="relative z-10 w-full h-[60vh] md:h-[80vh] overflow-hidden mb-24 md:mb-48 px-6 md:px-12">
                 <motion.img
                     initial={{ scale: 1.1, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
                     transition={{ duration: 1.5, ease: "easeOut" }}
                     src={project.image}
                     alt={project.title}
-                    className="w-full h-full object-cover rounded-sm md:rounded-lg"
+                    className={`w-full h-full ${project.heroFit === 'contain' ? 'object-contain p-12 bg-neutral-900 dark:bg-black' : 'object-cover'} rounded-sm md:rounded-lg`}
                 />
             </div>
 
             {/* Gallery Grid */}
-            <div className="px-6 md:px-12 mb-24">
+            <div className="relative z-10 px-6 md:px-12 mb-24">
                 <div className="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
-                    {project.gallery?.map((img, index) => (
-                        <motion.div
-                            key={index}
-                            initial={{ opacity: 0, y: 50 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ delay: index * 0.1 }}
-                            className={`aspect-[4/5] md:aspect-[3/4] overflow-hidden ${index % 3 === 0 ? 'md:col-span-2 md:aspect-[16/9]' : ''}`}
-                        >
-                            <img src={img} alt={`Gallery ${index}`} className="w-full h-full object-cover hover:scale-105 transition-transform duration-700" />
-                        </motion.div>
-                    ))}
+                    {project.gallery?.map((item, index) => {
+                        // Use explicit colSpan if provided, otherwise fallback to the pattern (every 3rd item is wide)
+                        const colSpan = item.colSpan ?? (index % 3 === 0 ? 2 : 1);
+                        const isWide = colSpan === 2;
+
+                        return (
+                            <motion.div
+                                key={index}
+                                initial={{ opacity: 0, y: 50 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ delay: index * 0.1 }}
+                                className={isWide ? 'md:col-span-2' : ''}
+                            >
+                                {item.type === 'image' ? (
+                                    <div className={`overflow-hidden w-full`}>
+                                        <img
+                                            src={item.src}
+                                            alt={`Gallery ${index}`}
+                                            className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700"
+                                        />
+                                    </div>
+                                ) : item.type === 'video' ? (
+                                    <div className={`overflow-hidden w-full ${isWide ? 'aspect-[16/9]' : 'aspect-[4/5] md:aspect-[3/4]'}`}>
+                                        <video
+                                            src={item.src}
+                                            poster={item.poster}
+                                            autoPlay={item.autoPlay ?? true}
+                                            loop={item.loop ?? true}
+                                            muted={item.muted ?? true}
+                                            playsInline
+                                            className="w-full h-full object-cover"
+                                        />
+                                    </div>
+                                ) : item.type === 'group' ? (
+                                    <div className="grid grid-cols-2 gap-4 h-full">
+                                        {item.items.map((subItem, i) => (
+                                            <div key={i} className="overflow-hidden w-full">
+                                                <img
+                                                    src={subItem.src}
+                                                    alt={`Group ${index}-${i}`}
+                                                    className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700"
+                                                />
+                                            </div>
+                                        ))}
+                                    </div>
+                                ) : (
+                                    <div className="flex flex-col justify-center h-full py-12 md:px-12 bg-gray-50 dark:bg-zinc-900 rounded-sm">
+                                        {item.title && (
+                                            <h3 className="text-xl font-bold mb-4">{item.title[language]}</h3>
+                                        )}
+                                        <p className="text-xl md:text-3xl font-light leading-relaxed text-madde-black dark:text-madde-white">
+                                            {item.content[language]}
+                                        </p>
+                                    </div>
+                                )}
+                            </motion.div>
+                        );
+                    })}
                 </div>
             </div>
 
             {/* Next Project (Loop) */}
             <div
-                className="relative px-6 md:px-12 py-32 md:py-48 border-t border-black/5 dark:border-white/5 overflow-hidden transition-colors duration-500"
+                className="relative z-10 px-6 md:px-12 py-32 md:py-48 border-t border-black/5 dark:border-white/5 overflow-hidden transition-colors duration-500 bg-madde-white dark:bg-madde-black"
                 onMouseEnter={() => setIsNextHovered(true)}
                 onMouseLeave={() => setIsNextHovered(false)}
             >

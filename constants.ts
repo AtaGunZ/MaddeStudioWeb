@@ -1,4 +1,4 @@
-import { Language, Project, Service, Fragment, Client } from './types';
+import { Language, Project, Service, Fragment, Client, GalleryItem, ContentText } from './types';
 
 export const CLIENTS: Client[] = [
   { id: '1', name: 'TechFlow', logo: 'https://placehold.co/200x80/000000/FFFFFF/png?text=TechFlow' },
@@ -169,6 +169,27 @@ export const TEXTS = {
   }
 };
 
+export const SERVICE_TRANSLATIONS: Record<string, ContentText> = {
+  "Brand Identity": { [Language.EN]: "Brand Identity", [Language.TR]: "Marka Kimliği" },
+  "UI/UX Design": { [Language.EN]: "UI/UX Design", [Language.TR]: "UI/UX Tasarımı" },
+  "Motion Graphics": { [Language.EN]: "Motion Graphics", [Language.TR]: "Hareketli Grafikler" },
+  "CGI": { [Language.EN]: "CGI", [Language.TR]: "CGI" },
+  "Art Direction": { [Language.EN]: "Art Direction", [Language.TR]: "Sanat Yönetimi" },
+  "Motion": { [Language.EN]: "Motion", [Language.TR]: "Hareket" },
+  "Dynamic Branding": { [Language.EN]: "Dynamic Branding", [Language.TR]: "Dinamik Markalama" },
+  "Motion Design": { [Language.EN]: "Motion Design", [Language.TR]: "Hareket Tasarımı" },
+  "UI/UX": { [Language.EN]: "UI/UX", [Language.TR]: "UI/UX" },
+  "Creative Coding": { [Language.EN]: "Creative Coding", [Language.TR]: "Yaratıcı Kodlama" },
+  "Installation": { [Language.EN]: "Installation", [Language.TR]: "Enstalasyon" },
+  "Interaction": { [Language.EN]: "Interaction", [Language.TR]: "Etkileşim" },
+  "Product Design": { [Language.EN]: "Product Design", [Language.TR]: "Ürün Tasarımı" },
+  "Typography": { [Language.EN]: "Typography", [Language.TR]: "Tipografi" },
+  "Editorial Design": { [Language.EN]: "Editorial Design", [Language.TR]: "Editoryal Tasarım" },
+  "3D Rendering": { [Language.EN]: "3D Rendering", [Language.TR]: "3D Görselleştirme" },
+  "Spatial Design": { [Language.EN]: "Spatial Design", [Language.TR]: "Mekansal Tasarım" },
+  "Interior": { [Language.EN]: "Interior", [Language.TR]: "İç Mimari" }
+};
+
 export const SERVICES: Service[] = [
   {
     title: {
@@ -207,28 +228,60 @@ export const SERVICES: Service[] = [
 
 export const PROJECTS: Project[] = [
   {
-    id: '1',
-    title: 'Orbital Identity',
+    id: 'o3-layer',
+    title: 'O3 Layer',
     description: {
-      [Language.EN]: "Modular branding system for aerospace logistics.",
-      [Language.TR]: "Havacılık lojistiği için modüler marka sistemi."
+      [Language.EN]: "Brand identity and UI system designed to visualize atmospheric data.",
+      [Language.TR]: "Atmosferik verileri görselleştirmek için tasarlanmış marka kimliği ve arayüz sistemi."
     },
-    image: 'https://picsum.photos/seed/orbital/800/800',
-    client: "Orbital Logistics",
+    image: '/works/o3_layer/hero.png',
+    heroFit: 'contain',
+    hero_bg: '/works/o3_layer/hero.png',
+    client: "O3 Layer",
+    clientLogo: '/works/o3_layer/o3_logo.png',
     year: "2024",
-    services: ["Brand Identity", "Design System", "Art Direction"],
+    services: ["Brand Identity", "UI/UX Design", "Motion Graphics"],
     challenge: {
-      [Language.EN]: "How do you create a visual language that feels grounded yet boundless?",
-      [Language.TR]: "Hem yere sağlam basan hem de sınırsız hissettiren bir görsel dil nasıl yaratılır?"
+      [Language.EN]: "O3 Layer needed a visual language to represent their complex environmental data. Our challenge was to design a system that translates invisible, abstract ozone metrics into a tangible and urgent user experience without causing alarm fatigue.",
+      [Language.TR]: "O3 Layer'ın karmaşık çevresel verilerini temsil edecek bir görsel dile ihtiyacı vardı. Bizim için zorluk, görünmez ve soyut ozon ölçümlerini, alarm yorgunluğuna neden olmadan somut ve aciliyet hissettiren bir kullanıcı deneyimine dönüştüren bir sistem tasarlamaktı."
     },
     solution: {
-      [Language.EN]: "We built a modular system inspired by orbital mechanics—stable paths, variable speeds. The logo isn't static; it shifts phase based on application.",
-      [Language.TR]: "Yörünge mekaniğinden ilham alan modüler bir sistem inşa ettik—sabit yollar, değişken hızlar. Logo durağan değil; uygulamaya göre evre değiştiriyor."
+      [Language.EN]: "We developed a 'Living Brand' concept where the identity elements react programmatically to data inputs. We created a suite of motion assets and a dual-mode (light/dark) interface system that shifts color spectrums based on air quality index, giving users an immediate visual understanding of their environment.",
+      [Language.TR]: "Kimlik öğelerinin veri girişlerine programatik olarak tepki verdiği bir 'Yaşayan Marka' konsepti geliştirdik. Hava kalitesi indeksine göre renk spektrumlarını değiştiren bir dizi hareketli asset ve çift modlu (açık/koyu) bir arayüz sistemi yaratarak, kullanıcılara çevrelerini anında görsel olarak kavrama imkanı sunduk."
     },
     gallery: [
-      'https://picsum.photos/seed/orbital1/1200/800',
-      'https://picsum.photos/seed/orbital2/800/1200',
-      'https://picsum.photos/seed/orbital3/1200/800',
+      {
+        type: 'group',
+        colSpan: 1,
+        items: [
+          { src: '/works/o3_layer/gif1.gif' },
+          { src: '/works/o3_layer/gif2.gif' }
+        ]
+      },
+      {
+        type: 'text',
+        colSpan: 1,
+        content: {
+          [Language.EN]: "The core of our design strategy was 'Data as Motion'. Instead of static charts, we used fluid dynamics to represent air currents.",
+          [Language.TR]: "Tasarım stratejimizin çekirdeği 'Hareket Olarak Veri'ydi. Statik grafikler yerine, hava akımlarını temsil etmek için akışkan dinamikler kullandık."
+        }
+      },
+      {
+        type: 'text',
+        colSpan: 1,
+        content: {
+          [Language.EN]: "We designed the interface to be legible in all lighting conditions, creating a distinct Light and Dark mode that maintains brand coherence.",
+          [Language.TR]: "Arayüzü her türlü ışık koşulunda okunabilir olacak şekilde tasarladık ve marka bütünlüğünü koruyan belirgin bir Açık ve Koyu mod oluşturduk."
+        }
+      },
+      {
+        type: 'group',
+        colSpan: 1,
+        items: [
+          { src: '/works/o3_layer/2.png' },
+          { src: '/works/o3_layer/1.jpg' }
+        ]
+      }
     ]
   },
   {
@@ -251,9 +304,9 @@ export const PROJECTS: Project[] = [
       [Language.TR]: "Işık, doku ve dürüst malzemelere odaklandık. Sadece binaları değil, onları dolduran yaşamı da modelledik."
     },
     gallery: [
-      'https://picsum.photos/seed/canvas1/1200/800',
-      'https://picsum.photos/seed/canvas2/800/1200',
-      'https://picsum.photos/seed/canvas3/1200/800',
+      { type: 'image', src: 'https://picsum.photos/seed/canvas1/1200/800' },
+      { type: 'image', src: 'https://picsum.photos/seed/canvas2/800/1200' },
+      { type: 'image', src: 'https://picsum.photos/seed/canvas3/1200/800' },
     ]
   },
   {
@@ -276,9 +329,9 @@ export const PROJECTS: Project[] = [
       [Language.TR]: "Markanın temel öğesi olarak sesle tepkimeye giren üretken görseller kullandık. Kimlik, yaptıkları işin ritmiyle kelimenin tam anlamıyla nabız gibi atıyor."
     },
     gallery: [
-      'https://picsum.photos/seed/sonar1/1200/800',
-      'https://picsum.photos/seed/sonar2/800/1200',
-      'https://picsum.photos/seed/sonar3/1200/800',
+      { type: 'image', src: 'https://picsum.photos/seed/sonar1/1200/800' },
+      { type: 'image', src: 'https://picsum.photos/seed/sonar2/800/1200' },
+      { type: 'image', src: 'https://picsum.photos/seed/sonar3/1200/800' },
     ]
   },
   {
@@ -301,9 +354,9 @@ export const PROJECTS: Project[] = [
       [Language.TR]: "Hareketi akışkan dinamiklerle yansıtan devasa bir LED duvar. Kaotik kalabalık akışını sanata dönüştürüyor."
     },
     gallery: [
-      'https://picsum.photos/seed/aeon1/1200/800',
-      'https://picsum.photos/seed/aeon2/800/1200',
-      'https://picsum.photos/seed/aeon3/1200/800',
+      { type: 'image', src: 'https://picsum.photos/seed/aeon1/1200/800' },
+      { type: 'image', src: 'https://picsum.photos/seed/aeon2/800/1200' },
+      { type: 'image', src: 'https://picsum.photos/seed/aeon3/1200/800' },
     ]
   },
   {
@@ -326,9 +379,9 @@ export const PROJECTS: Project[] = [
       [Language.TR]: "Derin tonlar, serif tipografi ve üst düzey ürünlerin kutu açılımındaki dokunsal hissi taklit eden mikro etkileşimler."
     },
     gallery: [
-      'https://picsum.photos/seed/velvet1/1200/800',
-      'https://picsum.photos/seed/velvet2/800/1200',
-      'https://picsum.photos/seed/velvet3/1200/800',
+      { type: 'image', src: 'https://picsum.photos/seed/velvet1/1200/800' },
+      { type: 'image', src: 'https://picsum.photos/seed/velvet2/800/1200' },
+      { type: 'image', src: 'https://picsum.photos/seed/velvet3/1200/800' },
     ]
   },
   {
@@ -351,9 +404,9 @@ export const PROJECTS: Project[] = [
       [Language.TR]: "Hem başlık hem de gövde metni olarak sorunsuz işlev görmesine olanak tanıyan, değişken kalınlık özelliklerine sahip monospaced bir font."
     },
     gallery: [
-      'https://picsum.photos/seed/mono1/1200/800',
-      'https://picsum.photos/seed/mono2/800/1200',
-      'https://picsum.photos/seed/mono3/1200/800',
+      { type: 'image', src: 'https://picsum.photos/seed/mono1/1200/800' },
+      { type: 'image', src: 'https://picsum.photos/seed/mono2/800/1200' },
+      { type: 'image', src: 'https://picsum.photos/seed/mono3/1200/800' },
     ]
   },
   {
@@ -376,9 +429,9 @@ export const PROJECTS: Project[] = [
       [Language.TR]: "Fotoğraf ile render arasındaki çizgiyi bulanıklaştırarak kostikleri mükemmel bir şekilde simüle etmek için özel bir ışın izleme stüdyosu kurduk."
     },
     gallery: [
-      'https://picsum.photos/seed/prism1/1200/800',
-      'https://picsum.photos/seed/prism2/800/1200',
-      'https://picsum.photos/seed/prism3/1200/800',
+      { type: 'image', src: 'https://picsum.photos/seed/prism1/1200/800' },
+      { type: 'image', src: 'https://picsum.photos/seed/prism2/800/1200' },
+      { type: 'image', src: 'https://picsum.photos/seed/prism3/1200/800' },
     ]
   },
   {
@@ -401,9 +454,9 @@ export const PROJECTS: Project[] = [
       [Language.TR]: "Modern minimalizmin sert hatlarını yumuşatmak için biyotik şekiller ve sıcak akustikler kullanmak. Nefes alan bir mekan."
     },
     gallery: [
-      'https://picsum.photos/seed/echo1/1200/800',
-      'https://picsum.photos/seed/echo2/800/1200',
-      'https://picsum.photos/seed/echo3/1200/800',
+      { type: 'image', src: 'https://picsum.photos/seed/echo1/1200/800' },
+      { type: 'image', src: 'https://picsum.photos/seed/echo2/800/1200' },
+      { type: 'image', src: 'https://picsum.photos/seed/echo3/1200/800' },
     ]
   }
 ];

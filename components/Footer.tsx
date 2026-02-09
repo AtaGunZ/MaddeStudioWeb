@@ -12,7 +12,7 @@ export const Footer: React.FC = () => {
   };
 
   return (
-    <footer className="w-full pb-20 px-6 md:px-12 bg-madde-white dark:bg-madde-black transition-colors duration-500">
+    <footer className="w-full relative z-[100] pb-20 px-6 md:px-12 bg-madde-white dark:bg-madde-black transition-colors duration-500">
       <div className="max-w-[1920px] mx-auto">
         <div className="border-t border-black/5 dark:border-white/5 mx-4 md:mx-8 mb-20" />
         <div className="grid grid-cols-1 md:grid-cols-3 gap-12 items-start mb-24 mx-4 md:mx-8">

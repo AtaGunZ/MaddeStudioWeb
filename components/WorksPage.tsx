@@ -32,11 +32,11 @@ export const WorksPage: React.FC<WorksPageProps> = ({ language }) => {
               setPage(Page.PROJECT_DETAIL);
             }}
           >
-            <div className="w-full aspect-square overflow-hidden bg-gray-200 dark:bg-gray-800 mb-4">
+            <div className={`w-full aspect-square overflow-hidden mb-4 ${project.heroFit === 'contain' ? 'bg-neutral-900 dark:bg-black' : 'bg-gray-200 dark:bg-gray-800'}`}>
               <img
                 src={project.image}
                 alt={project.title}
-                className="w-full h-full object-cover opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 grayscale group-hover:grayscale-0"
+                className={`w-full h-full ${project.heroFit === 'contain' ? 'object-contain p-8' : 'object-cover'} opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 grayscale group-hover:grayscale-0`}
               />
             </div>
             <div className="flex flex-col border-t border-gray-300 dark:border-gray-700 pt-3">
