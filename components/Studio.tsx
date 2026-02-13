@@ -268,7 +268,6 @@ export const Studio: React.FC<StudioProps> = ({ language }) => {
       </section>
 
       {/* TEAM SECTION - Unified */}
-      {/* TEAM SECTION - Unified */}
       <section className="py-24 md:py-32 px-6 md:px-12 border-t border-black/10 dark:border-white/10">
         <div className="max-w-[1920px] mx-auto">
           {/* Top Section: Title (Left) and Leads (Right) */}

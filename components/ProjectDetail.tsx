@@ -57,9 +57,6 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
 
             {/* Hero Section */}
             <div className="px-6 md:px-12 mb-24 md:mb-48">
-                {/* Fixed Hero Background */}
-                {/* Fixed Hero Background */}
-                {/* Fixed Hero Background */}
                 <div className="fixed top-0 left-0 w-full h-[80vh] z-0 overflow-hidden pointer-events-none">
                     {/* 1. The Image Layer: Grayscale and dark for both modes, slightly lighter opacity in light mode to maintain visibility against text */}
                     <img
@@ -91,7 +88,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                                         alt={project.client}
                                         className={`h-8 md:h-12 w-auto object-contain grayscale dark:invert opacity-90 transition-transform 
                                             ${project.client === 'Hiltar' ? 'scale-125' : ''}
-                                            ${(project.client === 'North' || project.client === 'Mehaz') ? 'scale-50' : ''}`}
+                                            ${(project.client === 'North' || project.client === 'Mehaz') ? 'scale-75' : ''}`}
                                     />
                                 ) : (
                                     <span>{project.client}</span>
@@ -148,11 +145,6 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                 </div>
             )}
 
-            {/* Gallery Grid */}
-
-            {/* Gallery Grid */}
-
-            {/* Gallery Grid */}
             <div className="relative z-10 px-6 md:px-12 mb-24">
                 <div className="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                     {project.gallery?.map((item, index) => {
