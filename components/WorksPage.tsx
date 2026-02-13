@@ -32,7 +32,7 @@ export const WorksPage: React.FC<WorksPageProps> = ({ language }) => {
               setPage(Page.PROJECT_DETAIL);
             }}
           >
-            <div className={`w-full aspect-square overflow-hidden mb-4 ${project.heroFit === 'contain' ? 'bg-neutral-900 dark:bg-black' : 'bg-gray-200 dark:bg-gray-800'}`}>
+            <div className={`w-full aspect-square overflow-hidden mb-4 ${project.heroFit === 'contain' ? 'bg-neutral-900 dark:bg-black' : 'bg-transparent'}`}>
               <img
                 src={project.image}
                 alt={project.title}

@@ -1,15 +1,21 @@
 # Project Implementation Guidelines
 
-This guide documents the standard structure for adding new projects to the portfolio, established during the implementation of the "O3 Layer" project.
+This guide documents the standard structure for adding new projects to the portfolio, established during the implementation of the "O3 Layer" and "Reeder Fancy" projects.
 
-## 1. Asset Organization
+## 1. Core Philosophy: Visualization First
+**Crucial:** Madde Studio is a **visualization studio**, not a product design firm.
+- **Descriptions**: Always emphasize *visualizing*, *rendering*, or *digital presentation* of the subject.
+- **Perspective**: We didn't design the product; we designed the *experience* of seeing it.
+- **Language**: Use terms like "Industrial design visualization," "Digital presentation," "CGI," "Visual Identity."
+
+## 2. Asset Organization
 For each project, create a dedicated folder in `public/works/[project_id]/`.
 **Required Assets:**
-- **Hero Image** (`hero.png` / `hero.jpg`): The main visual used for the project card and detail header.
-- **Client Logo** (`logo.png`): High-resolution logo with transparent background. Used in the project header Metadata. 
-- **Gallery Assets**: Numbered or descriptively named files (e.g., `1.jpg`, `app-flow.mp4`, `ui-dark.png`).
+- **Hero Image** (`hero.png`): The main visual. Used for both the project card (list view) and the detailed hero header.
+- **Client Logo** (`logo.png`): High-resolution logo with transparent background. Used in the project header metadata.
+- **Gallery Assets**: Descriptive file names preferred (e.g., `video.mp4`, `1.png`, `detail-view.jpg`).
 
-## 2. Data Structure (`constants.ts`)
+## 3. Data Structure (`constants.ts`)
 Each project entry in the `PROJECTS` array must follow this schema:
 
 ```typescript
@@ -21,64 +27,65 @@ Each project entry in the `PROJECTS` array must follow this schema:
   // -- VISUAL CONFIGURATION --
   image: '/works/[id]/hero.png', // Main project image
   heroFit: 'contain' | 'cover',   // 'contain' for logos/graphics, 'cover' for photos
-  // hero_bg is optional; defaults to 'image'. Use if you want a different background for the header.
+  // hero_bg is optional; defaults to 'image'.
   
   clientLogo: '/works/[id]/logo.png', // REPLACES the client name text in the header
   
   // -- METADATA --
   year: "2024",
-  services: ["Service 1", "Service 2"],
+  services: ["Service 1", "Service 2"], // Use keys from SERVICE_TRANSLATIONS
   
   // -- CONTENT --
+  // Focus on visualization and digital translation of the concept
   description: { [Language.EN]: "...", [Language.TR]: "..." },
   challenge: { [Language.EN]: "...", [Language.TR]: "..." },
   solution: { [Language.EN]: "...", [Language.TR]: "..." },
   
-  // -- GALLERY --
+  // -- GALLERY STRUCTURE --
+  // Standard Order:
+  // 1. Video (Full Width)
+  // 2. Main Hero/Detail Image (Full Width)
+  // 3. Supporting Details (Grouped)
   gallery: [
-    // 1. VIDEO (Autoplay loop)
+    // 1. VIDEO
     { 
       type: 'video', 
       src: '/works/[id]/video.mp4', 
-      colSpan: 1 | 2, 
       autoPlay: true, 
       loop: true, 
       muted: true 
     },
     
-    // 2. GROUPED IMAGES (Side-by-side, good for mobile screens or UI comparisons)
+    // 2. LARGE STANDALONE IMAGE
+    { type: 'image', src: '/works/[id]/1.png' },
+
+    // 3. GROUPED IMAGES (Side-by-side)
     {
       type: 'group',
-      colSpan: 1, // Usually 1 column wide, containing 2 vertical images
       items: [
-        { src: '/works/[id]/mobile-1.gif' },
-        { src: '/works/[id]/mobile-2.gif' }
+        { src: '/works/[id]/2.png' },
+        { src: '/works/[id]/3.png' }
       ]
-    },
-    
-    // 3. TEXT BLOCK (Narrative break)
-    {
-      type: 'text',
-      colSpan: 1,
-      content: { [Language.EN]: "...", [Language.TR]: "..." }
-    },
-    
-    // 4. STANDARD IMAGE
-    { type: 'image', src: '/works/[id]/photo.jpg', colSpan: 1 | 2 }
+    }
   ]
 }
 ```
 
-## 3. Design Standards
+## 4. Design Standards
 ### Project Detail Page
-- **Atmospheric Header**: The `image` is used as a fixed, grayscale, low-opacity background behind the title area. It fades out at the bottom using a gradient mask.
-- **Centered Title**: The project title is massive (6xl+) and centered.
-- **Logo Metadata**: The client name is replaced by the `clientLogo` in the metadata row to emphasize the brand identity.
-- **Layering**: All content (`<h1 ...>`, `<p ...>`, gallery) must have `relative z-10` to sit strictly above the fixed background (`z-0`).
-- **Footer**: The footer has `z-[100]` to ensure it covers the fixed background at the bottom of the page.
+- **Spacing**: Tighter margins are the standard.
+  - **Grid Gap**: `gap-4 md:gap-8` (16px base, 32px md). *Do not use larger gaps.*
+  - **Section Margins**: `mb-4 md:mb-8` between Hero and Gallery to match grid gaps.
+- **Atmospheric Header**: The `image` is used as a fixed, grayscale, low-opacity background.
+- **Full Image Hero**: Placed between text content and gallery. 
+  - If `heroFit: 'contain'`, use `bg-neutral-900` (Light Mode) and `bg-black` (Dark Mode). **Never use white.**
+- **Layering**: Content must have `relative z-10` to sit above fixed backgrounds.
 
 ### Works List (Home & Works Page)
-- **Hero Fit**: The project grid respects `heroFit`.
-- **Contain**: Adds a white/black background and padding (`p-8` or `p-24`) to ensure logos fit perfectly.
-- **Cover**: Standard full-bleed image for photos.
-- **Hover**: On desktop, the hover background preview also respects `heroFit` to avoid blowing up logos.
+- **Backgrounds**:
+  - `heroFit: 'contain'`: Use **`bg-neutral-900`** for Light Mode and **`bg-black`** for Dark Mode.
+  - Allows "contain" images (like logos) to look consistent and premium in all themes.
+- **Grayscale**:
+  - All items are **grayscale** by default.
+  - Color is revealed **only on hover**.
+  - This applies to both `cover` and `contain` types.

@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Language } from '../types';
-import { TEXTS, SERVICES } from '../constants';
+import { TEXTS, SERVICES, TEAM } from '../constants';
 import { useApp } from '../contexts/AppContext';
 
 interface StudioProps {
@@ -263,6 +263,71 @@ export const Studio: React.FC<StudioProps> = ({ language }) => {
               </div>
             </div>
 
+          </div>
+        </div>
+      </section>
+
+      {/* TEAM SECTION - Unified */}
+      {/* TEAM SECTION - Unified */}
+      <section className="py-24 md:py-32 px-6 md:px-12 border-t border-black/10 dark:border-white/10">
+        <div className="max-w-[1920px] mx-auto">
+          {/* Top Section: Title (Left) and Leads (Right) */}
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-24 mb-24">
+
+            {/* Left: Title */}
+            <div className="lg:col-span-3">
+              <span className="text-3xl md:text-4xl font-light tracking-tight block sticky top-32">
+                {TEXTS.studio.team[language]}
+              </span>
+            </div>
+
+            {/* Right: Leads (Partners) */}
+            <div className="lg:col-span-9">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-16">
+                {TEAM.filter(m => m.isLead).map((member, index) => (
+                  <motion.div
+                    key={member.id}
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: index * 0.1, duration: 0.6 }}
+                    className="group"
+                  >
+                    <div className="aspect-square mb-6 bg-gray-100 dark:bg-gray-800 overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700">
+                      <img src={member.image} alt={member.name} className="object-cover w-full h-full" />
+                    </div>
+
+                    <h3 className="text-xl font-medium mb-1">{member.name}</h3>
+
+                    <div className="mb-4 h-px w-8 bg-black/20 dark:bg-white/20" />
+
+                    <p className="text-[10px] md:text-xs leading-relaxed text-madde-gray dark:text-gray-400 font-light opacity-80 text-justify">
+                      {member.bio?.[language]}
+                    </p>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Bottom Section: Rest of Team (Full Width) */}
+          <div className="border-t border-black/5 dark:border-white/5 pt-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-x-8 gap-y-12">
+              {TEAM.filter(m => !m.isLead).map((member, index) => (
+                <motion.div
+                  key={member.id}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.05 * index, duration: 0.4 }}
+                >
+                  <h4 className="text-base font-medium mb-1">{member.name}</h4>
+                  <p className="text-[10px] font-mono uppercase tracking-widest text-madde-gray opacity-60">
+                    {member.role[language]}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

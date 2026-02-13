@@ -37,7 +37,7 @@ export interface Project {
 export type GalleryItem =
   | { type: 'image'; src: string; colSpan?: 1 | 2 }
   | { type: 'video'; src: string; colSpan?: 1 | 2; poster?: string; autoPlay?: boolean; muted?: boolean; loop?: boolean }
-  | { type: 'group'; items: { src: string; }[]; colSpan?: 1 | 2 }
+  | { type: 'group'; items: { src: string; }[]; colSpan?: 1 | 2; cols?: 2 | 4 }
   | { type: 'text'; content: ContentText; title?: ContentText; colSpan?: 1 | 2 };
 
 export interface Service {
@@ -59,4 +59,13 @@ export interface Client {
   id: string;
   name: string;
   logo: string;
+}
+
+export interface TeamMember {
+  id: string;
+  name: string;
+  role: ContentText;
+  bio?: ContentText;
+  image?: string;
+  isLead?: boolean;
 }

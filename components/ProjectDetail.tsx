@@ -15,6 +15,10 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
     useEffect(() => {
         if (selectedProjectId) {
             setProject(PROJECTS.find(p => p.id === selectedProjectId));
+            // Force scroll to top with a slight delay to ensure render is complete
+            setTimeout(() => {
+                window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+            }, 10);
         }
     }, [selectedProjectId]);
 
@@ -27,12 +31,14 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
 
     const handleNextProject = () => {
         setSelectedProjectId(nextProject.id);
-        window.scrollTo(0, 0);
+        // Scroll immediately on click as well
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
         setIsNextHovered(false);
     };
 
     return (
         <motion.article
+            key={project.id}
             className="min-h-screen bg-madde-white dark:bg-madde-black text-madde-black dark:text-madde-white pt-32 md:pt-48 pb-0"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -83,7 +89,9 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                                     <img
                                         src={project.clientLogo}
                                         alt={project.client}
-                                        className="h-6 md:h-8 w-auto object-contain dark:invert opacity-90"
+                                        className={`h-8 md:h-12 w-auto object-contain grayscale dark:invert opacity-90 transition-transform 
+                                            ${project.client === 'Hiltar' ? 'scale-125' : ''}
+                                            ${(project.client === 'North' || project.client === 'Mehaz') ? 'scale-50' : ''}`}
                                     />
                                 ) : (
                                     <span>{project.client}</span>
@@ -127,23 +135,29 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
             </div>
 
             {/* Full Image Hero */}
-            <div className="relative z-10 w-full h-[60vh] md:h-[80vh] overflow-hidden mb-24 md:mb-48 px-6 md:px-12">
-                <motion.img
-                    initial={{ scale: 1.1, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 1.5, ease: "easeOut" }}
-                    src={project.image}
-                    alt={project.title}
-                    className={`w-full h-full ${project.heroFit === 'contain' ? 'object-contain p-12 bg-neutral-900 dark:bg-black' : 'object-cover'} rounded-sm md:rounded-lg`}
-                />
-            </div>
+            {project.id !== 'north-keyboard' && project.id !== 'octopus-bridge' && project.id !== 'age-soft' && (
+                <div className="relative z-10 w-full h-[60vh] md:h-[80vh] overflow-hidden mb-4 md:mb-8 px-6 md:px-12">
+                    <motion.img
+                        initial={{ scale: 1.1, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ duration: 1.5, ease: "easeOut" }}
+                        src={project.image}
+                        alt={project.title}
+                        className={`w-full h-full ${project.heroFit === 'contain' ? 'object-contain p-12 bg-neutral-900 dark:bg-black' : 'object-cover'} rounded-sm md:rounded-lg`}
+                    />
+                </div>
+            )}
+
+            {/* Gallery Grid */}
+
+            {/* Gallery Grid */}
 
             {/* Gallery Grid */}
             <div className="relative z-10 px-6 md:px-12 mb-24">
-                <div className="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-12">
+                <div className="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                     {project.gallery?.map((item, index) => {
-                        // Use explicit colSpan if provided, otherwise fallback to the pattern (every 3rd item is wide)
-                        const colSpan = item.colSpan ?? (index % 3 === 0 ? 2 : 1);
+                        // Default to full width (2 columns) unless specific colSpan is provided
+                        const colSpan = item.colSpan ?? 2;
                         const isWide = colSpan === 2;
 
                         return (
@@ -176,7 +190,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                                         />
                                     </div>
                                 ) : item.type === 'group' ? (
-                                    <div className="grid grid-cols-2 gap-4 h-full">
+                                    <div className={`grid grid-cols-2 ${item.cols === 4 ? 'md:grid-cols-4' : ''} gap-4 md:gap-8 h-full`}>
                                         {item.items.map((subItem, i) => (
                                             <div key={i} className="overflow-hidden w-full">
                                                 <img
@@ -232,6 +246,6 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                     </button>
                 </div>
             </div>
-        </motion.article>
+        </motion.article >
     );
 };

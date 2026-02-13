@@ -1,16 +1,20 @@
-import { Language, Project, Service, Fragment, Client, GalleryItem, ContentText } from './types';
+import { Language, Project, Service, Fragment, Client, GalleryItem, ContentText, TeamMember } from './types';
 
 export const CLIENTS: Client[] = [
-  { id: '1', name: 'TechFlow', logo: 'https://placehold.co/200x80/000000/FFFFFF/png?text=TechFlow' },
-  { id: '2', name: 'Nordic Home', logo: 'https://placehold.co/200x80/000000/FFFFFF/png?text=Nordic+Home' },
-  { id: '3', name: 'Silva', logo: 'https://placehold.co/200x80/000000/FFFFFF/png?text=Silva' },
-  { id: '4', name: 'Future Lab', logo: 'https://placehold.co/200x80/000000/FFFFFF/png?text=Future+Lab' },
-  { id: '5', name: 'Urbanite', logo: 'https://placehold.co/200x80/000000/FFFFFF/png?text=Urbanite' },
-  { id: '6', name: 'Aura', logo: 'https://placehold.co/200x80/000000/FFFFFF/png?text=Aura' },
-  { id: '7', name: 'Vertex', logo: 'https://placehold.co/200x80/000000/FFFFFF/png?text=Vertex' },
-  { id: '8', name: 'Omni', logo: 'https://placehold.co/200x80/000000/FFFFFF/png?text=Omni' },
-  { id: '9', name: 'Zenith', logo: 'https://placehold.co/200x80/000000/FFFFFF/png?text=Zenith' }
+  { id: 'wizepod', name: 'Wizepod', logo: '/works/wizepod/wizepod_logo.png' },
+  { id: 'north', name: 'North', logo: '/works/North_keyboard/north_logo.png' },
+  { id: 'mehaz', name: 'Mehaz', logo: '/works/Mehaz_brandGuide/mehaz_logo.png' },
+  { id: 'octopus', name: 'Octopus', logo: '/works/Octopus/octopus_Logo.png' },
+  { id: 'reeder', name: 'Reeder', logo: '/works/reeder/reeder-logo.png' },
+  { id: 'o3', name: 'O3 Layer', logo: '/works/o3_layer/o3_logo.png' },
+  { id: 'hiltar', name: 'Hiltar', logo: '/works/hiltar/Hiltar_Logo.png' },
+  { id: 'age-soft', name: 'Age Soft', logo: '/works/Age_Soft/agesoft_logo.png' },
+
 ];
+
+
+
+
 
 export const TEXTS = {
   hero: {
@@ -165,6 +169,14 @@ export const TEXTS = {
       [Language.EN]: "Disciplines",
       [Language.TR]: "Disiplinler"
     },
+    partners: {
+      [Language.EN]: "Partners",
+      [Language.TR]: "Ortaklar"
+    },
+    team: {
+      [Language.EN]: "Team",
+      [Language.TR]: "Ekip"
+    },
     image: "/studio-geo.png"
   }
 };
@@ -228,6 +240,460 @@ export const SERVICES: Service[] = [
 
 export const PROJECTS: Project[] = [
   {
+    id: 'hiltar-sutas',
+    title: 'Sütaş Factory Animation',
+    description: {
+      [Language.EN]: "Industrial visualization and process animation for one of Turkey's leading dairy producers.",
+      [Language.TR]: "Türkiye'nin önde gelen süt ürünleri üreticilerinden biri için endüstriyel görselleştirme ve süreç animasyonu."
+    },
+    image: '/works/hiltar/1.png',
+    heroFit: 'cover',
+    client: "Hiltar",
+    clientLogo: '/works/hiltar/Hiltar_Logo.png',
+    year: "2024",
+    services: ["3D Rendering", "Motion Design", "CGI"],
+    challenge: {
+      [Language.EN]: "Communicating the scale, hygiene standards, and automated efficiency of a massive production facility without losing visual appeal.",
+      [Language.TR]: "Devasa bir üretim tesisinin ölçeğini, hijyen standartlarını ve otomatik verimliliğini görsel çekiciliği kaybetmeden aktarmak."
+    },
+    solution: {
+      [Language.EN]: "We built a high-fidelity digital twin of the factory, using cinematic camera movements and clean, stylized lighting to transform technical processes into a compelling visual narrative.",
+      [Language.TR]: "Sinematik kamera hareketleri ve temiz, stilize aydınlatma kullanarak fabrikanın yüksek sadakatli bir dijital ikizini oluşturduk ve teknik süreçleri etkileyici bir görsel anlatıya dönüştürdük."
+    },
+    gallery: [
+      {
+        type: 'video',
+        src: '/works/hiltar/video1.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true,
+        colSpan: 2
+      },
+      { type: 'image', src: '/works/hiltar/2.png', colSpan: 1 },
+      { type: 'image', src: '/works/hiltar/3.png', colSpan: 1 },
+      {
+        type: 'video',
+        src: '/works/hiltar/video2.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true,
+        colSpan: 1
+      },
+      {
+        type: 'video',
+        src: '/works/hiltar/video3.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true,
+        colSpan: 1
+      },
+      { type: 'image', src: '/works/hiltar/4.png', colSpan: 2 },
+      {
+        type: 'video',
+        src: '/works/hiltar/video4.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true,
+        colSpan: 2
+      },
+      { type: 'image', src: '/works/hiltar/5.png', colSpan: 1 },
+      { type: 'image', src: '/works/hiltar/6.png', colSpan: 1 },
+      {
+        type: 'video',
+        src: '/works/hiltar/video5.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true,
+        colSpan: 1
+      },
+      { type: 'image', src: '/works/hiltar/7.png', colSpan: 1 },
+      {
+        type: 'video',
+        src: '/works/hiltar/video6.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true,
+        colSpan: 2
+      }
+    ]
+  },
+  {
+    id: 'age-soft',
+    title: 'Age Soft',
+    description: {
+      [Language.EN]: "Comprehensive digital rebranding and asset creation for Age Soft.",
+      [Language.TR]: "Age Soft için kapsamlı dijital marka yenileme ve varlık üretimi."
+    },
+    image: '/works/Age_Soft/hero.png',
+    heroFit: 'cover',
+    client: "Age Soft",
+    clientLogo: '/works/Age_Soft/agesoft_logo.png',
+    year: "2024",
+    services: ["UI/UX Design", "Motion Design", "3D Rendering"],
+    challenge: {
+      [Language.EN]: "Creating a modern, tech-forward web presence that balances professional software solutions with engaging visual storytelling.",
+      [Language.TR]: "Profesyonel yazılım çözümlerini ilgi çekici görsel hikaye anlatımıyla dengeleyen modern, teknoloji odaklı bir web varlığı oluşturmak."
+    },
+    solution: {
+      [Language.EN]: "We delivered a complete UI/UX overhaul accompanied by a library of custom 3D assets and motion graphics that breathe life into the company's digital identity.",
+      [Language.TR]: "Şirketin dijital kimliğine hayat veren özel 3D varlıklar ve hareketli grafiklerden oluşan bir kütüphane ile desteklenen eksiksiz bir UI/UX yenilemesi sunduk."
+    },
+    gallery: [
+      { type: 'image', src: '/works/Age_Soft/2.png', colSpan: 2 },
+      {
+        type: 'video',
+        src: '/works/Age_Soft/video1.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true,
+        colSpan: 2
+      },
+      { type: 'image', src: '/works/Age_Soft/1.png', colSpan: 2 },
+      { type: 'image', src: '/works/Age_Soft/gif1.gif', colSpan: 2 },
+      { type: 'image', src: '/works/Age_Soft/3.png', colSpan: 2 },
+      { type: 'image', src: '/works/Age_Soft/gif2.gif', colSpan: 2 }
+    ]
+  },
+  {
+    id: 'reeder-fancy',
+    title: 'Fancy',
+    description: {
+      [Language.EN]: "Product design visualization for Reeder's next-gen device.",
+      [Language.TR]: "Reeder'ın yeni nesil cihazı için ürün tasarımı görselleştirmesi."
+    },
+    image: '/works/reeder/hero.png',
+    heroFit: 'cover',
+    client: "Reeder",
+    clientLogo: '/works/reeder/reeder-logo.png',
+    year: "2024",
+    services: ["Product Design"],
+    challenge: {
+      [Language.EN]: "Visualizing the tactile qualities and ergonomic details of a new device before physical prototyping.",
+      [Language.TR]: "Fiziksel prototip üretiminden önce yeni bir cihazın dokunsal niteliklerini ve ergonomik detaylarını görselleştirmek."
+    },
+    solution: {
+      [Language.EN]: "We focused on material fidelity and geometric purity in our 3D renders, creating a digital presentation that communicates exactly how the device feels in hand.",
+      [Language.TR]: "3D renderlarımızda malzeme sadakatine ve geometrik saflığa odaklanarak, cihazın elde tam olarak nasıl hissettirdiğini aktaran bir dijital sunum oluşturduk."
+    },
+    gallery: [
+      {
+        type: 'video',
+        src: '/works/reeder/Fancyvideo1.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true
+      },
+      { type: 'image', src: '/works/reeder/1.png' },
+      {
+        type: 'video',
+        src: '/works/reeder/Fancyvideo2.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true
+      },
+      {
+        type: 'group',
+        items: [
+          { src: '/works/reeder/2.png' },
+          { src: '/works/reeder/3.png' }
+        ]
+      },
+      {
+        type: 'video',
+        src: '/works/reeder/Fancyvideo3.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true
+      },
+      {
+        type: 'video',
+        src: '/works/reeder/Fancyvideo4.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true
+      },
+      {
+        type: 'video',
+        src: '/works/reeder/Fancyvideo5.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true
+      },
+      { type: 'image', src: '/works/reeder/Fancy.png' }
+    ]
+  },
+  {
+    id: 'north-gaming-mouse',
+    title: 'Odin Pro WL Gaming Mouse',
+    description: {
+      [Language.EN]: "Product visualization for the North Odin Pro WL Gaming Mouse.",
+      [Language.TR]: "North Odin Pro WL Gaming Mouse için ürün görselleştirmesi."
+    },
+    image: '/works/North_gamingmouse/hero.png',
+    heroFit: 'cover',
+    client: "North",
+    clientLogo: '/works/North_keyboard/north_logo.png', // Reusing existing logo
+    year: "2024",
+    services: ["Product Design", "3D Rendering"],
+    challenge: {
+      [Language.EN]: "Capturing the aerodynamic shape and precise tracking capabilities of a competitive gaming mouse.",
+      [Language.TR]: "Rekabetçi bir oyun faresinin aerodinamik şeklini ve hassas izleme yeteneklerini yakalamak."
+    },
+    solution: {
+      [Language.EN]: "We produced high-impact renders and motion graphics that emphasize the lightweight chassis, customizable buttons, and RGB lighting system.",
+      [Language.TR]: "Hafif kasayı, özelleştirilebilir düğmeleri ve RGB aydınlatma sistemini vurgulayan yüksek etkili renderlar ve hareketli grafikler ürettik."
+    },
+    gallery: [
+      {
+        type: 'video',
+        src: '/works/North_gamingmouse/video1_1.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true,
+        colSpan: 1
+      },
+      { type: 'image', src: '/works/North_gamingmouse/1.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_gamingmouse/2.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_gamingmouse/3.png', colSpan: 1 },
+      {
+        type: 'video',
+        src: '/works/North_gamingmouse/video2.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true,
+        colSpan: 2
+      },
+      { type: 'image', src: '/works/North_gamingmouse/4.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_gamingmouse/5.png', colSpan: 1 }
+    ]
+  },
+  {
+    id: 'wizepod',
+    title: 'Wizepod',
+    description: {
+      [Language.EN]: "Product visualization for a smart autonomous workspace pod.",
+      [Language.TR]: "Akıllı otonom çalışma kapsülü için ürün görselleştirmesi."
+    },
+    image: '/works/wizepod/hero.png',
+    heroFit: 'cover',
+    client: "Wizepod",
+    clientLogo: '/works/wizepod/wizepod_logo.png',
+    year: "2024",
+    services: ["Product Design", "3D Rendering"],
+    challenge: {
+      [Language.EN]: "Visualizing a compact, tech-enabled space that feels expansive.",
+      [Language.TR]: "Kompakt, teknoloji destekli bir alanı ferah hissettirecek şekilde görselleştirmek."
+    },
+    solution: {
+      [Language.EN]: "We used wide-angle interior compositions and superior lighting setups to showcase the ergonomic comfort and premium finish of the pod.",
+      [Language.TR]: "Kapsülün ergonomik konforunu ve birinci sınıf bitişini sergilemek için geniş açılı iç mekan kompozisyonları ve üstün aydınlatma kurulumları kullandık."
+    },
+    gallery: [
+      {
+        type: 'video',
+        src: '/works/wizepod/videohero.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true
+      },
+      { type: 'image', src: '/works/wizepod/1.png' },
+      {
+        type: 'video',
+        src: '/works/wizepod/video1.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true
+      },
+      { type: 'image', src: '/works/wizepod/2.png' },
+      { type: 'image', src: '/works/wizepod/3.png' },
+      { type: 'image', src: '/works/wizepod/4.png' },
+      {
+        type: 'video',
+        src: '/works/wizepod/video2.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true
+      },
+      {
+        type: 'video',
+        src: '/works/wizepod/5.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true
+      },
+      { type: 'image', src: '/works/wizepod/6.png' },
+      {
+        type: 'video',
+        src: '/works/wizepod/video3.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true
+      }
+    ]
+  },
+  {
+    id: 'reeder-s19',
+    title: 'S19',
+    description: {
+      [Language.EN]: "Product visualization for Reeder's S19 smartphone.",
+      [Language.TR]: "Reeder S19 akıllı telefon için ürün görselleştirmesi."
+    },
+    image: '/works/reeder_s19/1.png',
+    heroFit: 'cover',
+    client: "Reeder",
+    clientLogo: '/works/reeder/reeder-logo.png', // Reusing existing logo
+    year: "2024",
+    services: ["Product Design"],
+    challenge: {
+      [Language.EN]: "Creating a compelling visual narrative for a new flagship device.",
+      [Language.TR]: "Yeni bir amiral gemisi cihaz için etkileyici bir görsel anlatı oluşturmak."
+    },
+    solution: {
+      [Language.EN]: "We produced high-fidelity 3D renders and motion assets that highlight the device's sleek geometry and material finish.",
+      [Language.TR]: "Cihazın şık geometrisini ve malzeme bitişini vurgulayan yüksek sadakatli 3D renderlar ve hareketli varlıklar ürettik."
+    },
+    gallery: [
+      {
+        type: 'video',
+        src: '/works/reeder_s19/video1_1.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true
+      },
+      { type: 'image', src: '/works/reeder_s19/2.png' },
+      { type: 'image', src: '/works/reeder_s19/3.png' },
+      { type: 'image', src: '/works/reeder_s19/4.png' },
+      {
+        type: 'video',
+        src: '/works/reeder_s19/video2.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true
+      }
+    ]
+  },
+  {
+    id: 'north-keyboard',
+    title: 'Odin Pro WL68 Keyboard',
+    description: {
+      [Language.EN]: "Product visualization for the North Odin Pro WL68 Keyboard.",
+      [Language.TR]: "North Odin Pro WL68 Klavye için ürün görselleştirmesi."
+    },
+    image: '/works/North_keyboard/hero.png',
+    heroFit: 'cover',
+    client: "North",
+    clientLogo: '/works/North_keyboard/north_logo.png',
+    year: "2024",
+    services: ["Product Design", "3D Rendering"],
+    challenge: {
+      [Language.EN]: "Showcasing the premium build quality and customizability of a high-end mechanical keyboard.",
+      [Language.TR]: "Üst düzey bir mekanik klavyenin birinci sınıf yapı kalitesini ve özelleştirilebilirliğini sergilemek."
+    },
+    solution: {
+      [Language.EN]: "We created a series of photorealistic renders and dynamic motion assets that highlight the keyboard's materials, lighting effects, and ergonomic design.",
+      [Language.TR]: "Klavyenin malzemelerini, aydınlatma efektlerini ve ergonomik tasarımını vurgulayan bir dizi fotogerçekçi render ve dinamik hareketli varlık oluşturduk."
+    },
+    gallery: [
+      {
+        type: 'video',
+        src: '/works/North_keyboard/video1_2.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true
+      },
+      { type: 'image', src: '/works/North_keyboard/1.png' },
+      { type: 'image', src: '/works/North_keyboard/2.png' },
+      {
+        type: 'video',
+        src: '/works/North_keyboard/video2.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true
+      },
+      { type: 'image', src: '/works/North_keyboard/3.png' },
+      { type: 'image', src: '/works/North_keyboard/4.png' },
+      { type: 'image', src: '/works/North_keyboard/5.png' },
+      { type: 'image', src: '/works/North_keyboard/6.png' },
+      {
+        type: 'video',
+        src: '/works/North_keyboard/video3.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true
+      }
+    ]
+  },
+  {
+    id: 'mehaz-brand',
+    title: 'Mehaz Brand Guide',
+    description: {
+      [Language.EN]: "Brand identity and guidelines for Mehaz.",
+      [Language.TR]: "Mehaz için marka kimliği ve kılavuzları."
+    },
+    image: '/works/Mehaz_brandGuide/a9d27a52-01.png',
+    heroFit: 'cover',
+    client: "Mehaz",
+    clientLogo: '/works/Mehaz_brandGuide/mehaz_logo.png',
+    year: "2024",
+    services: ["Brand Identity", "Art Direction"],
+    challenge: {
+      [Language.EN]: "Creating a cohesive and adaptable brand language.",
+      [Language.TR]: "Bütünlüklü ve uyarlanabilir bir marka dili oluşturmak."
+    },
+    solution: {
+      [Language.EN]: "We developed a comprehensive brand guide that defines the visual and verbal tone of Mehaz across all touchpoints.",
+      [Language.TR]: "Mehaz'ın tüm temas noktalarında görsel ve sözel tonunu tanımlayan kapsamlı bir marka kılavuzu geliştirdik."
+    },
+    gallery: [
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-01.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-02.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-03.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-04.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-05.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-06.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-07.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-08.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-09.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-10.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-11.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-12.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-13.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-14.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-15.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-16.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-17.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-18.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-19.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-20.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-21.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-22.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-23.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-24.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-25.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-26.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-27.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-28.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-29.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-30.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-31.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-32.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-33.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-34.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-35.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-36.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-37.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-38.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-39.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-40.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-41.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-42.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-43.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-44.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-45.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-46.png', colSpan: 1 }
+    ]
+  },
+  {
     id: 'o3-layer',
     title: 'O3 Layer',
     description: {
@@ -236,7 +702,6 @@ export const PROJECTS: Project[] = [
     },
     image: '/works/o3_layer/hero.png',
     heroFit: 'contain',
-    hero_bg: '/works/o3_layer/hero.png',
     client: "O3 Layer",
     clientLogo: '/works/o3_layer/o3_logo.png',
     year: "2024",
@@ -285,180 +750,86 @@ export const PROJECTS: Project[] = [
     ]
   },
   {
-    id: '2',
-    title: 'Canvas Living',
+    id: 'octopus-bridge',
+    title: 'Octopus Bridge',
     description: {
-      [Language.EN]: "Architectural visualization for sustainable urban housing.",
-      [Language.TR]: "Sürdürülebilir kentsel konutlar için mimari görselleştirme."
+      [Language.EN]: "Brand identity and motion design for Octopus Bridge.",
+      [Language.TR]: "Octopus Bridge için marka kimliği ve hareket tasarımı."
     },
-    image: 'https://picsum.photos/seed/canvas/800/800',
-    client: "Canvas Living",
-    year: "2023",
-    services: ["CGI", "Art Direction", "Motion"],
-    challenge: {
-      [Language.EN]: "Visualizing sustainability without the green-washing clichés.",
-      [Language.TR]: "Sürdürülebilirliği 'yeşil aklama' klişeleri olmadan görselleştirmek."
-    },
-    solution: {
-      [Language.EN]: "A focus on light, texture, and honest materials. We rendered not just the buildings, but the life that fills them.",
-      [Language.TR]: "Işık, doku ve dürüst malzemelere odaklandık. Sadece binaları değil, onları dolduran yaşamı da modelledik."
-    },
-    gallery: [
-      { type: 'image', src: 'https://picsum.photos/seed/canvas1/1200/800' },
-      { type: 'image', src: 'https://picsum.photos/seed/canvas2/800/1200' },
-      { type: 'image', src: 'https://picsum.photos/seed/canvas3/1200/800' },
-    ]
-  },
-  {
-    id: '3',
-    title: 'Sonar Audio',
-    description: {
-      [Language.EN]: "Visual identity and motion graphics for a sound lab.",
-      [Language.TR]: "Bir ses laboratuvarı için görsel kimlik ve hareketli grafikler."
-    },
-    image: 'https://picsum.photos/seed/sonar/800/800',
-    client: "Sonar Audio",
-    year: "2023",
-    services: ["Dynamic Branding", "Motion Design", "UI/UX"],
-    challenge: {
-      [Language.EN]: "Making sound visible.",
-      [Language.TR]: "Sesi görünür kılmak."
-    },
-    solution: {
-      [Language.EN]: "We utilized generative audio-reactive visuals as the core brand element. The identity literally pulses to the beat of their work.",
-      [Language.TR]: "Markanın temel öğesi olarak sesle tepkimeye giren üretken görseller kullandık. Kimlik, yaptıkları işin ritmiyle kelimenin tam anlamıyla nabız gibi atıyor."
-    },
-    gallery: [
-      { type: 'image', src: 'https://picsum.photos/seed/sonar1/1200/800' },
-      { type: 'image', src: 'https://picsum.photos/seed/sonar2/800/1200' },
-      { type: 'image', src: 'https://picsum.photos/seed/sonar3/1200/800' },
-    ]
-  },
-  {
-    id: '4',
-    title: 'Aeon Flux',
-    description: {
-      [Language.EN]: "Interactive digital installation for a modern art museum.",
-      [Language.TR]: "Modern sanat müzesi için interaktif dijital enstalasyon."
-    },
-    image: 'https://picsum.photos/seed/aeon/800/800',
-    client: "MOMA NY",
-    year: "2022",
-    services: ["Creative Coding", "Installation", "Interaction"],
-    challenge: {
-      [Language.EN]: "Engaging a passive audience in a high-traffic space.",
-      [Language.TR]: "Yoğun bir alanda pasif bir izleyici kitlesini etkileşime sokmak."
-    },
-    solution: {
-      [Language.EN]: "An immense LED wall that mirrors movement with fluid dynamics. It transforms the chaotic crowd flow into art.",
-      [Language.TR]: "Hareketi akışkan dinamiklerle yansıtan devasa bir LED duvar. Kaotik kalabalık akışını sanata dönüştürüyor."
-    },
-    gallery: [
-      { type: 'image', src: 'https://picsum.photos/seed/aeon1/1200/800' },
-      { type: 'image', src: 'https://picsum.photos/seed/aeon2/800/1200' },
-      { type: 'image', src: 'https://picsum.photos/seed/aeon3/1200/800' },
-    ]
-  },
-  {
-    id: '5',
-    title: 'Velvet UI',
-    description: {
-      [Language.EN]: "User interface kit for luxury e-commerce platforms.",
-      [Language.TR]: "Lüks e-ticaret platformları için kullanıcı arayüz kiti."
-    },
-    image: 'https://picsum.photos/seed/velvet/800/800',
-    client: "Velvet Group",
+    image: '/works/Octopus/hero.png',
+    heroFit: 'cover',
+    client: "Octopus",
+    clientLogo: '/works/Octopus/octopus_Logo.png',
     year: "2024",
-    services: ["UI/UX", "Product Design"],
+    services: ["Brand Identity", "Motion Design"],
     challenge: {
-      [Language.EN]: "Digital luxury often feels cold. We needed warmth.",
-      [Language.TR]: "Dijital lüks genellikle soğuk hissettirir. Bizim sıcaklığa ihtiyacımız vardı."
+      [Language.EN]: "Creating a dynamic visual system for a connected ecosystem.",
+      [Language.TR]: "Bağlantılı bir ekosistem için dinamik bir görsel sistem oluşturmak."
     },
     solution: {
-      [Language.EN]: "Deep tones, serif typography, and micro-interactions that mimic the tactile feel of unboxing high-end products.",
-      [Language.TR]: "Derin tonlar, serif tipografi ve üst düzey ürünlerin kutu açılımındaki dokunsal hissi taklit eden mikro etkileşimler."
+      [Language.EN]: "We designed a vibrant and fluid identity that represents seamless connectivity and adaptability.",
+      [Language.TR]: "Kesintisiz bağlantıyı ve uyarlanabilirliği temsil eden canlı ve akışkan bir kimlik tasarladık."
     },
     gallery: [
-      { type: 'image', src: 'https://picsum.photos/seed/velvet1/1200/800' },
-      { type: 'image', src: 'https://picsum.photos/seed/velvet2/800/1200' },
-      { type: 'image', src: 'https://picsum.photos/seed/velvet3/1200/800' },
+      { type: 'image', src: '/works/Octopus/1.png', colSpan: 2 },
+      { type: 'image', src: '/works/Octopus/big_anim.gif', colSpan: 2 },
+      {
+        type: 'group',
+        colSpan: 2,
+        cols: 4,
+        items: [
+          { src: '/works/Octopus/Head.png' },
+          { src: '/works/Octopus/beher.gif' },
+          { src: '/works/Octopus/buyutec.gif' },
+          { src: '/works/Octopus/merkeziyetsiz.gif' }
+        ]
+      },
+      {
+        type: 'group',
+        colSpan: 2,
+        cols: 4,
+        items: [
+          { src: '/works/Octopus/portal.gif' },
+          { src: '/works/Octopus/ucan.gif' },
+          { src: '/works/Octopus/09345c204061893.66a24feeb86e1.gif' },
+          { src: '/works/Octopus/20518f204061893.66a24feebe41a.gif' }
+        ]
+      },
+      {
+        type: 'group',
+        colSpan: 2,
+        cols: 4,
+        items: [
+          { src: '/works/Octopus/2a51b2204061893.66a24feeb9fa9.gif' },
+          { src: '/works/Octopus/2f6196204061893.66a24feebc86d.gif' },
+          { src: '/works/Octopus/487c2c204061893.66a24feebeba5.gif' },
+          { src: '/works/Octopus/547947204061893.66a24feebfd57.gif' }
+        ]
+      },
+      {
+        type: 'group',
+        colSpan: 2,
+        cols: 4,
+        items: [
+          { src: '/works/Octopus/6c3c10204061893.66a24feec07a6.gif' },
+          { src: '/works/Octopus/76c0f4204061893.66a24feebd092.gif' },
+          { src: '/works/Octopus/98c260204061893.66a24feeb9a62.gif' },
+          { src: '/works/Octopus/990381204061893.66a24feebf40b.gif' }
+        ]
+      },
+      {
+        type: 'group',
+        colSpan: 2,
+        cols: 4,
+        items: [
+          { src: '/works/Octopus/e42db6204061893.66a24feec0f75.gif' },
+          { src: '/works/Octopus/ebefc1204061893.66a24feec185f.gif' },
+          { src: '/works/Octopus/eccbd3204061893.66a24feebda5d.gif' },
+          { src: '/works/Octopus/ed5814204061893.66a24feeb8cab.gif' }
+        ]
+      }
     ]
   },
-  {
-    id: '6',
-    title: 'Mono Type',
-    description: {
-      [Language.EN]: "Custom typeface design for a tech publication.",
-      [Language.TR]: "Bir teknoloji yayını için özel yazı tipi tasarımı."
-    },
-    image: 'https://picsum.photos/seed/mono/800/800',
-    client: "TechWeekly",
-    year: "2023",
-    services: ["Typography", "Editorial Design"],
-    challenge: {
-      [Language.EN]: "Readability meets code aesthetics.",
-      [Language.TR]: "Okunabilirliğin kod estetiğiyle buluşması."
-    },
-    solution: {
-      [Language.EN]: "A monospaced font with variable weight capabilities, allowing it to function as both display and body text seamlessly.",
-      [Language.TR]: "Hem başlık hem de gövde metni olarak sorunsuz işlev görmesine olanak tanıyan, değişken kalınlık özelliklerine sahip monospaced bir font."
-    },
-    gallery: [
-      { type: 'image', src: 'https://picsum.photos/seed/mono1/1200/800' },
-      { type: 'image', src: 'https://picsum.photos/seed/mono2/800/1200' },
-      { type: 'image', src: 'https://picsum.photos/seed/mono3/1200/800' },
-    ]
-  },
-  {
-    id: '7',
-    title: 'Prism Glass',
-    description: {
-      [Language.EN]: "Product photography and 3D rendering for glassware.",
-      [Language.TR]: "Cam eşyalar için ürün fotoğrafçılığı ve 3D görselleştirme."
-    },
-    image: 'https://picsum.photos/seed/prism/800/800',
-    client: "Prism",
-    year: "2023",
-    services: ["3D Rendering", "Art Direction"],
-    challenge: {
-      [Language.EN]: "Capturing the physics of refraction accurately.",
-      [Language.TR]: "Kırılma fiziğini doğru bir şekilde yakalamak."
-    },
-    solution: {
-      [Language.EN]: "We built a custom ray-tracing studio to simulate caustics perfectly, blurring the line between photo and render.",
-      [Language.TR]: "Fotoğraf ile render arasındaki çizgiyi bulanıklaştırarak kostikleri mükemmel bir şekilde simüle etmek için özel bir ışın izleme stüdyosu kurduk."
-    },
-    gallery: [
-      { type: 'image', src: 'https://picsum.photos/seed/prism1/1200/800' },
-      { type: 'image', src: 'https://picsum.photos/seed/prism2/800/1200' },
-      { type: 'image', src: 'https://picsum.photos/seed/prism3/1200/800' },
-    ]
-  },
-  {
-    id: '8',
-    title: 'Echo Space',
-    description: {
-      [Language.EN]: "Spatial design concept for minimal workspaces.",
-      [Language.TR]: "Minimal çalışma alanları için mekansal tasarım konsepti."
-    },
-    image: 'https://picsum.photos/seed/echo/800/800',
-    client: "Echo",
-    year: "2024",
-    services: ["Spatial Design", "Interior"],
-    challenge: {
-      [Language.EN]: "Minimalism that isn't sterile.",
-      [Language.TR]: "Steril olmayan bir minimalizm."
-    },
-    solution: {
-      [Language.EN]: "Using biotic shapes and warm acoustics to soften the hard lines of modern minimalism. A space that breathes.",
-      [Language.TR]: "Modern minimalizmin sert hatlarını yumuşatmak için biyotik şekiller ve sıcak akustikler kullanmak. Nefes alan bir mekan."
-    },
-    gallery: [
-      { type: 'image', src: 'https://picsum.photos/seed/echo1/1200/800' },
-      { type: 'image', src: 'https://picsum.photos/seed/echo2/800/1200' },
-      { type: 'image', src: 'https://picsum.photos/seed/echo3/1200/800' },
-    ]
-  }
 ];
 
 export const FRAGMENTS: Fragment[] = [
@@ -505,6 +876,72 @@ export const FRAGMENTS: Fragment[] = [
       [Language.EN]: "Can a grid be strict yet fluid? We built a generative tool that creates layout grids based on the rhythm of the content provided. The result is a structure that adapts to the story, not the other way around.",
       [Language.TR]: "Bir ızgara sistemi hem katı hem akışkan olabilir mi? İçeriğin ritmine göre mizanpaj ızgaraları oluşturan üretken bir araç geliştirdik. Sonuç, hikayeye uyum sağlayan bir yapı, tersi değil."
     }
+  }
+];
+
+export const TEAM: TeamMember[] = [
+  {
+    id: 'doruk',
+    name: 'Doruk Teker',
+    role: { [Language.EN]: 'Co-Founder', [Language.TR]: 'Kurucu Ortak' },
+    bio: {
+      [Language.EN]: "Born in Zurich in 1967. Doruk Teker got his Bachelor’s degree in METU Department of Architecture (1989) and his Master’s degree from SCI-ARC (1992) in Los Angeles. Has been carrying out projects and research on architecture and urban design at Madde since 2000 as co-founder. Lectured in various universities.",
+      [Language.TR]: "1967 yılında Zürih'te doğdu. Doruk Teker, ODTÜ Mimarlık Bölümü'nden lisans (1989) ve Los Angeles'taki SCI-ARC'tan yüksek lisans (1992) derecesini aldı. 2000 yılından bu yana Madde'de kurucu ortak olarak mimarlık ve kentsel tasarım üzerine proje ve araştırmalar yürütmektedir."
+    },
+    image: 'https://placehold.co/400x500/000000/FFFFFF/png?text=Doruk',
+    isLead: true
+  },
+  {
+    id: 'nebil',
+    name: 'Nebil Erşan Elcenabi',
+    role: { [Language.EN]: 'Co-Founder', [Language.TR]: 'Kurucu Ortak' },
+    bio: {
+      [Language.EN]: "Born in Zurich in 1967. Nebil Erşan Elcenabi got his Bachelor’s degree in METU Department of Architecture (1989) and his Master’s degree from SCI-ARC (1992) in Los Angeles. Has been carrying out projects and research on architecture and urban design at Madde since 2000 as co-founder. Lectured in various universities.",
+      [Language.TR]: "1967 yılında Zürih'te doğdu. Nebil Erşan Elcenabi, ODTÜ Mimarlık Bölümü'nden lisans (1989) ve Los Angeles'taki SCI-ARC'tan yüksek lisans (1992) derecesini aldı. 2000 yılından bu yana Madde'de kurucu ortak olarak mimarlık ve kentsel tasarım üzerine proje ve araştırmalar yürütmektedir."
+    },
+    image: 'https://placehold.co/400x500/000000/FFFFFF/png?text=Nebil',
+    isLead: true
+  },
+  {
+    id: 'yusuf',
+    name: 'Yusuf Ihlamur',
+    role: { [Language.EN]: 'Partner', [Language.TR]: 'Ortak' },
+    bio: {
+      [Language.EN]: "Born in Zurich in 1967. Yusuf Ihlamur got his Bachelor’s degree in METU Department of Architecture (1989) and his Master’s degree from SCI-ARC (1992) in Los Angeles. Has been carrying out projects and research on architecture and urban design at Madde since 2000 as co-founder. Lectured in various universities.",
+      [Language.TR]: "1967 yılında Zürih'te doğdu. Yusuf Ihlamur, ODTÜ Mimarlık Bölümü'nden lisans (1989) ve Los Angeles'taki SCI-ARC'tan yüksek lisans (1992) derecesini aldı. 2000 yılından bu yana Madde'de kurucu ortak olarak mimarlık ve kentsel tasarım üzerine proje ve araştırmalar yürütmektedir."
+    },
+    image: 'https://placehold.co/400x500/000000/FFFFFF/png?text=Yusuf',
+    isLead: true
+  },
+  {
+    id: 'member4',
+    name: 'Zeynep Yılmaz',
+    role: { [Language.EN]: 'Senior Architect', [Language.TR]: 'Kıdemli Mimar' },
+    isLead: false
+  },
+  {
+    id: 'member5',
+    name: 'Can Demir',
+    role: { [Language.EN]: 'Designer', [Language.TR]: 'Tasarımcı' },
+    isLead: false
+  },
+  {
+    id: 'member6',
+    name: 'Elif Kaya',
+    role: { [Language.EN]: 'Architect', [Language.TR]: 'Mimar' },
+    isLead: false
+  },
+  {
+    id: 'member7',
+    name: 'Ayşe Yıldız',
+    role: { [Language.EN]: 'Architect', [Language.TR]: 'Mimar' },
+    isLead: false
+  },
+  {
+    id: 'member8',
+    name: 'Mehmet Öz',
+    role: { [Language.EN]: 'Architect', [Language.TR]: 'Mimar' },
+    isLead: false
   }
 ];
 

@@ -40,12 +40,15 @@ export const Clients: React.FC<ClientsProps> = ({ language }) => {
                     {items.map((client, index) => (
                         <div
                             key={`${client.id}-${index}`}
-                            className="w-32 md:w-40 flex-shrink-0 opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-grab active:cursor-grabbing"
+                            className="w-40 md:w-56 h-24 md:h-32 flex items-center justify-center flex-shrink-0 opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-grab active:cursor-grabbing"
                         >
                             <img
                                 src={client.logo}
                                 alt={client.name}
-                                className="w-full h-auto object-contain select-none pointer-events-none dark:invert"
+                                className={`w-auto h-auto max-w-full max-h-12 md:max-h-20 object-contain select-none pointer-events-none grayscale dark:invert transition-transform duration-300
+                                ${client.id === 'hiltar' ? 'scale-125' : ''}
+                                ${(client.id === 'north' || client.id === 'mehaz') ? 'scale-75' : ''}
+                                ${client.id === 'o3' ? 'scale-110' : ''}`}
                             />
                         </div>
                     ))}
