@@ -16,13 +16,56 @@ export const Contact: React.FC<ContactProps> = ({ language }) => {
       className="min-h-[60vh] pt-48 pb-4 px-6 md:px-12 flex flex-col justify-between relative"
     >
       <div className="max-w-[1920px] mx-auto w-full flex-grow flex items-center justify-center">
-        <h1 className="text-2xl md:text-4xl lg:text-5xl font-light tracking-tighter leading-tight text-center max-w-6xl">
-          {language === Language.EN ? (
-            <>Let's give <span className="font-bold">form</span> to an <span className="font-bold">idea</span>.</>
-          ) : (
-            <><span className="font-bold">Bir fikre</span> <span className="font-bold">form</span> verelim.</>
-          )}
-        </h1>
+        {/* Animated Title */}
+        <motion.h1
+          className="text-2xl md:text-4xl lg:text-5xl font-light tracking-tighter leading-tight text-center max-w-6xl"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={{
+            hidden: {},
+            visible: {
+              transition: {
+                staggerChildren: 0.1
+              }
+            }
+          }}
+        >
+          {(language === Language.EN
+            ? [
+              { text: "Let's", bold: false },
+              { text: "give", bold: false },
+              { text: "form", bold: true },
+              { text: "to", bold: false },
+              { text: "an", bold: false },
+              { text: "idea.", bold: true }
+            ]
+            : [
+              { text: "Bir", bold: true },
+              { text: "fikre", bold: true },
+              { text: "form", bold: true },
+              { text: "verelim.", bold: false }
+            ]
+          ).map((word, i) => (
+            <motion.span
+              key={i}
+              className={`inline-block mr-2 ${word.bold ? 'font-bold' : ''}`}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: {
+                  opacity: 1,
+                  y: 0,
+                  transition: {
+                    duration: 0.8,
+                    ease: [0.2, 0.65, 0.3, 0.9]
+                  }
+                }
+              }}
+            >
+              {word.text}
+            </motion.span>
+          ))}
+        </motion.h1>
       </div>
 
       <div className="w-full flex justify-center pb-2">

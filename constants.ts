@@ -964,8 +964,8 @@ export const TEAM: TeamMember[] = [
   },
   {
     id: 'sabri',
-    name: 'Sabri Dikiştutmaz',
-    role: { [Language.EN]: 'Videographer', [Language.TR]: 'Videographer' },
+    name: 'Sabri Tekeş',
+    role: { [Language.EN]: 'Motion Graphic Designer', [Language.TR]: 'Motion Grafik Tasarımcısı' },
     isLead: false
   },
 
