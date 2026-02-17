@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { PROJECTS, TEXTS, SERVICE_TRANSLATIONS } from '../constants';
 import { Language, Page } from '../types';
 import { useApp } from '../contexts/AppContext';
@@ -10,6 +10,8 @@ interface ProjectDetailProps {
 
 export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
     const { selectedProjectId, setSelectedProjectId, setPage } = useApp();
+    const { scrollY } = useScroll();
+    const blur = useTransform(scrollY, [0, 800], ["blur(0px)", "blur(12px)"]);
     const [project, setProject] = useState(PROJECTS.find(p => p.id === selectedProjectId));
 
     useEffect(() => {
@@ -36,6 +38,8 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
         setIsNextHovered(false);
     };
 
+
+
     return (
         <motion.article
             key={project.id}
@@ -59,7 +63,8 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
             <div className="px-6 md:px-12 mb-24 md:mb-48">
                 <div className="fixed top-0 left-0 w-full h-[80vh] z-0 overflow-hidden pointer-events-none">
                     {/* 1. The Image Layer: Grayscale and dark for both modes, slightly lighter opacity in light mode to maintain visibility against text */}
-                    <img
+                    <motion.img
+                        style={{ filter: blur }}
                         src={project.image}
                         alt=""
                         className="absolute inset-0 w-full h-full object-cover opacity-40 dark:opacity-40 grayscale"

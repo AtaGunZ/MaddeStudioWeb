@@ -168,7 +168,6 @@ export const Studio: React.FC<StudioProps> = ({ language }) => {
                       key={index}
                       initial={false}
                       animate={{
-                        fontWeight: isActive ? 700 : 400,
                         opacity: hoveredCard && !isActive ? 0.3 : 1,
                         scale: isActive ? 1.05 : 1,
                         color: isActive ? (darkMode ? '#FFFFFF' : '#000000') : (darkMode ? '#A1A1AA' : '#71717A')

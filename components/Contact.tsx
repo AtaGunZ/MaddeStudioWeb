@@ -16,8 +16,12 @@ export const Contact: React.FC<ContactProps> = ({ language }) => {
       className="min-h-[60vh] pt-48 pb-4 px-6 md:px-12 flex flex-col justify-between relative"
     >
       <div className="max-w-[1920px] mx-auto w-full flex-grow flex items-center justify-center">
-        <h1 className="text-5xl md:text-7xl lg:text-9xl font-bold tracking-tighter leading-tight text-center max-w-6xl">
-          {TEXTS.contact.title[language]}
+        <h1 className="text-2xl md:text-4xl lg:text-5xl font-light tracking-tighter leading-tight text-center max-w-6xl">
+          {language === Language.EN ? (
+            <>Let's give <span className="font-bold">form</span> to an <span className="font-bold">idea</span>.</>
+          ) : (
+            <><span className="font-bold">Bir fikre</span> <span className="font-bold">form</span> verelim.</>
+          )}
         </h1>
       </div>
 
