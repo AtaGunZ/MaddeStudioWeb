@@ -1,7 +1,7 @@
 import { Language, Project, Service, Fragment, Client, GalleryItem, ContentText, TeamMember } from './types';
 
 export const CLIENTS: Client[] = [
-  { id: 'wizepod', name: 'Wizepod', logo: '/works/wizepod/wizepod_logo.png' },
+  { id: 'wizepod', name: 'Wizepod', logo: '/works/wizepod/Primewize Logo Kare.png' },
   { id: 'north', name: 'North', logo: '/works/North_keyboard/north_logo.png' },
   { id: 'mehaz', name: 'Mehaz', logo: '/works/Mehaz_brandGuide/mehaz_logo.png' },
   { id: 'octopus', name: 'Octopus', logo: '/works/Octopus/octopus_Logo.png' },
@@ -189,7 +189,7 @@ export const SERVICE_TRANSLATIONS: Record<string, ContentText> = {
   "Art Direction": { [Language.EN]: "Art Direction", [Language.TR]: "Sanat Yönetimi" },
   "Motion": { [Language.EN]: "Motion", [Language.TR]: "Hareket" },
   "Dynamic Branding": { [Language.EN]: "Dynamic Branding", [Language.TR]: "Dinamik Markalama" },
-  "Motion Design": { [Language.EN]: "Motion Design", [Language.TR]: "Hareket Tasarımı" },
+  "Motion Design": { [Language.EN]: "Motion Design", [Language.TR]: "Motion Tasarımı" },
   "UI/UX": { [Language.EN]: "UI/UX", [Language.TR]: "UI/UX" },
   "Creative Coding": { [Language.EN]: "Creative Coding", [Language.TR]: "Yaratıcı Kodlama" },
   "Installation": { [Language.EN]: "Installation", [Language.TR]: "Enstalasyon" },
@@ -199,7 +199,12 @@ export const SERVICE_TRANSLATIONS: Record<string, ContentText> = {
   "Editorial Design": { [Language.EN]: "Editorial Design", [Language.TR]: "Editoryal Tasarım" },
   "3D Rendering": { [Language.EN]: "3D Rendering", [Language.TR]: "3D Görselleştirme" },
   "Spatial Design": { [Language.EN]: "Spatial Design", [Language.TR]: "Mekansal Tasarım" },
-  "Interior": { [Language.EN]: "Interior", [Language.TR]: "İç Mimari" }
+  "Interior": { [Language.EN]: "Interior", [Language.TR]: "İç Mimari" },
+  "3D Motion Design": { [Language.EN]: "3D Motion Design", [Language.TR]: "3D Motion Tasarımı" },
+  "3D Product Animation": { [Language.EN]: "3D Product Animation", [Language.TR]: "3D Ürün Animasyonu" },
+  "Brand Strategy": { [Language.EN]: "Brand Strategy", [Language.TR]: "Marka Stratejisi" },
+  "Brand Guidelines": { [Language.EN]: "Brand Guidelines", [Language.TR]: "Marka Kimliği" },
+  "Product Visualizations": { [Language.EN]: "Product Visualizations", [Language.TR]: "Ürün Görselleştirme" }
 };
 
 export const SERVICES: Service[] = [
@@ -241,26 +246,27 @@ export const SERVICES: Service[] = [
 export const PROJECTS: Project[] = [
   {
     id: 'hiltar-sutas',
-    title: 'Sütaş Factory Animation',
+    title: 'Hiltar',
     description: {
       [Language.EN]: "Industrial visualization and process animation for one of Turkey's leading dairy producers.",
       [Language.TR]: "Türkiye'nin önde gelen süt ürünleri üreticilerinden biri için endüstriyel görselleştirme ve süreç animasyonu."
     },
-    image: '/works/hiltar/1.png',
+    image: '/works/hiltar/hero.png',
     heroFit: 'cover',
     client: "Hiltar",
     clientLogo: '/works/hiltar/Hiltar_Logo.png',
-    year: "2024",
-    services: ["3D Rendering", "Motion Design", "CGI"],
+    year: "2026",
+    services: ["3D Rendering", "3D Motion Design"],
     challenge: {
-      [Language.EN]: "Communicating the scale, hygiene standards, and automated efficiency of a massive production facility without losing visual appeal.",
-      [Language.TR]: "Devasa bir üretim tesisinin ölçeğini, hijyen standartlarını ve otomatik verimliliğini görsel çekiciliği kaybetmeden aktarmak."
+      [Language.EN]: "The goal was to represent Hiltar's fertilizer production facilities in a powerful and clear manner for investment and corporate presentations. The closed and complex nature of industrial production lines makes it challenging to clearly convey the facility's engineering strength and operational capacity.",
+      [Language.TR]: "Hiltara gübre üretim tesislerinin yatırım ve kurumsal sunumlarda güçlü ve anlaşılır biçimde temsil edilmesi amaçlanmıştır. Endüstriyel üretim hatlarının kapalı ve karmaşık yapısı, tesisin mühendislik gücünün ve operasyonel kapasitesinin net şekilde aktarılmasını zorlaştırmaktadır."
     },
     solution: {
-      [Language.EN]: "We built a high-fidelity digital twin of the factory, using cinematic camera movements and clean, stylized lighting to transform technical processes into a compelling visual narrative.",
-      [Language.TR]: "Sinematik kamera hareketleri ve temiz, stilize aydınlatma kullanarak fabrikanın yüksek sadakatli bir dijital ikizini oluşturduk ve teknik süreçleri etkileyici bir görsel anlatıya dönüştürdük."
+      [Language.EN]: "Through the 3D visualization and animation work developed within this scope, machinery systems were presented with controlled transparency, and the production process was structured in a fluid and clear manner from start to finish. Thus, the factory's technological infrastructure and production power were made visible with a professional and trustworthy narrative.",
+      [Language.TR]: "Bu kapsamda geliştirilen 3D görselleştirme ve animasyon çalışmasıyla makine sistemleri kontrollü şeffaflıkla sunulmuş, üretim süreci baştan sona akıcı ve anlaşılır bir yapıda kurgulanmıştır. Böylece fabrikanın teknolojik altyapısı ve üretim gücü profesyonel ve güven veren bir anlatımla görünür hale getirilmiştir."
     },
     gallery: [
+      { type: 'image', src: '/works/hiltar/hero.png', colSpan: 2 },
       {
         type: 'video',
         src: '/works/hiltar/video1.mp4',
@@ -319,7 +325,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'age-soft',
-    title: 'Age Soft',
+    title: 'Agesoft',
     description: {
       [Language.EN]: "Comprehensive digital rebranding and asset creation for Age Soft.",
       [Language.TR]: "Age Soft için kapsamlı dijital marka yenileme ve varlık üretimi."
@@ -328,15 +334,15 @@ export const PROJECTS: Project[] = [
     heroFit: 'cover',
     client: "Age Soft",
     clientLogo: '/works/Age_Soft/agesoft_logo.png',
-    year: "2024",
-    services: ["UI/UX Design", "Motion Design", "3D Rendering"],
+    year: "2026",
+    services: ["UI/UX Design", "Motion Design"],
     challenge: {
-      [Language.EN]: "Creating a modern, tech-forward web presence that balances professional software solutions with engaging visual storytelling.",
-      [Language.TR]: "Profesyonel yazılım çözümlerini ilgi çekici görsel hikaye anlatımıyla dengeleyen modern, teknoloji odaklı bir web varlığı oluşturmak."
+      [Language.EN]: "To strengthen Agesoft's position in the digital world, the website was reimagined with a holistic approach that reflects the brand's vision more clearly. The goal was not just an interface update, but to create a trustworthy, contemporary, and technology-oriented brand perception. The design language was simplified, and the interaction with the user was transformed into a more fluid and intuitive structure, ensuring the corporate identity is felt more strongly in the digital sphere.",
+      [Language.TR]: "Agesoft’un dijital dünyadaki konumunu güçlendirmek amacıyla web sitesi, markanın vizyonunu daha net yansıtan bütüncül bir yaklaşımla yeniden ele alınmıştır. Amaç yalnızca bir arayüz güncellemesi değil; güven veren, çağdaş ve teknoloji odaklı bir marka algısı oluşturmaktı. Tasarım dili sadeleştirilmiş, kullanıcıyla kurulan temas daha akıcı ve sezgisel bir yapıya dönüştürülerek kurumsal kimliğin dijitalde daha güçlü hissedilmesi sağlanmıştır."
     },
     solution: {
-      [Language.EN]: "We delivered a complete UI/UX overhaul accompanied by a library of custom 3D assets and motion graphics that breathe life into the company's digital identity.",
-      [Language.TR]: "Şirketin dijital kimliğine hayat veren özel 3D varlıklar ve hareketli grafiklerden oluşan bir kütüphane ile desteklenen eksiksiz bir UI/UX yenilemesi sunduk."
+      [Language.EN]: "The resulting structure offers an experience that simultaneously conveys a sense of dynamism, innovation, and technical competence. Through visual depth and motion composition, the brand narrative was transformed from a static presentation into a living digital identity, creating a modern and prestigious web experience that supports Agesoft's industrial positioning.",
+      [Language.TR]: "Ortaya çıkan yapı; dinamizm, yenilik ve teknik yetkinlik duygusunu aynı anda taşıyan bir deneyim sunmaktadır. Görsel derinlik ve hareket kurgusu sayesinde marka anlatımı statik bir sunumdan çıkarılarak yaşayan bir dijital kimliğe dönüştürülmüş, Agesoft’un sektörel konumunu destekleyen modern ve prestijli bir web deneyimi oluşturulmuştur."
     },
     gallery: [
       { type: 'image', src: '/works/Age_Soft/2.png', colSpan: 2 },
@@ -350,13 +356,20 @@ export const PROJECTS: Project[] = [
       },
       { type: 'image', src: '/works/Age_Soft/1.png', colSpan: 2 },
       { type: 'image', src: '/works/Age_Soft/gif1.gif', colSpan: 2 },
-      { type: 'image', src: '/works/Age_Soft/3.png', colSpan: 2 },
+      {
+        type: 'video',
+        src: '/works/Age_Soft/3.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true,
+        colSpan: 2
+      },
       { type: 'image', src: '/works/Age_Soft/gif2.gif', colSpan: 2 }
     ]
   },
   {
     id: 'reeder-fancy',
-    title: 'Fancy',
+    title: 'REEDER Fancy',
     description: {
       [Language.EN]: "Product design visualization for Reeder's next-gen device.",
       [Language.TR]: "Reeder'ın yeni nesil cihazı için ürün tasarımı görselleştirmesi."
@@ -365,15 +378,15 @@ export const PROJECTS: Project[] = [
     heroFit: 'cover',
     client: "Reeder",
     clientLogo: '/works/reeder/reeder-logo.png',
-    year: "2024",
-    services: ["Product Design"],
+    year: "2025",
+    services: ["3D Rendering", "Motion Design", "CGI"],
     challenge: {
-      [Language.EN]: "Visualizing the tactile qualities and ergonomic details of a new device before physical prototyping.",
-      [Language.TR]: "Fiziksel prototip üretiminden önce yeni bir cihazın dokunsal niteliklerini ve ergonomik detaylarını görselleştirmek."
+      [Language.EN]: "The 3D visualization work developed for the Fancy model, representing Reeder's vision of domestic production, was conceived not just as a car promotion, but as a visual expression of production and engineering determination in Turkey. Its ergonomic structure, economic accessibility, and a design approach suitable for local market dynamics formed the basis of the narrative. The aim was to go beyond technical specifications and create an atmosphere that evokes a sense of trust, pride, and belonging in the audience.",
+      [Language.TR]: "Reeder’ın yerli üretim vizyonunu temsil eden Fancy modeli için geliştirilen 3D görselleştirme çalışması, yalnızca bir otomobil tanıtımı değil; Türkiye’de üretimin ve mühendislik kararlılığının görsel bir ifadesi olarak kurgulandı. Ergonomik yapısı, ekonomik erişilebilirliği ve yerel pazar dinamiklerine uygun tasarım yaklaşımı anlatının temelini oluşturdu. Amaç, teknik özelliklerin ötesine geçerek izleyicide güven, gurur ve aidiyet duygusu uyandıran bir atmosfer yaratmaktı."
     },
     solution: {
-      [Language.EN]: "We focused on material fidelity and geometric purity in our 3D renders, creating a digital presentation that communicates exactly how the device feels in hand.",
-      [Language.TR]: "3D renderlarımızda malzeme sadakatine ve geometrik saflığa odaklanarak, cihazın elde tam olarak nasıl hissettirdiğini aktaran bir dijital sunum oluşturduk."
+      [Language.EN]: "In the promotional film, the vehicle's design language and user-centric structure were handled with a cinematic flow, aiming to establish both a rational and emotional connection. Shaped by local needs, this model was represented with a simple yet powerful visual narrative. The resulting work provided a holistic presentation that supports the idea of accessible mobility and expresses Fancy's market position with a trustworthy aesthetic.",
+      [Language.TR]: "Tanıtım filminde aracın tasarım dili ve kullanıcı odaklı yapısı sinematik bir akışla ele alınarak hem rasyonel hem duygusal bir bağ kurulması hedeflendi. Yerel ihtiyaçlar doğrultusunda şekillenen bu model, sade fakat güçlü bir görsel anlatımla temsil edildi. Ortaya çıkan çalışma, ulaşılabilir mobilite fikrini destekleyen ve Fancy’nin pazardaki konumunu güven veren bir estetikle ifade eden bütüncül bir sunum sundu."
     },
     gallery: [
       {
@@ -433,15 +446,15 @@ export const PROJECTS: Project[] = [
     heroFit: 'cover',
     client: "North",
     clientLogo: '/works/North_keyboard/north_logo.png', // Reusing existing logo
-    year: "2024",
-    services: ["Product Design", "3D Rendering"],
+    year: "2025",
+    services: ["3D Product Animation", "Motion Design", "CGI"],
     challenge: {
-      [Language.EN]: "Capturing the aerodynamic shape and precise tracking capabilities of a competitive gaming mouse.",
-      [Language.TR]: "Rekabetçi bir oyun faresinin aerodinamik şeklini ve hassas izleme yeteneklerini yakalamak."
+      [Language.EN]: "The 3D visualization work developed for this mouse, which features a battery indicator—a world first in this category—aimed to position the product not just as hardware, but as a symbol of competitive performance. Its structure, designed for use in esports arenas, highlights the perceptions of speed, precision, and durability, while its innovative technology was supported by a powerful and characterful visual narrative.",
+      [Language.TR]: "Şarj göstergesine sahip ve bu özelliğiyle dünyada bir ilki temsil eden bu mouse için geliştirilen 3D görselleştirme çalışması, ürünü yalnızca bir donanım değil, rekabetçi performansın simgesi olarak konumlandırmayı hedefledi. E-spor arenalarında kullanılan yapısı; hız, hassasiyet ve dayanıklılık algısını ön plana çıkarırken, yenilikçi teknolojisi güçlü ve karakter sahibi bir görsel anlatımla desteklendi."
     },
     solution: {
-      [Language.EN]: "We produced high-impact renders and motion graphics that emphasize the lightweight chassis, customizable buttons, and RGB lighting system.",
-      [Language.TR]: "Hafif kasayı, özelleştirilebilir düğmeleri ve RGB aydınlatma sistemini vurgulayan yüksek etkili renderlar ve hareketli grafikler ürettik."
+      [Language.EN]: "In the promotional structure, the battery indicator was treated as the primary element that differentiates the product and was presented within a dynamic atmosphere. Through light, motion, and surface details, the sense of performance was reinforced, creating a feeling of control, trust, and competitive advantage in the viewer.",
+      [Language.TR]: "Tanıtım kurgusunda şarj göstergesi ürünü ayrıştıran temel unsur olarak ele alındı ve dinamik bir atmosfer içinde sunuldu. Işık, hareket ve yüzey detaylarıyla performans duygusu pekiştirilerek izleyicide kontrol, güven ve rekabet avantajı hissi oluşturuldu."
     },
     gallery: [
       {
@@ -464,12 +477,30 @@ export const PROJECTS: Project[] = [
         colSpan: 2
       },
       { type: 'image', src: '/works/North_gamingmouse/4.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_gamingmouse/5.png', colSpan: 1 }
+      { type: 'image', src: '/works/North_gamingmouse/5.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_gamingmouse/6.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_gamingmouse/7.png', colSpan: 1 },
+      {
+        type: 'video',
+        src: '/works/North_gamingmouse/video3.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true,
+        colSpan: 1
+      },
+      {
+        type: 'video',
+        src: '/works/North_gamingmouse/video4.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true,
+        colSpan: 1
+      }
     ]
   },
   {
     id: 'wizepod',
-    title: 'Wizepod',
+    title: 'Primewize: Wizepod CGM',
     description: {
       [Language.EN]: "Product visualization for a smart autonomous workspace pod.",
       [Language.TR]: "Akıllı otonom çalışma kapsülü için ürün görselleştirmesi."
@@ -477,16 +508,16 @@ export const PROJECTS: Project[] = [
     image: '/works/wizepod/hero.png',
     heroFit: 'cover',
     client: "Wizepod",
-    clientLogo: '/works/wizepod/wizepod_logo.png',
-    year: "2024",
-    services: ["Product Design", "3D Rendering"],
+    clientLogo: '/works/wizepod/Primewize Logo Kare.png',
+    year: "2025",
+    services: ["3D Product Animation", "Motion Design", "CGI"],
     challenge: {
-      [Language.EN]: "Visualizing a compact, tech-enabled space that feels expansive.",
-      [Language.TR]: "Kompakt, teknoloji destekli bir alanı ferah hissettirecek şekilde görselleştirmek."
+      [Language.EN]: "The 3D modeling and animation work developed for WizePod aimed to position the world's first and only reusable diabetes medication not just as a medical product, but as an innovative solution that transforms quality of life. The functional structure and ease of use of this product, specially developed for diabetes patients, were handled with a visual narrative that prioritizes feelings of trust and precision.",
+      [Language.TR]: "WizePod için geliştirilen 3D modelleme ve animasyon çalışması, dünyada ilk ve tek çok kullanımlı diyabet ilacını yalnızca medikal bir ürün olarak değil, yaşam kalitesini dönüştüren yenilikçi bir çözüm olarak konumlandırmayı hedefledi. Diyabet hastalarına özel olarak geliştirilen bu ürünün fonksiyonel yapısı ve kullanım kolaylığı, güven ve hassasiyet duygusunu ön planda tutan bir görsel anlatımla ele alındı."
     },
     solution: {
-      [Language.EN]: "We used wide-angle interior compositions and superior lighting setups to showcase the ergonomic comfort and premium finish of the pod.",
-      [Language.TR]: "Kapsülün ergonomik konforunu ve birinci sınıf bitişini sergilemek için geniş açılı iç mekan kompozisyonları ve üstün aydınlatma kurulumları kullandık."
+      [Language.EN]: "In the prepared animation sequence, the product's design details and usage scenarios were presented with a fluid, simple, and impressive language. Through lighting, material, and motion compositions, both technological superiority and a patient-centric approach were strongly emphasized. The resulting work provided a prestigious presentation that positions WizePod as a trustworthy and transformative solution in the field of medical innovation.",
+      [Language.TR]: "Hazırlanan animasyon kurgusunda ürünün tasarım detayları ve kullanım senaryosu akıcı, sade ve etkileyici bir dil ile sunuldu. Işık, materyal ve hareket kompozisyonları sayesinde hem teknolojik üstünlük hem de hasta odaklı yaklaşım güçlü bir biçimde vurgulandı. Ortaya çıkan çalışma, WizePod’u medikal inovasyon alanında güven veren ve fark yaratan bir çözüm olarak konumlandıran prestijli bir sunum sundu."
     },
     gallery: [
       {
@@ -533,7 +564,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'reeder-s19',
-    title: 'S19',
+    title: 'REEDER S19 MAX PRO S EDGE',
     description: {
       [Language.EN]: "Product visualization for Reeder's S19 smartphone.",
       [Language.TR]: "Reeder S19 akıllı telefon için ürün görselleştirmesi."
@@ -542,15 +573,15 @@ export const PROJECTS: Project[] = [
     heroFit: 'cover',
     client: "Reeder",
     clientLogo: '/works/reeder/reeder-logo.png', // Reusing existing logo
-    year: "2024",
-    services: ["Product Design"],
+    year: "2025",
+    services: ["3D Product Animation", "Motion Design", "CGI"],
     challenge: {
-      [Language.EN]: "Creating a compelling visual narrative for a new flagship device.",
-      [Language.TR]: "Yeni bir amiral gemisi cihaz için etkileyici bir görsel anlatı oluşturmak."
+      [Language.EN]: "The 3D product animation work developed for Reeder's phone, which features an angular and powerful design language, aimed to position the product not just as a technical device, but as a design object with character. Its sharp lines, balanced proportions, and stylish form were handled with a modern, ambitious, and premium stance. The aim was to highlight the geometric clarity of the design while creating perceptions of quality and trust in the audience.",
+      [Language.TR]: "Reeder’in köşeli ve güçlü tasarım diline sahip telefonu için geliştirilen 3D product animasyon çalışması, ürünü yalnızca teknik bir cihaz olarak değil, karakter sahibi bir tasarım objesi olarak konumlandırmayı hedefledi. Keskin hatları, dengeli oranları ve şık formu; modern, iddialı ve premium bir duruşla ele alındı. Amaç, tasarımın geometrik netliğini ön plana çıkarırken izleyicide kalite ve güven algısı oluşturmaktı."
     },
     solution: {
-      [Language.EN]: "We produced high-fidelity 3D renders and motion assets that highlight the device's sleek geometry and material finish.",
-      [Language.TR]: "Cihazın şık geometrisini ve malzeme bitişini vurgulayan yüksek sadakatli 3D renderlar ve hareketli varlıklar ürettik."
+      [Language.EN]: "In the prepared animation film, surface transitions, edge details, and material feel were presented with a cinematic flow, emphasizing the product's aesthetic power. Through lighting and motion compositions, the phone's minimal yet impressive design language was highlighted. The resulting work offered a powerful and refined product narrative that reflects Reeder's design vision.",
+      [Language.TR]: "Hazırlanan animasyon filminde yüzey geçişleri, kenar detayları ve malzeme hissi sinematik bir akışla sunularak ürünün estetik gücü vurgulandı. Işık ve hareket kompozisyonları sayesinde telefonun minimal fakat etkileyici tasarım dili ön plana çıkarıldı. Ortaya çıkan çalışma, Reeder’in tasarım vizyonunu yansıtan, güçlü ve rafine bir ürün anlatımı sundu."
     },
     gallery: [
       {
@@ -574,7 +605,7 @@ export const PROJECTS: Project[] = [
   },
   {
     id: 'north-keyboard',
-    title: 'Odin Pro WL68 Keyboard',
+    title: 'Odin Pro WL Gaming Keyboard',
     description: {
       [Language.EN]: "Product visualization for the North Odin Pro WL68 Keyboard.",
       [Language.TR]: "North Odin Pro WL68 Klavye için ürün görselleştirmesi."
@@ -583,15 +614,15 @@ export const PROJECTS: Project[] = [
     heroFit: 'cover',
     client: "North",
     clientLogo: '/works/North_keyboard/north_logo.png',
-    year: "2024",
-    services: ["Product Design", "3D Rendering"],
+    year: "2025",
+    services: ["3D Product Animation", "Motion Design", "CGI"],
     challenge: {
-      [Language.EN]: "Showcasing the premium build quality and customizability of a high-end mechanical keyboard.",
-      [Language.TR]: "Üst düzey bir mekanik klavyenin birinci sınıf yapı kalitesini ve özelleştirilebilirliğini sergilemek."
+      [Language.EN]: "The 3D visualization and animation work developed for the Odin Pro WL Gaming Keyboard aimed to position the product not just as gaming equipment, but as a strategic tool at the center of competitive performance. Standing out with its illuminated structure and rechargeable wireless technology, this model represented its status as a world-first within a powerful and ambitious atmosphere. The design language was handled with a sharp and dynamic narrative that supports perceptions of speed, response time, and durability.",
+      [Language.TR]: "Odin Pro WL Gaming Keyboard için geliştirilen 3D görselleştirme ve animasyon çalışması, ürünü yalnızca bir oyun ekipmanı değil, rekabetçi performansın merkezindeki stratejik bir araç olarak konumlandırmayı hedefledi. Işıklı yapısı ve şarjlı kablosuz teknolojisiyle öne çıkan bu model, dünyada ilk olma özelliğini güçlü ve iddialı bir atmosfer içinde temsil etti. Tasarım dili; hız, tepki süresi ve dayanıklılık algısını destekleyen keskin ve dinamik bir anlatımla ele alındı."
     },
     solution: {
-      [Language.EN]: "We created a series of photorealistic renders and dynamic motion assets that highlight the keyboard's materials, lighting effects, and ergonomic design.",
-      [Language.TR]: "Klavyenin malzemelerini, aydınlatma efektlerini ve ergonomik tasarımını vurgulayan bir dizi fotogerçekçi render ve dinamik hareketli varlık oluşturduk."
+      [Language.EN]: "In the promotional sequence, light effects and surface details were structured to reinforce the sense of performance. Through motion and composition language, the product's technological strength and unique position were emphasized, creating feelings of control, superiority, and competitive advantage in the viewer. The resulting work provided a prestigious presentation that positions the Odin Pro WL not just as a keyboard, but as a powerful piece of equipment that makes a difference in the gaming arena.",
+      [Language.TR]: "Tanıtım kurgusunda ışık efektleri ve yüzey detayları performans duygusunu pekiştirecek şekilde yapılandırıldı. Hareket ve kompozisyon diliyle ürünün teknolojik gücü ve özgün konumu vurgulanarak izleyicide kontrol, üstünlük ve rekabet avantajı hissi oluşturuldu. Ortaya çıkan çalışma, Odin Pro WL’yi yalnızca bir klavye değil, oyun arenasında fark yaratan güçlü bir ekipman olarak konumlandıran prestijli bir sunum sundu."
     },
     gallery: [
       {
@@ -610,22 +641,34 @@ export const PROJECTS: Project[] = [
         loop: true,
         muted: true
       },
-      { type: 'image', src: '/works/North_keyboard/3.png' },
-      { type: 'image', src: '/works/North_keyboard/4.png' },
-      { type: 'image', src: '/works/North_keyboard/5.png' },
-      { type: 'image', src: '/works/North_keyboard/6.png' },
+      { type: 'image', src: '/works/North_keyboard/3.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_keyboard/4.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_keyboard/5.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_keyboard/6.png', colSpan: 1 },
       {
         type: 'video',
         src: '/works/North_keyboard/video3.mp4',
         autoPlay: true,
         loop: true,
-        muted: true
+        muted: true,
+        colSpan: 2
+      },
+      { type: 'image', src: '/works/North_keyboard/7.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_keyboard/8.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_keyboard/gif1.gif', colSpan: 1 },
+      {
+        type: 'video',
+        src: '/works/North_keyboard/video4.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true,
+        colSpan: 1
       }
     ]
   },
   {
     id: 'mehaz-brand',
-    title: 'Mehaz Brand Guide',
+    title: 'MEHAZ Brand Guide',
     description: {
       [Language.EN]: "Brand identity and guidelines for Mehaz.",
       [Language.TR]: "Mehaz için marka kimliği ve kılavuzları."
@@ -634,15 +677,15 @@ export const PROJECTS: Project[] = [
     heroFit: 'cover',
     client: "Mehaz",
     clientLogo: '/works/Mehaz_brandGuide/mehaz_logo.png',
-    year: "2024",
-    services: ["Brand Identity", "Art Direction"],
+    year: "2026",
+    services: ["Brand Strategy", "Brand Guidelines"],
     challenge: {
-      [Language.EN]: "Creating a cohesive and adaptable brand language.",
-      [Language.TR]: "Bütünlüklü ve uyarlanabilir bir marka dili oluşturmak."
+      [Language.EN]: "The Brand Guide work developed for Mehaz was handled as a holistic design process aiming to reposition the brand not just visually, but strategically as well. From logo design to corporate identity elements, the entire structure was built on a clear and powerful language that reflects the company's vision, reliability, and industry seriousness. The aim was to provide the brand with a sustainable and consistent corporate foundation.",
+      [Language.TR]: "Mehaz firması için geliştirilen Brand Guide çalışması, markayı yalnızca görsel olarak değil, stratejik olarak da yeniden konumlandırmayı hedefleyen bütüncül bir tasarım süreci olarak ele alındı. Logo tasarımından kurumsal kimlik öğelerine kadar tüm yapı, firmanın vizyonunu, güvenilirliğini ve sektörel ciddiyetini yansıtacak net ve güçlü bir dil üzerine inşa edildi. Amaç, markaya sürdürülebilir ve tutarlı bir kurumsal temel kazandırmaktı."
     },
     solution: {
-      [Language.EN]: "We developed a comprehensive brand guide that defines the visual and verbal tone of Mehaz across all touchpoints.",
-      [Language.TR]: "Mehaz'ın tüm temas noktalarında görsel ve sözel tonunu tanımlayan kapsamlı bir marka kılavuzu geliştirdik."
+      [Language.EN]: "Within the scope of the developed 360° design approach, the logo, business cards, and all corporate documents were unified under a common visual system. Color, typography, and composition language were standardized, ensuring the brand delivers the same professional impact at every touchpoint. The resulting work offered a prestigious and consistent brand integrity that strengthens Mehaz's corporate identity.",
+      [Language.TR]: "Hazırlanan 360° tasarım yaklaşımı kapsamında logo, kartvizit ve tüm kurumsal dokümanlar ortak bir görsel sistem altında toplandı. Renk, tipografi ve kompozisyon dili standardize edilerek markanın her temas noktasında aynı profesyonel etkiyi vermesi sağlandı. Ortaya çıkan çalışma, Mehaz’ın kurumsal kimliğini güçlendiren, prestijli ve tutarlı bir marka bütünlüğü sundu."
     },
     gallery: [
       { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-01.png', colSpan: 1 },
@@ -704,15 +747,15 @@ export const PROJECTS: Project[] = [
     heroFit: 'contain',
     client: "O3 Layer",
     clientLogo: '/works/o3_layer/o3_logo.png',
-    year: "2024",
-    services: ["Brand Identity", "UI/UX Design", "Motion Graphics"],
+    year: "2025",
+    services: ["Brand Strategy", "Product Visualizations"],
     challenge: {
-      [Language.EN]: "O3 Layer needed a visual language to represent their complex environmental data. Our challenge was to design a system that translates invisible, abstract ozone metrics into a tangible and urgent user experience without causing alarm fatigue.",
-      [Language.TR]: "O3 Layer'ın karmaşık çevresel verilerini temsil edecek bir görsel dile ihtiyacı vardı. Bizim için zorluk, görünmez ve soyut ozon ölçümlerini, alarm yorgunluğuna neden olmadan somut ve aciliyet hissettiren bir kullanıcı deneyimine dönüştüren bir sistem tasarlamaktı."
+      [Language.EN]: "The process carried out for O3 Layer was not just a design project but handled as a strategic transformation clarifying the brand's digital positioning and growth vision. While the UI/UX structure developed for the web platform was conceived with a simple and powerful architecture centering on the user experience; 3D animations and visual language created a dynamic identity supporting the brand's technology-oriented character. Along with the logo design, all brand elements were restructured under a single holistic system.",
+      [Language.TR]: "O3 Layer için yürütülen süreç, yalnızca bir tasarım çalışması değil; markanın dijital konumlanmasını ve büyüme vizyonunu netleştiren stratejik bir dönüşüm olarak ele alındı. Web platformu için geliştirilen UI/UX yapısı, kullanıcı deneyimini merkeze alan sade ve güçlü bir mimariyle kurgulanırken; 3D animasyonlar ve görsel dil markanın teknoloji odaklı karakterini destekleyen dinamik bir kimlik oluşturdu. Logo tasarımıyla birlikte tüm marka unsurları tek bir bütüncül sistem altında yeniden yapılandırıldı."
     },
     solution: {
-      [Language.EN]: "We developed a 'Living Brand' concept where the identity elements react programmatically to data inputs. We created a suite of motion assets and a dual-mode (light/dark) interface system that shifts color spectrums based on air quality index, giving users an immediate visual understanding of their environment.",
-      [Language.TR]: "Kimlik öğelerinin veri girişlerine programatik olarak tepki verdiği bir 'Yaşayan Marka' konsepti geliştirdik. Hava kalitesi indeksine göre renk spektrumlarını değiştiren bir dizi hareketli asset ve çift modlu (açık/koyu) bir arayüz sistemi yaratarak, kullanıcılara çevrelerini anında görsel olarak kavrama imkanı sunduk."
+      [Language.EN]: "During this process, a 360° brand strategy and roadmap were also created, placing O3 Layer's market position and growth potential within a clear framework. Investor presentations were structured to express the vision, scalability, and technological power with a trustworthy narrative. The resulting work offered a comprehensive transformation that brought O3 Layer to a powerful, consistent, and investment-oriented brand structure on both digital and strategic levels.",
+      [Language.TR]: "Bu süreçte aynı zamanda 360° marka stratejisi ve yol haritası oluşturularak, O3 Layer’ın pazardaki konumu ve büyüme potansiyeli net bir çerçeveye oturtuldu. Hazırlanan yatırımcı sunumları; vizyonu, ölçeklenebilirliği ve teknolojik gücü güven veren bir anlatımla ifade edecek şekilde kurgulandı. Ortaya çıkan çalışma, O3 Layer’ı hem dijital hem stratejik düzlemde güçlü, tutarlı ve yatırım odaklı bir marka yapısına taşıyan kapsamlı bir dönüşüm sundu."
     },
     gallery: [
       {
@@ -761,14 +804,14 @@ export const PROJECTS: Project[] = [
     client: "Octopus",
     clientLogo: '/works/Octopus/octopus_Logo.png',
     year: "2024",
-    services: ["Brand Identity", "Motion Design"],
+    services: ["Brand Strategy", "Motion Design"],
     challenge: {
-      [Language.EN]: "Creating a dynamic visual system for a connected ecosystem.",
-      [Language.TR]: "Bağlantılı bir ekosistem için dinamik bir görsel sistem oluşturmak."
+      [Language.EN]: "The work carried out for Octopus Bridge was handled as a holistic design process that strengthens the brand's digital identity and clarifies its vision. While the UI/UX structure developed for the web platform reimagined the user experience with a simple and fluid architecture; logo design, hand-drawn illustrations, and the established color system transformed the brand's character into a unique and memorable structure. The entire visual language was structured to create a consistent brand integrity supporting the company's vision.",
+      [Language.TR]: "Octapus Bridge için yürütülen çalışma, markanın dijital kimliğini güçlendiren ve vizyonunu netleştiren bütüncül bir tasarım süreci olarak ele alındı. Web platformu için geliştirilen UI/UX yapısı, kullanıcı deneyimini sade ve akıcı bir mimariyle yeniden kurgularken; logo tasarımı, el çizimi illüstrasyonlar ve belirlenen renk sistemi markanın karakterini özgün ve hatırlanabilir bir yapıya dönüştürdü. Tüm görsel dil, firmanın vizyonunu destekleyen tutarlı bir marka bütünlüğü oluşturacak şekilde yapılandırıldı."
     },
     solution: {
-      [Language.EN]: "We designed a vibrant and fluid identity that represents seamless connectivity and adaptability.",
-      [Language.TR]: "Kesintisiz bağlantıyı ve uyarlanabilirliği temsil eden canlı ve akışkan bir kimlik tasarladık."
+      [Language.EN]: "While dynamism was added to the digital experience through Lottie animations and motion design elements, brand interaction was carried to different platforms with secondary communication tools like Telegram sticker sets. The resulting work offered a comprehensive transformation that moved Octopus Bridge to a powerful, integrated, and modern brand structure, not only visually but also strategically and communicatively.",
+      [Language.TR]: "Lottie animasyonlar ve hareketli tasarım öğeleriyle dijital deneyime dinamizm kazandırılırken, Telegram sticker setleri gibi yan iletişim araçlarıyla marka etkileşimi farklı platformlara taşındı. Ortaya çıkan çalışma, Octapus Bridge’i yalnızca görsel olarak değil, stratejik ve iletişimsel açıdan da güçlü, bütünlüklü ve modern bir marka yapısına taşıyan kapsamlı bir dönüşüm sundu."
     },
     gallery: [
       { type: 'image', src: '/works/Octopus/1.png', colSpan: 2 },
@@ -885,8 +928,8 @@ export const TEAM: TeamMember[] = [
     name: 'Doruk Teker',
     role: { [Language.EN]: 'Co-Founder', [Language.TR]: 'Kurucu Ortak' },
     bio: {
-      [Language.EN]: "Born in Zurich in 1967. Doruk Teker got his Bachelor’s degree in METU Department of Architecture (1989) and his Master’s degree from SCI-ARC (1992) in Los Angeles. Has been carrying out projects and research on architecture and urban design at Madde since 2000 as co-founder. Lectured in various universities.",
-      [Language.TR]: "1967 yılında Zürih'te doğdu. Doruk Teker, ODTÜ Mimarlık Bölümü'nden lisans (1989) ve Los Angeles'taki SCI-ARC'tan yüksek lisans (1992) derecesini aldı. 2000 yılından bu yana Madde'de kurucu ortak olarak mimarlık ve kentsel tasarım üzerine proje ve araştırmalar yürütmektedir."
+      [Language.EN]: "Creative Director, Co-Founder",
+      [Language.TR]: "Creative Director, Co-Founder"
     },
     image: 'https://placehold.co/400x500/000000/FFFFFF/png?text=Doruk',
     isLead: true
@@ -896,8 +939,8 @@ export const TEAM: TeamMember[] = [
     name: 'Nebil Erşan Elcenabi',
     role: { [Language.EN]: 'Co-Founder', [Language.TR]: 'Kurucu Ortak' },
     bio: {
-      [Language.EN]: "Born in Zurich in 1967. Nebil Erşan Elcenabi got his Bachelor’s degree in METU Department of Architecture (1989) and his Master’s degree from SCI-ARC (1992) in Los Angeles. Has been carrying out projects and research on architecture and urban design at Madde since 2000 as co-founder. Lectured in various universities.",
-      [Language.TR]: "1967 yılında Zürih'te doğdu. Nebil Erşan Elcenabi, ODTÜ Mimarlık Bölümü'nden lisans (1989) ve Los Angeles'taki SCI-ARC'tan yüksek lisans (1992) derecesini aldı. 2000 yılından bu yana Madde'de kurucu ortak olarak mimarlık ve kentsel tasarım üzerine proje ve araştırmalar yürütmektedir."
+      [Language.EN]: "Creative Operations, Co-Founder",
+      [Language.TR]: "Creative Operations, Co-Founder"
     },
     image: 'https://placehold.co/400x500/000000/FFFFFF/png?text=Nebil',
     isLead: true
@@ -907,42 +950,25 @@ export const TEAM: TeamMember[] = [
     name: 'Yusuf Ihlamur',
     role: { [Language.EN]: 'Partner', [Language.TR]: 'Ortak' },
     bio: {
-      [Language.EN]: "Born in Zurich in 1967. Yusuf Ihlamur got his Bachelor’s degree in METU Department of Architecture (1989) and his Master’s degree from SCI-ARC (1992) in Los Angeles. Has been carrying out projects and research on architecture and urban design at Madde since 2000 as co-founder. Lectured in various universities.",
-      [Language.TR]: "1967 yılında Zürih'te doğdu. Yusuf Ihlamur, ODTÜ Mimarlık Bölümü'nden lisans (1989) ve Los Angeles'taki SCI-ARC'tan yüksek lisans (1992) derecesini aldı. 2000 yılından bu yana Madde'de kurucu ortak olarak mimarlık ve kentsel tasarım üzerine proje ve araştırmalar yürütmektedir."
+      [Language.EN]: "Executive Director, Co-Founder",
+      [Language.TR]: "Executive Director, Co-Founder"
     },
     image: 'https://placehold.co/400x500/000000/FFFFFF/png?text=Yusuf',
     isLead: true
   },
   {
-    id: 'member4',
-    name: 'Zeynep Yılmaz',
-    role: { [Language.EN]: 'Senior Architect', [Language.TR]: 'Kıdemli Mimar' },
+    id: 'sait',
+    name: 'Sait Özer',
+    role: { [Language.EN]: 'Art Director', [Language.TR]: 'Sanat Yönetmeni' },
     isLead: false
   },
   {
-    id: 'member5',
-    name: 'Can Demir',
-    role: { [Language.EN]: 'Designer', [Language.TR]: 'Tasarımcı' },
+    id: 'sabri',
+    name: 'Sabri Dikiştutmaz',
+    role: { [Language.EN]: 'Videographer', [Language.TR]: 'Videographer' },
     isLead: false
   },
-  {
-    id: 'member6',
-    name: 'Elif Kaya',
-    role: { [Language.EN]: 'Architect', [Language.TR]: 'Mimar' },
-    isLead: false
-  },
-  {
-    id: 'member7',
-    name: 'Ayşe Yıldız',
-    role: { [Language.EN]: 'Architect', [Language.TR]: 'Mimar' },
-    isLead: false
-  },
-  {
-    id: 'member8',
-    name: 'Mehmet Öz',
-    role: { [Language.EN]: 'Architect', [Language.TR]: 'Mimar' },
-    isLead: false
-  }
+
 ];
 
 export const BRANDS = [

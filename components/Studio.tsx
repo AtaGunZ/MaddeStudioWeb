@@ -101,9 +101,15 @@ export const Studio: React.FC<StudioProps> = ({ language }) => {
       <section className="py-32 md:py-48 px-6 md:px-12">
         <div className="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
           <div className="md:col-span-4">
-            <span className="text-xs font-mono uppercase tracking-widest text-madde-gray block mb-4 sticky top-32">
+            <motion.h2
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tighter mb-8 md:mb-0"
+            >
               {TEXTS.studio.philosophyTitle[language]}
-            </span>
+            </motion.h2>
           </div>
           <div className="md:col-span-8">
             <motion.p
@@ -142,7 +148,7 @@ export const Studio: React.FC<StudioProps> = ({ language }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8 }}
-                className="text-6xl md:text-7xl lg:text-8xl font-bold tracking-tighter mb-16"
+                className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tighter mb-16"
               >
                 {TEXTS.studio.disciplines[language]}
               </motion.h2>
@@ -275,9 +281,15 @@ export const Studio: React.FC<StudioProps> = ({ language }) => {
 
             {/* Left: Title */}
             <div className="lg:col-span-3">
-              <span className="text-3xl md:text-4xl font-light tracking-tight block sticky top-32">
+              <motion.h2
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tighter mb-12 lg:mb-0"
+              >
                 {TEXTS.studio.team[language]}
-              </span>
+              </motion.h2>
             </div>
 
             {/* Right: Leads (Partners) */}

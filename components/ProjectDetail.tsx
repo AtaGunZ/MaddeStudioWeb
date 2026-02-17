@@ -132,7 +132,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
             </div>
 
             {/* Full Image Hero */}
-            {project.id !== 'north-keyboard' && project.id !== 'octopus-bridge' && project.id !== 'age-soft' && (
+            {project.id !== 'north-keyboard' && project.id !== 'octopus-bridge' && project.id !== 'age-soft' && project.id !== 'hiltar-sutas' && (
                 <div className="relative z-10 w-full h-[60vh] md:h-[80vh] overflow-hidden mb-4 md:mb-8 px-6 md:px-12">
                     <motion.img
                         initial={{ scale: 1.1, opacity: 0 }}
