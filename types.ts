@@ -3,15 +3,6 @@ export enum Language {
   TR = 'TR'
 }
 
-export enum Page {
-  HOME = 'Home',
-  WORKS = 'Works',
-  FRAGMENTS = 'Fragments',
-  STUDIO = 'Studio',
-  CONTACT = 'Contact',
-  PROJECT_DETAIL = 'ProjectDetail',
-  FRAGMENT_DETAIL = 'FragmentDetail'
-}
 
 export interface ContentText {
   [Language.EN]: string;

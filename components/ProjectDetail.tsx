@@ -1,30 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { PROJECTS, TEXTS, SERVICE_TRANSLATIONS } from '../constants';
-import { Language, Page } from '../types';
-import { useApp } from '../contexts/AppContext';
+import { Language } from '../types';
+import { useNavigate, useParams } from 'react-router-dom';
 
 interface ProjectDetailProps {
     language: Language;
 }
 
 export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
-    const { selectedProjectId, setSelectedProjectId, setPage } = useApp();
+    const { projectId } = useParams<{ projectId: string }>();
+    const navigate = useNavigate();
     const { scrollY } = useScroll();
     const blur = useTransform(scrollY, [0, 800], ["blur(0px)", "blur(12px)"]);
-    const [project, setProject] = useState(PROJECTS.find(p => p.id === selectedProjectId));
+
+    // Derive directly — no useState so there's never a stale/undefined frame
+    const project = PROJECTS.find(p => p.id === projectId);
+    const [isNextHovered, setIsNextHovered] = useState(false);
 
     useEffect(() => {
-        if (selectedProjectId) {
-            setProject(PROJECTS.find(p => p.id === selectedProjectId));
-            // Force scroll to top with a slight delay to ensure render is complete
-            setTimeout(() => {
-                window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-            }, 10);
-        }
-    }, [selectedProjectId]);
-
-    const [isNextHovered, setIsNextHovered] = useState(false);
+        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+    }, [projectId]);
 
     if (!project) return null;
 
@@ -32,13 +28,8 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
     const nextProject = PROJECTS[(currentIndex + 1) % PROJECTS.length];
 
     const handleNextProject = () => {
-        setSelectedProjectId(nextProject.id);
-        // Scroll immediately on click as well
-        window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
-        setIsNextHovered(false);
+        navigate(`/works/${nextProject.id}`);
     };
-
-
 
     return (
         <motion.article
@@ -51,7 +42,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
             {/* Back Button */}
             <div className="fixed top-24 left-6 md:left-12 z-50">
                 <button
-                    onClick={() => setPage(Page.WORKS)}
+                    onClick={() => navigate('/works')}
                     className="group flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:opacity-60 transition-opacity"
                 >
                     <span className="text-xl group-hover:-translate-x-1 transition-transform">←</span>
@@ -62,14 +53,12 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
             {/* Hero Section */}
             <div className="px-6 md:px-12 mb-24 md:mb-48">
                 <div className="fixed top-0 left-0 w-full h-[80vh] z-0 overflow-hidden pointer-events-none">
-                    {/* 1. The Image Layer: Grayscale and dark for both modes, slightly lighter opacity in light mode to maintain visibility against text */}
                     <motion.img
                         style={{ filter: blur }}
                         src={project.image}
                         alt=""
                         className="absolute inset-0 w-full h-full object-cover opacity-40 dark:opacity-40 grayscale"
                     />
-                    {/* 2. The Gradient Mask: Fades out the bottom */}
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/80 to-madde-white dark:via-black/80 dark:to-madde-black" />
                 </div>
 
@@ -153,7 +142,6 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
             <div className="relative z-10 px-6 md:px-12 mb-24">
                 <div className="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                     {project.gallery?.map((item, index) => {
-                        // Default to full width (2 columns) unless specific colSpan is provided
                         const colSpan = item.colSpan ?? 2;
                         const isWide = colSpan === 2;
 
@@ -167,42 +155,24 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                                 className={isWide ? 'md:col-span-2' : ''}
                             >
                                 {item.type === 'image' ? (
-                                    <div className={`overflow-hidden w-full`}>
-                                        <img
-                                            src={item.src}
-                                            alt={`Gallery ${index}`}
-                                            className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700"
-                                        />
+                                    <div className="overflow-hidden w-full">
+                                        <img src={item.src} alt={`Gallery ${index}`} className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700" />
                                     </div>
                                 ) : item.type === 'video' ? (
                                     <div className={`overflow-hidden w-full ${isWide ? 'aspect-[16/9]' : 'aspect-[4/5] md:aspect-[3/4]'}`}>
-                                        <video
-                                            src={item.src}
-                                            poster={item.poster}
-                                            autoPlay={item.autoPlay ?? true}
-                                            loop={item.loop ?? true}
-                                            muted={item.muted ?? true}
-                                            playsInline
-                                            className="w-full h-full object-cover"
-                                        />
+                                        <video src={item.src} poster={item.poster} autoPlay={item.autoPlay ?? true} loop={item.loop ?? true} muted={item.muted ?? true} playsInline className="w-full h-full object-cover" />
                                     </div>
                                 ) : item.type === 'group' ? (
                                     <div className={`grid grid-cols-2 ${item.cols === 4 ? 'md:grid-cols-4' : ''} gap-4 md:gap-8 h-full`}>
                                         {item.items.map((subItem, i) => (
                                             <div key={i} className="overflow-hidden w-full">
-                                                <img
-                                                    src={subItem.src}
-                                                    alt={`Group ${index}-${i}`}
-                                                    className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700"
-                                                />
+                                                <img src={subItem.src} alt={`Group ${index}-${i}`} className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700" />
                                             </div>
                                         ))}
                                     </div>
                                 ) : (
                                     <div className="flex flex-col justify-center h-full py-12 md:px-12 bg-gray-50 dark:bg-zinc-900 rounded-sm">
-                                        {item.title && (
-                                            <h3 className="text-xl font-bold mb-4">{item.title[language]}</h3>
-                                        )}
+                                        {item.title && <h3 className="text-xl font-bold mb-4">{item.title[language]}</h3>}
                                         <p className="text-xl md:text-3xl font-light leading-relaxed text-madde-black dark:text-madde-white">
                                             {item.content[language]}
                                         </p>
@@ -214,16 +184,13 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                 </div>
             </div>
 
-            {/* Next Project (Loop) */}
+            {/* Next Project */}
             <div
                 className="relative z-10 px-6 md:px-12 py-32 md:py-48 border-t border-black/5 dark:border-white/5 overflow-hidden transition-colors duration-500 bg-madde-white dark:bg-madde-black"
                 onMouseEnter={() => setIsNextHovered(true)}
                 onMouseLeave={() => setIsNextHovered(false)}
             >
-                {/* Background Preview */}
-                <div
-                    className={`absolute inset-0 z-0 transition-opacity duration-700 ${isNextHovered ? 'opacity-20' : 'opacity-0'}`}
-                >
+                <div className={`absolute inset-0 z-0 transition-opacity duration-700 ${isNextHovered ? 'opacity-20' : 'opacity-0'}`}>
                     <img src={nextProject.image} alt="" className="w-full h-full object-cover grayscale" />
                     <div className="absolute inset-0 bg-gradient-to-t from-madde-white via-transparent to-transparent dark:from-madde-black" />
                 </div>
@@ -243,6 +210,6 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                     </button>
                 </div>
             </div>
-        </motion.article >
+        </motion.article>
     );
 };

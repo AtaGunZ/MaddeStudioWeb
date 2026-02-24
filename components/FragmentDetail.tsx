@@ -1,22 +1,19 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { motion } from 'framer-motion';
 import { FRAGMENTS, TEXTS } from '../constants';
-import { FragmentBlock, Language, Page } from '../types';
-import { useApp } from '../contexts/AppContext';
+import { FragmentBlock, Language } from '../types';
+import { useNavigate, useParams } from 'react-router-dom';
 
 interface FragmentDetailProps {
     language: Language;
 }
 
 export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
-    const { selectedFragmentId, setPage } = useApp();
-    const [fragment, setFragment] = useState(FRAGMENTS.find(f => f.id === selectedFragmentId));
+    const { fragmentId } = useParams<{ fragmentId: string }>();
+    const navigate = useNavigate();
 
-    useEffect(() => {
-        if (selectedFragmentId) {
-            setFragment(FRAGMENTS.find(f => f.id === selectedFragmentId));
-        }
-    }, [selectedFragmentId]);
+    // Derive directly — no useState so there's never a stale/undefined frame
+    const fragment = FRAGMENTS.find(f => f.id === fragmentId);
 
     if (!fragment) return null;
 
@@ -52,11 +49,7 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                         transition={{ duration: 1, ease: 'easeInOut' }}
                         className="w-full overflow-hidden"
                     >
-                        <img
-                            src={block.src}
-                            alt=""
-                            className="w-full h-auto object-cover"
-                        />
+                        <img src={block.src} alt="" className="w-full h-auto object-cover" />
                     </motion.div>
                 );
 
@@ -72,11 +65,7 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                     >
                         {block.srcs.map((src, si) => (
                             <div key={si} className="overflow-hidden">
-                                <img
-                                    src={src}
-                                    alt=""
-                                    className="w-full h-full object-cover"
-                                />
+                                <img src={src} alt="" className="w-full h-full object-cover" />
                             </div>
                         ))}
                     </motion.div>
@@ -115,7 +104,7 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
             {/* Back Button */}
             <div className="fixed top-24 left-6 md:left-12 z-50">
                 <button
-                    onClick={() => setPage(Page.FRAGMENTS)}
+                    onClick={() => navigate('/fragments')}
                     className="group flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:opacity-60 transition-opacity"
                 >
                     <span className="text-xl group-hover:-translate-x-1 transition-transform">←</span>
@@ -143,7 +132,7 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
 
                 {/* Fallback: legacy single-content fragments */}
                 {!fragment.blocks && fragment.content?.[language] && (
-                    <p className="text-base md:text-lg leading-[1.9] text-madde-gray dark:text-gray-300 font-light max-w-3xl">
+                    <p className="text-base md:text-lg leading-[1.9] text-madde-gray dark:text-gray-300 font-light">
                         {fragment.content[language]}
                     </p>
                 )}

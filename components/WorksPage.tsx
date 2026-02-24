@@ -1,15 +1,15 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Language, Page } from '../types';
+import { Language } from '../types';
 import { PROJECTS, TEXTS } from '../constants';
-import { useApp } from '../contexts/AppContext';
+import { useNavigate } from 'react-router-dom';
 
 interface WorksPageProps {
   language: Language;
 }
 
 export const WorksPage: React.FC<WorksPageProps> = ({ language }) => {
-  const { setPage, setSelectedProjectId } = useApp();
+  const navigate = useNavigate();
 
   return (
     <motion.section
@@ -27,10 +27,7 @@ export const WorksPage: React.FC<WorksPageProps> = ({ language }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
             className="group cursor-pointer"
-            onClick={() => {
-              setSelectedProjectId(project.id);
-              setPage(Page.PROJECT_DETAIL);
-            }}
+            onClick={() => navigate(`/works/${project.id}`)}
           >
             <div className={`w-full aspect-square overflow-hidden mb-4 ${project.heroFit === 'contain' ? 'bg-neutral-900 dark:bg-black' : 'bg-transparent'}`}>
               <img

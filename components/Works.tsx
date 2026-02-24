@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { PROJECTS, TEXTS } from '../constants';
-import { Language, Page } from '../types';
+import { Language } from '../types';
 import { useApp } from '../contexts/AppContext';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useNavigate } from 'react-router-dom';
 
 interface WorksProps {
   language: Language;
@@ -10,7 +11,7 @@ interface WorksProps {
 
 export const Works: React.FC<WorksProps> = ({ language }) => {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
-  const { setPage, setSelectedProjectId } = useApp();
+  const navigate = useNavigate();
 
   return (
     <section className="pt-24 pb-8 border-t border-gray-200 dark:border-gray-800">
@@ -27,10 +28,7 @@ export const Works: React.FC<WorksProps> = ({ language }) => {
             className="group relative border-b border-gray-200 dark:border-gray-800 last:border-b-0 cursor-pointer"
             onMouseEnter={() => setHoveredProject(project.id)}
             onMouseLeave={() => setHoveredProject(null)}
-            onClick={() => {
-              setSelectedProjectId(project.id);
-              setPage(Page.PROJECT_DETAIL);
-            }}
+            onClick={() => navigate(`/works/${project.id}`)}
           >
             {/* Background Image Fade In on Hover (Desktop) */}
             <div className={`hidden lg:block fixed inset-0 z-0 pointer-events-none transition-opacity duration-700 opacity-0 group-hover:opacity-20 ${project.heroFit === 'contain' ? 'bg-neutral-900 dark:bg-black' : ''}`}>
@@ -63,21 +61,14 @@ export const Works: React.FC<WorksProps> = ({ language }) => {
       </div>
 
       <div className="flex justify-end px-6 md:px-12 mt-8">
-        <button
-          onClick={() => setPage(Page.WORKS)}
-          className="group flex items-center gap-4"
-        >
+        <button onClick={() => navigate('/works')} className="group flex items-center gap-4">
           <span className="text-lg font-medium group-hover:text-madde-gray transition-colors uppercase tracking-widest text-sm">
             {language === Language.EN ? 'More' : 'Daha Fazlası'}
           </span>
           <div className="h-px w-12 bg-gray-300 dark:bg-gray-700 relative overflow-hidden">
-            <motion.div
-              className="absolute top-0 left-0 h-full w-full bg-current -translate-x-full group-hover:translate-x-0 transition-transform duration-500"
-            />
+            <motion.div className="absolute top-0 left-0 h-full w-full bg-current -translate-x-full group-hover:translate-x-0 transition-transform duration-500" />
           </div>
-          <span className="text-xl group-hover:translate-x-2 transition-transform duration-300">
-            →
-          </span>
+          <span className="text-xl group-hover:translate-x-2 transition-transform duration-300">→</span>
         </button>
       </div>
     </section>

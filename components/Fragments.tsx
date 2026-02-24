@@ -1,15 +1,15 @@
 import React from 'react';
 import { FRAGMENTS, TEXTS } from '../constants';
-import { Language, Page } from '../types';
+import { Language } from '../types';
 import { motion } from 'framer-motion';
-import { useApp } from '../contexts/AppContext';
+import { useNavigate } from 'react-router-dom';
 
 interface FragmentsProps {
   language: Language;
 }
 
 export const Fragments: React.FC<FragmentsProps> = ({ language }) => {
-  const { setPage, setSelectedFragmentId } = useApp();
+  const navigate = useNavigate();
 
   return (
     <motion.section
@@ -18,7 +18,6 @@ export const Fragments: React.FC<FragmentsProps> = ({ language }) => {
       exit={{ opacity: 0 }}
       className="pt-48 pb-24 px-6 md:px-12 min-h-screen"
     >
-
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {FRAGMENTS.map((item, index) => (
           <motion.article
@@ -27,15 +26,12 @@ export const Fragments: React.FC<FragmentsProps> = ({ language }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
             className="group cursor-pointer"
-            onClick={() => {
-              setSelectedFragmentId(item.id);
-              setPage(Page.FRAGMENT_DETAIL);
-            }}
+            onClick={() => navigate(`/fragments/${item.id}`)}
           >
             <div className="w-full aspect-square overflow-hidden bg-gray-200 dark:bg-gray-800 mb-6">
               <img
                 src={item.image}
-                alt={item.title}
+                alt={item.title[language]}
                 className="w-full h-full object-cover opacity-80 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 grayscale group-hover:grayscale-0"
               />
             </div>

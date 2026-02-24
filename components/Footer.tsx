@@ -1,11 +1,12 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Language, Page } from '../types';
 import { useApp } from '../contexts/AppContext';
 import { TEXTS } from '../constants';
+import { useNavigate } from 'react-router-dom';
 
 export const Footer: React.FC = () => {
-  const { language, setPage } = useApp();
+  const { language } = useApp();
+  const navigate = useNavigate();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -19,7 +20,7 @@ export const Footer: React.FC = () => {
           {/* Logo */}
           <div className="flex flex-col gap-4">
             <button
-              onClick={() => setPage(Page.HOME)}
+              onClick={() => navigate('/')}
               className="w-20 h-20 hover:opacity-100 transition-opacity"
             >
               <img
