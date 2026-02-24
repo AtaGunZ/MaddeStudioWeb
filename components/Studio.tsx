@@ -98,42 +98,47 @@ export const Studio: React.FC<StudioProps> = ({ language }) => {
       </section>
 
       {/* PHILOSOPHY SECTION */}
-      <section className="py-32 md:py-48 px-6 md:px-12">
-        <div className="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12">
-          <div className="md:col-span-4">
-            <motion.h2
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tighter mb-8 md:mb-0"
-            >
-              {TEXTS.studio.philosophyTitle[language]}
-            </motion.h2>
-          </div>
-          <div className="md:col-span-8">
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
-              className="text-3xl md:text-5xl lg:text-6xl font-light leading-tight mb-16"
-            >
-              {TEXTS.studio.description[language]}
-            </motion.p>
+      <section className="py-32 md:py-48 px-6 md:px-12 border-t border-black/10 dark:border-white/10">
+        <div className="max-w-[1920px] mx-auto">
 
-            <motion.p
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="text-xl md:text-2xl leading-relaxed text-madde-gray dark:text-gray-400 max-w-3xl"
-            >
-              {TEXTS.studio.philosophy[language]}
-            </motion.p>
+          {/* Section title */}
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
+            className="text-2xl md:text-3xl lg:text-4xl font-bold tracking-tighter mb-20 md:mb-32"
+          >
+            {TEXTS.studio.philosophyTitle[language]}
+          </motion.h2>
+
+          {/* Paragraphs — centered, fade in one by one */}
+          <div className="flex flex-col items-center space-y-10 md:space-y-14">
+            {(TEXTS.studio as any).philosophyBlocks.map((block: any, index: number) => {
+              const isLast = index === (TEXTS.studio as any).philosophyBlocks.length - 1;
+
+              return (
+                <motion.p
+                  key={index}
+                  initial={{ opacity: 0 }}
+                  whileInView={{ opacity: 1 }}
+                  viewport={{ once: true, margin: '-5%' }}
+                  transition={{ duration: 1.4, ease: 'easeInOut' }}
+                  className={
+                    isLast
+                      ? 'text-sm md:text-base font-light italic text-center opacity-40 max-w-md'
+                      : 'text-sm md:text-base leading-[1.85] text-madde-gray dark:text-gray-400 font-light text-center max-w-2xl'
+                  }
+                >
+                  {block[language]}
+                </motion.p>
+              );
+            })}
           </div>
+
         </div>
       </section>
+
 
       {/* DISCIPLINES SECTION - Redesigned */}
       <section className="py-32 md:py-48 px-6 md:px-12 border-t border-black/10 dark:border-white/10">
@@ -207,9 +212,10 @@ export const Studio: React.FC<StudioProps> = ({ language }) => {
                     >
                       {/* Background Image */}
                       <div
-                        className="absolute inset-0 bg-cover bg-center transition-all duration-700"
+                        className="absolute inset-0 bg-cover transition-all duration-700"
                         style={{
                           backgroundImage: `url(${service.image})`,
+                          backgroundPosition: index === 0 ? '50% 40%' : 'center',
                           filter: isHovered ? 'grayscale(0%) brightness(1)' : 'grayscale(100%) brightness(0.7)',
                           transform: isHovered ? 'scale(1.1)' : 'scale(1)',
                         }}

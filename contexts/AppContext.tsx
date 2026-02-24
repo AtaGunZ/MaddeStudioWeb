@@ -52,6 +52,11 @@ export const AppProvider: React.FC<AppProviderProps> = ({ children }) => {
     }
   }, [darkMode]);
 
+  // Sync language attribute
+  useEffect(() => {
+    document.documentElement.setAttribute('lang', language.toLowerCase());
+  }, [language]);
+
   // Scroll to top on page change
   useEffect(() => {
     window.scrollTo(0, 0);

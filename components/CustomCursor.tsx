@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { motion, useMotionValue, useSpring } from 'framer-motion';
+import React, { useEffect, useRef, useState } from 'react';
+import { motion, useMotionValue } from 'framer-motion';
 import { useApp } from '../contexts/AppContext';
 
 export const CustomCursor: React.FC = () => {
@@ -7,33 +7,50 @@ export const CustomCursor: React.FC = () => {
     const cursorX = useMotionValue(-100);
     const cursorY = useMotionValue(-100);
 
-    // Track mouse movement
+    // Raw position stored in a ref — updated on every mousemove event
+    // (not capped by rAF, but also not tied to render cycle)
+    const mousePos = useRef({ x: -100, y: -100 });
+    const rafId = useRef<number>(0);
+
+    // Detect touch/mobile — coarse pointer means no custom cursor
+    const isTouchDevice = typeof window !== 'undefined' && window.matchMedia('(pointer: coarse)').matches;
+
     useEffect(() => {
-        const moveCursor = (e: MouseEvent) => {
-            cursorX.set(e.clientX);
-            cursorY.set(e.clientY);
-        };
+        if (isTouchDevice) return;
 
-        window.addEventListener('mousemove', moveCursor);
+        const onMouseMove = (e: MouseEvent) => {
+            mousePos.current = { x: e.clientX, y: e.clientY };
+        };
+        window.addEventListener('mousemove', onMouseMove);
+
+        // rAF loop — syncs motion values to display refresh rate (144Hz, 120Hz, 60Hz, etc.)
+        const loop = () => {
+            cursorX.set(mousePos.current.x);
+            cursorY.set(mousePos.current.y);
+            rafId.current = requestAnimationFrame(loop);
+        };
+        rafId.current = requestAnimationFrame(loop);
+
         return () => {
-            window.removeEventListener('mousemove', moveCursor);
+            window.removeEventListener('mousemove', onMouseMove);
+            cancelAnimationFrame(rafId.current);
         };
-    }, [cursorX, cursorY]);
+    }, [cursorX, cursorY, isTouchDevice]);
 
-    // Handle click animations (optional, but adds nice feedback)
     const [isClicked, setIsClicked] = useState(false);
     useEffect(() => {
+        if (isTouchDevice) return;
         const mouseDown = () => setIsClicked(true);
         const mouseUp = () => setIsClicked(false);
-
         window.addEventListener('mousedown', mouseDown);
         window.addEventListener('mouseup', mouseUp);
-
         return () => {
             window.removeEventListener('mousedown', mouseDown);
             window.removeEventListener('mouseup', mouseUp);
         };
-    }, []);
+    }, [isTouchDevice]);
+
+    if (isTouchDevice) return null;
 
     return (
         <>

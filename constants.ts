@@ -26,15 +26,15 @@ export const TEXTS = {
   manifesto: {
     p1: {
       [Language.EN]: "We believe every idea has a structure.",
-      [Language.TR]: "Her fikir bir yapı taşır."
+      [Language.TR]: "Her fikir bir yapı barındırır."
     },
     p2: {
       [Language.EN]: "Design is the act of revealing that structure and giving it form.",
-      [Language.TR]: "Tasarım, bu yapının görünür hâle gelmesidir."
+      [Language.TR]: "Tasarım, bu yapının görünür hale gelmesidir."
     },
     p3: {
       [Language.EN]: "Madde Studio works multi-disciplinary, shaping different expressions from the same underlying matter.",
-      [Language.TR]: "Madde Studio multidisipliner çalışır, aynı maddeden farklı formlar ortaya çıkarır."
+      [Language.TR]: "Madde Studio multidisipliner çalışır, aynı yapıdan farklı formlar ortaya çıkarır."
     }
   },
   services: {
@@ -165,6 +165,40 @@ export const TEXTS = {
       [Language.EN]: "Matter (Madde) is our namesake and our medium. Whether pixels or concrete, we treat every element with the same respect for physics, light, and purpose.",
       [Language.TR]: "Madde, ismimiz ve aracımızdır. İster piksel ister beton olsun, her elemente fizik, ışık ve amaca aynı saygıyla yaklaşırız."
     },
+    philosophyBlocks: [
+      {
+        [Language.EN]: "We look at matter without dictating 'what life is', without adding artificial values and decorations. We accept the truth that design is not just us shaping matter, but matter also shaping us, our habits, and our perception.",
+        [Language.TR]: "Biz, maddeye \"hayatın ne olduğunu\" dikte etmeden, üzerine yapay değerler ve süslemeler eklemeden bakarız. Tasarımın sadece bizim maddeyi şekillendirmemiz değil; maddenin de bizi, alışkanlıklarımızı ve algımızı şekillendirdiği gerçeğini kabul ederiz."
+      },
+      {
+        [Language.EN]: "In the footsteps of Bauhaus, we solve the unknown with the known, and the complex in its simplest form. We do not look for a hidden, mystical 'representation' behind a structure, a visual, or a movement. For us, truth is not separate from the design itself, its material and its function. 'Material Design' is a stance that takes its freedom from its internal consistency, untouched by the domination of trends or imposed aesthetic perceptions.",
+        [Language.TR]: "Bauhaus'un izinde, bilinmeyeni bilinenle, karmaşık olanı en yalın haliyle çözümleriz. Bir yapının, bir görselin veya bir hareketin ardında saklı, mistik bir \"temsiliyet\" aramayız. Bizim için gerçek, tasarımın kendisinden, malzemesinden ve işlevinden ayrı değildir. \"Materyal Tasarım\", üzerinde trendlerin veya dayatılmış estetik algıların tahakkümü olmayan, kendi özgürlüğünü içsel tutarlılığından alan bir duruştur."
+      },
+      {
+        [Language.EN]: "Our design process is not stuck in a studio. For us, 'place' is not an office with drawn boundaries — it is the whole world. Madde Studio is a flaneur in this world.",
+        [Language.TR]: "Tasarım sürecimiz, bir stüdyoya sıkışmış değildir. Bizim için \"yer\", sınırları çizilmiş bir ofis değil, tüm dünyadır. Madde Studio, bu dünyada bir flanördür."
+      },
+      {
+        [Language.EN]: "We wear flanerie like an apron; we wander through digital and physical universes, we look and we see. We observe not only with our eyes but by 'knowing how to be there'. Every visualization, every animation, and every story we design is a product of this observation, of that 'place' and that 'moment'. We refuse to fit into a mold, a movement, or a label. Just like that material human trying to make their voice heard, our designs are foreign to everything but deeply connected to everything.",
+        [Language.TR]: "Flanörlüğü bir önlük gibi giyer; dijital ve fiziksel evrenlerde dolaşır, bakar ve görürüz. Sadece gözle değil, \"orada olmayı bilerek\" gözlem yaparız. Tasarladığımız her görselleştirme, her animasyon ve her hikaye; bu gözlemin, o \"yer\"in ve o \"an\"ın bir ürünüdür. Bir kalıba, bir akıma veya bir etikete sığmayı reddederiz. Tıpkı sesini duyurmaya çalışan o materyal insan gibi, tasarımlarımız da her şeye yabancı ama her şeyle derinden bağlıdır."
+      },
+      {
+        [Language.EN]: "In this medium, we create every work and every form to 'remain human' and 'touch reality'. We do not yet know the final shape of the path we have set out on; we trust the process.",
+        [Language.TR]: "Biz bu mecrada; üretilen her işi, çizilen her formu \"insan kalabilmek\" ve \"gerçeğe dokunabilmek\" için yaparız. Çıktığımız yolun son şeklini şimdiden bilmeyiz; sürece güveniriz."
+      },
+      {
+        [Language.EN]: "Preserving the freedom of our work is essential. Let our works be read, watched, criticized, and looked at again from where they couldn't be seen. Even let them be reviled. Because we believe that when all these interactions come together, a living rhythm emerges beyond a static image. This rhythm is the voice of matter itself.",
+        [Language.TR]: "Çalışmalarımızın özgürlüğünü korumak esastır. İşlerimiz okunsun, izlensin, eleştirilsin, bakılamayan yerden tekrar bakılsın. Hatta yerilsin. Çünkü inanıyoruz ki; bütün bu etkileşimler bir araya geldiğinde, statik bir görüntüden öte, yaşayan bir ritim oluşur. Bu ritim, maddenin kendi sesidir."
+      },
+      {
+        [Language.EN]: "In this age where the digital, the virtual, and the 'metamaterial' have surrounded everything, is it possible for design to remain 'material'? We think it's possible. Even necessary. To preserve our own uniqueness, our designs must also preserve their 'materiality' — their essence, their honesty. Reminding people first to breathe, then to perceive, and finally that they are not an 'object' but exist with objects...",
+        [Language.TR]: "Dijitalin, sanalın ve \"metamateryal\"in her yeri sardığı bu çağda, tasarımın \"materyal\" kalabilmesi mümkün mü? Bizce mümkün. Hatta zorunlu. Kendi biricikliğimizi korumak için, tasarımlarımızın da \"materyalliğini\" — özünü, dürüstlüğünü — koruması gerekir. İnsanın önce nefes almasını, sonra algılamasını, en sonunda da kendisinin bir \"nesne\" olmadığını ama nesnelerle var olduğunu hatırlatmak..."
+      },
+      {
+        [Language.EN]: "Madde Studio exists to make this reminder.",
+        [Language.TR]: "Madde Studio, işte bu hatırlatmayı yapmak için vardır."
+      }
+    ],
     disciplines: {
       [Language.EN]: "Disciplines",
       [Language.TR]: "Disiplinler"
@@ -210,14 +244,14 @@ export const SERVICE_TRANSLATIONS: Record<string, ContentText> = {
 export const SERVICES: Service[] = [
   {
     title: {
-      [Language.EN]: "Realistic Visualization",
-      [Language.TR]: "Gerçekçi Görselleştirme"
+      [Language.EN]: "Visualization",
+      [Language.TR]: "Görselleştirme"
     },
     process: {
-      [Language.EN]: "Detail → Aesthetics → Realism",
-      [Language.TR]: "Detay → Estetik → Gerçekçilik"
+      [Language.EN]: "Idea → Form → Aesthetics",
+      [Language.TR]: "Fikir → Form → Estetik"
     },
-    image: "/services/realistic.png"
+    image: "/services/visualization_image.png"
   },
   {
     title: {
@@ -225,8 +259,8 @@ export const SERVICES: Service[] = [
       [Language.TR]: "Dinamik Hareket"
     },
     process: {
-      [Language.EN]: "Movement → Animation → Life",
-      [Language.TR]: "Hareket → Animasyon → Yaşam"
+      [Language.EN]: "Material → Movement → Animation",
+      [Language.TR]: "Materyal → Hareket → Animasyon"
     },
     image: "/services/motion.png"
   },
@@ -259,7 +293,7 @@ export const PROJECTS: Project[] = [
     services: ["3D Rendering", "3D Motion Design"],
     challenge: {
       [Language.EN]: "The goal was to represent Hiltar's fertilizer production facilities in a powerful and clear manner for investment and corporate presentations. The closed and complex nature of industrial production lines makes it challenging to clearly convey the facility's engineering strength and operational capacity.",
-      [Language.TR]: "Hiltara gübre üretim tesislerinin yatırım ve kurumsal sunumlarda güçlü ve anlaşılır biçimde temsil edilmesi amaçlanmıştır. Endüstriyel üretim hatlarının kapalı ve karmaşık yapısı, tesisin mühendislik gücünün ve operasyonel kapasitesinin net şekilde aktarılmasını zorlaştırmaktadır."
+      [Language.TR]: "Hiltar'ın gübre üretim tesislerinin yatırım ve kurumsal sunumlarda güçlü ve anlaşılır biçimde temsil edilmesi amaçlanmıştır. Endüstriyel üretim hatlarının kapalı ve karmaşık yapısı, tesisin mühendislik gücünün ve operasyonel kapasitesinin net şekilde aktarılmasını zorlaştırmaktadır."
     },
     solution: {
       [Language.EN]: "Through the 3D visualization and animation work developed within this scope, machinery systems were presented with controlled transparency, and the production process was structured in a fluid and clear manner from start to finish. Thus, the factory's technological infrastructure and production power were made visible with a professional and trustworthy narrative.",
@@ -454,7 +488,7 @@ export const PROJECTS: Project[] = [
     },
     solution: {
       [Language.EN]: "In the promotional structure, the battery indicator was treated as the primary element that differentiates the product and was presented within a dynamic atmosphere. Through light, motion, and surface details, the sense of performance was reinforced, creating a feeling of control, trust, and competitive advantage in the viewer.",
-      [Language.TR]: "Tanıtım kurgusunda şarj göstergesi ürünü ayrıştıran temel unsur olarak ele alındı ve dinamik bir atmosfer içinde sunuldu. Işık, hareket ve yüzey detaylarıyla performans duygusu pekiştirilerek izleyicide kontrol, güven ve rekabet avantajı hissi oluşturuldu."
+      [Language.TR]: "Tanıtım kurgusunda şarj göstergesi ürünü ayrıştıran temel unsur olarak ele alındı ve dinamik bir atmosfer içinde sunuldu. İşık, hareket ve yüzey detaylarıyla performans duygusu pekiştirilerek izleyicide kontrol, güven ve rekabet avantajı hissi oluşturuldu."
     },
     gallery: [
       {
@@ -517,7 +551,7 @@ export const PROJECTS: Project[] = [
     },
     solution: {
       [Language.EN]: "In the prepared animation sequence, the product's design details and usage scenarios were presented with a fluid, simple, and impressive language. Through lighting, material, and motion compositions, both technological superiority and a patient-centric approach were strongly emphasized. The resulting work provided a prestigious presentation that positions WizePod as a trustworthy and transformative solution in the field of medical innovation.",
-      [Language.TR]: "Hazırlanan animasyon kurgusunda ürünün tasarım detayları ve kullanım senaryosu akıcı, sade ve etkileyici bir dil ile sunuldu. Işık, materyal ve hareket kompozisyonları sayesinde hem teknolojik üstünlük hem de hasta odaklı yaklaşım güçlü bir biçimde vurgulandı. Ortaya çıkan çalışma, WizePod’u medikal inovasyon alanında güven veren ve fark yaratan bir çözüm olarak konumlandıran prestijli bir sunum sundu."
+      [Language.TR]: "Hazırlanan animasyon kurgusunda ürünün tasarım detayları ve kullanım senaryosu akıcı, sade ve etkileyici bir dil ile sunuldu. İşık, materyal ve hareket kompozisyonları sayesinde hem teknolojik üstünlük hem de hasta odaklı yaklaşım güçlü bir biçimde vurgulandı. Ortaya çıkan çalışma, WizePod’u medikal inovasyon alanında güven veren ve fark yaratan bir çözüm olarak konumlandıran prestijli bir sunum sundu."
     },
     gallery: [
       {
@@ -581,7 +615,7 @@ export const PROJECTS: Project[] = [
     },
     solution: {
       [Language.EN]: "In the prepared animation film, surface transitions, edge details, and material feel were presented with a cinematic flow, emphasizing the product's aesthetic power. Through lighting and motion compositions, the phone's minimal yet impressive design language was highlighted. The resulting work offered a powerful and refined product narrative that reflects Reeder's design vision.",
-      [Language.TR]: "Hazırlanan animasyon filminde yüzey geçişleri, kenar detayları ve malzeme hissi sinematik bir akışla sunularak ürünün estetik gücü vurgulandı. Işık ve hareket kompozisyonları sayesinde telefonun minimal fakat etkileyici tasarım dili ön plana çıkarıldı. Ortaya çıkan çalışma, Reeder’in tasarım vizyonunu yansıtan, güçlü ve rafine bir ürün anlatımı sundu."
+      [Language.TR]: "Hazırlanan animasyon filminde yüzey geçişleri, kenar detayları ve malzeme hissi sinematik bir akışla sunularak ürünün estetik gücü vurgulandı. İşık ve hareket kompozisyonları sayesinde telefonun minimal fakat etkileyici tasarım dili ön plana çıkarıldı. Ortaya çıkan çalışma, Reeder’in tasarım vizyonunu yansıtan, güçlü ve rafine bir ürün anlatımı sundu."
     },
     gallery: [
       {
@@ -618,7 +652,7 @@ export const PROJECTS: Project[] = [
     services: ["3D Product Animation", "Motion Design", "CGI"],
     challenge: {
       [Language.EN]: "The 3D visualization and animation work developed for the Odin Pro WL Gaming Keyboard aimed to position the product not just as gaming equipment, but as a strategic tool at the center of competitive performance. Standing out with its illuminated structure and rechargeable wireless technology, this model represented its status as a world-first within a powerful and ambitious atmosphere. The design language was handled with a sharp and dynamic narrative that supports perceptions of speed, response time, and durability.",
-      [Language.TR]: "Odin Pro WL Gaming Keyboard için geliştirilen 3D görselleştirme ve animasyon çalışması, ürünü yalnızca bir oyun ekipmanı değil, rekabetçi performansın merkezindeki stratejik bir araç olarak konumlandırmayı hedefledi. Işıklı yapısı ve şarjlı kablosuz teknolojisiyle öne çıkan bu model, dünyada ilk olma özelliğini güçlü ve iddialı bir atmosfer içinde temsil etti. Tasarım dili; hız, tepki süresi ve dayanıklılık algısını destekleyen keskin ve dinamik bir anlatımla ele alındı."
+      [Language.TR]: "Odin Pro WL Gaming Keyboard için geliştirilen 3D görselleştirme ve animasyon çalışması, ürünü yalnızca bir oyun ekipmanı değil, rekabetçi performansın merkezindeki stratejik bir araç olarak konumlandırmayı hedefledi. İşıklı yapısı ve şarjlı kablosuz teknolojisiyle öne çıkan bu model, dünyada ilk olma özelliğini güçlü ve iddialı bir atmosfer içinde temsil etti. Tasarım dili; hız, tepki süresi ve dayanıklılık algısını destekleyen keskin ve dinamik bir anlatımla ele alındı."
     },
     solution: {
       [Language.EN]: "In the promotional sequence, light effects and surface details were structured to reinforce the sense of performance. Through motion and composition language, the product's technological strength and unique position were emphasized, creating feelings of control, superiority, and competitive advantage in the viewer. The resulting work provided a prestigious presentation that positions the Odin Pro WL not just as a keyboard, but as a powerful piece of equipment that makes a difference in the gaming arena.",
@@ -807,11 +841,11 @@ export const PROJECTS: Project[] = [
     services: ["Brand Strategy", "Motion Design"],
     challenge: {
       [Language.EN]: "The work carried out for Octopus Bridge was handled as a holistic design process that strengthens the brand's digital identity and clarifies its vision. While the UI/UX structure developed for the web platform reimagined the user experience with a simple and fluid architecture; logo design, hand-drawn illustrations, and the established color system transformed the brand's character into a unique and memorable structure. The entire visual language was structured to create a consistent brand integrity supporting the company's vision.",
-      [Language.TR]: "Octapus Bridge için yürütülen çalışma, markanın dijital kimliğini güçlendiren ve vizyonunu netleştiren bütüncül bir tasarım süreci olarak ele alındı. Web platformu için geliştirilen UI/UX yapısı, kullanıcı deneyimini sade ve akıcı bir mimariyle yeniden kurgularken; logo tasarımı, el çizimi illüstrasyonlar ve belirlenen renk sistemi markanın karakterini özgün ve hatırlanabilir bir yapıya dönüştürdü. Tüm görsel dil, firmanın vizyonunu destekleyen tutarlı bir marka bütünlüğü oluşturacak şekilde yapılandırıldı."
+      [Language.TR]: "Octopus Bridge için yürütülen çalışma, markanın dijital kimliğini güçlendiren ve vizyonunu netleştiren bütüncül bir tasarım süreci olarak ele alındı. Web platformu için geliştirilen UI/UX yapısı, kullanıcı deneyimini sade ve akıcı bir mimariyle yeniden kurgularken; logo tasarımı, el çizimi illüstrasyonlar ve belirlenen renk sistemi markanın karakterini özgün ve hatırlanabilir bir yapıya dönüştürdü. Tüm görsel dil, firmanın vizyonunu destekleyen tutarlı bir marka bütünlüğü oluşturacak şekilde yapılandırıldı."
     },
     solution: {
       [Language.EN]: "While dynamism was added to the digital experience through Lottie animations and motion design elements, brand interaction was carried to different platforms with secondary communication tools like Telegram sticker sets. The resulting work offered a comprehensive transformation that moved Octopus Bridge to a powerful, integrated, and modern brand structure, not only visually but also strategically and communicatively.",
-      [Language.TR]: "Lottie animasyonlar ve hareketli tasarım öğeleriyle dijital deneyime dinamizm kazandırılırken, Telegram sticker setleri gibi yan iletişim araçlarıyla marka etkileşimi farklı platformlara taşındı. Ortaya çıkan çalışma, Octapus Bridge’i yalnızca görsel olarak değil, stratejik ve iletişimsel açıdan da güçlü, bütünlüklü ve modern bir marka yapısına taşıyan kapsamlı bir dönüşüm sundu."
+      [Language.TR]: "Lottie animasyonlar ve hareketli tasarım öğeleriyle dijital deneyime dinamizm kazandırılırken, Telegram sticker setleri gibi yan iletişim araçlarıyla marka etkileşimi farklı platformlara taşındı. Ortaya çıkan çalışma, Octopus Bridge’i yalnızca görsel olarak değil, stratejik ve iletişimsel açıdan da güçlü, bütünlüklü ve modern bir marka yapısına taşıyan kapsamlı bir dönüşüm sundu."
     },
     gallery: [
       { type: 'image', src: '/works/Octopus/1.png', colSpan: 2 },
@@ -947,7 +981,7 @@ export const TEAM: TeamMember[] = [
   },
   {
     id: 'yusuf',
-    name: 'Yusuf Ihlamur',
+    name: 'Yusuf İhlamur',
     role: { [Language.EN]: 'Partner', [Language.TR]: 'Ortak' },
     bio: {
       [Language.EN]: "Executive Director, Co-Founder",
