@@ -46,13 +46,20 @@ export interface Service {
   image: string;
 }
 
+export type FragmentBlock =
+  | { kind: 'text'; content: ContentText }
+  | { kind: 'image'; src: string }
+  | { kind: 'image-pair'; srcs: [string, string] }
+  | { kind: 'credits'; content: ContentText };
+
 export interface Fragment {
   id: string;
-  title: string;
-  type: 'News' | 'Sketch';
+  title: ContentText;
+  type: ContentText;
   date: string;
   image: string;
   content?: ContentText;
+  blocks?: FragmentBlock[];
 }
 
 export interface Client {

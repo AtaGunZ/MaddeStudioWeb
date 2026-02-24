@@ -912,47 +912,74 @@ export const PROJECTS: Project[] = [
 export const FRAGMENTS: Fragment[] = [
   {
     id: 'f1',
-    title: 'Study: Typography on Glass',
-    type: 'Sketch',
-    date: '2023.10',
-    image: 'https://picsum.photos/seed/glassy/600/600',
-    content: {
-      [Language.EN]: "Exploring how typography interacts with transparent materials. We tested various etching depths and backlighting techniques to see how legibility changes under different angles. The goal was to create signs that feel floating yet permanent.",
-      [Language.TR]: "Tipografinin şeffaf malzemelerle nasıl etkileşime girdiğini araştırıyoruz. Farklı açılar altında okunabilirliğin nasıl değiştiğini görmek için çeşitli aşındırma derinliklerini ve arkadan aydınlatma tekniklerini test ettik. Amaç, havada asılı duran ama kalıcı hissettiren tabelalar yaratmaktı."
-    }
-  },
-  {
-    id: 'f2',
-    title: 'Design Week Panel',
-    type: 'News',
-    date: '2023.11',
-    image: 'https://picsum.photos/seed/panel/600/600',
-    content: {
-      [Language.EN]: "We were honored to speak at Istanbul Design Week about 'Digital Materiality'. It was a great opportunity to discuss how we bring physical tactile sensations into the digital realm.",
-      [Language.TR]: "İstanbul Tasarım Haftası'nda 'Dijital Maddesellik' üzerine konuşmaktan onur duyduk. Fiziksel dokunsal hisleri dijital dünyaya nasıl taşıdığımızı tartışmak için harika bir fırsattı."
-    }
-  },
-  {
-    id: 'f3',
-    title: 'Texture Experiments: Concrete',
-    type: 'Sketch',
-    date: '2023.12',
-    image: 'https://picsum.photos/seed/concrete/600/600',
-    content: {
-      [Language.EN]: "Concrete is often seen as cold and brutal. We wanted to find the warmth in it. By mixing organic compounds into the aggregate, we achieved a surface that feels almost like skin.",
-      [Language.TR]: "Beton genellikle soğuk ve brütal olarak görülür. Biz içindeki sıcaklığı bulmak istedik. Karışıma organik bileşenler ekleyerek neredeyse deri gibi hissettiren bir yüzey elde ettik."
-    }
-  },
-  {
-    id: 'f4',
-    title: 'Generative Grid Systems',
-    type: 'Sketch',
-    date: '2024.01',
-    image: 'https://picsum.photos/seed/grids/600/600',
-    content: {
-      [Language.EN]: "Can a grid be strict yet fluid? We built a generative tool that creates layout grids based on the rhythm of the content provided. The result is a structure that adapts to the story, not the other way around.",
-      [Language.TR]: "Bir ızgara sistemi hem katı hem akışkan olabilir mi? İçeriğin ritmine göre mizanpaj ızgaraları oluşturan üretken bir araç geliştirdik. Sonuç, hikayeye uyum sağlayan bir yapı, tersi değil."
-    }
+    title: {
+      [Language.EN]: 'The Materialization of Madde',
+      [Language.TR]: 'Maddenin Somutlaşması'
+    },
+    type: {
+      [Language.EN]: 'Sketch',
+      [Language.TR]: 'Eskiz'
+    },
+    date: '02.2025',
+    image: '/fragments/f1/Cover.png',
+    blocks: [
+      {
+        kind: 'image',
+        src: '/fragments/f1/Cover.png'
+      },
+      {
+        kind: 'text',
+        content: {
+          [Language.TR]: `Bu yazıda, ismimizin çizgilerde nasıl hayat bulduğunun, kütle ve boşluk arasında kurduğumuz o dengenin hikayesini paylaşıyoruz.
+
+Logo fikrini üretirken işe varlığın kökenine inerek başladık. Alfabenin ilk harfi olan "a"nın taşıdığı başlangıç vurgusu, etimolojide temel kavramlarla örtüşüyordu: Aristoteles′in hylē "1. ahşap hammaddesi, 2. Madde gibi olarak tanımladığı sözcük, tıpkı Yunanca aslı gibi esasen "ağaç, tomruk, ahşap" anlamına gelmekte olup" işlevsel ve temel "maddeleri" anlam olarak barındırmaktadır. Ayrıca Arapça'da madd yayılma, uzama filidir; her ne kadar etimolojik olarak farklı köken olsa da bizim "biçimleri hareketlendirme" prensibini ifade etmektedir. Logo tasarımımız bu nedenle maddenin kendisiyle, onun içindeki boşlukla olan ilişkisini yansıtmalıydı ve biz de kütle-boşluğun iç içe geçtiği bir denge kurmayı hedefledik. Böylece logomuz bir alanın içinde bulunan herhangi bir maddeyi tanımlayacak ve aynı zamanda ayırt edilebilen bir biçim oluşturmak istedik.`,
+          [Language.EN]: `In this piece, we share the story of how our name came to life in lines — and the balance we struck between mass and void.
+
+When developing the logo concept, we began by tracing the origins of existence itself. The initial emphasis carried by "a" — the first letter of the alphabet — resonated with foundational concepts in etymology: Aristotle's hylē, defined as "1. raw timber, 2. Matter," a word that in its Greek origin essentially means "wood, log, timber," while also carrying the meaning of functional and elemental "matters." In Arabic, madd is the verb for spreading and extending; though etymologically distinct, it expresses our principle of "animating forms." Our logo design therefore had to reflect matter's relationship with itself — and with the void within it — and we set out to establish a balance where mass and void intertwine. We wanted our logo to define any matter within a space while simultaneously forming a distinguishable shape.`
+        }
+      },
+      {
+        kind: 'image',
+        src: '/fragments/f1/1.jpeg'
+      },
+      {
+        kind: 'text',
+        content: {
+          [Language.TR]: `Logonun biçimsel kurgusunda, ismimizin doğasına uygun olarak soyut ancak kendi içinde kesintisiz bir ritim oluşturmasını bekledik. M-A-D-D-E harfleri yan yana geldiğinde, farklı biçimlerin yığması gibi değil, hepsi aynı "maddeden" oyulmuş, aynı özden kopup gelmiş hissini vermeliydi. Bunu sağlamak için italik bir dikdörtgeni ana referans (base) olarak belirledik ve harfleri bu temel formun üzerine inşa ettik. Eskiz süreçlerimizde harflerin yapısını bozmamaya, eklemeler veya boşluklar yaratsak bile o ana formun karakterini korumasına özen gösterdik. Ortaya çıkan biçimler, maddenin kendine has o saf ve ayrışmaz bütünlüğünü yansıtıyordu.`,
+          [Language.EN]: `In the formal composition of the logo, we expected it to create an abstract yet internally unbroken rhythm — true to the nature of our name. When the letters M-A-D-D-E appear side by side, they should not feel like an accumulation of different forms, but rather as if all were carved from the same "matter," broken from the same essence. To achieve this, we established an italic rectangle as the primary reference (base) and built the letters upon this foundational form. Throughout our sketching process, we took care not to disrupt the structure of the letters — even when introducing additions or voids, we preserved the character of that base form. The resulting shapes reflected the pure and indivisible wholeness that is unique to matter itself.`
+        }
+      },
+      {
+        kind: 'image-pair',
+        srcs: ['/fragments/f1/2.jpeg', '/fragments/f1/3.jpeg']
+      },
+      {
+        kind: 'text',
+        content: {
+          [Language.TR]: `Tasarım süreci hiçbir zaman düz bir çizgi değildir; kendi içimizde en çok tartıştığımız nokta, formun ne kadar deneysel kalacağı ve nerede işlevselliğe teslim olacağıydı. Bauhaus prensiplerinden aldığımız ilham, bize işlevi her zaman ön planda tutmamızı söylüyordu. Ortaya çıkan o "boşluklu" ve soyut yapı, markanın imajını doğrudan yansıtıp görsel olarak bizi çok heyecanlandırsa da markanın akılda kalıcılığı ve okunabilirliği de bir o kadar kritikti.
+
+Bir tasarımın çok deneysel kalıp işlevden uzaklaşması riskine karşı logoyu sadeleştirmeye karar verdik. Örneğin, başlardaki alternatiflerde kelimenin dengesini biraz bozan ilk "m" harfini daha düz ve okunaklı bir forma çekerek, deneyselliği okunabilirlikle dengeledik. Nihayetinde önemli olan, logoyu bir bulmaca gibi çözdürmek değil; ismin ve o ismin yarattığı hissin zihne kazınmasıydı. Tıpkı iyi bir mimari yapının silüetini unutsanız da ismini ve size hissettirdiğini asla unutmamanız gibi.
+
+Bu güçlü ve karakteristik yapıyı destekleyecek tipografi seçimi de en az logonun kendi formu kadar önemliydi. Tercihimiz, tarafsız yapısıyla bilinen Neue Kabel oldu. Neue Kabel'ı seçmemizin nedeni, onun bu tanımsız kalabilme gücüydü; böylece Madde Studio'nun logosu her yerde, her yüzeyde ve her şey için kullanılabilir evrensel bir zemin kazanmış oldu.`,
+          [Language.EN]: `The design process is never a straight line. The point we debated most internally was how experimental the form should remain, and where it would surrender to function. The inspiration we drew from Bauhaus principles told us to always keep function at the forefront. While the resulting "voided" and abstract structure directly reflected the brand's image and thrilled us visually, the brand's memorability and legibility were equally critical.
+
+Against the risk of a design becoming too experimental and losing its function, we decided to simplify the logo. For example, by pulling the initial "m" — which slightly disrupted the balance of the word in early alternatives — into a more straightforward and readable form, we balanced experimentation with legibility. Ultimately, what mattered was not solving the logo like a puzzle, but having the name and the feeling it evokes etched into the mind. Just as you may forget the silhouette of a great building, you never forget its name and what it made you feel.
+
+The choice of typography to support this strong and characteristic structure was no less important than the logo's own form. Our choice was Neue Kabel, known for its neutral structure. The reason we chose Neue Kabel was its power to remain undefined — giving Madde Studio's logo a universal foundation usable everywhere, on every surface, for everything.`
+        }
+      },
+      {
+        kind: 'image-pair',
+        srcs: ['/fragments/f1/4.png', '/fragments/f1/5.png']
+      },
+      {
+        kind: 'credits',
+        content: {
+          [Language.TR]: `Tasarım: Mehmet Sait Özer, Doruk Teker, Nebil Erşan Elcenabi\nFikir: Mehmet Sait Özer, Nebil Erşan Elcenabi`,
+          [Language.EN]: `Design: Mehmet Sait Özer, Doruk Teker, Nebil Erşan Elcenabi\nConcept: Mehmet Sait Özer, Nebil Erşan Elcenabi`
+        }
+      }
+    ]
   }
 ];
 

@@ -18,10 +18,10 @@ export const Contact: React.FC<ContactProps> = ({ language }) => {
       <div className="max-w-[1920px] mx-auto w-full flex-grow flex items-center justify-center">
         {/* Animated Title */}
         <motion.h1
+          key={language}
           className="text-2xl md:text-4xl lg:text-5xl font-light tracking-tighter leading-tight text-center max-w-6xl"
           initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
+          animate="visible"
           variants={{
             hidden: {},
             visible: {

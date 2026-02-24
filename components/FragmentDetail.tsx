@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FRAGMENTS, TEXTS } from '../constants';
-import { Language, Page } from '../types';
+import { FragmentBlock, Language, Page } from '../types';
 import { useApp } from '../contexts/AppContext';
 
 interface FragmentDetailProps {
@@ -19,6 +19,91 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
     }, [selectedFragmentId]);
 
     if (!fragment) return null;
+
+    const renderBlock = (block: FragmentBlock, i: number) => {
+        switch (block.kind) {
+            case 'text':
+                return (
+                    <motion.div
+                        key={i}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: '-6%' }}
+                        transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
+                        className="w-full"
+                    >
+                        {block.content[language].split('\n\n').map((para, pi) => (
+                            <p key={pi} className="text-base md:text-lg leading-[1.9] text-madde-gray dark:text-gray-300 font-light mb-6 last:mb-0 whitespace-pre-line">
+                                {para}
+                            </p>
+                        ))}
+                    </motion.div>
+                );
+
+            case 'image':
+                return (
+                    <motion.div
+                        key={i}
+                        initial={{ opacity: 0 }}
+                        {...(i === 0
+                            ? { animate: { opacity: 1 } }
+                            : { whileInView: { opacity: 1 }, viewport: { once: true, margin: '-4%' } }
+                        )}
+                        transition={{ duration: 1, ease: 'easeInOut' }}
+                        className="w-full overflow-hidden"
+                    >
+                        <img
+                            src={block.src}
+                            alt=""
+                            className="w-full h-auto object-cover"
+                        />
+                    </motion.div>
+                );
+
+            case 'image-pair':
+                return (
+                    <motion.div
+                        key={i}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true, margin: '-4%' }}
+                        transition={{ duration: 1, ease: 'easeInOut' }}
+                        className="grid grid-cols-2 gap-3 md:gap-5 w-full"
+                    >
+                        {block.srcs.map((src, si) => (
+                            <div key={si} className="overflow-hidden">
+                                <img
+                                    src={src}
+                                    alt=""
+                                    className="w-full h-full object-cover"
+                                />
+                            </div>
+                        ))}
+                    </motion.div>
+                );
+
+            case 'credits':
+                return (
+                    <motion.div
+                        key={i}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 1 }}
+                        className="pt-8 border-t border-black/10 dark:border-white/10 w-full"
+                    >
+                        {block.content[language].split('\n').map((line, li) => (
+                            <p key={li} className="text-xs font-mono text-madde-gray opacity-60 leading-relaxed">
+                                {line}
+                            </p>
+                        ))}
+                    </motion.div>
+                );
+
+            default:
+                return null;
+        }
+    };
 
     return (
         <motion.article
@@ -38,53 +123,31 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                 </button>
             </div>
 
-            <div className="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-8">
-                {/* Header & Meta */}
-                <div className="col-span-1 md:col-span-12 mb-12">
+            <div className="max-w-4xl mx-auto flex flex-col gap-16 md:gap-24">
+
+                {/* Header */}
+                <div>
                     <span className="inline-block px-3 py-1 mb-6 text-xs font-mono border border-black dark:border-white rounded-full uppercase">
-                        {fragment.type}
+                        {fragment.type[language]}
                     </span>
-                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight mb-4 max-w-5xl">
-                        {fragment.title}
+                    <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter leading-tight mb-4">
+                        {fragment.title[language]}
                     </h1>
                     <span className="text-sm font-mono text-madde-gray">
                         {fragment.date}
                     </span>
                 </div>
 
-                {/* Main Content Area */}
-                <div className="col-span-1 md:col-span-8 flex flex-col gap-16">
-                    {/* Image */}
-                    <div className="w-full aspect-[4/3] md:aspect-[16/9] overflow-hidden rounded-sm md:rounded-lg">
-                        <img
-                            src={fragment.image}
-                            alt={fragment.title}
-                            className="w-full h-full object-cover"
-                        />
-                    </div>
+                {/* Rich blocks */}
+                {fragment.blocks?.map((block, i) => renderBlock(block, i))}
 
-                    {/* Text Content */}
-                    <div className="max-w-3xl">
-                        <p className="text-xl md:text-2xl leading-relaxed text-madde-gray dark:text-gray-300">
-                            {fragment.content?.[language]}
-                        </p>
-                    </div>
-                </div>
+                {/* Fallback: legacy single-content fragments */}
+                {!fragment.blocks && fragment.content?.[language] && (
+                    <p className="text-base md:text-lg leading-[1.9] text-madde-gray dark:text-gray-300 font-light max-w-3xl">
+                        {fragment.content[language]}
+                    </p>
+                )}
 
-                {/* Sidebar (Optional - for future use or simple navigation) */}
-                <div className="col-span-1 md:col-span-3 md:col-start-10 hidden md:block border-l border-black/5 dark:border-white/5 pl-8 md:sticky md:top-48 h-fit">
-                    <span className="block text-xs uppercase tracking-widest mb-6 opacity-40">{TEXTS.fragmentDetail.previous[language]}</span>
-                    <ul className="flex flex-col gap-4">
-                        {FRAGMENTS.filter(f => f.id !== fragment.id).slice(0, 3).map(f => (
-                            <li key={f.id} className="group cursor-pointer" onClick={() => {
-                                // We probably want to implement navigation here later
-                            }}>
-                                <span className="block text-sm font-medium group-hover:opacity-60 transition-opacity truncate">{f.title}</span>
-                                <span className="text-xs text-madde-gray">{f.date}</span>
-                            </li>
-                        ))}
-                    </ul>
-                </div>
             </div>
         </motion.article>
     );

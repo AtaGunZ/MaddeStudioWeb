@@ -42,10 +42,10 @@ export const Fragments: React.FC<FragmentsProps> = ({ language }) => {
             <div className="flex justify-between items-start">
               <div>
                 <span className="inline-block px-2 py-1 mb-2 text-[10px] font-mono border border-black/20 dark:border-white/20 rounded-full uppercase">
-                  {item.type}
+                  {item.type[language]}
                 </span>
                 <h3 className="text-xl font-bold tracking-tight group-hover:opacity-60 transition-opacity">
-                  {item.title}
+                  {item.title[language]}
                 </h3>
               </div>
               <span className="text-xs font-mono text-madde-gray">{item.date}</span>
