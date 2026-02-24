@@ -1,13 +1,13 @@
 import { Language, Project, Service, Fragment, Client, GalleryItem, ContentText, TeamMember } from './types';
 
 export const CLIENTS: Client[] = [
-  { id: 'wizepod', name: 'Wizepod', logo: '/works/wizepod/Primewize Logo Kare.png' },
-  { id: 'north', name: 'North', logo: '/works/North_keyboard/north_logo.png' },
-  { id: 'mehaz', name: 'Mehaz', logo: '/works/Mehaz_brandGuide/mehaz_logo.png' },
+  { id: 'wizepod', name: 'Wizepod', logo: '/works/Wizepod/Primewize Logo Kare.png' },
+  { id: 'north', name: 'North', logo: '/works/North_Keyboard/north_logo.png' },
+  { id: 'mehaz', name: 'Mehaz', logo: '/works/Mehaz_BrandGuide/mehaz_logo.png' },
   { id: 'octopus', name: 'Octopus', logo: '/works/Octopus/octopus_Logo.png' },
   { id: 'reeder', name: 'Reeder', logo: '/works/Reeder_Fancy/reeder-logo.png' },
-  { id: 'o3', name: 'O3 Layer', logo: '/works/o3_layer/o3_logo.png' },
-  { id: 'hiltar', name: 'Hiltar', logo: '/works/hiltar/Hiltar_Logo.png' },
+  { id: 'o3', name: 'O3 Layer', logo: '/works/o3_Layer/o3_logo.png' },
+  { id: 'hiltar', name: 'Hiltar', logo: '/works/Hiltar/Hiltar_Logo.png' },
   { id: 'age-soft', name: 'Age Soft', logo: '/works/Age_Soft/agesoft_logo.png' },
 
 ];
@@ -285,10 +285,10 @@ export const PROJECTS: Project[] = [
       [Language.EN]: "Industrial visualization and process animation for one of Turkey's leading dairy producers.",
       [Language.TR]: "Türkiye'nin önde gelen süt ürünleri üreticilerinden biri için endüstriyel görselleştirme ve süreç animasyonu."
     },
-    image: '/works/hiltar/hero.png',
+    image: '/works/Hiltar/hero.png',
     heroFit: 'cover',
     client: "Hiltar",
-    clientLogo: '/works/hiltar/Hiltar_Logo.png',
+    clientLogo: '/works/Hiltar/Hiltar_Logo.png',
     year: "2026",
     services: ["3D Rendering", "3D Motion Design"],
     challenge: {
@@ -300,20 +300,20 @@ export const PROJECTS: Project[] = [
       [Language.TR]: "Bu kapsamda geliştirilen 3D görselleştirme ve animasyon çalışmasıyla makine sistemleri kontrollü şeffaflıkla sunulmuş, üretim süreci baştan sona akıcı ve anlaşılır bir yapıda kurgulanmıştır. Böylece fabrikanın teknolojik altyapısı ve üretim gücü profesyonel ve güven veren bir anlatımla görünür hale getirilmiştir."
     },
     gallery: [
-      { type: 'image', src: '/works/hiltar/hero.png', colSpan: 2 },
+      { type: 'image', src: '/works/Hiltar/hero.png', colSpan: 2 },
       {
         type: 'video',
-        src: '/works/hiltar/video1.mp4',
+        src: '/works/Hiltar/video1.mp4',
         autoPlay: true,
         loop: true,
         muted: true,
         colSpan: 2
       },
-      { type: 'image', src: '/works/hiltar/2.png', colSpan: 1 },
-      { type: 'image', src: '/works/hiltar/3.png', colSpan: 1 },
+      { type: 'image', src: '/works/Hiltar/2.png', colSpan: 1 },
+      { type: 'image', src: '/works/Hiltar/3.png', colSpan: 1 },
       {
         type: 'video',
-        src: '/works/hiltar/video2.mp4',
+        src: '/works/Hiltar/video2.mp4',
         autoPlay: true,
         loop: true,
         muted: true,
@@ -321,35 +321,35 @@ export const PROJECTS: Project[] = [
       },
       {
         type: 'video',
-        src: '/works/hiltar/video3.mp4',
+        src: '/works/Hiltar/video3.mp4',
         autoPlay: true,
         loop: true,
         muted: true,
         colSpan: 1
       },
-      { type: 'image', src: '/works/hiltar/4.png', colSpan: 2 },
+      { type: 'image', src: '/works/Hiltar/4.png', colSpan: 2 },
       {
         type: 'video',
-        src: '/works/hiltar/video4.mp4',
+        src: '/works/Hiltar/video4.mp4',
         autoPlay: true,
         loop: true,
         muted: true,
         colSpan: 2
       },
-      { type: 'image', src: '/works/hiltar/5.png', colSpan: 1 },
-      { type: 'image', src: '/works/hiltar/6.png', colSpan: 1 },
+      { type: 'image', src: '/works/Hiltar/5.png', colSpan: 1 },
+      { type: 'image', src: '/works/Hiltar/6.png', colSpan: 1 },
       {
         type: 'video',
-        src: '/works/hiltar/video5.mp4',
+        src: '/works/Hiltar/video5.mp4',
         autoPlay: true,
         loop: true,
         muted: true,
         colSpan: 1
       },
-      { type: 'image', src: '/works/hiltar/7.png', colSpan: 1 },
+      { type: 'image', src: '/works/Hiltar/7.png', colSpan: 1 },
       {
         type: 'video',
-        src: '/works/hiltar/video6.mp4',
+        src: '/works/Hiltar/video6.mp4',
         autoPlay: true,
         loop: true,
         muted: true,
@@ -476,10 +476,10 @@ export const PROJECTS: Project[] = [
       [Language.EN]: "Product visualization for the North Odin Pro WL Gaming Mouse.",
       [Language.TR]: "North Odin Pro WL Gaming Mouse için ürün görselleştirmesi."
     },
-    image: '/works/North_gamingmouse/hero.png',
+    image: '/works/North_GamingMouse/hero.png',
     heroFit: 'cover',
     client: "North",
-    clientLogo: '/works/North_keyboard/north_logo.png', // Reusing existing logo
+    clientLogo: '/works/North_Keyboard/north_logo.png', // Reusing existing logo
     year: "2025",
     services: ["3D Product Animation", "Motion Design", "CGI"],
     challenge: {
@@ -493,30 +493,30 @@ export const PROJECTS: Project[] = [
     gallery: [
       {
         type: 'video',
-        src: '/works/North_gamingmouse/video1_1.mp4',
+        src: '/works/North_GamingMouse/video1_1.mp4',
         autoPlay: true,
         loop: true,
         muted: true,
         colSpan: 1
       },
-      { type: 'image', src: '/works/North_gamingmouse/1.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_gamingmouse/2.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_gamingmouse/3.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_GamingMouse/1.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_GamingMouse/2.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_GamingMouse/3.png', colSpan: 1 },
       {
         type: 'video',
-        src: '/works/North_gamingmouse/video2.mp4',
+        src: '/works/North_GamingMouse/video2.mp4',
         autoPlay: true,
         loop: true,
         muted: true,
         colSpan: 2
       },
-      { type: 'image', src: '/works/North_gamingmouse/4.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_gamingmouse/5.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_gamingmouse/6.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_gamingmouse/7.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_GamingMouse/4.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_GamingMouse/5.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_GamingMouse/6.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_GamingMouse/7.png', colSpan: 1 },
       {
         type: 'video',
-        src: '/works/North_gamingmouse/video3.mp4',
+        src: '/works/North_GamingMouse/video3.mp4',
         autoPlay: true,
         loop: true,
         muted: true,
@@ -524,7 +524,7 @@ export const PROJECTS: Project[] = [
       },
       {
         type: 'video',
-        src: '/works/North_gamingmouse/video4.mp4',
+        src: '/works/North_GamingMouse/video4.mp4',
         autoPlay: true,
         loop: true,
         muted: true,
@@ -539,10 +539,10 @@ export const PROJECTS: Project[] = [
       [Language.EN]: "Product visualization for a smart autonomous workspace pod.",
       [Language.TR]: "Akıllı otonom çalışma kapsülü için ürün görselleştirmesi."
     },
-    image: '/works/wizepod/hero.png',
+    image: '/works/Wizepod/hero.png',
     heroFit: 'cover',
     client: "Wizepod",
-    clientLogo: '/works/wizepod/Primewize Logo Kare.png',
+    clientLogo: '/works/Wizepod/Primewize Logo Kare.png',
     year: "2025",
     services: ["3D Product Animation", "Motion Design", "CGI"],
     challenge: {
@@ -556,40 +556,40 @@ export const PROJECTS: Project[] = [
     gallery: [
       {
         type: 'video',
-        src: '/works/wizepod/videohero.mp4',
+        src: '/works/Wizepod/videohero.mp4',
         autoPlay: true,
         loop: true,
         muted: true
       },
-      { type: 'image', src: '/works/wizepod/1.png' },
+      { type: 'image', src: '/works/Wizepod/1.png' },
       {
         type: 'video',
-        src: '/works/wizepod/video1.mp4',
+        src: '/works/Wizepod/video1.mp4',
         autoPlay: true,
         loop: true,
         muted: true
       },
-      { type: 'image', src: '/works/wizepod/2.png' },
-      { type: 'image', src: '/works/wizepod/3.png' },
-      { type: 'image', src: '/works/wizepod/4.png' },
+      { type: 'image', src: '/works/Wizepod/2.png' },
+      { type: 'image', src: '/works/Wizepod/3.png' },
+      { type: 'image', src: '/works/Wizepod/4.png' },
       {
         type: 'video',
-        src: '/works/wizepod/video2.mp4',
+        src: '/works/Wizepod/video2.mp4',
         autoPlay: true,
         loop: true,
         muted: true
       },
       {
         type: 'video',
-        src: '/works/wizepod/5.mp4',
+        src: '/works/Wizepod/5.mp4',
         autoPlay: true,
         loop: true,
         muted: true
       },
-      { type: 'image', src: '/works/wizepod/6.png' },
+      { type: 'image', src: '/works/Wizepod/6.png' },
       {
         type: 'video',
-        src: '/works/wizepod/video3.mp4',
+        src: '/works/Wizepod/video3.mp4',
         autoPlay: true,
         loop: true,
         muted: true
@@ -603,7 +603,7 @@ export const PROJECTS: Project[] = [
       [Language.EN]: "Product visualization for Reeder's S19 smartphone.",
       [Language.TR]: "Reeder S19 akıllı telefon için ürün görselleştirmesi."
     },
-    image: '/works/reeder_s19/1.png',
+    image: '/works/Reeder_S19/1.png',
     heroFit: 'cover',
     client: "Reeder",
     clientLogo: '/works/Reeder_Fancy/reeder-logo.png', // Reusing existing logo
@@ -620,17 +620,17 @@ export const PROJECTS: Project[] = [
     gallery: [
       {
         type: 'video',
-        src: '/works/reeder_s19/video1_1.mp4',
+        src: '/works/Reeder_S19/video1_1.mp4',
         autoPlay: true,
         loop: true,
         muted: true
       },
-      { type: 'image', src: '/works/reeder_s19/2.png' },
-      { type: 'image', src: '/works/reeder_s19/3.png' },
-      { type: 'image', src: '/works/reeder_s19/4.png' },
+      { type: 'image', src: '/works/Reeder_S19/2.png' },
+      { type: 'image', src: '/works/Reeder_S19/3.png' },
+      { type: 'image', src: '/works/Reeder_S19/4.png' },
       {
         type: 'video',
-        src: '/works/reeder_s19/video2.mp4',
+        src: '/works/Reeder_S19/video2.mp4',
         autoPlay: true,
         loop: true,
         muted: true
@@ -644,10 +644,10 @@ export const PROJECTS: Project[] = [
       [Language.EN]: "Product visualization for the North Odin Pro WL68 Keyboard.",
       [Language.TR]: "North Odin Pro WL68 Klavye için ürün görselleştirmesi."
     },
-    image: '/works/North_keyboard/hero.png',
+    image: '/works/North_Keyboard/hero.png',
     heroFit: 'cover',
     client: "North",
-    clientLogo: '/works/North_keyboard/north_logo.png',
+    clientLogo: '/works/North_Keyboard/north_logo.png',
     year: "2025",
     services: ["3D Product Animation", "Motion Design", "CGI"],
     challenge: {
@@ -661,38 +661,38 @@ export const PROJECTS: Project[] = [
     gallery: [
       {
         type: 'video',
-        src: '/works/North_keyboard/video1_2.mp4',
+        src: '/works/North_Keyboard/video1_2.mp4',
         autoPlay: true,
         loop: true,
         muted: true
       },
-      { type: 'image', src: '/works/North_keyboard/1.png' },
-      { type: 'image', src: '/works/North_keyboard/2.png' },
+      { type: 'image', src: '/works/North_Keyboard/1.png' },
+      { type: 'image', src: '/works/North_Keyboard/2.png' },
       {
         type: 'video',
-        src: '/works/North_keyboard/video2.mp4',
+        src: '/works/North_Keyboard/video2.mp4',
         autoPlay: true,
         loop: true,
         muted: true
       },
-      { type: 'image', src: '/works/North_keyboard/3.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_keyboard/4.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_keyboard/5.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_keyboard/6.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_Keyboard/3.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_Keyboard/4.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_Keyboard/5.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_Keyboard/6.png', colSpan: 1 },
       {
         type: 'video',
-        src: '/works/North_keyboard/video3.mp4',
+        src: '/works/North_Keyboard/video3.mp4',
         autoPlay: true,
         loop: true,
         muted: true,
         colSpan: 2
       },
-      { type: 'image', src: '/works/North_keyboard/7.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_keyboard/8.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_keyboard/gif1.gif', colSpan: 1 },
+      { type: 'image', src: '/works/North_Keyboard/7.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_Keyboard/8.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_Keyboard/gif1.gif', colSpan: 1 },
       {
         type: 'video',
-        src: '/works/North_keyboard/video4.mp4',
+        src: '/works/North_Keyboard/video4.mp4',
         autoPlay: true,
         loop: true,
         muted: true,
@@ -707,10 +707,10 @@ export const PROJECTS: Project[] = [
       [Language.EN]: "Brand identity and guidelines for Mehaz.",
       [Language.TR]: "Mehaz için marka kimliği ve kılavuzları."
     },
-    image: '/works/Mehaz_brandGuide/a9d27a52-01.png',
+    image: '/works/Mehaz_BrandGuide/a9d27a52-01.png',
     heroFit: 'cover',
     client: "Mehaz",
-    clientLogo: '/works/Mehaz_brandGuide/mehaz_logo.png',
+    clientLogo: '/works/Mehaz_BrandGuide/mehaz_logo.png',
     year: "2026",
     services: ["Brand Strategy", "Brand Guidelines"],
     challenge: {
@@ -722,52 +722,52 @@ export const PROJECTS: Project[] = [
       [Language.TR]: "Hazırlanan 360° tasarım yaklaşımı kapsamında logo, kartvizit ve tüm kurumsal dokümanlar ortak bir görsel sistem altında toplandı. Renk, tipografi ve kompozisyon dili standardize edilerek markanın her temas noktasında aynı profesyonel etkiyi vermesi sağlandı. Ortaya çıkan çalışma, Mehaz’ın kurumsal kimliğini güçlendiren, prestijli ve tutarlı bir marka bütünlüğü sundu."
     },
     gallery: [
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-01.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-02.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-03.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-04.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-05.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-06.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-07.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-08.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-09.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-10.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-11.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-12.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-13.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-14.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-15.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-16.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-17.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-18.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-19.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-20.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-21.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-22.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-23.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-24.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-25.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-26.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-27.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-28.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-29.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-30.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-31.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-32.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-33.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-34.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-35.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-36.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-37.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-38.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-39.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-40.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-41.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-42.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-43.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-44.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-45.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_brandGuide/a9d27a52-46.png', colSpan: 1 }
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-01.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-02.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-03.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-04.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-05.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-06.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-07.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-08.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-09.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-10.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-11.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-12.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-13.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-14.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-15.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-16.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-17.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-18.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-19.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-20.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-21.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-22.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-23.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-24.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-25.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-26.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-27.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-28.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-29.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-30.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-31.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-32.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-33.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-34.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-35.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-36.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-37.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-38.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-39.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-40.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-41.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-42.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-43.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-44.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-45.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-46.png', colSpan: 1 }
     ]
   },
   {
@@ -777,10 +777,10 @@ export const PROJECTS: Project[] = [
       [Language.EN]: "Brand identity and UI system designed to visualize atmospheric data.",
       [Language.TR]: "Atmosferik verileri görselleştirmek için tasarlanmış marka kimliği ve arayüz sistemi."
     },
-    image: '/works/o3_layer/hero.png',
+    image: '/works/o3_Layer/hero.png',
     heroFit: 'contain',
     client: "O3 Layer",
-    clientLogo: '/works/o3_layer/o3_logo.png',
+    clientLogo: '/works/o3_Layer/o3_logo.png',
     year: "2025",
     services: ["Brand Strategy", "Product Visualizations"],
     challenge: {
@@ -796,8 +796,8 @@ export const PROJECTS: Project[] = [
         type: 'group',
         colSpan: 1,
         items: [
-          { src: '/works/o3_layer/gif1.gif' },
-          { src: '/works/o3_layer/gif2.gif' }
+          { src: '/works/o3_Layer/gif1.gif' },
+          { src: '/works/o3_Layer/gif2.gif' }
         ]
       },
       {
@@ -820,8 +820,8 @@ export const PROJECTS: Project[] = [
         type: 'group',
         colSpan: 1,
         items: [
-          { src: '/works/o3_layer/2.png' },
-          { src: '/works/o3_layer/1.jpg' }
+          { src: '/works/o3_Layer/2.png' },
+          { src: '/works/o3_Layer/1.jpg' }
         ]
       }
     ]
