@@ -27,7 +27,7 @@ export interface Project {
 
 export type GalleryItem =
   | { type: 'image'; src: string; colSpan?: 1 | 2 }
-  | { type: 'video'; src: string; colSpan?: 1 | 2; poster?: string; autoPlay?: boolean; muted?: boolean; loop?: boolean }
+  | { type: 'video'; src: string; colSpan?: 1 | 2; poster?: string; autoPlay?: boolean; muted?: boolean; loop?: boolean; customAspect?: string }
   | { type: 'group'; items: { src: string; }[]; colSpan?: 1 | 2; cols?: 2 | 4 }
   | { type: 'text'; content: ContentText; title?: ContentText; colSpan?: 1 | 2 };
 

@@ -9,7 +9,7 @@ export const CLIENTS: Client[] = [
   { id: 'o3', name: 'O3 Layer', logo: '/works/o3_Layer/o3_logo.png' },
   { id: 'hiltar', name: 'Hiltar', logo: '/works/Hiltar/Hiltar_Logo.png' },
   { id: 'age-soft', name: 'Age Soft', logo: '/works/Age_Soft/agesoft_logo.png' },
-
+  { id: 'cankaya', name: 'Özel Çankaya Hastanesi', logo: '/works/ACL_Reconstruction/cankaya_logo.png' },
 ];
 
 
@@ -278,6 +278,51 @@ export const SERVICES: Service[] = [
 ];
 
 export const PROJECTS: Project[] = [
+  {
+    id: 'acl-reconstruction',
+    title: 'ACL Reconstruction Surgery',
+    description: {
+      [Language.EN]: "Detailed 3D animation presenting the ACL reconstruction surgery technique.",
+      [Language.TR]: "Ön çapraz bağ (ACL) onarım cerrahisi tekniğini sunan detaylı 3D animasyon."
+    },
+    image: '/works/ACL_Reconstruction/1.png',
+    heroFit: 'cover',
+    client: "Dr. Kürşat Teker (Özel Çankaya Hastanesi)",
+    clientLogo: '/works/ACL_Reconstruction/cankaya_logo.png',
+    year: "2026",
+    services: ["3D Product Animation", "CGI", "Motion Design"],
+    challenge: {
+      [Language.EN]: "The primary challenge was to clearly and accurately present the complex anatomical steps of an ACL reconstruction surgery. Traditional static imagery and X-rays often fall short in conveying the dynamic nature, spatial relationships, and procedural flow required to fully understand the surgical technique.",
+      [Language.TR]: "Temel zorluk, Ön Çapraz Bağ (ACL) rekonstrüksiyon cerrahisinin karmaşık anatomik adımlarını net ve doğru bir şekilde sunmaktı. Geleneksel statik görseller ve röntgenler, cerrahi tekniği tam olarak anlamak için gereken dinamik yapıyı, mekânsal ilişkileri ve prosedürel akışı aktarmada çoğu zaman yetersiz kalmaktadır."
+    },
+    solution: {
+      [Language.EN]: "By utilizing high-fidelity 3D animation, we transformed the intricate surgical process into a fluid, comprehensive visual narrative. This dynamic approach surpasses static representation, offering an immersive view of the procedure. The animation vividly captures the mechanics and nuances of the surgery, ensuring a profound understanding of the technique for medical professionals and patients alike.",
+      [Language.TR]: "Yüksek sadakatli 3D animasyon kullanarak karmaşık cerrahi süreci akıcı ve kapsamlı bir görsel anlatıya dönüştürdük. Bu dinamik yaklaşım, prosedürün sürükleyici bir görünümünü sunarak statik temsillerin ötesine geçer. Animasyon, cerrahinin mekaniğini ve ince ayrıntılarını canlı bir şekilde yakalayarak hem tıp uzmanları hem de hastalar için tekniğin derinlemesine anlaşılmasını sağlar."
+    },
+    gallery: [
+      {
+        type: 'video',
+        src: '/works/ACL_Reconstruction/ACL_Animation_LowBit.mp4',
+        autoPlay: true,
+        loop: true,
+        muted: true,
+        colSpan: 2,
+        customAspect: 'aspect-square'
+      },
+      { type: 'image', src: '/works/ACL_Reconstruction/1.png', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/2.png', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/3.png', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/4.png', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/5.png', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/6.png', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/7.png', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/8.png', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/9.png', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/10.png', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/11.png', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/12.png', colSpan: 1 }
+    ]
+  },
   {
     id: 'hiltar-sutas',
     title: 'Hiltar',

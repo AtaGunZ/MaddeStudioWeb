@@ -82,7 +82,8 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                                         alt={project.client}
                                         className={`h-8 md:h-12 w-auto object-contain grayscale dark:invert opacity-90 transition-transform 
                                             ${project.client === 'Hiltar' ? 'scale-125' : ''}
-                                            ${(project.client === 'North' || project.client === 'Mehaz') ? 'scale-75' : ''}`}
+                                            ${(project.client === 'North' || project.client === 'Mehaz') ? 'scale-75' : ''}
+                                            ${project.id === 'acl-reconstruction' ? 'scale-[2]' : ''}`}
                                     />
                                 ) : (
                                     <span>{project.client}</span>
@@ -126,7 +127,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
             </div>
 
             {/* Full Image Hero */}
-            {project.id !== 'north-keyboard' && project.id !== 'octopus-bridge' && project.id !== 'age-soft' && project.id !== 'hiltar-sutas' && (
+            {project.id !== 'north-keyboard' && project.id !== 'octopus-bridge' && project.id !== 'acl-reconstruction' && project.id !== 'age-soft' && project.id !== 'hiltar-sutas' && (
                 <div className="relative z-10 w-full h-[60vh] md:h-[80vh] overflow-hidden mb-4 md:mb-8 px-6 md:px-12">
                     <motion.img
                         initial={{ scale: 1.1, opacity: 0 }}
@@ -159,7 +160,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                                         <img src={item.src} alt={`Gallery ${index}`} className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700" />
                                     </div>
                                 ) : item.type === 'video' ? (
-                                    <div className={`overflow-hidden w-full ${isWide ? 'aspect-[16/9]' : 'aspect-[4/5] md:aspect-[3/4]'}`}>
+                                    <div className={`overflow-hidden w-full ${item.customAspect ? item.customAspect : (isWide ? 'aspect-[16/9]' : 'aspect-[4/5] md:aspect-[3/4]')}`}>
                                         <video src={item.src} poster={item.poster} autoPlay={item.autoPlay ?? true} loop={item.loop ?? true} muted={item.muted ?? true} playsInline className="w-full h-full object-cover" />
                                     </div>
                                 ) : item.type === 'group' ? (

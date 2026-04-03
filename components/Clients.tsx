@@ -48,7 +48,8 @@ export const Clients: React.FC<ClientsProps> = ({ language }) => {
                                 className={`w-auto h-auto max-w-full max-h-12 md:max-h-20 object-contain select-none pointer-events-none grayscale dark:invert transition-transform duration-300
                                 ${client.id === 'hiltar' ? 'scale-125' : ''}
                                 ${(client.id === 'north' || client.id === 'mehaz') ? 'scale-75' : ''}
-                                ${client.id === 'o3' ? 'scale-110' : ''}`}
+                                ${client.id === 'o3' ? 'scale-110' : ''}
+                                ${client.id === 'cankaya' ? 'scale-[2]' : ''}`}
                             />
                         </div>
                     ))}
