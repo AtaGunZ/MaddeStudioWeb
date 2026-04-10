@@ -1037,7 +1037,7 @@ export const TEAM: TeamMember[] = [
       [Language.EN]: "Creative Director, Co-Founder",
       [Language.TR]: "Creative Director, Co-Founder"
     },
-    image: 'https://placehold.co/400x500/000000/FFFFFF/png?text=Doruk',
+    image: '/team/doruk.jpg',
     isLead: true
   },
   {
@@ -1048,7 +1048,7 @@ export const TEAM: TeamMember[] = [
       [Language.EN]: "Creative Operations, Co-Founder",
       [Language.TR]: "Creative Operations, Co-Founder"
     },
-    image: 'https://placehold.co/400x500/000000/FFFFFF/png?text=Nebil',
+    image: '/team/nebil.jpg',
     isLead: true
   },
   {
@@ -1059,7 +1059,7 @@ export const TEAM: TeamMember[] = [
       [Language.EN]: "Executive Director, Co-Founder",
       [Language.TR]: "Executive Director, Co-Founder"
     },
-    image: 'https://placehold.co/400x500/000000/FFFFFF/png?text=Yusuf',
+    image: '/team/yusuf.jpg',
     isLead: true
   },
   {
