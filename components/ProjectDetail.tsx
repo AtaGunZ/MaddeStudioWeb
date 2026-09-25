@@ -41,17 +41,6 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.5 } }}
         >
-            {/* Back Button */}
-            <div className="fixed top-24 left-6 md:left-12 z-50">
-                <button
-                    onClick={() => navigate('/works')}
-                    className="group flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:opacity-60 transition-opacity"
-                >
-                    <span className="text-xl group-hover:-translate-x-1 transition-transform">←</span>
-                    {TEXTS.projectDetail.back[language]}
-                </button>
-            </div>
-
             {/* Hero Section */}
             <div className="px-6 md:px-12 mb-24 md:mb-48">
                 <div className="fixed top-0 left-0 w-full h-[80vh] z-0 overflow-hidden pointer-events-none">

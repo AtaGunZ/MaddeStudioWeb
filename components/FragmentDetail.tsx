@@ -2,7 +2,7 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { FRAGMENTS, TEXTS } from '../constants';
 import { FragmentBlock, Language } from '../types';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 interface FragmentDetailProps {
     language: Language;
@@ -10,7 +10,6 @@ interface FragmentDetailProps {
 
 export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
     const { fragmentId } = useParams<{ fragmentId: string }>();
-    const navigate = useNavigate();
 
     // Derive directly — no useState so there's never a stale/undefined frame
     const fragment = FRAGMENTS.find(f => f.id === fragmentId);
@@ -101,17 +100,6 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.5 } }}
         >
-            {/* Back Button */}
-            <div className="fixed top-24 left-6 md:left-12 z-50">
-                <button
-                    onClick={() => navigate('/fragments')}
-                    className="group flex items-center gap-2 text-xs font-bold uppercase tracking-widest hover:opacity-60 transition-opacity"
-                >
-                    <span className="text-xl group-hover:-translate-x-1 transition-transform">←</span>
-                    {TEXTS.fragmentDetail.back[language]}
-                </button>
-            </div>
-
             <div className="max-w-4xl mx-auto flex flex-col gap-16 md:gap-24">
 
                 {/* Header */}
