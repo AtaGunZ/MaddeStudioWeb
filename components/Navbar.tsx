@@ -44,7 +44,7 @@ export const Navbar: React.FC = () => {
         transition={{ duration: 0.8, ease: "circOut" }}
         className="fixed top-0 left-0 right-0 z-50"
       >
-        <div className={`relative transition-all duration-500 ${scrolled ? 'bg-madde-white/90 dark:bg-madde-black/90 backdrop-blur-lg' : 'bg-transparent'}`}>
+        <div className={`relative transition-all duration-500 ${scrolled ? 'bg-madde-white/60 dark:bg-madde-black/60 backdrop-blur-lg' : 'bg-transparent'}`}>
           <div className="max-w-[1920px] mx-auto px-6 md:px-12 py-6 flex justify-between items-center">
 
             {/* Logo */}
