@@ -248,7 +248,8 @@ export const SERVICE_TRANSLATIONS: Record<string, ContentText> = {
   "Brand Guidelines": { [Language.EN]: "Brand Guidelines", [Language.TR]: "Marka Kimliği" },
   "Product Visualizations": { [Language.EN]: "Product Visualizations", [Language.TR]: "Ürün Görselleştirme" },
   "AI Visualization": { [Language.EN]: "AI Visualization", [Language.TR]: "AI Görselleştirme" },
-  "Video Editing": { [Language.EN]: "Video Editing", [Language.TR]: "Video Kurgu" }
+  "Video Editing": { [Language.EN]: "Video Editing", [Language.TR]: "Video Kurgu" },
+  "Poster Design": { [Language.EN]: "Poster Design", [Language.TR]: "Afiş Tasarımı" }
 };
 
 export const SERVICES: Service[] = [
@@ -504,6 +505,71 @@ export const PROJECTS: Project[] = [
         muted: true,
         colSpan: 2
       }
+    ]
+  },
+  {
+    id: 'poster',
+    title: 'Poster',
+    description: {
+      [Language.EN]: "A selection of poster and editorial work: a typographic series on graphic design, an exhibited Yunus Emre poster and a Lars von Trier magazine practice.",
+      [Language.TR]: "Afiş ve editoryal çalışmalardan bir seçki: grafik tasarım üzerine tipografik bir seri, sergilenen bir Yunus Emre afişi ve Lars von Trier üzerine bir dergi pratiği."
+    },
+    image: '/works/Poster/hero.jpg',
+    heroFit: 'cover',
+    client: "Self-initiated",
+    year: "2021–2022",
+    services: ["Poster Design", "Typography", "Editorial Design"],
+    challenge: {
+      [Language.EN]: "A poster has a single moment to be understood. Each work here starts from a fixed constraint, a sentence, an anniversary or an editorial format, and asks how far form alone can carry the message.",
+      [Language.TR]: "Bir afişin anlaşılmak için tek bir anı vardır. Buradaki her çalışma sabit bir kısıttan yola çıkar: bir cümle, bir anma yılı ya da bir editoryal format; ve mesajı yalnızca biçimin ne kadar taşıyabileceğini sorar."
+    },
+    solution: {
+      [Language.EN]: "In the 'Graphic Design Is…' series the same sentence is completed three times, each time through a basic design principle: line and rhythm, repetition and contrast, color and distortion. The Yunus Emre poster, made for the 700th anniversary of the poet's death, was exhibited in a juried exhibition. The Lars von Trier work carries the same thinking into a magazine: cover, back cover and feature spread.",
+      [Language.TR]: "'Graphic Design Is…' serisinde aynı cümle üç kez, her seferinde bir temel tasarım ilkesiyle tamamlanır: çizgi ve ritim, tekrar ve kontrast, renk ve bozulma. Şairin vefatının 700. yılı için hazırlanan Yunus Emre afişi jürili bir sergide sergilendi. Lars von Trier çalışması aynı düşünceyi bir dergiye taşır: ön kapak, arka kapak ve iç sayfa."
+    },
+    gallery: [
+      { type: 'image', src: '/works/Poster/graphic_design_is_psychedelic.jpg', colSpan: 1 },
+      {
+        type: 'text',
+        colSpan: 1,
+        title: {
+          [Language.EN]: "Graphic Design Is…",
+          [Language.TR]: "Graphic Design Is…"
+        },
+        content: {
+          [Language.EN]: "One sentence, three answers. A poster series built on basic design principles, where the form itself completes the sentence.",
+          [Language.TR]: "Tek cümle, üç cevap. Temel tasarım ilkeleri üzerine kurulu, cümleyi biçimin kendisinin tamamladığı bir afiş serisi."
+        }
+      },
+      { type: 'image', src: '/works/Poster/graphic_design_is_more_than_one_way.png', colSpan: 1 },
+      { type: 'image', src: '/works/Poster/graphic_design_is_functional.png', colSpan: 1 },
+      {
+        type: 'text',
+        colSpan: 1,
+        title: {
+          [Language.EN]: "Yunus Emre",
+          [Language.TR]: "Yunus Emre"
+        },
+        content: {
+          [Language.EN]: "Made for the 700th anniversary of Yunus Emre's death and exhibited in a juried exhibition.",
+          [Language.TR]: "Yunus Emre'nin vefatının 700. yılı için hazırlandı ve jürili bir sergide sergilendi."
+        }
+      },
+      { type: 'image', src: '/works/Poster/yunus_emre.jpg', colSpan: 1 },
+      {
+        type: 'text',
+        colSpan: 2,
+        title: {
+          [Language.EN]: "LaPasse' — Lars von Trier",
+          [Language.TR]: "LaPasse' — Lars von Trier"
+        },
+        content: {
+          [Language.EN]: "A magazine and poster practice: the portrait carries the cover, typography carries the story.",
+          [Language.TR]: "Bir dergi ve afiş pratiği: kapağı portre, hikâyeyi tipografi taşır."
+        }
+      },
+      { type: 'image', src: '/works/Poster/lapasse_cover.jpg', colSpan: 2 },
+      { type: 'image', src: '/works/Poster/lapasse_spread.jpg', colSpan: 2 }
     ]
   },
   {
