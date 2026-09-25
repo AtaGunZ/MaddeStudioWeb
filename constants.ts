@@ -253,6 +253,7 @@ export const SERVICE_TRANSLATIONS: Record<string, ContentText> = {
   "Product Visualizations": { [Language.EN]: "Product Visualizations", [Language.TR]: "Ürün Görselleştirme" },
   "AI Visualization": { [Language.EN]: "AI Visualization", [Language.TR]: "AI Görselleştirme" },
   "Video Editing": { [Language.EN]: "Video Editing", [Language.TR]: "Video Kurgu" },
+  "Prompt Engineering": { [Language.EN]: "Prompt Engineering", [Language.TR]: "Prompt Mühendisliği" },
   "Poster Design": { [Language.EN]: "Poster Design", [Language.TR]: "Afiş Tasarımı" }
 };
 
@@ -304,88 +305,17 @@ export const PROJECTS: Project[] = [
     heroFit: 'cover',
     client: "Sudi — Case Study",
     year: "2026",
-    services: ["3D Motion Design", "AI Visualization", "Video Editing"],
+    services: ["3D Motion Design", "AI Visualization", "Prompt Engineering", "Video Editing"],
     challenge: {
-      [Language.EN]: "A case study for Sudi, a Persian restaurant in Istanbul: two Instagram Reels that make the food irresistible, built in two days with no raw footage of the brand, only its Instagram feed and website. AI video is fast, but left alone it drifts: cameras wander, food merges or shrinks by itself, hands behave unnaturally.",
-      [Language.TR]: "İstanbul'daki İran restoranı Sudi için bir case çalışması: yemekleri iştah açıcı gösteren iki Instagram Reels; iki günde, markaya ait hiç ham görüntü olmadan, yalnızca Instagram hesabı ve web sitesinden yola çıkarak üretildi. AI video hızlıdır ama kendi haline bırakıldığında dağılır: kamera savrulur, yemekler birbirine karışır ya da kendiliğinden küçülür, eller doğal davranmaz."
+      [Language.EN]: "A case study for Sudi, a Persian restaurant in Istanbul: two Instagram Reels meant to drive table reservations and profile visits and to introduce the menu, made in two days with no raw footage of the brand. AI video is fast, but left alone it drifts: cameras wander, food merges or shrinks by itself, hands behave unnaturally.",
+      [Language.TR]: "İstanbul'daki İran restoranı Sudi için bir case çalışması: masa rezervasyonu ve profil ziyareti getirmesi, menüyü tanıtması amaçlanan iki Instagram Reels; iki günde, markaya ait hiç ham görüntü olmadan üretildi. AI video hızlıdır ama kendi haline bırakıldığında dağılır: kamera savrulur, yemekler birbirine karışır ya da kendiliğinden küçülür, eller doğal davranmaz."
     },
     solution: {
-      [Language.EN]: "We directed every shot in Blender first. A simple blockout fixes the camera move, timing, plate positions and every hand and utensil action. That blockout became the motion reference in Seedance (Dreamina / CapCut), paired with dish and set photos and a second-by-second prompt. The outputs were cut, retimed and sound-designed in Premiere, with a hook in the first second and a rhythm built for vertical viewing.",
-      [Language.TR]: "Her planı önce Blender'da yönettik. Basit bir blockout; kamera hareketini, zamanlamayı, tabakların yerini, elin ve kaşığın her hareketini sabitler. Bu blockout, yemek ve mekân fotoğrafları ve saniye saniye yazılmış bir prompt ile birlikte Seedance'e (Dreamina / CapCut) hareket referansı olarak verildi. Çıktılar Premiere'de kesildi, yeniden zamanlandı ve ses tasarımıyla birleştirildi: ilk saniyede kanca, dikey izlemeye göre kurulmuş bir ritim."
+      [Language.EN]: "We directed every shot in Blender first. The blockout fixes the camera move, timing, plate positions and every hand and utensil action; it goes to Seedance (Dreamina / CapCut) as the motion reference, together with dish and set photos and a second-by-second prompt, all kept in one folder per shot. The outputs were cut, graded and sound-designed in Premiere for a hook in the first second and a rhythm built for vertical viewing.",
+      [Language.TR]: "Her planı önce Blender'da yönettik. Blockout; kamera hareketini, zamanlamayı, tabakların yerini, elin ve kaşığın her hareketini sabitler. Yemek ve mekân fotoğrafları ve saniye saniye yazılmış bir prompt ile birlikte Seedance'e (Dreamina / CapCut) hareket referansı olarak verilir; hepsi her çekim için tek bir klasörde saklanır. Çıktılar Premiere'de kesildi, renk düzeltmesi ve ses tasarımıyla bitirildi: ilk saniyede kanca, dikey izlemeye göre kurulmuş bir ritim."
     },
-    gallery: [
-      {
-        type: 'video',
-        src: '/works/Sudi_Reels/sudi_reel_02.mp4',
-        poster: '/works/Sudi_Reels/poster_02.jpg',
-        colSpan: 1,
-        customAspect: 'aspect-[9/16] max-w-full md:w-[calc(85vh*9/16)] md:ml-auto',
-        soundToggle: true,
-        playOnView: true
-      },
-      {
-        type: 'video',
-        src: '/works/Sudi_Reels/sudi_reel_01.mp4',
-        poster: '/works/Sudi_Reels/poster_01.jpg',
-        colSpan: 1,
-        customAspect: 'aspect-[9/16] max-w-full md:w-[calc(85vh*9/16)] md:mr-auto',
-        soundToggle: true,
-        playOnView: true
-      },
-      {
-        type: 'text',
-        colSpan: 2,
-        title: {
-          [Language.EN]: "Blockout → Frame",
-          [Language.TR]: "Blockout → Kare"
-        },
-        content: {
-          [Language.EN]: "Left: the Blender blockout. Right: the final frame. The blockout decides what AI usually gets wrong: where the camera goes, what the hand touches, how much food is left.",
-          [Language.TR]: "Solda Blender blockout, sağda final kare. AI'ın genelde yanlış yaptığı şeylere blockout karar verir: kamera nereye gider, el neye dokunur, tabakta ne kadar yemek kalır."
-        }
-      },
-      {
-        type: 'group',
-        colSpan: 2,
-        cols: 4,
-        items: [
-          { src: '/works/Sudi_Reels/blockout_kofte.jpg' },
-          { src: '/works/Sudi_Reels/output_kofte.jpg' },
-          { src: '/works/Sudi_Reels/blockout_barg.jpg' },
-          { src: '/works/Sudi_Reels/output_barg.jpg' }
-        ]
-      },
-      {
-        type: 'group',
-        colSpan: 2,
-        cols: 4,
-        items: [
-          { src: '/works/Sudi_Reels/blockout_cocuk.jpg' },
-          { src: '/works/Sudi_Reels/output_cocuk.jpg' },
-          { src: '/works/Sudi_Reels/blockout_top.jpg' },
-          { src: '/works/Sudi_Reels/output_top.jpg' }
-        ]
-      },
-      {
-        type: 'text',
-        colSpan: 2,
-        content: {
-          [Language.EN]: "Organic by rule: food is only ever taken by spoon or fork, never trimmed away. Rules like this are solved in the blockout first, then written into the prompt.",
-          [Language.TR]: "Kural olarak organik: yemek yalnızca kaşık ya da çatalla alınır, asla kendiliğinden eksilmez. Bu tür kurallar önce blockout'ta çözülür, sonra prompt'a yazılır."
-        }
-      },
-      {
-        type: 'group',
-        colSpan: 2,
-        cols: 4,
-        items: [
-          { src: '/works/Sudi_Reels/blockout_nar.jpg' },
-          { src: '/works/Sudi_Reels/output_nar.jpg' },
-          { src: '/works/Sudi_Reels/blockout_kadin.jpg' },
-          { src: '/works/Sudi_Reels/output_kadin.jpg' }
-        ]
-      }
-    ]
+    // Rendered by components/SudiCaseStudy.tsx
+    gallery: []
   },
   {
     id: 'acl-reconstruction',
