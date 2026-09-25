@@ -211,6 +211,10 @@ export const TEXTS = {
       [Language.EN]: "Disciplines",
       [Language.TR]: "Disiplinler"
     },
+    allDisciplines: {
+      [Language.EN]: "All disciplines",
+      [Language.TR]: "Tüm disiplinler"
+    },
     partners: {
       [Language.EN]: "Partners",
       [Language.TR]: "Ortaklar"

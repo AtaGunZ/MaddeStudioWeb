@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { Language } from '../types';
 import { TEXTS, SERVICES, TEAM } from '../constants';
-import { useApp } from '../contexts/AppContext';
 
 interface StudioProps {
   language: Language;
@@ -32,9 +31,64 @@ const ALL_SKILLS = [
   { en: 'Visual Effects', tr: 'Görsel Efektler', categories: ['dynamicMotion'] },
 ];
 
+const SCRAMBLE_CHARS = 'abcdefghijklmnopqrstuvwxyz';
+
+// Re-types the text through random letters whenever `trigger` changes
+const ScrambleText: React.FC<{ text: string; trigger: string | null; className?: string }> = ({ text, trigger, className }) => {
+  const [display, setDisplay] = useState(text);
+  const [scrambling, setScrambling] = useState(false);
+  const isFirst = useRef(true);
+
+  useEffect(() => {
+    if (isFirst.current || window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      isFirst.current = false;
+      setDisplay(text);
+      return;
+    }
+    let frame = 0;
+    const delay = Math.random() * 150;
+    const duration = 350 + Math.random() * 300;
+    const start = performance.now() + delay;
+    setScrambling(true);
+
+    const tick = (now: number) => {
+      const progress = Math.min(Math.max((now - start) / duration, 0), 1);
+      setDisplay(text.split('').map((char, i) => {
+        if (char === ' ' || progress >= 1 || progress > i / text.length) return char;
+        const rnd = SCRAMBLE_CHARS[Math.floor(Math.random() * SCRAMBLE_CHARS.length)];
+        return char === char.toUpperCase() ? rnd.toUpperCase() : rnd;
+      }).join(''));
+      if (progress < 1) frame = requestAnimationFrame(tick);
+      else setScrambling(false);
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
+  }, [trigger, text]);
+
+  return (
+    <span className={`${className ?? ''} transition-[filter] duration-300`} style={{ filter: scrambling ? 'blur(1px)' : 'blur(0px)' }}>
+      {display}
+    </span>
+  );
+};
+
+// Emphasis of a skill: 2 = primary for the hovered card, 1 = related, 0 = unrelated
+const getSkillLevel = (categories: string[], hovered: string | null): number => {
+  if (!hovered) return categories.length > 1 ? 1 : 0;
+  if (categories[0] === hovered) return 2;
+  return categories.includes(hovered) ? 1 : 0;
+};
+
+const SKILL_LEVEL_CLASSES = [
+  'text-[11px] md:text-xs font-light text-madde-gray dark:text-zinc-500',
+  'text-sm md:text-base font-medium text-madde-black/80 dark:text-white/80',
+  'text-xl md:text-2xl font-semibold text-madde-black dark:text-white',
+];
+
 export const Studio: React.FC<StudioProps> = ({ language }) => {
   const [hoveredCard, setHoveredCard] = useState<string | null>(null);
-  const { darkMode } = useApp();
+  const hoveredIndex = ['realisticVis', 'dynamicMotion', 'storyProcess'].indexOf(hoveredCard ?? '');
+  const skillsLabel = hoveredIndex >= 0 ? SERVICES[hoveredIndex].title[language] : TEXTS.studio.allDisciplines[language];
 
   // Map service index to category
   const getCategoryFromIndex = (index: number): string => {
@@ -158,37 +212,31 @@ export const Studio: React.FC<StudioProps> = ({ language }) => {
                 {TEXTS.studio.disciplines[language]}
               </motion.h2>
 
-              {/* Skills List */}
+              {/* Skills List — words re-type and resize for the hovered card */}
               <motion.div
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
-                className="flex flex-wrap gap-x-6 gap-y-3"
               >
-                {ALL_SKILLS.map((skill, index) => {
-                  const isActive = hoveredCard ? skill.categories.includes(hoveredCard) : false;
-                  return (
-                    <motion.span
-                      key={index}
-                      initial={false}
-                      animate={{
-                        opacity: hoveredCard && !isActive ? 0.3 : 1,
-                        scale: isActive ? 1.05 : 1,
-                        color: isActive ? (darkMode ? '#FFFFFF' : '#000000') : (darkMode ? '#A1A1AA' : '#71717A')
-                      }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 80,
-                        damping: 25,
-                        mass: 1
-                      }}
-                      className="text-sm leading-relaxed whitespace-nowrap cursor-default origin-left"
-                    >
-                      {language === Language.EN ? skill.en : skill.tr}
-                    </motion.span>
-                  );
-                })}
+                <ScrambleText
+                  text={`${skillsLabel}:`}
+                  trigger={hoveredCard}
+                  className="block text-sm font-bold mb-4"
+                />
+                <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 min-h-[14rem]">
+                  {ALL_SKILLS.map((skill, index) => {
+                    const level = getSkillLevel(skill.categories, hoveredCard);
+                    return (
+                      <ScrambleText
+                        key={index}
+                        text={language === Language.EN ? skill.en : skill.tr}
+                        trigger={hoveredCard}
+                        className={`leading-snug whitespace-nowrap cursor-default transition-all duration-500 ${SKILL_LEVEL_CLASSES[level]}`}
+                      />
+                    );
+                  })}
+                </div>
               </motion.div>
             </div>
 
