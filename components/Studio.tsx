@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { LayoutGroup, motion, useReducedMotion } from 'framer-motion';
 import { Language } from '../types';
 import { TEXTS, SERVICES, TEAM } from '../constants';
@@ -40,6 +40,9 @@ const getSkillLevel = (categories: string[], hovered: string | null): number => 
 
 // Words slide into their new size and place; a horizontal blur smears them while they move
 const SKILL_MOVE_MS = 550;
+// Blur follows the slide's speed: strongest at the start, gone as the words settle
+const SKILL_BLUR_MS = 380;
+const SKILL_BLUR_MAX = 4;
 const SKILL_EASE = [0.22, 1, 0.36, 1] as const;
 
 const SKILL_LEVEL_CLASSES = [
@@ -53,13 +56,31 @@ export const Studio: React.FC<StudioProps> = ({ language }) => {
   const hoveredIndex = ['realisticVis', 'dynamicMotion', 'storyProcess'].indexOf(hoveredCard ?? '');
   const skillsLabel = hoveredIndex >= 0 ? SERVICES[hoveredIndex].title[language] : TEXTS.studio.allDisciplines[language];
   const reduceMotion = useReducedMotion();
-  const [skillsMoving, setSkillsMoving] = useState(false);
+  const skillsRef = useRef<HTMLDivElement>(null);
+  const skillsBlurRef = useRef<SVGFEGaussianBlurElement>(null);
+  const isFirstSkillsRender = useRef(true);
 
   useEffect(() => {
-    if (reduceMotion) return;
-    setSkillsMoving(true);
-    const timer = window.setTimeout(() => setSkillsMoving(false), SKILL_MOVE_MS);
-    return () => window.clearTimeout(timer);
+    const list = skillsRef.current;
+    const blur = skillsBlurRef.current;
+    if (isFirstSkillsRender.current || reduceMotion || !list || !blur) {
+      isFirstSkillsRender.current = false;
+      return;
+    }
+    let frame = 0;
+    const start = performance.now();
+    list.style.filter = 'url(#skill-motion-blur)';
+
+    const tick = (now: number) => {
+      const t = Math.min((now - start) / SKILL_BLUR_MS, 1);
+      const strength = (1 - t) ** 3;
+      blur.setAttribute('stdDeviation', `${(SKILL_BLUR_MAX * strength).toFixed(2)} 0`);
+      list.style.opacity = String(1 - 0.3 * strength);
+      if (t < 1) frame = requestAnimationFrame(tick);
+      else list.style.filter = 'none';
+    };
+    frame = requestAnimationFrame(tick);
+    return () => cancelAnimationFrame(frame);
   }, [hoveredCard, reduceMotion]);
 
   // Map service index to category
@@ -193,12 +214,12 @@ export const Studio: React.FC<StudioProps> = ({ language }) => {
               >
                 <svg width="0" height="0" className="absolute" aria-hidden="true">
                   <filter id="skill-motion-blur">
-                    <feGaussianBlur stdDeviation="3 0" />
+                    <feGaussianBlur ref={skillsBlurRef} stdDeviation="0 0" />
                   </filter>
                 </svg>
                 <p className="text-sm font-bold mb-4">{skillsLabel}:</p>
                 <LayoutGroup>
-                  <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1 min-h-[14rem]">
+                  <div ref={skillsRef} className="flex flex-wrap items-baseline gap-x-4 gap-y-1 min-h-[14rem]">
                     {ALL_SKILLS.map((skill, index) => {
                       const level = getSkillLevel(skill.categories, hoveredCard);
                       return (
@@ -206,11 +227,7 @@ export const Studio: React.FC<StudioProps> = ({ language }) => {
                           key={index}
                           layout
                           transition={{ layout: { duration: reduceMotion ? 0 : SKILL_MOVE_MS / 1000, ease: SKILL_EASE } }}
-                          style={{
-                            filter: skillsMoving ? 'url(#skill-motion-blur)' : 'none',
-                            opacity: skillsMoving ? 0.75 : 1,
-                          }}
-                          className={`leading-snug whitespace-nowrap cursor-default transition-[color,opacity] duration-500 ${SKILL_LEVEL_CLASSES[level]}`}
+                          className={`leading-snug whitespace-nowrap cursor-default transition-colors duration-500 ${SKILL_LEVEL_CLASSES[level]}`}
                         >
                           {language === Language.EN ? skill.en : skill.tr}
                         </motion.span>
