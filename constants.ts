@@ -315,7 +315,8 @@ export const PROJECTS: Project[] = [
         poster: '/works/Sudi_Reels/poster_02.jpg',
         colSpan: 1,
         customAspect: 'aspect-[9/16] max-w-full md:w-[calc(85vh*9/16)] md:ml-auto',
-        soundToggle: true
+        soundToggle: true,
+        playOnView: true
       },
       {
         type: 'video',
@@ -323,7 +324,8 @@ export const PROJECTS: Project[] = [
         poster: '/works/Sudi_Reels/poster_01.jpg',
         colSpan: 1,
         customAspect: 'aspect-[9/16] max-w-full md:w-[calc(85vh*9/16)] md:mr-auto',
-        soundToggle: true
+        soundToggle: true,
+        playOnView: true
       },
       {
         type: 'text',

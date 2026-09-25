@@ -32,6 +32,20 @@ const GalleryVideo: React.FC<{ item: VideoItem; isWide: boolean; language: Langu
         if (videoRef.current) videoRef.current.muted = muted;
     }, [muted]);
 
+    // Start once the video scrolls into view, then keep playing
+    useEffect(() => {
+        const video = videoRef.current;
+        if (!video || !item.playOnView) return;
+        const observer = new IntersectionObserver(([entry]) => {
+            if (entry.isIntersecting) {
+                video.play().catch(() => {});
+                observer.disconnect();
+            }
+        }, { threshold: 0.5 });
+        observer.observe(video);
+        return () => observer.disconnect();
+    }, [item.playOnView]);
+
     useEffect(() => {
         const onSound = (e: Event) => {
             if ((e as CustomEvent).detail !== videoRef.current) setMuted(true);
@@ -53,7 +67,7 @@ const GalleryVideo: React.FC<{ item: VideoItem; isWide: boolean; language: Langu
 
     return (
         <div className={`relative overflow-hidden w-full ${item.customAspect ? item.customAspect : (isWide ? 'aspect-[16/9]' : 'aspect-[4/5] md:aspect-[3/4]')}`}>
-            <video ref={videoRef} src={item.src} poster={item.poster} autoPlay={item.autoPlay ?? true} loop={item.loop ?? true} muted={muted} playsInline className="w-full h-full object-cover" />
+            <video ref={videoRef} src={item.src} poster={item.poster} autoPlay={item.playOnView ? false : (item.autoPlay ?? true)} preload={item.playOnView ? 'auto' : undefined} loop={item.loop ?? true} muted={muted} playsInline className="w-full h-full object-cover" />
             {item.soundToggle && (
                 <button
                     onClick={toggleSound}
