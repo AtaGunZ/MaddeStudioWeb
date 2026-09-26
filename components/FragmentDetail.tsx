@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { FRAGMENTS, TEXTS } from '../constants';
 import { FragmentBlock, Language } from '../types';
 import { useParams } from 'react-router-dom';
+import { usePageTitle } from './usePageTitle';
 
 interface FragmentDetailProps {
     language: Language;
@@ -13,6 +14,7 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
 
     // Derive directly — no useState so there's never a stale/undefined frame
     const fragment = FRAGMENTS.find(f => f.id === fragmentId);
+    usePageTitle(fragment?.title[language]);
 
     if (!fragment) return null;
 

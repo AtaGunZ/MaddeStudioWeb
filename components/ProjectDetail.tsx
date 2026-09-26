@@ -4,6 +4,7 @@ import { PROJECTS, TEXTS, SERVICE_TRANSLATIONS } from '../constants';
 import { Language } from '../types';
 import { GalleryVideo } from './GalleryVideo';
 import { SudiCaseStudy } from './SudiCaseStudy';
+import { usePageTitle } from './usePageTitle';
 import { useNavigate, useParams } from 'react-router-dom';
 
 interface ProjectDetailProps {
@@ -19,6 +20,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
     // Derive directly — no useState so there's never a stale/undefined frame
     const project = PROJECTS.find(p => p.id === projectId);
     const [isNextHovered, setIsNextHovered] = useState(false);
+    usePageTitle(project?.title);
 
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
