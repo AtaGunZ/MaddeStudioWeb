@@ -36,7 +36,7 @@ const PROMPT_ORDER = ['References', 'Product (fixed)', 'Scale', 'Perspective', '
 // Mean color of the button pixels in each final frame, against the brand green
 const BUTTON_SWATCHES = [
   { area: L('Lifestyle scene', 'Yaşam sahnesi'), out: '#9BAC7C', de: '12.3' },
-  { area: L('E-commerce hero', 'E-ticaret hero'), out: '#B4C387', de: '10.5' },
+  { area: L('E-commerce hero', 'E-ticaret hero'), out: '#B2C283', de: '9.5' },
   { area: L('Application', 'Uygulama'), out: '#99B07E', de: '11.0' },
 ];
 
