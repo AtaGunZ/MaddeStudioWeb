@@ -5,7 +5,7 @@ import { Language } from '../types';
 // Ported from the Claude Design file (05_Yerlesim/claude_design, wizepod_layout.dc.html).
 // Buttons are part of the study: clicking one only sends a ripple across the frame.
 
-const IMG = '/works/Wizepod_AI/ecom_hero.jpg';
+const IMG = '/works/Wizepod_AI/ecom_hero.jpg?v=20260927'; // bump when the image is replaced
 
 const COPY = {
   [Language.EN]: {

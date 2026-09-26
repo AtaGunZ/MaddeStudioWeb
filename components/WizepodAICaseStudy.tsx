@@ -9,6 +9,8 @@ import { WizepodLayoutStudy } from './WizepodLayoutStudy';
 // Project footer stay in ProjectDetail.
 
 const DIR = '/works/Wizepod_AI';
+// Bump when images in public/works/Wizepod_AI are replaced, so browsers skip their cached copy
+const VER = '20260927';
 const DIR3D = '/works/Wizepod';
 const ACCENT = 'text-[#5F7D38] dark:text-[#97B36C]';
 const LINE = 'border-black/10 dark:border-white/10';
@@ -135,7 +137,7 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
             <Caption file="videohero.mp4" note={isEN ? '3D product film · 2025' : '3D ürün filmi · 2025'} />
           </figure>
           <figure className="mt-4 md:mt-8">
-            <img src={`${DIR}/scene_wide.jpg`} alt={isEN ? 'Wizepod applicator and sensor on a living room table' : 'Salon masasında Wizepod aplikatörü ve sensörü'} className="w-full h-auto" />
+            <img src={`${DIR}/scene_wide.jpg?v=${VER}`} alt={isEN ? 'Wizepod applicator and sensor on a living room table' : 'Salon masasında Wizepod aplikatörü ve sensörü'} className="w-full h-auto" />
             <Caption file="scene_wide.jpg" note={isEN ? 'AI revision · 2026 · same product' : 'AI revizyonu · 2026 · aynı ürün'} />
           </figure>
           <div className="mt-4 md:mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
@@ -145,7 +147,7 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
               ['worn_sensor.jpg', L('Sensor worn', 'Kolda sensör')],
             ].map(([src, note]) => (
               <figure key={src as string}>
-                <img src={`${DIR}/${src}`} alt="" className="w-full aspect-[3/2] object-cover bg-neutral-900" />
+                <img src={`${DIR}/${src}?v=${VER}`} alt="" className="w-full aspect-[3/2] object-cover bg-neutral-900" />
                 <Caption file={src as string} note={t(note as ContentText)} />
               </figure>
             ))}
@@ -215,7 +217,7 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
               <Caption file="video3.mp4" note={isEN ? '3D film · the brand\'s room' : '3D film · markanın odası'} />
             </figure>
             <figure>
-              <img src={`${DIR}/plate_wide.jpg`} alt="" className="w-full aspect-video object-cover bg-neutral-900" />
+              <img src={`${DIR}/plate_wide.jpg?v=${VER}`} alt="" className="w-full aspect-video object-cover bg-neutral-900" />
               <Caption file="plate_wide.jpg" note={isEN ? 'AI plate · same room, generated from its frames' : 'AI sahnesi · aynı oda, karelerinden üretildi'} />
             </figure>
           </div>
@@ -226,7 +228,7 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
               ['scene_wide.jpg', L('3 · Product drawn into it', '3 · Ürün içine çizildi')],
             ].map(([src, note]) => (
               <figure key={src as string}>
-                <img src={`${DIR}/${src}`} alt="" className="w-full aspect-[3/2] object-cover bg-neutral-900" />
+                <img src={`${DIR}/${src}?v=${VER}`} alt="" className="w-full aspect-[3/2] object-cover bg-neutral-900" />
                 <Caption file={src as string} note={t(note as ContentText)} />
               </figure>
             ))}
@@ -234,11 +236,11 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
           <div className={`mt-12 md:mt-24 flex justify-end ${MONO} ${MUTED}`}>{isEN ? 'Drag to compare' : 'Karşılaştırmak için sürükleyin'}</div>
           <div className="mt-4 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
             <figure>
-              <BeforeAfter before={`${DIR}/guide_wide.jpg`} after={`${DIR}/scene_wide.jpg`} beforeLabel={isEN ? 'Placeholder' : 'Yer tutucu'} afterLabel={isEN ? 'Frame' : 'Kare'} />
+              <BeforeAfter before={`${DIR}/guide_wide.jpg?v=${VER}`} after={`${DIR}/scene_wide.jpg?v=${VER}`} beforeLabel={isEN ? 'Placeholder' : 'Yer tutucu'} afterLabel={isEN ? 'Frame' : 'Kare'} />
               <Caption file="guide_wide / scene_wide" note={isEN ? 'Grey placeholder at true scale' : 'Gerçek ölçekte gri yer tutucu'} />
             </figure>
             <figure>
-              <BeforeAfter before={`${DIR}/plate_ecom.jpg`} after={`${DIR}/ecom_hero.jpg`} beforeLabel={isEN ? 'Plate' : 'Sahne'} afterLabel={isEN ? 'Frame' : 'Kare'} />
+              <BeforeAfter before={`${DIR}/plate_ecom.jpg?v=${VER}`} after={`${DIR}/ecom_hero.jpg?v=${VER}`} beforeLabel={isEN ? 'Plate' : 'Sahne'} afterLabel={isEN ? 'Frame' : 'Kare'} />
               <Caption file="plate_ecom / ecom_hero" note={isEN ? 'Studio plate, products added' : 'Stüdyo sahnesi, ürünler eklendi'} />
             </figure>
           </div>
@@ -256,7 +258,7 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
           />
           <div className="mt-8 md:mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-start">
             <figure>
-              <img src={`${DIR}/ref_package.jpg`} alt={isEN ? 'Wizepod product sheet with four views' : 'Dört görünümlü Wizepod ürün föyü'} className="w-full h-auto" />
+              <img src={`${DIR}/ref_package.jpg?v=${VER}`} alt={isEN ? 'Wizepod product sheet with four views' : 'Dört görünümlü Wizepod ürün föyü'} className="w-full h-auto" />
               <Caption file="ref_package.jpg" note={isEN ? 'Product sheet · built from our renders' : 'Ürün föyü · render\'larımızdan kuruldu'} />
               <div className="mt-4 md:mt-8 grid grid-cols-3 gap-4 md:gap-8">
                 {['2.png', '3.png', '4.png'].map(f => (
@@ -269,7 +271,7 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
             </figure>
             <div className="flex flex-col gap-8">
               <figure>
-                <img src={`${DIR}/fidelity_overlay.jpg`} alt="" className="w-full h-auto" />
+                <img src={`${DIR}/fidelity_overlay.jpg?v=${VER}`} alt="" className="w-full h-auto" />
                 <Caption file="fidelity_overlay.jpg" note={isEN ? 'Reference · output · silhouette overlay' : 'Referans · çıktı · silüet bindirme'} />
               </figure>
               <div className={`border-t ${LINE}`}>
@@ -322,7 +324,7 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
             <div className="mt-6 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
               {FAILS.map(f => (
                 <figure key={f.src}>
-                  <img src={`${DIR}/${f.src}`} alt="" className="w-full aspect-[3/2] object-cover bg-neutral-900" />
+                  <img src={`${DIR}/${f.src}?v=${VER}`} alt="" className="w-full aspect-[3/2] object-cover bg-neutral-900" />
                   <Caption file={f.src} note={t(f.label)} />
                   <p className="mt-3 text-base leading-relaxed">{t(f.note)}</p>
                 </figure>
@@ -391,7 +393,7 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
           <div className="mt-8 md:mt-16 grid grid-cols-2 md:grid-cols-5 gap-4 md:gap-8">
             {[L('3D render', '3D render'), L('Lifestyle', 'Yaşam'), L('E-commerce', 'E-ticaret'), L('Application', 'Uygulama'), L('Worn', 'Kolda')].map((label, i) => (
               <figure key={i} className={i === 0 ? 'col-span-2 md:col-span-1' : ''}>
-                <img src={`${DIR}/product_0${i}.jpg`} alt="" className="w-full aspect-[4/5] object-cover bg-neutral-900" />
+                <img src={`${DIR}/product_0${i}.jpg?v=${VER}`} alt="" className="w-full aspect-[4/5] object-cover bg-neutral-900" />
                 <Caption file={`product_0${i}.jpg`} note={t(label)} />
               </figure>
             ))}
@@ -408,7 +410,7 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
               : 'AI karesi yeniden üretilmedi, düzeltme turlarından geçti: kolda erken beliren sensör kaldırıldı, koltuk altı temizlendi, aplikatör 3D uygulama render\'ı referans alınarak gerçek boyuna küçültüldü ve tabanı beyaza döndü. Altta her 3D animasyon, beslediği AI karesinin yanında.'}
           />
           <figure className="mt-8 md:mt-16">
-            <BeforeAfter before={`${DIR}/apply_raw.jpg`} after={`${DIR}/apply_final.jpg`} beforeLabel={isEN ? 'Raw' : 'Ham'} afterLabel="Final" />
+            <BeforeAfter before={`${DIR}/apply_raw.jpg?v=${VER}`} after={`${DIR}/apply_final.jpg?v=${VER}`} beforeLabel={isEN ? 'Raw' : 'Ham'} afterLabel="Final" />
             <Caption file="apply_raw / apply_final" note={isEN ? 'Same frame · edit prompt, no reshoot' : 'Aynı kare · düzeltme prompt\'u, yeniden üretim yok'} />
           </figure>
           <div className="mt-12 md:mt-24 grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
@@ -417,7 +419,7 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
               <Caption file="video2.mp4" note={isEN ? '3D · application, as designed' : '3D · uygulama, tasarlandığı gibi'} />
             </figure>
             <figure>
-              <img src={`${DIR}/apply_final.jpg`} alt="" className="w-full aspect-video object-cover bg-neutral-900" />
+              <img src={`${DIR}/apply_final.jpg?v=${VER}`} alt="" className="w-full aspect-video object-cover bg-neutral-900" />
               <Caption file="apply_final.jpg" note={isEN ? 'AI · application, in a real room' : 'AI · uygulama, gerçek bir odada'} />
             </figure>
             <figure>
@@ -425,7 +427,7 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
               <Caption file="5.mp4" note={isEN ? '3D · worn' : '3D · kolda'} />
             </figure>
             <figure>
-              <img src={`${DIR}/worn_sensor.jpg`} alt="" className="w-full aspect-video object-cover bg-neutral-900" />
+              <img src={`${DIR}/worn_sensor.jpg?v=${VER}`} alt="" className="w-full aspect-video object-cover bg-neutral-900" />
               <Caption file="worn_sensor.jpg" note={isEN ? 'AI · worn, everyday' : 'AI · kolda, gündelik'} />
             </figure>
           </div>

@@ -325,7 +325,7 @@ export const PROJECTS: Project[] = [
       [Language.EN]: "3D product film for the Wizepod CGM (2025), revisited in 2026 as a technical AI study that places the same product into generated scenes.",
       [Language.TR]: "Wizepod CGM için 3D ürün filmi (2025); 2026'da aynı ürünü üretilmiş sahnelere yerleştiren teknik bir AI çalışmasıyla yeniden ele alındı.",
     },
-    image: '/works/Wizepod_AI/hero.jpg',
+    image: '/works/Wizepod_AI/hero.jpg?v=20260927',
     heroFit: 'cover',
     heroPosition: '62% 78%', // keep the applicator on the table in wide crops
     client: "Wizepod",
