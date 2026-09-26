@@ -296,6 +296,29 @@ export const SERVICES: Service[] = [
 
 export const PROJECTS: Project[] = [
   {
+    id: 'sudi-reels',
+    title: 'Sudi Reels',
+    description: {
+      [Language.EN]: "Case study: AI-assisted food visualization for a Persian restaurant's Instagram Reels, directed shot by shot in Blender.",
+      [Language.TR]: "Case çalışması: Bir İran restoranının Instagram Reels'leri için Blender'da plan plan yönetilen, AI destekli yemek görselleştirmesi."
+    },
+    image: '/works/Sudi_Reels/hero.jpg',
+    heroFit: 'cover',
+    client: "Sudi — Case Study",
+    year: "2026",
+    services: ["3D Motion Design", "AI Visualization", "Prompt Engineering", "Video Editing"],
+    challenge: {
+      [Language.EN]: "A case study for Sudi, a Persian restaurant in Istanbul: two Instagram Reels meant to drive table reservations and profile visits and to introduce the menu, made in two days with no raw footage of the brand. AI video is fast, but left alone it drifts: cameras wander, food merges or shrinks by itself, hands behave unnaturally.",
+      [Language.TR]: "İstanbul'daki İran restoranı Sudi için bir case çalışması: masa rezervasyonu ve profil ziyareti getirmesi, menüyü tanıtması amaçlanan iki Instagram Reels; iki günde, markaya ait hiç ham görüntü olmadan üretildi. AI video hızlıdır ama kendi haline bırakıldığında dağılır: kamera savrulur, yemekler birbirine karışır ya da kendiliğinden küçülür, eller doğal davranmaz."
+    },
+    solution: {
+      [Language.EN]: "We directed every shot in Blender first. The blockout fixes the camera move, timing, plate positions and every hand and utensil action; it goes to Seedance (Dreamina / CapCut) as the motion reference, together with dish and set photos and a second-by-second prompt, all kept in one folder per shot. The outputs were cut, graded and sound-designed in Premiere for a hook in the first second and a rhythm built for vertical viewing.",
+      [Language.TR]: "Her planı önce Blender'da yönettik. Blockout; kamera hareketini, zamanlamayı, tabakların yerini, elin ve kaşığın her hareketini sabitler. Yemek ve mekân fotoğrafları ve saniye saniye yazılmış bir prompt ile birlikte Seedance'e (Dreamina / CapCut) hareket referansı olarak verilir; hepsi her çekim için tek bir klasörde saklanır. Çıktılar Premiere'de kesildi, renk düzeltmesi ve ses tasarımıyla bitirildi: ilk saniyede kanca, dikey izlemeye göre kurulmuş bir ritim."
+    },
+    // Rendered by components/SudiCaseStudy.tsx
+    gallery: []
+  },
+  {
     id: 'wizepod',
     title: 'Primewize: Wizepod CGM',
     description: {
@@ -317,29 +340,6 @@ export const PROJECTS: Project[] = [
       [Language.TR]: "Hazırlanan animasyon kurgusunda ürünün tasarım detayları ve kullanım senaryosu akıcı, sade ve etkileyici bir dil ile sunuldu. İşık, materyal ve hareket kompozisyonları sayesinde hem teknolojik üstünlük hem de hasta odaklı yaklaşım güçlü bir biçimde vurgulandı. Ortaya çıkan çalışma, WizePod’u medikal inovasyon alanında güven veren ve fark yaratan bir çözüm olarak konumlandıran prestijli bir sunum sundu. 2026'daki AI revizyonunda mevcut render'larımız dört görünümlü bir ürün föyüne dönüştü: her sahne boş üretilir, ürün ölçülmüş gerçek boyunda gri bir yer tutucu olarak girer ve her kare föye göre kontrol edilir."
     },
     // Rendered by components/WizepodAICaseStudy.tsx: 3D film and renders woven with the AI case study
-    gallery: []
-  },
-  {
-    id: 'sudi-reels',
-    title: 'Sudi Reels',
-    description: {
-      [Language.EN]: "Case study: AI-assisted food visualization for a Persian restaurant's Instagram Reels, directed shot by shot in Blender.",
-      [Language.TR]: "Case çalışması: Bir İran restoranının Instagram Reels'leri için Blender'da plan plan yönetilen, AI destekli yemek görselleştirmesi."
-    },
-    image: '/works/Sudi_Reels/hero.jpg',
-    heroFit: 'cover',
-    client: "Sudi — Case Study",
-    year: "2026",
-    services: ["3D Motion Design", "AI Visualization", "Prompt Engineering", "Video Editing"],
-    challenge: {
-      [Language.EN]: "A case study for Sudi, a Persian restaurant in Istanbul: two Instagram Reels meant to drive table reservations and profile visits and to introduce the menu, made in two days with no raw footage of the brand. AI video is fast, but left alone it drifts: cameras wander, food merges or shrinks by itself, hands behave unnaturally.",
-      [Language.TR]: "İstanbul'daki İran restoranı Sudi için bir case çalışması: masa rezervasyonu ve profil ziyareti getirmesi, menüyü tanıtması amaçlanan iki Instagram Reels; iki günde, markaya ait hiç ham görüntü olmadan üretildi. AI video hızlıdır ama kendi haline bırakıldığında dağılır: kamera savrulur, yemekler birbirine karışır ya da kendiliğinden küçülür, eller doğal davranmaz."
-    },
-    solution: {
-      [Language.EN]: "We directed every shot in Blender first. The blockout fixes the camera move, timing, plate positions and every hand and utensil action; it goes to Seedance (Dreamina / CapCut) as the motion reference, together with dish and set photos and a second-by-second prompt, all kept in one folder per shot. The outputs were cut, graded and sound-designed in Premiere for a hook in the first second and a rhythm built for vertical viewing.",
-      [Language.TR]: "Her planı önce Blender'da yönettik. Blockout; kamera hareketini, zamanlamayı, tabakların yerini, elin ve kaşığın her hareketini sabitler. Yemek ve mekân fotoğrafları ve saniye saniye yazılmış bir prompt ile birlikte Seedance'e (Dreamina / CapCut) hareket referansı olarak verilir; hepsi her çekim için tek bir klasörde saklanır. Çıktılar Premiere'de kesildi, renk düzeltmesi ve ses tasarımıyla bitirildi: ilk saniyede kanca, dikey izlemeye göre kurulmuş bir ritim."
-    },
-    // Rendered by components/SudiCaseStudy.tsx
     gallery: []
   },
   {
