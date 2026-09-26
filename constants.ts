@@ -254,6 +254,7 @@ export const SERVICE_TRANSLATIONS: Record<string, ContentText> = {
   "AI Visualization": { [Language.EN]: "AI Visualization", [Language.TR]: "AI Görselleştirme" },
   "Video Editing": { [Language.EN]: "Video Editing", [Language.TR]: "Video Kurgu" },
   "Prompt Engineering": { [Language.EN]: "Prompt Engineering", [Language.TR]: "Prompt Mühendisliği" },
+  "Product Visualization": { [Language.EN]: "Product Visualization", [Language.TR]: "Ürün Görselleştirme" },
   "Poster Design": { [Language.EN]: "Poster Design", [Language.TR]: "Afiş Tasarımı" }
 };
 
@@ -294,6 +295,30 @@ export const SERVICES: Service[] = [
 ];
 
 export const PROJECTS: Project[] = [
+  {
+    id: 'wizepod',
+    title: 'Primewize: Wizepod CGM',
+    description: {
+      [Language.EN]: "3D product film for the Wizepod CGM, extended into AI-generated scenes that use the same renders as their only product reference.",
+      [Language.TR]: "Wizepod CGM için 3D ürün filmi; aynı render'ları tek ürün referansı olarak kullanan AI sahneleriyle genişletildi."
+    },
+    image: '/works/Wizepod/hero.png',
+    heroFit: 'cover',
+    client: "Wizepod",
+    clientLogo: '/works/Wizepod/Primewize Logo Kare.png',
+    year: "2025–2026",
+    services: ["3D Product Animation", "CGI", "AI Visualization", "Prompt Engineering", "UI/UX Design"],
+    challenge: {
+      [Language.EN]: "The 3D modeling and animation work developed for WizePod aimed to position the world's first and only reusable diabetes medication not just as a medical product, but as an innovative solution that transforms quality of life. The functional structure and ease of use of this product, specially developed for diabetes patients, were handled with a visual narrative that prioritizes feelings of trust and precision. The work then asked a harder question: can the same product be placed into AI-generated lifestyle and e-commerce scenes without the model redesigning it?",
+      [Language.TR]: "WizePod için geliştirilen 3D modelleme ve animasyon çalışması, dünyada ilk ve tek çok kullanımlı diyabet ilacını yalnızca medikal bir ürün olarak değil, yaşam kalitesini dönüştüren yenilikçi bir çözüm olarak konumlandırmayı hedefledi. Diyabet hastalarına özel olarak geliştirilen bu ürünün fonksiyonel yapısı ve kullanım kolaylığı, güven ve hassasiyet duygusunu ön planda tutan bir görsel anlatımla ele alındı. Ardından daha zor bir soru soruldu: aynı ürün, model onu yeniden tasarlamadan AI ile üretilmiş yaşam ve e-ticaret sahnelerine yerleştirilebilir mi?"
+    },
+    solution: {
+      [Language.EN]: "In the prepared animation sequence, the product's design details and usage scenarios were presented with a fluid, simple, and impressive language. Through lighting, material, and motion compositions, both technological superiority and a patient-centric approach were strongly emphasized. The resulting work provided a prestigious presentation that positions WizePod as a trustworthy and transformative solution in the field of medical innovation. For the AI scenes, our renders became a four-view product sheet: each scene is generated empty, the product enters as a grey placeholder at its measured true size, and every frame is checked against the sheet.",
+      [Language.TR]: "Hazırlanan animasyon kurgusunda ürünün tasarım detayları ve kullanım senaryosu akıcı, sade ve etkileyici bir dil ile sunuldu. İşık, materyal ve hareket kompozisyonları sayesinde hem teknolojik üstünlük hem de hasta odaklı yaklaşım güçlü bir biçimde vurgulandı. Ortaya çıkan çalışma, WizePod’u medikal inovasyon alanında güven veren ve fark yaratan bir çözüm olarak konumlandıran prestijli bir sunum sundu. AI sahneleri için render'larımız dört görünümlü bir ürün föyüne dönüştü: her sahne boş üretilir, ürün ölçülmüş gerçek boyunda gri bir yer tutucu olarak girer ve her kare föye göre kontrol edilir."
+    },
+    // Rendered by components/WizepodAICaseStudy.tsx: 3D film and renders woven with the AI case study
+    gallery: []
+  },
   {
     id: 'sudi-reels',
     title: 'Sudi Reels',
@@ -678,70 +703,6 @@ export const PROJECTS: Project[] = [
         loop: true,
         muted: true,
         colSpan: 1
-      }
-    ]
-  },
-  {
-    id: 'wizepod',
-    title: 'Primewize: Wizepod CGM',
-    description: {
-      [Language.EN]: "Product visualization for a smart autonomous workspace pod.",
-      [Language.TR]: "Akıllı otonom çalışma kapsülü için ürün görselleştirmesi."
-    },
-    image: '/works/Wizepod/hero.png',
-    heroFit: 'cover',
-    client: "Wizepod",
-    clientLogo: '/works/Wizepod/Primewize Logo Kare.png',
-    year: "2025",
-    services: ["3D Product Animation", "Motion Design", "CGI"],
-    challenge: {
-      [Language.EN]: "The 3D modeling and animation work developed for WizePod aimed to position the world's first and only reusable diabetes medication not just as a medical product, but as an innovative solution that transforms quality of life. The functional structure and ease of use of this product, specially developed for diabetes patients, were handled with a visual narrative that prioritizes feelings of trust and precision.",
-      [Language.TR]: "WizePod için geliştirilen 3D modelleme ve animasyon çalışması, dünyada ilk ve tek çok kullanımlı diyabet ilacını yalnızca medikal bir ürün olarak değil, yaşam kalitesini dönüştüren yenilikçi bir çözüm olarak konumlandırmayı hedefledi. Diyabet hastalarına özel olarak geliştirilen bu ürünün fonksiyonel yapısı ve kullanım kolaylığı, güven ve hassasiyet duygusunu ön planda tutan bir görsel anlatımla ele alındı."
-    },
-    solution: {
-      [Language.EN]: "In the prepared animation sequence, the product's design details and usage scenarios were presented with a fluid, simple, and impressive language. Through lighting, material, and motion compositions, both technological superiority and a patient-centric approach were strongly emphasized. The resulting work provided a prestigious presentation that positions WizePod as a trustworthy and transformative solution in the field of medical innovation.",
-      [Language.TR]: "Hazırlanan animasyon kurgusunda ürünün tasarım detayları ve kullanım senaryosu akıcı, sade ve etkileyici bir dil ile sunuldu. İşık, materyal ve hareket kompozisyonları sayesinde hem teknolojik üstünlük hem de hasta odaklı yaklaşım güçlü bir biçimde vurgulandı. Ortaya çıkan çalışma, WizePod’u medikal inovasyon alanında güven veren ve fark yaratan bir çözüm olarak konumlandıran prestijli bir sunum sundu."
-    },
-    gallery: [
-      {
-        type: 'video',
-        src: '/works/Wizepod/videohero.mp4',
-        autoPlay: true,
-        loop: true,
-        muted: true
-      },
-      { type: 'image', src: '/works/Wizepod/1.png' },
-      {
-        type: 'video',
-        src: '/works/Wizepod/video1.mp4',
-        autoPlay: true,
-        loop: true,
-        muted: true
-      },
-      { type: 'image', src: '/works/Wizepod/2.png' },
-      { type: 'image', src: '/works/Wizepod/3.png' },
-      { type: 'image', src: '/works/Wizepod/4.png' },
-      {
-        type: 'video',
-        src: '/works/Wizepod/video2.mp4',
-        autoPlay: true,
-        loop: true,
-        muted: true
-      },
-      {
-        type: 'video',
-        src: '/works/Wizepod/5.mp4',
-        autoPlay: true,
-        loop: true,
-        muted: true
-      },
-      { type: 'image', src: '/works/Wizepod/6.png' },
-      {
-        type: 'video',
-        src: '/works/Wizepod/video3.mp4',
-        autoPlay: true,
-        loop: true,
-        muted: true
       }
     ]
   },

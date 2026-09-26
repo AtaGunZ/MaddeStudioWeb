@@ -4,6 +4,7 @@ import { PROJECTS, TEXTS, SERVICE_TRANSLATIONS } from '../constants';
 import { Language } from '../types';
 import { GalleryVideo } from './GalleryVideo';
 import { SudiCaseStudy } from './SudiCaseStudy';
+import { WizepodAICaseStudy } from './WizepodAICaseStudy';
 import { usePageTitle } from './usePageTitle';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -133,7 +134,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                 </div>
             )}
 
-            {project.id === 'sudi-reels' ? <SudiCaseStudy language={language} /> : (
+            {project.id === 'sudi-reels' ? <SudiCaseStudy language={language} /> : project.id === 'wizepod' ? <WizepodAICaseStudy language={language} /> : (
             <div className="relative z-10 px-6 md:px-12 mb-24">
                 <div className="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
                     {project.gallery?.map((item, index) => {
