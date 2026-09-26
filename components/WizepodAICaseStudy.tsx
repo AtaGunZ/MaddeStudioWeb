@@ -132,11 +132,11 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
         <Reveal>
           <figure>
             <Film src="videohero.mp4" language={language} />
-            <Caption file="videohero.mp4" note={isEN ? '3D product film' : '3D ürün filmi'} />
+            <Caption file="videohero.mp4" note={isEN ? '3D product film · 2025' : '3D ürün filmi · 2025'} />
           </figure>
           <figure className="mt-4 md:mt-8">
             <img src={`${DIR}/scene_wide.jpg`} alt={isEN ? 'Wizepod applicator and sensor on a living room table' : 'Salon masasında Wizepod aplikatörü ve sensörü'} className="w-full h-auto" />
-            <Caption file="scene_wide.jpg" note={isEN ? 'AI lifestyle scene · same product' : 'AI yaşam sahnesi · aynı ürün'} />
+            <Caption file="scene_wide.jpg" note={isEN ? 'AI revision · 2026 · same product' : 'AI revizyonu · 2026 · aynı ürün'} />
           </figure>
           <div className="mt-4 md:mt-8 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
             {[
@@ -157,8 +157,8 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
           <SectionHead num="01" title="Brief" />
           <div className="mt-8 md:mt-16 grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-8">
             {[
-              [L('Objective', 'Amaç'), L('A 3D film and render set that present the Wizepod CGM with trust and precision, then the same product placed into AI-generated scenes without losing fidelity.', 'Wizepod CGM\'i güven ve hassasiyetle sunan bir 3D film ve render seti; ardından aynı ürünün sadakatini kaybetmeden AI ile üretilmiş sahnelere yerleştirilmesi.')],
-              [L('Constraint', 'Kısıt'), L('No photo shoot. For the AI scenes, the only product reference is our own 3D model, its renders and frames of the film.', 'Fotoğraf çekimi yok. AI sahneleri için tek ürün referansı kendi 3D modelimiz, render\'ları ve filmden kareler.')],
+              [L('Objective', 'Amaç'), L('2025: a 3D film and render set that present the Wizepod CGM with trust and precision. 2026: a technical revision of that finished work, testing whether the same product survives in AI-generated scenes.', '2025: Wizepod CGM\'i güven ve hassasiyetle sunan bir 3D film ve render seti. 2026: bu bitmiş işin teknik bir revizyonu; aynı ürün AI ile üretilmiş sahnelerde bozulmadan kalabiliyor mu diye sınandı.')],
+              [L('Constraint', 'Kısıt'), L('A revision, not a new brief: no new shoot and no new modeling. The only product reference for the AI scenes is the existing 3D model, its renders and frames of the film.', 'Yeni bir brief değil, revizyon: yeni çekim yok, yeni modelleme yok. AI sahneleri için tek ürün referansı mevcut 3D model, render\'ları ve filmden kareler.')],
               [L('Output', 'Çıktı'), L('A 3D product film, application and exploded animations, stills; a lifestyle scene, an e-commerce hero, two application moments and a layout study.', '3D ürün filmi, uygulama ve patlatılmış animasyonlar, görseller; bir yaşam sahnesi, bir e-ticaret hero\'su, iki uygulama anı ve bir yerleşim çalışması.')],
             ].map(([label, body]) => (
               <div key={label[Language.EN]} className={`border-t ${LINE} pt-4`}>
@@ -174,7 +174,7 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
           <SectionHead num="02" title={isEN ? 'Pipeline' : 'Süreç'} />
           <div className="mt-8 md:mt-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 md:gap-8">
             {[
-              ['3D model', L('The product is modeled, lit and animated in 3D. Its renders become the four-view product sheet.', 'Ürün 3D\'de modellenir, ışıklanır ve canlandırılır. Render\'ları dört görünümlü ürün föyüne dönüşür.')],
+              ['3D model · 2025', L('From the original project: the product modeled, lit and animated in 3D. In the revision its renders become the four-view product sheet.', 'Orijinal projeden: 3D\'de modellenmiş, ışıklanmış ve canlandırılmış ürün. Revizyonda render\'ları dört görünümlü ürün föyüne dönüşür.')],
               ['Empty plate', L('The scene is generated without the product (GPT Image in Firefly, Seedream for the studio). It fixes the camera, the light and a scale reference: a short tumbler.', 'Sahne ürünsüz üretilir (Firefly\'da GPT Image, stüdyo için Seedream). Kamerayı, ışığı ve ölçek referansını sabitler: kısa bir su bardağı.')],
               ['Scale guide', L('A grey placeholder at true size, measured from the tumbler: 8 cm = 220 px, so a 7 cm applicator = 225 px.', 'Bardaktan ölçülen gerçek boyda gri bir yer tutucu: 8 cm = 220 px, yani 7 cm\'lik aplikatör = 225 px.')],
               ['Product pass', L('Seedream 5.0 (Dreamina) replaces the placeholder, guided by the product sheet and a fixed product block.', 'Seedream 5.0 (Dreamina), ürün föyü ve sabit ürün bloğuyla yer tutucunun yerine ürünü çizer.')],
