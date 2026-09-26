@@ -129,6 +129,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                         transition={{ duration: 1.5, ease: "easeOut" }}
                         src={project.image}
                         alt={project.title}
+                        style={{ objectPosition: project.heroPosition }}
                         className={`w-full h-full ${project.heroFit === 'contain' ? 'object-contain p-12 bg-neutral-900 dark:bg-black' : 'object-cover'} rounded-sm md:rounded-lg`}
                     />
                 </div>

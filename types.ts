@@ -15,6 +15,7 @@ export interface Project {
   description: ContentText;
   image: string;
   heroFit?: 'cover' | 'contain';
+  heroPosition?: string; // object-position for cover crops, e.g. '50% 75%'
   hero_bg?: string;
   client: string;
   clientLogo?: string;

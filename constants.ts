@@ -327,6 +327,7 @@ export const PROJECTS: Project[] = [
     },
     image: '/works/Wizepod_AI/hero.jpg',
     heroFit: 'cover',
+    heroPosition: '62% 78%', // keep the applicator on the table in wide crops
     client: "Wizepod",
     clientLogo: '/works/Wizepod/Primewize Logo Kare.png',
     year: "2025 · AI 2026",

@@ -65,15 +65,16 @@ const CSS = `
   animation:wz-ripple 1.5s cubic-bezier(.2,.7,.2,1) forwards;}
 @keyframes wz-ripple{0%{transform:translate(-50%,-50%) scale(.06);opacity:.95;}100%{transform:translate(-50%,-50%) scale(1);opacity:0;}}
 @property --rim-a{syntax:'<angle>';inherits:true;initial-value:0deg;}
-@property --sheen-x{syntax:'<percentage>';inherits:false;initial-value:20%;}
-.wz-btn{animation:wz-rim 9s linear infinite;}
+.wz-btn{animation:wz-rim 6s linear infinite, wz-breathe 4.5s ease-in-out infinite;}
 .wz-btn::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-  background:radial-gradient(38% 120% at var(--sheen-x) 25%, rgba(255,255,255,.55), rgba(255,255,255,0) 70%);
-  opacity:.45;mix-blend-mode:soft-light;animation:wz-sheen 7s ease-in-out infinite alternate;}
-.wz-btn:hover::after{opacity:.7;}
+  background:linear-gradient(110deg, rgba(255,255,255,0) 35%, rgba(255,255,255,.7) 47%, rgba(151,179,108,.22) 52%, rgba(255,255,255,0) 64%);
+  background-size:260% 100%;background-repeat:no-repeat;opacity:.9;animation:wz-sheen 5.5s cubic-bezier(.45,0,.25,1) infinite;}
+.wz-btn:hover::after{opacity:1;}
 .wz-label{position:relative;z-index:1;display:inherit;align-items:inherit;gap:inherit;}
 @keyframes wz-rim{to{--rim-a:360deg;}}
-@keyframes wz-sheen{0%{--sheen-x:18%;}100%{--sheen-x:82%;}}
+@keyframes wz-sheen{0%{background-position:130% 0;}45%,100%{background-position:-30% 0;}}
+@keyframes wz-breathe{0%,100%{box-shadow:var(--glass-highlight), var(--glass-shadow);}50%{box-shadow:inset 0 0 0 .5px rgba(255,255,255,.25), inset 0 0 16px rgba(255,255,255,.5), inset -3px 4px 3px -2px rgba(255,255,255,.8), inset 3px -4px 3px -2px rgba(255,255,255,.6), inset 0 -10px 18px -12px rgba(255,255,255,.55), var(--glass-shadow);}}
+.wz-btn:hover{animation-play-state:running;}
 @media (prefers-reduced-motion: reduce){.wz-ripple{animation-duration:.01s;}.wz-btn,.wz-btn::after{animation:none;transition:none;}}
 `;
 

@@ -32,6 +32,7 @@ export const WorksPage: React.FC<WorksPageProps> = ({ language }) => {
             <div className={`w-full aspect-square overflow-hidden mb-4 ${project.heroFit === 'contain' ? 'bg-neutral-900 dark:bg-black' : 'bg-transparent'}`}>
               <img
                 src={project.image}
+                style={{ objectPosition: project.heroPosition }}
                 alt={project.title}
                 className={`w-full h-full ${project.heroFit === 'contain' ? 'object-contain p-8' : 'object-cover'} opacity-90 group-hover:opacity-100 group-hover:scale-105 transition-all duration-700 grayscale group-hover:grayscale-0`}
               />
