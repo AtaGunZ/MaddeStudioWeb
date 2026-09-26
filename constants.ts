@@ -302,7 +302,7 @@ export const PROJECTS: Project[] = [
       [Language.EN]: "3D product film for the Wizepod CGM, extended into AI-generated scenes that use the same renders as their only product reference.",
       [Language.TR]: "Wizepod CGM için 3D ürün filmi; aynı render'ları tek ürün referansı olarak kullanan AI sahneleriyle genişletildi."
     },
-    image: '/works/Wizepod/hero.png',
+    image: '/works/Wizepod_AI/hero.jpg',
     heroFit: 'cover',
     client: "Wizepod",
     clientLogo: '/works/Wizepod/Primewize Logo Kare.png',

@@ -36,7 +36,7 @@ const PROMPT_ORDER = ['References', 'Product (fixed)', 'Scale', 'Perspective', '
 
 // Mean color of the button pixels in each final frame, against the brand green
 const BUTTON_SWATCHES = [
-  { area: L('Lifestyle scene', 'Yaşam sahnesi'), out: '#9BAC7C', de: '12.3' },
+  { area: L('Lifestyle scene', 'Yaşam sahnesi'), out: '#839466', de: '16.8' },
   { area: L('E-commerce hero', 'E-ticaret hero'), out: '#B2C283', de: '9.5' },
   { area: L('Application', 'Uygulama'), out: '#99B07E', de: '11.0' },
 ];
@@ -277,7 +277,7 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
                   [L('Height (target 7 cm)', 'Yükseklik (hedef 7 cm)'), isEN ? '≈ 7.7 cm · +11%' : '≈ 7,7 cm · +%11'],
                   [L('Silhouette', 'Silüet'), isEN ? 'Body and collar within the outline' : 'Gövde ve yaka kontur içinde'],
                   [L('Ribbed base cap', 'Yivli taban'), isEN ? 'Kept, even spacing' : 'Korundu, eşit aralık'],
-                  [L('Embossed mark', 'Kabartma logo'), isEN ? 'Tonal ✓ · lettering drifted to “WIZEPOID” ✗' : 'Tonal ✓ · yazı “WIZEPOID”e kaydı ✗'],
+                  [L('Embossed mark', 'Kabartma logo'), isEN ? 'Tonal ✓ · “WIZEPOID” fixed in one edit pass' : 'Tonal ✓ · “WIZEPOID” tek düzeltme turuyla giderildi'],
                   [L('Surface', 'Yüzey'), isEN ? 'Matte ✓' : 'Mat ✓'],
                   [L('Sensor slot', 'Sensör yuvası'), isEN ? 'Exactly one ✓' : 'Tam bir tane ✓'],
                 ].map(([k, v]) => (

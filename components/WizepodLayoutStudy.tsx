@@ -32,8 +32,8 @@ const CSS = `
   --glass-shadow:0 18px 36px -14px rgba(50,38,30,.28), 0 3px 8px -2px rgba(50,38,30,.08);
   --glass-shadow-hover:0 22px 40px -14px rgba(50,38,30,.32), 0 4px 10px -2px rgba(50,38,30,.10);
   --glass-ease:cubic-bezier(.2,.8,.2,1); --glass-dur:.45s; --glass-blur:4px; --glass-rim-w:1.2px;
-  --glass-rim:conic-gradient(from 0deg, rgba(255,255,255,.25) 0deg, rgba(255,255,255,.08) 50deg, rgba(255,255,255,.55) 110deg, rgba(255,255,255,1) 140deg, rgba(255,255,255,.5) 170deg, rgba(255,255,255,.06) 230deg, rgba(255,255,255,.55) 290deg, rgba(255,255,255,1) 318deg, rgba(255,255,255,.5) 345deg, rgba(255,255,255,.25) 360deg);
-  --glass-rim-hover:conic-gradient(from 0deg, rgba(255,255,255,.3) 0deg, rgba(151,179,108,.5) 60deg, rgba(255,255,255,1) 140deg, rgba(151,179,108,.4) 230deg, rgba(255,255,255,1) 318deg, rgba(255,255,255,.3) 360deg);
+  --glass-rim:conic-gradient(from var(--rim-a), rgba(255,255,255,.25) 0deg, rgba(255,255,255,.08) 50deg, rgba(255,255,255,.55) 110deg, rgba(255,255,255,1) 140deg, rgba(255,255,255,.5) 170deg, rgba(255,255,255,.06) 230deg, rgba(255,255,255,.55) 290deg, rgba(255,255,255,1) 318deg, rgba(255,255,255,.5) 345deg, rgba(255,255,255,.25) 360deg);
+  --glass-rim-hover:conic-gradient(from var(--rim-a), rgba(255,255,255,.3) 0deg, rgba(151,179,108,.5) 60deg, rgba(255,255,255,1) 140deg, rgba(151,179,108,.4) 230deg, rgba(255,255,255,1) 318deg, rgba(255,255,255,.3) 360deg);
   --glass-highlight:inset 0 0 0 .5px rgba(255,255,255,.18), inset 0 0 12px rgba(255,255,255,.38), inset 3px 4px 3px -2px rgba(255,255,255,.75), inset -3px -4px 3px -2px rgba(255,255,255,.55), inset 0 -10px 18px -12px rgba(255,255,255,.5);
   --serif:'Fraunces', Georgia, serif;
   --guide:rgba(26,26,26,.55); --guide-keepout:rgba(151,179,108,.9);
@@ -64,7 +64,17 @@ const CSS = `
   border:1.5px solid rgba(255,255,255,.9);box-shadow:0 0 0 1px rgba(151,179,108,.28), inset 0 0 14px rgba(255,255,255,.35);
   animation:wz-ripple 1.5s cubic-bezier(.2,.7,.2,1) forwards;}
 @keyframes wz-ripple{0%{transform:translate(-50%,-50%) scale(.06);opacity:.95;}100%{transform:translate(-50%,-50%) scale(1);opacity:0;}}
-@media (prefers-reduced-motion: reduce){.wz-ripple{animation-duration:.01s;}.wz-btn{transition:none;}}
+@property --rim-a{syntax:'<angle>';inherits:true;initial-value:0deg;}
+@property --sheen-x{syntax:'<percentage>';inherits:false;initial-value:20%;}
+.wz-btn{animation:wz-rim 9s linear infinite;}
+.wz-btn::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
+  background:radial-gradient(38% 120% at var(--sheen-x) 25%, rgba(255,255,255,.55), rgba(255,255,255,0) 70%);
+  opacity:.45;mix-blend-mode:soft-light;animation:wz-sheen 7s ease-in-out infinite alternate;}
+.wz-btn:hover::after{opacity:.7;}
+.wz-label{position:relative;z-index:1;display:inherit;align-items:inherit;gap:inherit;}
+@keyframes wz-rim{to{--rim-a:360deg;}}
+@keyframes wz-sheen{0%{--sheen-x:18%;}100%{--sheen-x:82%;}}
+@media (prefers-reduced-motion: reduce){.wz-ripple{animation-duration:.01s;}.wz-btn,.wz-btn::after{animation:none;transition:none;}}
 `;
 
 type Ripple = { id: number; x: number; y: number };
@@ -144,7 +154,7 @@ export const WizepodLayoutStudy: React.FC<{ language: Language }> = ({ language 
           <div style={{ position: 'absolute', left: '62%', top: '14.5%', width: '30%', display: 'flex', flexDirection: 'column', gap: '1.8cqw', alignItems: 'flex-start' }}>
             <p className="wz-body" style={{ fontSize: '1.3cqw' }}>{c.body}</p>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.8cqw', fontSize: '1.1cqw' }}>
-              <button type="button" data-ripple className="wz-glass wz-btn" style={{ gap: '.7cqw', padding: '1.15cqw 2.5cqw' }}>{c.buy}</button>
+              <button type="button" data-ripple className="wz-glass wz-btn" style={{ gap: '.7cqw', padding: '1.15cqw 2.5cqw' }}><span className="wz-label">{c.buy}</span></button>
               <button type="button" data-ripple className="wz-link" style={{ paddingBottom: '.2cqw' }}>{c.how}</button>
             </div>
           </div>
@@ -186,7 +196,7 @@ export const WizepodLayoutStudy: React.FC<{ language: Language }> = ({ language 
               <button type="button" data-ripple className="wz-link" style={{ fontSize: '4.1cqw', paddingBottom: '.6cqw' }}>{c.how}</button>
             </div>
             <button type="button" data-ripple className="wz-glass wz-btn" style={{ position: 'absolute', left: '6%', right: '6%', bottom: '6%', height: '13.5cqw', minHeight: 48, justifyContent: 'center', gap: '2cqw', fontSize: '4.3cqw' }}>
-              <span className="wz-dot" style={{ width: '1.6cqw', height: '1.6cqw' }} />{c.buy}
+              <span className="wz-label"><span className="wz-dot" style={{ width: '1.6cqw', height: '1.6cqw' }} />{c.buy}</span>
             </button>
             {guides && (
               <div className="wz-guides" style={{ fontSize: 8 }}>
