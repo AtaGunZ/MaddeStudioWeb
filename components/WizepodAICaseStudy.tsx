@@ -404,8 +404,8 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
             num="07"
             title={isEN ? 'Application: film and frame' : 'Uygulama: film ve kare'}
             lead={isEN
-              ? 'The AI frame gets one correction pass: the sensor that appeared on the arm before the application is removed and the underarm is cleaned. Below, each 3D animation sits next to the AI frame it informed.'
-              : 'AI karesi tek düzeltme turundan geçti: uygulamadan önce kolda beliren sensör kaldırıldı, koltuk altı temizlendi. Altta her 3D animasyon, beslediği AI karesinin yanında.'}
+              ? 'The AI frame went through edit passes, not reshoots: the sensor that appeared on the arm too early is removed, the underarm is cleaned, and the applicator is scaled down to its true size with a plain white base, guided by the 3D application render. Below, each 3D animation sits next to the AI frame it informed.'
+              : 'AI karesi yeniden üretilmedi, düzeltme turlarından geçti: kolda erken beliren sensör kaldırıldı, koltuk altı temizlendi, aplikatör 3D uygulama render\'ı referans alınarak gerçek boyuna küçültüldü ve tabanı beyaza döndü. Altta her 3D animasyon, beslediği AI karesinin yanında.'}
           />
           <figure className="mt-8 md:mt-16">
             <BeforeAfter before={`${DIR}/apply_raw.jpg`} after={`${DIR}/apply_final.jpg`} beforeLabel={isEN ? 'Raw' : 'Ham'} afterLabel="Final" />

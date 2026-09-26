@@ -65,17 +65,29 @@ const CSS = `
   animation:wz-ripple 1.5s cubic-bezier(.2,.7,.2,1) forwards;}
 @keyframes wz-ripple{0%{transform:translate(-50%,-50%) scale(.06);opacity:.95;}100%{transform:translate(-50%,-50%) scale(1);opacity:0;}}
 @property --rim-a{syntax:'<angle>';inherits:true;initial-value:0deg;}
-.wz-btn{animation:wz-rim 6s linear infinite, wz-breathe 4.5s ease-in-out infinite;}
-.wz-btn::after{content:'';position:absolute;inset:0;border-radius:inherit;pointer-events:none;
-  background:linear-gradient(110deg, rgba(255,255,255,0) 35%, rgba(255,255,255,.7) 47%, rgba(151,179,108,.22) 52%, rgba(255,255,255,0) 64%);
-  background-size:260% 100%;background-repeat:no-repeat;opacity:.9;animation:wz-sheen 5.5s cubic-bezier(.45,0,.25,1) infinite;}
-.wz-btn:hover::after{opacity:1;}
+.wz-btn{animation:wz-rim 8s linear infinite, wz-breathe 5s ease-in-out infinite;}
+.wz-liquid{position:absolute;inset:0;border-radius:inherit;overflow:hidden;pointer-events:none;}
+.wz-liquid i{position:absolute;top:-35%;height:170%;width:62%;filter:blur(5px);will-change:transform,border-radius;}
+.wz-liquid i:nth-child(1){left:-12%;opacity:.7;background:radial-gradient(circle at 45% 45%, rgba(255,255,255,.95), rgba(255,255,255,0) 68%);
+  animation:wz-flow-a 7.5s ease-in-out infinite;}
+.wz-liquid i:nth-child(2){left:46%;opacity:.55;background:radial-gradient(circle at 50% 55%, rgba(151,179,108,.55), rgba(151,179,108,0) 66%);
+  animation:wz-flow-b 9.5s ease-in-out infinite;}
+.wz-liquid i:nth-child(3){left:18%;width:40%;opacity:.5;background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.8), rgba(255,255,255,0) 70%);
+  animation:wz-flow-c 11s ease-in-out infinite;}
+.wz-btn:hover .wz-liquid i{animation-duration:3.8s, 4.8s, 5.5s;}
 .wz-label{position:relative;z-index:1;display:inherit;align-items:inherit;gap:inherit;}
 @keyframes wz-rim{to{--rim-a:360deg;}}
-@keyframes wz-sheen{0%{background-position:130% 0;}45%,100%{background-position:-30% 0;}}
+@keyframes wz-flow-a{0%,100%{transform:translate(0,0) rotate(0deg) scale(1);border-radius:42% 58% 63% 37% / 45% 40% 60% 55%;}
+  33%{transform:translate(55%,6%) rotate(35deg) scale(1.18,.92);border-radius:62% 38% 35% 65% / 55% 62% 38% 45%;}
+  66%{transform:translate(22%,-8%) rotate(-18deg) scale(.9,1.1);border-radius:36% 64% 55% 45% / 62% 34% 66% 38%;}}
+@keyframes wz-flow-b{0%,100%{transform:translate(0,0) rotate(0deg) scale(1);border-radius:55% 45% 40% 60% / 40% 58% 42% 60%;}
+  40%{transform:translate(-60%,-6%) rotate(-30deg) scale(1.15,.9);border-radius:38% 62% 60% 40% / 60% 42% 58% 40%;}
+  75%{transform:translate(-25%,8%) rotate(20deg) scale(.92,1.08);border-radius:64% 36% 45% 55% / 45% 60% 40% 55%;}}
+@keyframes wz-flow-c{0%,100%{transform:translate(0,4%) scale(1);border-radius:50% 50% 45% 55% / 55% 45% 55% 45%;}
+  50%{transform:translate(90%,-4%) scale(1.25,.85);border-radius:40% 60% 58% 42% / 45% 58% 42% 55%;}}
 @keyframes wz-breathe{0%,100%{box-shadow:var(--glass-highlight), var(--glass-shadow);}50%{box-shadow:inset 0 0 0 .5px rgba(255,255,255,.25), inset 0 0 16px rgba(255,255,255,.5), inset -3px 4px 3px -2px rgba(255,255,255,.8), inset 3px -4px 3px -2px rgba(255,255,255,.6), inset 0 -10px 18px -12px rgba(255,255,255,.55), var(--glass-shadow);}}
 .wz-btn:hover{animation-play-state:running;}
-@media (prefers-reduced-motion: reduce){.wz-ripple{animation-duration:.01s;}.wz-btn,.wz-btn::after{animation:none;transition:none;}}
+@media (prefers-reduced-motion: reduce){.wz-ripple{animation-duration:.01s;}.wz-btn,.wz-liquid i{animation:none;transition:none;}}
 `;
 
 type Ripple = { id: number; x: number; y: number };
@@ -110,6 +122,9 @@ const Frame: React.FC<{ aspect: string; pos: string; label: string; ringSize: st
     </section>
   );
 };
+
+// Slow liquid light moving inside the glass, so the button reads as interactive without a click
+const Liquid: React.FC = () => <span className="wz-liquid" aria-hidden><i /><i /><i /></span>;
 
 const Crosshair: React.FC<{ x: string; y: string; size?: number }> = ({ x, y, size = 22 }) => (
   <div style={{ left: x, top: y, width: size, height: size, margin: `-${size / 2}px 0 0 -${size / 2}px` }}>
@@ -155,7 +170,7 @@ export const WizepodLayoutStudy: React.FC<{ language: Language }> = ({ language 
           <div style={{ position: 'absolute', left: '62%', top: '14.5%', width: '30%', display: 'flex', flexDirection: 'column', gap: '1.8cqw', alignItems: 'flex-start' }}>
             <p className="wz-body" style={{ fontSize: '1.3cqw' }}>{c.body}</p>
             <div style={{ display: 'flex', alignItems: 'center', gap: '1.8cqw', fontSize: '1.1cqw' }}>
-              <button type="button" data-ripple className="wz-glass wz-btn" style={{ gap: '.7cqw', padding: '1.15cqw 2.5cqw' }}><span className="wz-label">{c.buy}</span></button>
+              <button type="button" data-ripple className="wz-glass wz-btn" style={{ gap: '.7cqw', padding: '1.15cqw 2.5cqw' }}><Liquid /><span className="wz-label">{c.buy}</span></button>
               <button type="button" data-ripple className="wz-link" style={{ paddingBottom: '.2cqw' }}>{c.how}</button>
             </div>
           </div>
@@ -197,6 +212,7 @@ export const WizepodLayoutStudy: React.FC<{ language: Language }> = ({ language 
               <button type="button" data-ripple className="wz-link" style={{ fontSize: '4.1cqw', paddingBottom: '.6cqw' }}>{c.how}</button>
             </div>
             <button type="button" data-ripple className="wz-glass wz-btn" style={{ position: 'absolute', left: '6%', right: '6%', bottom: '6%', height: '13.5cqw', minHeight: 48, justifyContent: 'center', gap: '2cqw', fontSize: '4.3cqw' }}>
+              <Liquid />
               <span className="wz-label"><span className="wz-dot" style={{ width: '1.6cqw', height: '1.6cqw' }} />{c.buy}</span>
             </button>
             {guides && (
