@@ -2,6 +2,7 @@ import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ContentText, Language } from '../types';
 import { GalleryVideo } from './GalleryVideo';
+import { WizepodLayoutStudy } from './WizepodLayoutStudy';
 
 // Body of the 'wizepod' project: the 3D film and renders woven together with the AI case
 // study they fed. The shared header (title, meta, challenge / solution) and the Next
@@ -116,74 +117,6 @@ const Crosshair: React.FC<{ x?: string; y?: string }> = ({ x = '50%', y = '50%' 
   <div className="absolute w-7 h-7 -ml-3.5 -mt-3.5 rounded-full border border-white pointer-events-none" style={{ left: x, top: y }}>
     <div className="absolute left-1/2 -top-2 -bottom-2 w-px bg-white" />
     <div className="absolute top-1/2 -left-2 -right-2 h-px bg-white" />
-  </div>
-);
-
-// Product sits at about x 36%, y 71% of ecom_hero.jpg; the box at x 82%
-
-// Shop copy set over the frames (layout study, not a live page)
-const SERIF: React.CSSProperties = { fontFamily: "'Fraunces', Georgia, serif", fontOpticalSizing: 'auto' };
-const GLASS = 'rounded-full bg-white/25 backdrop-blur-md border border-white/60 shadow-[0_8px_30px_rgba(0,0,0,0.12),inset_0_1px_0_rgba(255,255,255,0.6)] text-madde-black';
-
-const COPY = {
-  eyebrow: 'Wizepod CGM',
-  title: L('Your glucose, <i>quietly</i> in the background.', 'Şekeriniz, <i>sessizce</i> arka planda.'),
-  short: L('<i>Quietly</i>, in the background.', '<i>Sessizce</i>, arka planda.'),
-  body: L('A small sensor on the upper arm, applied at home with a single press.', 'Üst kola takılan küçük bir sensör; evde, tek bir basışla uygulanır.'),
-  buy: L('Buy now', 'Satın al'),
-  how: L('How it works', 'Nasıl çalışır'),
-  box: L('In the box · applicator + sensor', 'Kutuda · aplikatör + sensör'),
-};
-
-// Title strings carry one <i> for the soft italic accent; nothing user-supplied goes through here
-const Title: React.FC<{ html: string; className?: string }> = ({ html, className }) => (
-  <div className={className} style={SERIF} dangerouslySetInnerHTML={{ __html: html }} />
-);
-
-const GlassButton: React.FC<{ label: string; className?: string }> = ({ label, className }) => (
-  <span className={`${GLASS} inline-flex items-center gap-2 font-medium tracking-tight ${className ?? ''}`}>
-    {label}<span aria-hidden className="opacity-60">→</span>
-  </span>
-);
-
-const DesktopHero: React.FC<{ isEN: boolean; t: (c: ContentText) => string }> = ({ isEN, t }) => (
-  <div className="relative aspect-[16/9] overflow-hidden bg-neutral-900 text-madde-black">
-    <img src={`${DIR}/ecom_hero.jpg`} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: '50% 70%' }} />
-    <div className="absolute inset-x-0 top-0 h-[40%] border-b border-dashed border-black/15" />
-    <div className="absolute left-[6%] top-[8%] max-w-[44%]">
-      <div className="flex items-center gap-2 text-[9px] sm:text-[11px] md:text-xs tracking-wide opacity-70">
-        <span className="w-1.5 h-1.5 rounded-full bg-[#97B36C]" />{COPY.eyebrow}
-      </div>
-      <Title html={t(COPY.title)} className="mt-1.5 md:mt-3 text-xl sm:text-3xl lg:text-5xl font-light leading-[1.02] tracking-[-0.02em] [&_i]:font-normal" />
-      <p className="hidden sm:block mt-2 md:mt-4 max-w-[80%] text-[11px] md:text-sm lg:text-base font-light leading-relaxed opacity-75">{t(COPY.body)}</p>
-      <div className="mt-2 md:mt-6 flex items-center gap-3 md:gap-5">
-        <GlassButton label={t(COPY.buy)} className="px-3 py-1 text-[10px] sm:px-4 sm:py-1.5 sm:text-xs md:px-6 md:py-2.5 md:text-sm" />
-        <span className="hidden sm:inline text-[10px] md:text-sm underline underline-offset-4 decoration-black/30 opacity-80">{t(COPY.how)}</span>
-      </div>
-    </div>
-    <span className={`${GLASS} absolute right-[5%] bottom-[7%] px-2 py-0.5 text-[8px] sm:px-3 sm:py-1 sm:text-[10px] md:text-xs`}>{t(COPY.box)}</span>
-    <span className={`absolute right-2 top-2 px-1.5 py-0.5 bg-black/50 text-madde-white ${MONO} text-[9px]`}>{isEN ? 'Headline zone · top 40%' : 'Başlık alanı · üst %40'}</span>
-  </div>
-);
-
-// object-position that puts the product (x 36% of the 3:2 image) in the middle of a narrower crop
-const IMG_ASPECT = 3 / 2;
-const centerOn = (frameAspect: number, fx = 0.36) =>
-  `${Math.max(0, Math.min(1, (fx * IMG_ASPECT - frameAspect / 2) / (IMG_ASPECT - frameAspect))) * 100}% 50%`;
-
-const CropFrame: React.FC<{ aspect: string; ratio: number; label: string; note: string; children?: React.ReactNode }> = ({ aspect, ratio, label, note, children }) => (
-  <figure>
-    <div className={`relative ${aspect} overflow-hidden bg-neutral-900 text-madde-black`}>
-      <img src={`${DIR}/ecom_hero.jpg`} alt="" className="absolute inset-0 w-full h-full object-cover" style={{ objectPosition: centerOn(ratio) }} />
-      {children}
-    </div>
-    <Caption file={label} note={note} />
-  </figure>
-);
-
-const Eyebrow: React.FC<{ className?: string }> = ({ className }) => (
-  <div className={`flex items-center gap-1.5 tracking-wide opacity-70 ${className ?? ''}`}>
-    <span className="w-1 h-1 md:w-1.5 md:h-1.5 rounded-full bg-[#97B36C]" />{COPY.eyebrow}
   </div>
 );
 
@@ -508,46 +441,8 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
               ? 'The e-commerce hero checked where it will live: behind a shop headline and a buy button on desktop, and cropped for mobile and social formats. The product stays in frame in every crop.'
               : 'E-ticaret hero\'su yayınlanacağı yerde kontrol edildi: masaüstünde mağaza başlığı ve satın al butonunun arkasında, mobil ve sosyal formatlar için kırpılmış halde. Ürün her kırpımda kadrajda kalıyor.'}
           />
-          <figure className="mt-8 md:mt-16">
-            <DesktopHero isEN={isEN} t={t} />
-            <Caption file="ecom_hero.jpg" note={isEN ? '16:9 · desktop hero · layout study' : '16:9 · masaüstü hero · yerleşim çalışması'} />
-          </figure>
-          <div className="mt-4 md:mt-8 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8 items-end">
-            <CropFrame aspect="aspect-[9/16]" ratio={9 / 16} label="9:16" note={isEN ? 'Mobile' : 'Mobil'}>
-              <div className="absolute left-[8%] right-[8%] top-[7%]">
-                <Eyebrow className="text-[9px] md:text-[11px]" />
-                <Title html={t(COPY.title)} className="mt-1.5 text-lg md:text-2xl lg:text-3xl font-light leading-[1.05] tracking-[-0.02em] [&_i]:font-normal" />
-                <p className="mt-2 text-[10px] md:text-xs font-light leading-relaxed opacity-75">{t(COPY.body)}</p>
-              </div>
-              <div className="absolute inset-x-[8%] bottom-[4%] flex">
-                <GlassButton label={t(COPY.buy)} className="w-full justify-center py-1.5 md:py-2.5 text-[11px] md:text-sm" />
-              </div>
-            </CropFrame>
-            <CropFrame aspect="aspect-[4/5]" ratio={4 / 5} label="4:5" note={isEN ? 'Feed' : 'Akış'}>
-              <div className="absolute left-[7%] right-[7%] top-[7%]">
-                <Eyebrow className="text-[8px] md:text-[10px]" />
-                <Title html={t(COPY.short)} className="mt-1 text-base md:text-xl lg:text-2xl font-light leading-[1.05] tracking-[-0.02em] [&_i]:font-normal" />
-              </div>
-            </CropFrame>
-            <CropFrame aspect="aspect-square" ratio={1} label="1:1" note={isEN ? 'Grid' : 'Izgara'}>
-              <span className={`${GLASS} absolute left-[6%] top-[6%] px-2 py-0.5 text-[8px] md:px-3 md:py-1 md:text-[11px]`}>{COPY.eyebrow}</span>
-            </CropFrame>
-            <div>
-              <div className="w-1/2">
-                <CropFrame aspect="aspect-square" ratio={1} label="Thumb" note="160 px" />
-              </div>
-              <div className={`mt-6 border-t ${LINE}`}>
-                {[
-                  [L('Headline zone', 'Başlık alanı'), isEN ? 'Top 40%' : 'Üst %40'],
-                  [L('Focal point', 'Odak noktası'), 'X 36% · Y 71%'],
-                  [L('Box', 'Kutu'), isEN ? 'X 82% · desktop only' : 'X %82 · sadece masaüstü'],
-                ].map(([k, v]) => (
-                  <div key={(k as ContentText)[Language.EN]} className={`flex justify-between gap-4 py-3 border-b ${LINE} ${MONO}`}>
-                    <span className={MUTED}>{t(k as ContentText)}</span><span>{v as string}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+          <div className="mt-8 md:mt-16">
+            <WizepodLayoutStudy language={language} />
           </div>
         </Reveal>
 
