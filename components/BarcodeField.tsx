@@ -23,6 +23,15 @@ export const BarcodeField: React.FC<{ dark: boolean; className?: string }> = ({ 
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     let bars: Bar[] = [], W = 0, H = 0, L = 0, raf = 0, visible = true, last = performance.now();
     const t0 = performance.now();
+    const ptr = { x: -1, on: false };
+    const onMove = (e: PointerEvent) => {
+      const r = cv.getBoundingClientRect();
+      ptr.on = e.clientY >= Math.max(0, r.top) && e.clientY <= r.bottom && e.clientX >= r.left && e.clientX <= r.right;
+      ptr.x = e.clientX - r.left;
+    };
+    const onLeave = () => { ptr.on = false; };
+    window.addEventListener('pointermove', onMove);
+    document.addEventListener('pointerleave', onLeave);
     let seed = 23;
     const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
 
@@ -33,22 +42,21 @@ export const BarcodeField: React.FC<{ dark: boolean; className?: string }> = ({ 
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       bars = [];
       seed = 23;
-      // at most ten broad bars across the field: varied widths and gaps, scaled to fill it
+      // at most ten broad bars edge to edge: varied widths, alternating tone, scaled to fill it
       const N = W < 640 ? 6 : 10;
       const widths = Array.from({ length: N }, () => [0.45, 0.8, 1.2, 1.8][Math.floor(rnd() * 4)]);
-      const gaps = Array.from({ length: N }, () => 0.25 + rnd() * 0.7);
-      const scale = W / (widths.reduce((a, v) => a + v, 0) + gaps.reduce((a, v) => a + v, 0));
-      let x = gaps[0] * scale * 0.5;
+      const scale = W / widths.reduce((a, v) => a + v, 0);
+      let x = 0;
       for (let i = 0; i < N; i++) {
-        const w = Math.round(widths[i] * scale);
+        const w = i === N - 1 ? Math.ceil(W - x) : Math.round(widths[i] * scale);
         const start = entrance && !reduce ? H + 40 + rnd() * H * 0.6 : 0;
         bars.push({
-          x, w, alpha: 0.025 + rnd() * 0.035,
+          x, w, alpha: i % 2 ? 0.02 + rnd() * 0.02 : 0.05 + rnd() * 0.03,
           y: start, v: 0, target: 0, k: 60, c: 11,
           // entrance: staggered at random, so the cards land one after another
           next: entrance ? 0.2 + rnd() * 2.4 : 4 + rnd() * 10,
         });
-        x += w + gaps[(i + 1) % N] * scale;
+        x += w;
       }
       // hold every card above the field until its drop time
       if (entrance && !reduce) bars.forEach(b => { b.target = b.y; });
@@ -68,8 +76,13 @@ export const BarcodeField: React.FC<{ dark: boolean; className?: string }> = ({ 
             b.next = t + 5 + rnd() * 10;
           }
         }
-        // critically-ish damped spring: fluid, with at most a slight settle
-        const a = b.k * (b.target - b.y) - b.c * b.v;
+        // the pointer lifts the bar under it; neighbours follow a little
+        const cx = b.x + b.w / 2;
+        const near = ptr.on ? Math.max(0, 1 - Math.abs(ptr.x - cx) / (b.w * 0.5 + W * 0.08)) : 0;
+        const goal = Math.max(b.target, near * near * L * 0.18);
+        const k = near > 0.01 ? Math.max(b.k, 2.2) : b.k;
+        // critically damped spring: fluid, no bounce
+        const a = k * (goal - b.y) - 2 * Math.sqrt(k) * b.v;
         b.v += a * dt; b.y += b.v * dt;
       }
     };
@@ -102,7 +115,7 @@ export const BarcodeField: React.FC<{ dark: boolean; className?: string }> = ({ 
     ro.observe(cv);
     const io = new IntersectionObserver(([e]) => { visible = e.isIntersecting; last = performance.now(); });
     io.observe(cv);
-    return () => { cancelAnimationFrame(raf); ro.disconnect(); io.disconnect(); };
+    return () => { cancelAnimationFrame(raf); ro.disconnect(); io.disconnect(); window.removeEventListener('pointermove', onMove); document.removeEventListener('pointerleave', onLeave); };
   }, []);
 
   return <canvas ref={canvas} aria-hidden className={className} />;
