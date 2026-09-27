@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Language } from '../types';
 import { PROJECTS, TEXTS } from '../constants';
 import { useNavigate } from 'react-router-dom';
+import { EmphasisText } from './EmphasisText';
 
 interface WorksPageProps {
   language: Language;
@@ -10,6 +11,7 @@ interface WorksPageProps {
 
 export const WorksPage: React.FC<WorksPageProps> = ({ language }) => {
   const navigate = useNavigate();
+  const [hovered, setHovered] = useState<string | null>(null);
 
   return (
     <motion.section
@@ -28,6 +30,8 @@ export const WorksPage: React.FC<WorksPageProps> = ({ language }) => {
             transition={{ delay: index * 0.1 }}
             className="group cursor-pointer"
             onClick={() => navigate(`/works/${project.id}`)}
+            onMouseEnter={() => setHovered(project.id)}
+            onMouseLeave={() => setHovered(h => (h === project.id ? null : h))}
           >
             <div className={`w-full aspect-square overflow-hidden mb-4 ${project.heroFit === 'contain' ? 'bg-neutral-900 dark:bg-black' : 'bg-transparent'}`}>
               <img
@@ -41,9 +45,9 @@ export const WorksPage: React.FC<WorksPageProps> = ({ language }) => {
               <h4 className="text-lg font-medium group-hover:translate-x-1 transition-transform mb-1">
                 {project.title}
               </h4>
-              <p className="text-xs text-madde-gray dark:text-gray-400 line-clamp-2">
-                {project.description[language]}
-              </p>
+              <div className="text-xs max-h-[2.75em] overflow-hidden [mask-image:linear-gradient(180deg,#000_60%,transparent)]">
+                <EmphasisText text={project.description[language]} active={hovered === project.id} id={`wp-blur-${project.id}`} className="text-xs" />
+              </div>
             </div>
           </motion.article>
         ))}
