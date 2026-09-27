@@ -28,6 +28,7 @@ export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
     const letters = Array.from(root.querySelectorAll('[data-l]')) as HTMLElement[];
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const touch = window.matchMedia('(hover: none)').matches;
+    const narrow = window.innerWidth < 768;
     let seed = 7;
     const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
     // depth > 0 comes towards the viewer (bigger, blurrier), < 0 falls behind
@@ -40,10 +41,11 @@ export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
     const text = root.firstElementChild as HTMLElement;
     const target = () => {
       const vh = window.innerHeight, r = text.getBoundingClientRect();
-      // stays scattered until the text's middle reaches the bottom edge of the screen (0), and is
-      // fully set when that middle sits a little under mid-screen, at 67% of the height (1)
+      // a long, slow gather: starts while the text's middle is still well below the screen and is
+      // fully set only when that middle reaches 67% of the height (55% on phones, where the text is taller)
       const c = (r.top + r.height / 2) / vh;
-      return Math.min(1, Math.max(0, (1.0 - c) / (1.0 - 0.67)));
+      const end = narrow ? 0.55 : 0.67, start = end + 0.75;
+      return Math.min(1, Math.max(0, (start - c) / (start - end)));
     };
     const render = () => {
       const vh = window.innerHeight, vw = window.innerWidth;
@@ -53,10 +55,12 @@ export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
         if (u >= 1) { el.style.transform = ''; el.style.filter = ''; el.style.opacity = ''; return; }
         const k = 1 - easeSine(u);
         const scale = 1 + s.depth * 0.9 * k;
-        el.style.transform = `translate3d(${(s.x * vw * 0.5 * k).toFixed(1)}px, ${(s.y * vh * 0.6 * k).toFixed(1)}px, 0) rotate(${(s.r * k).toFixed(1)}deg) scale(${scale.toFixed(3)})`;
+        const sx = narrow ? 0.35 : 0.5, sy = narrow ? 0.35 : 0.6;   // phones: a tighter scatter
+        el.style.transform = `translate3d(${(s.x * vw * sx * k).toFixed(1)}px, ${(s.y * vh * sy * k).toFixed(1)}px, 0) rotate(${(s.r * k).toFixed(1)}deg) scale(${scale.toFixed(3)})`;
         // the blur clears slowly and evenly, only reaching sharp as the letter lands
         el.style.filter = touch ? '' : `blur(${(Math.abs(s.depth) * 9 * Math.pow(1 - u, 1.2)).toFixed(2)}px)`;
-        el.style.opacity = (0.35 + 0.65 * (1 - k)).toFixed(3);
+        // phones: letters fade in from nothing, so no loose pile waits at the bottom of the screen
+        el.style.opacity = (narrow ? Math.min(1, u * 1.6) : 0.35 + 0.65 * (1 - k)).toFixed(3);
       });
       drawn = p;
     };

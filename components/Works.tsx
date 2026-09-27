@@ -31,14 +31,14 @@ const WorkRow: React.FC<{ project: Project; language: Language; onOpen: () => vo
 
       <div className="relative z-10 px-6 md:px-12 py-12 md:py-24 flex flex-col md:flex-row md:items-end justify-between bg-transparent">
         <div className="mb-6 md:mb-0">
-          <h3 className="text-4xl md:text-6xl font-bold tracking-tighter mb-4 group-hover:translate-x-4 transition-transform duration-500">
+          <h3 className="text-4xl md:text-6xl font-bold tracking-tighter mb-4 lg:group-hover:translate-x-4 transition-transform duration-500">
             {project.title}
           </h3>
           <EmphasisText text={project.description[language]} active={hover} id={`wk-blur-${project.id}`} />
         </div>
 
         <div className="overflow-hidden">
-          <div className="transform translate-y-full group-hover:translate-y-0 transition-transform duration-500 font-mono text-xs uppercase tracking-widest">
+          <div className="transform lg:translate-y-full lg:group-hover:translate-y-0 transition-transform duration-500 font-mono text-xs uppercase tracking-widest">
             {language === Language.EN ? 'More' : 'Daha Fazlası'} &rarr;
           </div>
         </div>
