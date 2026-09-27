@@ -5,6 +5,8 @@ import React, { useEffect, useRef } from 'react';
 // back down. Each card is a pane of glass: bright rims, a rounded tip that stretches with speed
 // like a drop, and light gathered at the tip. Where a card hangs, the hero image shows in colour
 // (the `tint` element is clipped to the cards). A click sends a card up fast; it then glides down slowly.
+// As the page scrolls, lifted cards come down onto the line, each with its own small delay and a
+// soft spring; their drifting, the pointer and clicks keep moving them.
 // Paused off-screen; drawn once, resting, for reduced motion.
 
 type Bar = {
@@ -12,8 +14,13 @@ type Bar = {
   y: number; v: number; target: number;   // lift above the floor in px (0 = resting)
   k: number;                               // spring stiffness for the current move
   next: number;                            // time of the next move (s)
-  kick: boolean;                           // clicked: rising now, gliding back next
+  kick: boolean; knext: number;            // clicked: rising now, gliding back at `knext`
+  ky: number; kv: number; kt: number; kk: number;   // the click's own lift (not held down by folding)
+  c: number; cv: number; ct: number;       // scroll descent (0 free … 1 settled on the line), its speed and goal
+  delay: number; kc: number;               // when in the scroll this card starts coming down; how quickly it follows
 };
+
+const smooth = (t: number) => t * t * (3 - 2 * t);
 
 const NOTHING = 'polygon(0 0, 0 0, 0 0)';
 
@@ -26,7 +33,7 @@ export const BarcodeField: React.FC<{ dark: boolean; className?: string; tint?: 
     const cv = canvas.current!;
     const ctx = cv.getContext('2d')!;
     const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let bars: Bar[] = [], W = 0, H = 0, L = 0, raf = 0, visible = true, dirty = true, last = performance.now();
+    let bars: Bar[] = [], W = 0, H = 0, L = 0, vis = 0, fold = 0, raf = 0, visible = true, dirty = true, last = performance.now();
     const t0 = performance.now();
     const now = () => (performance.now() - t0) / 1000;
     const ptr = { x: -1, on: false };
@@ -42,12 +49,16 @@ export const BarcodeField: React.FC<{ dark: boolean; className?: string; tint?: 
       const r = cv.getBoundingClientRect();
       const x = e.clientX - r.left, y = e.clientY - r.top;
       const b = bars.find(b => x >= b.x && x < b.x + b.w);
-      if (!b || y < 0 || y > H - b.y) return;
-      // up to near the top of what is on screen, so the card stays in sight
-      const top = Math.max(0, -r.top) + 70;
-      b.kick = true; b.target = Math.max(b.y, H - top - (H - top) * 0.12); b.k = 26; b.next = now() + 0.55;
+      if (!b) return;
+      const base = H - b.y * (1 - 0.8 * Math.max(0, Math.min(1, b.c)));   // bottom before the click lift
+      if (y < 0 || y > base - b.ky) return;
+      // up to near the top of what is on screen, so the card stays in sight, however far the page is scrolled
+      const top = Math.max(0, -r.top) + 70, want = top + (base - top) * 0.12;
+      b.kick = true; b.kt = Math.max(b.ky, base - want); b.kk = 26; b.knext = now() + 0.55;
     };
-    const onScroll = () => { dirty = true; if (reduce) requestAnimationFrame(draw); };
+    // tell the hero image where the line is, so it can fade out below it
+    const markLine = () => { tint?.current?.parentElement?.style.setProperty('--line', `${Math.round(cv.getBoundingClientRect().bottom)}px`); };
+    const onScroll = () => { dirty = true; markLine(); if (reduce) requestAnimationFrame(() => { step(now(), 0); draw(); }); };
     window.addEventListener('pointermove', onMove);
     window.addEventListener('click', onDown);
     window.addEventListener('scroll', onScroll, { passive: true });
@@ -72,7 +83,8 @@ export const BarcodeField: React.FC<{ dark: boolean; className?: string; tint?: 
         const start = entrance && !reduce ? H + 40 + rnd() * H * 0.6 : 0;
         bars.push({
           x, w, alpha: 0.05 + rnd() * 0.025,
-          y: start, v: 0, target: 0, k: 60, kick: false,
+          y: start, v: 0, target: 0, k: 60, kick: false, knext: 0, ky: 0, kv: 0, kt: 0, kk: 26,
+          c: 0, cv: 0, ct: 0, delay: rnd() * 0.3, kc: 14 + rnd() * 16,
           // entrance: staggered at random, so the cards land one after another
           next: entrance ? 0.2 + rnd() * 2.4 : 4 + rnd() * 10,
         });
@@ -83,13 +95,25 @@ export const BarcodeField: React.FC<{ dark: boolean; className?: string; tint?: 
       dirty = true;
     };
 
+    // how far the page has scrolled the line up towards the top: 0 at rest, 1 when it nears the bar
+    const measure = () => {
+      const r = cv.getBoundingClientRect();
+      vis = Math.max(0, -r.top);
+      fold = Math.min(1, Math.max(0, window.scrollY / Math.max(1, (r.bottom + window.scrollY - 140) * 0.8)));
+    };
+
     const step = (t: number, dt: number) => {
+      measure();
       for (const b of bars) {
+        // scroll descent: a slightly underdamped spring, so each card settles with a little give
+        b.ct = smooth(Math.min(1, Math.max(0, (fold - b.delay) / 0.7)));
+        if (reduce) b.c = b.ct;
+        else { const a = b.kc * (b.ct - b.c) - 2 * 0.6 * Math.sqrt(b.kc) * b.cv; b.cv += a * dt; b.c += b.cv * dt; }
+        // a click: up fast, then a slow glide back down
+        if (b.kick && t >= b.knext) { b.kick = false; b.kt = 0; b.kk = 0.32; }
+        { const a = b.kk * (b.kt - b.ky) - 2 * Math.sqrt(b.kk) * b.kv; b.kv += a * dt; b.ky += b.kv * dt; }
         if (t >= b.next) {
-          if (b.kick) {                                   // after a click: glide back down, slowly
-            b.kick = false; b.target = 0; b.k = 0.32;
-            b.next = t + 9 + rnd() * 6;
-          } else if (b.target > 0 && b.y > L * 0.9) {     // drop in (entrance)
+          if (b.target > 0 && b.y > L * 0.9) {     // drop in (entrance)
             b.target = 0; b.k = 3.2 + rnd() * 1.6;
             b.next = t + 6 + rnd() * 8;
           } else if (b.target === 0) {                    // drift up a little…
@@ -113,8 +137,10 @@ export const BarcodeField: React.FC<{ dark: boolean; className?: string; tint?: 
 
     const draw = () => {
       ctx.clearRect(0, 0, W, H);
-      const ink = darkRef.current ? '250,250,250' : '10,10,10';
-      const rgba = (a: number) => `rgba(${ink},${Math.min(1, a).toFixed(3)})`;
+      // glass is light on both themes: dark ink on the white theme greyed the photo out, so there
+      // the panes are white and a touch stronger to read over the brighter image
+      const ink = '255,255,255', gain = darkRef.current ? 1 : 2.2;
+      const rgba = (a: number) => `rgba(${ink},${Math.min(1, a * gain).toFixed(3)})`;
       const cr = cv.getBoundingClientRect();
       const el = tint?.current, er = el?.getBoundingClientRect();
       const dx = er ? cr.left - er.left : 0, dy = er ? cr.top - er.top : 0;
@@ -124,16 +150,22 @@ export const BarcodeField: React.FC<{ dark: boolean; className?: string; tint?: 
       for (const b of bars) {
         // the outline: straight sides, rounded tip corners and a belly that hangs lower the
         // faster the card rises (the liquid lags behind), flattening as it sinks
-        const x0 = b.x, x1 = b.x + b.w, w = b.w, bottom = H - b.y, r = Math.min(16, w / 4);
+        // scrolling brings lifted cards down (most of the way, so their drift still shows); a click lifts on top
+        const x0 = b.x, x1 = b.x + b.w, w = b.w, bottom = H - b.y * (1 - 0.8 * Math.max(0, Math.min(1, b.c))) - b.ky;
         if (bottom < -40) continue;
-        const belly = Math.max(-4, Math.min(w * 0.28, 5 + b.v * 0.035)), tip = bottom + belly;
+        // the card always reaches the top of the screen
+        const top = vis - 2, hgt = bottom - top;
+        if (hgt < 3) continue;
+        const r = Math.min(16, w / 4, hgt / 2), rt = 0;
+        const belly = Math.max(-4, Math.min(w * 0.28, hgt * 0.4, 5 + (b.v + b.kv) * 0.035)), tip = bottom + belly;
         const tipPath = (c: Path2D | CanvasRenderingContext2D) => {
           c.quadraticCurveTo(x1, bottom, x1 - r, bottom);
           c.bezierCurveTo(x0 + w * 0.68, tip, x0 + w * 0.32, tip, x0 + r, bottom);
           c.quadraticCurveTo(x0, bottom, x0, bottom - r);
         };
         const p = new Path2D();
-        p.moveTo(x0, -2); p.lineTo(x1, -2); p.lineTo(x1, bottom - r); tipPath(p); p.closePath();
+        p.moveTo(x0, top + rt); p.quadraticCurveTo(x0, top, x0 + rt, top); p.lineTo(x1 - rt, top);
+        p.quadraticCurveTo(x1, top, x1, top + rt); p.lineTo(x1, bottom - r); tipPath(p); p.closePath();
         const a = b.alpha;
         // glass body: bright at the rims, clear in the middle
         const g = ctx.createLinearGradient(x0, 0, x1, 0);
@@ -147,12 +179,12 @@ export const BarcodeField: React.FC<{ dark: boolean; className?: string; tint?: 
         ctx.fillStyle = tg; ctx.fillRect(x0, bottom - 110, w, 112 + Math.max(0, belly));
         ctx.restore();
         // specular rim along the left edge and around the tip
-        ctx.fillStyle = rgba(a * 3.2); ctx.fillRect(x0, 0, 1, Math.max(0, bottom - r));
+        ctx.fillStyle = rgba(a * 3.2); ctx.fillRect(x0, top + rt, 1, Math.max(0, bottom - r - top - rt));
         ctx.beginPath(); ctx.moveTo(x1, bottom - r); tipPath(ctx);
         ctx.strokeStyle = rgba(a * 5); ctx.lineWidth = 1.5; ctx.stroke();
         if (el) {
           const X = (v: number) => ((v + dx) / s).toFixed(1), Y = (v: number) => ((v + dy) / s).toFixed(1);
-          clip += `M${X(x0)} ${Y(-2)}L${X(x1)} ${Y(-2)}L${X(x1)} ${Y(bottom - r)}Q${X(x1)} ${Y(bottom)} ${X(x1 - r)} ${Y(bottom)}`
+          clip += `M${X(x0)} ${Y(top + rt)}Q${X(x0)} ${Y(top)} ${X(x0 + rt)} ${Y(top)}L${X(x1 - rt)} ${Y(top)}Q${X(x1)} ${Y(top)} ${X(x1)} ${Y(top + rt)}L${X(x1)} ${Y(bottom - r)}Q${X(x1)} ${Y(bottom)} ${X(x1 - r)} ${Y(bottom)}`
             + `C${X(x0 + w * 0.68)} ${Y(tip)} ${X(x0 + w * 0.32)} ${Y(tip)} ${X(x0 + r)} ${Y(bottom)}Q${X(x0)} ${Y(bottom)} ${X(x0)} ${Y(bottom - r)}Z`;
         }
       }
@@ -168,14 +200,15 @@ export const BarcodeField: React.FC<{ dark: boolean; className?: string; tint?: 
       if (!visible) return;
       step(now(), dt);
       const ink = darkRef.current ? 'd' : 'l';
-      const moving = ink !== lastInk || bars.some(b => Math.abs(b.v) > 0.05 || Math.abs(b.target - b.y) > 0.3);
+      const moving = ink !== lastInk || bars.some(b => Math.abs(b.v) > 0.05 || Math.abs(b.target - b.y) > 0.3 || Math.abs(b.cv) > 0.0005 || Math.abs(b.ct - b.c) > 0.0005 || Math.abs(b.kv) > 0.05 || Math.abs(b.kt - b.ky) > 0.3);
       if (moving || dirty) { draw(); lastInk = ink; }
     };
 
     build(true);
+    markLine();
     if (reduce) draw(); else raf = requestAnimationFrame(frame);
     let first = true;
-    const ro = new ResizeObserver(() => { if (first) { first = false; return; } build(false); if (reduce) draw(); });
+    const ro = new ResizeObserver(() => { markLine(); if (first) { first = false; return; } build(false); if (reduce) draw(); });
     ro.observe(cv);
     const io = new IntersectionObserver(([e]) => {
       visible = e.isIntersecting; last = performance.now(); dirty = true;

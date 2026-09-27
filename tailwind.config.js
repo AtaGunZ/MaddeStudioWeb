@@ -14,6 +14,7 @@ export default {
         madde: {
           black: '#121212',
           white: '#F5F5F7',
+          paper: '#E2E1E1',   // page background of the light theme
           gray: '#888888'
         }
       }

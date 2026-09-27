@@ -96,7 +96,7 @@ export const Studio: React.FC<StudioProps> = ({ language }) => {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      className="min-h-screen bg-madde-white dark:bg-madde-black text-madde-black dark:text-madde-white"
+      className="min-h-screen bg-madde-paper dark:bg-madde-black text-madde-black dark:text-madde-white"
     >
       {/* HERO SECTION */}
       <section className="relative h-screen flex flex-col px-6 md:px-12 overflow-hidden">

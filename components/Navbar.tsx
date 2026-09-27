@@ -44,7 +44,7 @@ export const Navbar: React.FC = () => {
         transition={{ duration: 0.8, ease: "circOut" }}
         className="fixed top-0 left-0 right-0 z-50"
       >
-        <div className={`relative transition-all duration-500 ${scrolled ? 'bg-madde-white/60 dark:bg-madde-black/60 backdrop-blur-lg' : 'bg-transparent'}`}>
+        <div className={`relative transition-all duration-500 ${scrolled ? 'bg-madde-paper/60 dark:bg-madde-black/60 backdrop-blur-lg' : 'bg-transparent'}`}>
           <div className="max-w-[1920px] mx-auto px-5 md:px-12 py-3.5 md:py-6 flex justify-between items-center">
 
             {/* Logo */}
@@ -145,7 +145,7 @@ export const Navbar: React.FC = () => {
           <motion.div
             initial={{ opacity: 0, x: '100%' }} animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: '100%' }} transition={{ type: "spring", damping: 25, stiffness: 200 }}
-            className="fixed inset-0 z-40 bg-madde-white dark:bg-madde-black md:hidden overflow-y-auto"
+            className="fixed inset-0 z-40 bg-madde-paper dark:bg-madde-black md:hidden overflow-y-auto"
           >
             <div className="flex flex-col items-center justify-center min-h-screen gap-8 p-8">
               <nav className="flex flex-col items-center gap-8 text-2xl font-light">

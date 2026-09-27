@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ContentText, Language } from '../types';
 import { BallDivider, pickSlots, useDividerBudget } from './BallDivider';
 import { GalleryVideo } from './GalleryVideo';
+import { StackCards } from './StackCards';
 import { WizepodLayoutStudy } from './WizepodLayoutStudy';
 
 // Body of the 'wizepod' project: the 3D film and renders woven together with the AI case
@@ -353,7 +354,7 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
           />
           <div className="mt-8 md:mt-16 grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-16 items-start">
             <pre className={`whitespace-pre-wrap font-mono text-[12px] md:text-[13px] leading-relaxed bg-black/5 dark:bg-white/5 p-5 md:p-8 border-l-2 border-[#97B36C]`}>{PRODUCT_BLOCK}</pre>
-            <div className={`border-t ${LINE}`}>
+            <StackCards>
               {[
                 [L('Order', 'Sıra'), (
                   <div key="o" className="flex flex-wrap items-center gap-1.5 font-mono text-[10px] uppercase tracking-wider">
@@ -380,12 +381,12 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
                   </div>
                 )],
               ].map(([label, body]) => (
-                <div key={(label as ContentText)[Language.EN]} className={`flex flex-wrap gap-x-4 gap-y-2 py-5 border-b ${LINE}`}>
+                <div key={(label as ContentText)[Language.EN]} className="flex flex-wrap gap-x-4 gap-y-2">
                   <div className={`basis-28 shrink-0 ${MONO} ${MUTED}`}>{t(label as ContentText)}</div>
                   <div className="flex-1 min-w-[16rem] text-base leading-relaxed">{body as React.ReactNode}</div>
                 </div>
               ))}
-            </div>
+            </StackCards>
           </div>
         </Reveal>
 

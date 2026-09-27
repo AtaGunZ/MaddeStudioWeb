@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import { ContentText, Language } from '../types';
 import { BallDivider, pickSlots, useDividerBudget } from './BallDivider';
 import { GalleryVideo } from './GalleryVideo';
+import { StackCards } from './StackCards';
 
 // Case-study body for the 'sudi-reels' project. The shared header (title, meta,
 // challenge / solution) and the Next Project footer stay in ProjectDetail.
@@ -238,7 +239,7 @@ export const SudiCaseStudy: React.FC<{ language: Language }> = ({ language }) =>
           </figure>
           <div className="mt-12 md:mt-24">
             <h3 className="text-2xl md:text-4xl font-semibold tracking-tighter">{isEN ? 'Per shot' : 'Çekim başına'}</h3>
-            <div className={`mt-6 border-t ${LINE}`}>
+            <StackCards className="mt-6">
               {[
                 [L('Motion ref', 'Hareket ref.'), '1', <p key="m">{isEN ? 'An MP4 rendered from the Blender blockout: camera, hands, timing, dish swaps.' : 'Blender blockout\'undan alınmış MP4: kamera, eller, zamanlama, tabak değişimleri.'}</p>],
                 [L('Image refs', 'Görsel ref.'), '3–6', (
@@ -270,13 +271,13 @@ export const SudiCaseStudy: React.FC<{ language: Language }> = ({ language }) =>
                   </div>
                 )],
               ].map(([label, count, body]) => (
-                <div key={(label as ContentText)[Language.EN]} className={`flex flex-wrap gap-x-4 gap-y-2 py-5 border-b ${LINE}`}>
+                <div key={(label as ContentText)[Language.EN]} className="flex flex-wrap gap-x-4 gap-y-2">
                   <div className={`basis-32 shrink-0 ${MONO} ${MUTED}`}>{t(label as ContentText)}</div>
                   <div className="basis-12 shrink-0 font-mono text-sm">{count as string}</div>
                   <div className="flex-1 min-w-[16rem] text-base leading-relaxed">{body as React.ReactNode}</div>
                 </div>
               ))}
-            </div>
+            </StackCards>
           </div>
         </Reveal>
 
@@ -284,9 +285,9 @@ export const SudiCaseStudy: React.FC<{ language: Language }> = ({ language }) =>
         <Reveal>
           <SectionHead num="05" title={isEN ? 'Production rules' : 'Üretim kuralları'} />
           <div className={`mt-8 md:mt-16 flex justify-end ${MONO} ${MUTED}`}>{isEN ? 'Enforced in' : 'Uygulandığı yer'}</div>
-          <div className={`mt-4 border-t ${LINE}`}>
+          <StackCards className="mt-4">
             {RULES.map((r, i) => (
-              <div key={i} className={`flex flex-wrap items-baseline gap-x-8 gap-y-3 py-6 border-b ${LINE}`}>
+              <div key={i} className="flex flex-wrap items-baseline gap-x-8 gap-y-3 py-1">
                 <span className={`flex items-center gap-2.5 font-mono text-[11px] tracking-widest ${ACCENT}`}>
                   <span className="w-2 h-2 bg-[#E84142] inline-block" />R{String(i + 1).padStart(2, '0')}
                 </span>
@@ -296,7 +297,7 @@ export const SudiCaseStudy: React.FC<{ language: Language }> = ({ language }) =>
                 </div>
               </div>
             ))}
-          </div>
+          </StackCards>
         </Reveal>
 
         {/* 06 REPEATABLE */}

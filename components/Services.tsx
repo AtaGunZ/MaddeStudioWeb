@@ -11,7 +11,7 @@ export const Services: React.FC<ServicesProps> = ({ language }) => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
-    <section className="py-32 px-6 md:px-12 border-t border-black/10 dark:border-white/10 bg-madde-white dark:bg-madde-black transition-colors duration-500">
+    <section className="py-32 px-6 md:px-12 border-t border-black/10 dark:border-white/10 bg-madde-paper dark:bg-madde-black transition-colors duration-500">
       <div className="flex flex-col md:flex-row mb-24 items-baseline justify-between max-w-[1920px] mx-auto">
         <h2 className="text-xs font-bold uppercase tracking-widest mb-4 md:mb-0">
           {TEXTS.services.title[language]}

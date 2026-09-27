@@ -10,8 +10,13 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ text, currentLang }) => {
   const { scrollY } = useScroll();
-  const y = useTransform(scrollY, [0, 500], [0, 200]);
-  const opacity = useTransform(scrollY, [0, 300], [1, 0]);
+  // on scroll the slogan thins out and shrinks, then slides up behind the logo, blurring away
+  const up = typeof window !== 'undefined' && window.innerWidth < 768 ? -150 : -190;
+  const weight = useTransform(scrollY, [0, 320], [700, 200]);
+  const scale = useTransform(scrollY, [0, 460], [1, 0.62]);
+  const y = useTransform(scrollY, [60, 480], [0, up]);
+  const blur = useTransform(scrollY, [180, 480], ['blur(0px)', 'blur(10px)']);
+  const opacity = useTransform(scrollY, [300, 520], [1, 0]);
   const { darkMode } = useApp();
 
   // Colors for the animation
@@ -36,7 +41,7 @@ export const Hero: React.FC<HeroProps> = ({ text, currentLang }) => {
 
       {/* Main Animation: Logo Animation */}
       <div className="relative z-10 flex flex-col items-center">
-        <div className="w-24 h-24 md:w-32 md:h-32 relative mb-12">
+        <div className="w-24 h-24 md:w-32 md:h-32 relative z-20 mb-12">
 
           {/* The Square - Scales UP from loading screen size and rotates into position */}
           <motion.div
@@ -116,8 +121,8 @@ export const Hero: React.FC<HeroProps> = ({ text, currentLang }) => {
         </div>
 
         <motion.h1
-          style={{ y, opacity }}
-          className="text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-center max-w-4xl px-4"
+          style={{ y, scale, opacity, fontWeight: weight, filter: blur }}
+          className="relative z-10 text-4xl md:text-6xl lg:text-7xl tracking-tighter text-center max-w-4xl px-4"
         >
           {/* Split text for reveal effect */}
           {text[currentLang as keyof ContentText].split(" ").map((word, i) => (
