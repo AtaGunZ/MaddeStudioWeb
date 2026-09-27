@@ -7,6 +7,9 @@ import { SudiCaseStudy } from './SudiCaseStudy';
 import { WizepodAICaseStudy } from './WizepodAICaseStudy';
 import { GlassHover } from './GlassHover';
 import { usePageTitle } from './usePageTitle';
+import { BarcodeField } from './BarcodeField';
+import { BallDivider } from './BallDivider';
+import { useApp } from '../contexts/AppContext';
 import { useNavigate, useParams } from 'react-router-dom';
 
 // First sentence as the lead; handles '.', '?' and '!' followed by a space
@@ -24,6 +27,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
     const navigate = useNavigate();
     const { scrollY } = useScroll();
     const blur = useTransform(scrollY, [0, 800], ["blur(0px)", "blur(12px)"]);
+    const { darkMode } = useApp();
 
     // Derive directly — no useState so there's never a stale/undefined frame
     const project = PROJECTS.find(p => p.id === projectId);
@@ -53,7 +57,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
             exit={{ opacity: 0, transition: { duration: 0.5 } }}
         >
             {/* Hero Section */}
-            <div className="px-6 md:px-12 mb-8 md:mb-12">
+            <div className="relative px-6 md:px-12">
                 <div className="fixed top-0 left-0 w-full h-[80vh] z-0 overflow-hidden pointer-events-none">
                     <motion.img
                         style={{ filter: blur }}
@@ -97,6 +101,20 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                             </div>
                         </div>
 
+                        {/* Barcode cards stand on this line; the logo's circle, split in two, is the scroll cue */}
+                        <BallDivider
+                            page
+                            className="md:col-span-12 -mx-12 md:-mx-24"
+                            onClick={() => contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+                            label={language === Language.EN ? 'Scroll to the work' : 'İşe in'}
+                        >
+                            <div className="absolute left-0 right-0 bottom-1/2 h-[140vh] pointer-events-none">
+                                <BarcodeField dark={darkMode} className="absolute inset-0 w-full h-full" />
+                                {/* soft shadow rising from the line */}
+                                <div className="absolute left-0 right-0 bottom-0 h-24 bg-gradient-to-t from-madde-white/70 dark:from-madde-black/80 to-transparent" />
+                            </div>
+                        </BallDivider>
+
                         {/* Challenge / Solution: the first sentence leads, the rest is quieter body copy */}
                         {([
                             [language === Language.EN ? 'The Challenge' : 'Zorluk', project.challenge?.[language], 'md:col-start-2'],
@@ -111,29 +129,11 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                                 </div>
                             );
                         })}
-
-                        {/* Scroll cue */}
-                        <div className="md:col-span-12 flex justify-center pt-2 md:pt-6">
-                            <button
-                                type="button"
-                                onClick={() => contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-                                className="group flex flex-col items-center gap-3 font-mono text-[11px] uppercase tracking-widest text-madde-gray dark:text-gray-400 hover:text-madde-black dark:hover:text-madde-white transition-colors"
-                            >
-                                <span>{language === Language.EN ? 'See the work' : 'İşe göz at'}</span>
-                                <span className="relative block w-px h-14 overflow-hidden bg-black/15 dark:bg-white/15">
-                                    <motion.span
-                                        className="absolute left-0 top-0 w-px h-1/2 bg-current"
-                                        animate={{ y: ['-100%', '200%'] }}
-                                        transition={{ duration: 1.6, repeat: Infinity, ease: [0.45, 0, 0.25, 1] }}
-                                    />
-                                </span>
-                            </button>
-                        </div>
                     </motion.div>
                 </div>
             </div>
 
-            <div ref={contentRef} className="scroll-mt-24" />
+            <div ref={contentRef} className="scroll-mt-24 mb-8 md:mb-12" />
 
             {/* Full Image Hero */}
             {project.id !== 'north-keyboard' && project.id !== 'octopus-bridge' && project.id !== 'acl-reconstruction' && project.id !== 'age-soft' && project.id !== 'hiltar-sutas' && project.id !== 'sudi-reels' && (
@@ -158,8 +158,9 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                         const isWide = colSpan === 2;
 
                         return (
+                            <React.Fragment key={index}>
+                            {index > 0 && index % 3 === 0 && index <= 6 && <BallDivider className="md:col-span-2 -mx-6 md:-mx-12 my-8 md:my-12" />}
                             <motion.div
-                                key={index}
                                 initial={{ opacity: 0, y: 50 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
@@ -189,11 +190,14 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                                     </div>
                                 )}
                             </motion.div>
+                            </React.Fragment>
                         );
                     })}
                 </div>
             </div>
             )}
+
+            <BallDivider className="mb-0" />
 
             {/* Next Project */}
             <div

@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ContentText, Language } from '../types';
+import { BallDivider } from './BallDivider';
 import { GalleryVideo } from './GalleryVideo';
 
 // Case-study body for the 'sudi-reels' project. The shared header (title, meta,
@@ -45,8 +46,12 @@ const Reveal: React.FC<{ children: React.ReactNode; className?: string }> = ({ c
   </motion.div>
 );
 
+const BALL_SECTIONS = ['03', '05', '07'];
+
 const SectionHead: React.FC<{ num: string; title: string; kicker?: string; lead?: string }> = ({ num, title, kicker, lead }) => (
-  <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-end pt-6 border-t ${LINE}`}>
+  <>
+  {BALL_SECTIONS.includes(num) && <BallDivider className="-mx-6 md:-mx-12 mb-4" />}
+  <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-end pt-6 ${BALL_SECTIONS.includes(num) ? '' : `border-t ${LINE}`}`}>
     <div>
       <div className={`flex gap-3 ${MONO}`}>
         <span className={ACCENT}>{num}</span>
@@ -56,6 +61,7 @@ const SectionHead: React.FC<{ num: string; title: string; kicker?: string; lead?
     </div>
     {lead && <p className="text-lg md:text-xl leading-relaxed max-w-2xl">{lead}</p>}
   </div>
+  </>
 );
 
 const Caption: React.FC<{ file: string; note?: string }> = ({ file, note }) => (
