@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
+import { BackgroundRings } from './components/BackgroundRings';
 import { Manifesto } from './components/Manifesto';
 import { Services } from './components/Services';
 import { Works } from './components/Works';
@@ -97,6 +98,7 @@ const App: React.FC = () => {
   return (
     <div className="min-h-screen w-full relative selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
       <ScrollToTop />
+      <BackgroundRings />
       <Navbar />
       <main className="w-full">
         <AnimatedRoutes language={language} />

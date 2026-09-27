@@ -17,7 +17,8 @@ const LINES: { key: 'p1' | 'p2' | 'p3'; className: string }[] = [
   { key: 'p3', className: 'md:pl-48 text-madde-gray dark:text-gray-400' },
 ];
 
-const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
+// quick to start, long and gentle to settle: letters glide the last stretch instead of snapping in
+const easeOut = (t: number) => 1 - Math.pow(1 - t, 4);
 
 export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
   const section = useRef<HTMLElement>(null);
@@ -32,7 +33,7 @@ export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
     // depth > 0 comes towards the viewer (bigger, blurrier), < 0 falls behind
     const scatter = letters.map(() => ({
       x: (rnd() - 0.5) * 1.2, y: (rnd() - 0.5) * 0.9, r: (rnd() - 0.5) * 70,
-      depth: rnd() * 2 - 0.6, delay: rnd() * 0.3,
+      depth: rnd() * 2 - 0.6, delay: rnd() * 0.18,
     }));
     // p follows the scroll with a soft lag, so wheel steps glide instead of jumping
     let raf = 0, p = -1, drawn = -1;
@@ -47,11 +48,11 @@ export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
         const s = scatter[i];
         const u = Math.min(1, Math.max(0, (p - s.delay) / (1 - s.delay)));   // every letter lands at p = 1
         if (u >= 1) { el.style.transform = ''; el.style.filter = ''; el.style.opacity = ''; return; }
-        const k = 1 - easeInOut(u);
+        const k = 1 - easeOut(u);
         const scale = 1 + s.depth * 0.9 * k;
         el.style.transform = `translate3d(${(s.x * vw * 0.5 * k).toFixed(1)}px, ${(s.y * vh * 0.6 * k).toFixed(1)}px, 0) rotate(${(s.r * k).toFixed(1)}deg) scale(${scale.toFixed(3)})`;
         // the blur clears slowly and evenly, only reaching sharp as the letter lands
-        el.style.filter = touch ? '' : `blur(${(Math.abs(s.depth) * 9 * Math.pow(1 - u, 1.4)).toFixed(2)}px)`;
+        el.style.filter = touch ? '' : `blur(${(Math.abs(s.depth) * 9 * Math.pow(1 - u, 1.8)).toFixed(2)}px)`;
         el.style.opacity = (0.35 + 0.65 * (1 - k)).toFixed(3);
       });
       drawn = p;

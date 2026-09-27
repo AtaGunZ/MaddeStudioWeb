@@ -25,20 +25,7 @@ export const Hero: React.FC<HeroProps> = ({ text, currentLang }) => {
 
   return (
     <section className="h-screen w-full flex flex-col items-center justify-center relative overflow-hidden">
-      {/* Background Forms (Subtle) */}
-      <div className="absolute inset-0 z-0 pointer-events-none opacity-5 dark:opacity-10">
-        <motion.div
-          animate={{ rotate: 360 }}
-          transition={{ duration: 120, repeat: Infinity, ease: "linear" }}
-          className="absolute -right-1/4 -top-1/4 w-[80vw] h-[80vw] border border-current rounded-full"
-        />
-        <motion.div
-          animate={{ rotate: -360 }}
-          transition={{ duration: 160, repeat: Infinity, ease: "linear" }}
-          className="absolute -left-1/4 -bottom-1/4 w-[60vw] h-[60vw] border border-current rounded-full"
-        />
-      </div>
-
+      {/* the background rings live in BackgroundRings, pinned for the whole page */}
       {/* Main Animation: Logo Animation */}
       <div className="relative z-10 flex flex-col items-center">
         <div className="w-24 h-24 md:w-32 md:h-32 relative z-20 mb-12">
