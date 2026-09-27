@@ -44,6 +44,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
     const [isNextHovered, setIsNextHovered] = useState(false);
     const contentRef = useRef<HTMLDivElement>(null);
     const bodyRef = useRef<HTMLDivElement>(null);
+    const tintRef = useRef<HTMLImageElement>(null);
     const [budget, setBudget] = useState(0);
     useEffect(() => {
         const el = bodyRef.current;
@@ -87,6 +88,14 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                         src={project.image}
                         alt=""
                         className={`absolute inset-0 w-full h-full object-cover grayscale ${fine ? 'opacity-40' : ''}`}
+                    />
+                    {/* the same image in colour and slightly magnified, like seen through glass: shown only inside the cards (clipped by BarcodeField) */}
+                    <motion.img
+                        ref={tintRef}
+                        style={{ ...(fine ? { filter: blur } : { opacity: heroFade }), clipPath: 'polygon(0 0, 0 0, 0 0)' }}
+                        src={project.image}
+                        alt=""
+                        className={`absolute inset-0 w-full h-full object-cover scale-[1.05] ${fine ? 'opacity-40' : ''}`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/80 to-madde-white dark:via-black/80 dark:to-madde-black" />
                 </div>
@@ -132,7 +141,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                             label={language === Language.EN ? 'Scroll to the work' : 'İşe in'}
                         >
                             <div className="absolute left-0 right-0 bottom-1/2 h-[140vh] pointer-events-none">
-                                <BarcodeField dark={darkMode} className="absolute inset-0 w-full h-full" />
+                                <BarcodeField dark={darkMode} tint={tintRef} className="absolute inset-0 w-full h-full" />
                                 {/* soft shadow rising from the line */}
                                 <div className="absolute left-0 right-0 bottom-0 h-24 bg-gradient-to-t from-madde-white/70 dark:from-madde-black/80 to-transparent" />
                             </div>
