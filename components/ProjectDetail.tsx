@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { PROJECTS, TEXTS, SERVICE_TRANSLATIONS } from '../constants';
 import { Language } from '../types';
@@ -8,6 +8,12 @@ import { WizepodAICaseStudy } from './WizepodAICaseStudy';
 import { GlassHover } from './GlassHover';
 import { usePageTitle } from './usePageTitle';
 import { useNavigate, useParams } from 'react-router-dom';
+
+// First sentence as the lead; handles '.', '?' and '!' followed by a space
+const splitLead = (text: string): [string, string] => {
+    const m = text.match(/^(.+?[.?!])\s+(.+)$/s);
+    return m ? [m[1], m[2]] : [text, ''];
+};
 
 interface ProjectDetailProps {
     language: Language;
@@ -22,6 +28,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
     // Derive directly — no useState so there's never a stale/undefined frame
     const project = PROJECTS.find(p => p.id === projectId);
     const [isNextHovered, setIsNextHovered] = useState(false);
+    const contentRef = useRef<HTMLDivElement>(null);
     usePageTitle(project?.title);
 
     useEffect(() => {
@@ -46,7 +53,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
             exit={{ opacity: 0, transition: { duration: 0.5 } }}
         >
             {/* Hero Section */}
-            <div className="px-6 md:px-12 mb-24 md:mb-48">
+            <div className="px-6 md:px-12 mb-8 md:mb-12">
                 <div className="fixed top-0 left-0 w-full h-[80vh] z-0 overflow-hidden pointer-events-none">
                     <motion.img
                         style={{ filter: blur }}
@@ -57,12 +64,12 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/80 to-madde-white dark:via-black/80 dark:to-madde-black" />
                 </div>
 
-                <div className="relative z-10 pt-32 md:pt-48 pb-12 md:pb-24 px-6 md:px-12 max-w-[1920px] mx-auto">
+                <div className="relative z-10 pt-24 md:pt-40 pb-4 md:pb-8 px-6 md:px-12 max-w-[1920px] mx-auto">
                     <motion.div
                         initial={{ opacity: 0, y: 50 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8 }}
-                        className="grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24 mb-24 md:mb-32"
+                        className="grid grid-cols-1 md:grid-cols-12 gap-x-12 md:gap-x-16 gap-y-10 md:gap-y-16"
                     >
                         {/* Title and Metadata */}
                         <div className="md:col-span-12 flex flex-col items-center text-center relative z-20">
@@ -90,36 +97,43 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                             </div>
                         </div>
 
-                        {/* Left Column: Challenge */}
-                        <div className="md:col-span-5 md:col-start-2">
-                            <div className="space-y-8">
-                                <div>
-                                    <h3 className="text-xs font-bold uppercase tracking-widest mb-4 text-madde-red dark:text-madde-red">
-                                        {language === Language.EN ? 'The Challenge' : 'Zorluk'}
-                                    </h3>
-                                    <p className="text-xl md:text-2xl leading-relaxed text-madde-black dark:text-madde-white font-light">
-                                        {project.challenge?.[language]}
-                                    </p>
+                        {/* Challenge / Solution: the first sentence leads, the rest is quieter body copy */}
+                        {([
+                            [language === Language.EN ? 'The Challenge' : 'Zorluk', project.challenge?.[language], 'md:col-start-2'],
+                            [language === Language.EN ? 'The Solution' : 'Çözüm', project.solution?.[language], ''],
+                        ] as const).map(([label, text, start]) => {
+                            const [lead, rest] = splitLead(text ?? '');
+                            return (
+                                <div key={label} className={`md:col-span-5 ${start}`}>
+                                    <h3 className="text-xs font-bold uppercase tracking-widest mb-4 text-madde-red dark:text-madde-red">{label}</h3>
+                                    <p className="text-xl md:text-2xl leading-snug tracking-tight text-madde-black dark:text-madde-white">{lead}</p>
+                                    {rest && <p className="mt-4 text-base md:text-lg leading-relaxed text-madde-gray dark:text-gray-400">{rest}</p>}
                                 </div>
-                            </div>
-                        </div>
+                            );
+                        })}
 
-                        {/* Right Column: Solution */}
-                        <div className="md:col-span-5">
-                            <div className="space-y-8">
-                                <div>
-                                    <h3 className="text-xs font-bold uppercase tracking-widest mb-4 text-madde-red dark:text-madde-red">
-                                        {language === Language.EN ? 'The Solution' : 'Çözüm'}
-                                    </h3>
-                                    <p className="text-xl md:text-2xl leading-relaxed text-madde-gray dark:text-gray-300">
-                                        {project.solution?.[language]}
-                                    </p>
-                                </div>
-                            </div>
+                        {/* Scroll cue */}
+                        <div className="md:col-span-12 flex justify-center pt-2 md:pt-6">
+                            <button
+                                type="button"
+                                onClick={() => contentRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+                                className="group flex flex-col items-center gap-3 font-mono text-[11px] uppercase tracking-widest text-madde-gray dark:text-gray-400 hover:text-madde-black dark:hover:text-madde-white transition-colors"
+                            >
+                                <span>{language === Language.EN ? 'See the work' : 'İşe göz at'}</span>
+                                <span className="relative block w-px h-14 overflow-hidden bg-black/15 dark:bg-white/15">
+                                    <motion.span
+                                        className="absolute left-0 top-0 w-px h-1/2 bg-current"
+                                        animate={{ y: ['-100%', '200%'] }}
+                                        transition={{ duration: 1.6, repeat: Infinity, ease: [0.45, 0, 0.25, 1] }}
+                                    />
+                                </span>
+                            </button>
                         </div>
                     </motion.div>
                 </div>
             </div>
+
+            <div ref={contentRef} className="scroll-mt-24" />
 
             {/* Full Image Hero */}
             {project.id !== 'north-keyboard' && project.id !== 'octopus-bridge' && project.id !== 'acl-reconstruction' && project.id !== 'age-soft' && project.id !== 'hiltar-sutas' && project.id !== 'sudi-reels' && (
