@@ -45,7 +45,7 @@ export const WorksPage: React.FC<WorksPageProps> = ({ language }) => {
               <h4 className="text-lg font-medium group-hover:translate-x-1 transition-transform mb-1">
                 {project.title}
               </h4>
-              <div className="text-xs max-h-[2.75em] overflow-hidden [mask-image:linear-gradient(180deg,#000_60%,transparent)]">
+              <div className="text-xs max-h-[2.75em] overflow-hidden">
                 <EmphasisText text={project.description[language]} active={hovered === project.id} id={`wp-blur-${project.id}`} className="text-xs" />
               </div>
             </div>
