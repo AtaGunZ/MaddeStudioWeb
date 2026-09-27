@@ -53,11 +53,30 @@ const CSS = `
   mask:linear-gradient(#000 0 0) content-box exclude, linear-gradient(#000 0 0);pointer-events:none;}
 .wz-btn{appearance:none;border:0;margin:0;font:inherit;font-weight:500;color:var(--ink);cursor:pointer;display:flex;align-items:center;
   transition:background-color var(--glass-dur) var(--glass-ease), transform var(--glass-dur) var(--glass-ease), box-shadow var(--glass-dur) var(--glass-ease);will-change:transform;}
-.wz-btn:hover{background-color:var(--glass-fill-hover);--glass-rim:var(--glass-rim-hover);transform:translateY(-1px) scale(1.03);box-shadow:var(--glass-highlight), var(--glass-shadow-hover);}
+@media (hover:hover) and (pointer:fine){
+  .wz-btn:hover{background-color:var(--glass-fill-hover);--glass-rim:var(--glass-rim-hover);transform:translateY(-1px) scale(1.03);box-shadow:var(--glass-highlight), var(--glass-shadow-hover);}
+  .wz-link:hover{border-bottom-color:var(--green);}
+  .wz-btn:hover .wz-liquid i{animation-duration:3.8s, 4.8s, 5.5s;}
+  .wz-toggle:hover{background:rgba(255,255,255,.12);border-color:rgba(255,255,255,.35);transform:translateY(-1px);}
+}
 .wz-btn:active{transform:translateY(0) scale(.98);transition-duration:.12s;}
+.wz-btn,.wz-link,.wz-toggle{-webkit-tap-highlight-color:transparent;touch-action:manipulation;}
+.wz-toggle{display:inline-flex;align-items:center;gap:10px;padding:11px 18px;border-radius:999px;cursor:pointer;
+  font-family:ui-monospace,monospace;font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:#E8E6E1;
+  background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.18);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.12), 0 6px 18px -8px rgba(0,0,0,.6);transition:background .3s, border-color .3s, transform .3s var(--glass-ease), box-shadow .3s;}
+.wz-toggle:active{transform:scale(.97);}
+.wz-toggle:focus-visible{outline:1px solid #E8E6E1;outline-offset:3px;}
+.wz-toggle[aria-pressed="true"]{background:rgba(151,179,108,.16);border-color:rgba(151,179,108,.6);box-shadow:inset 0 1px 0 rgba(255,255,255,.15), 0 0 0 3px rgba(151,179,108,.12);}
+.wz-switch{position:relative;width:26px;height:14px;border-radius:999px;background:rgba(255,255,255,.18);transition:background .3s;flex:none;}
+.wz-switch::after{content:'';position:absolute;top:2px;left:2px;width:10px;height:10px;border-radius:50%;background:#E8E6E1;transition:transform .3s var(--glass-ease);}
+.wz-toggle[aria-pressed="true"] .wz-switch{background:var(--green);}
+.wz-toggle[aria-pressed="true"] .wz-switch::after{transform:translateX(12px);}
+html:not(.dark) .wz-toggle{color:#1A1A1A;background:rgba(0,0,0,.04);border-color:rgba(0,0,0,.15);box-shadow:inset 0 1px 0 rgba(255,255,255,.6), 0 6px 18px -10px rgba(0,0,0,.25);}
+html:not(.dark) .wz-switch{background:rgba(0,0,0,.15);}
+html:not(.dark) .wz-switch::after{background:#fff;}
 .wz-btn:focus-visible{outline:1px solid var(--ink);outline-offset:3px;}
 .wz-link{appearance:none;background:none;border:0;margin:0;padding:0;font:inherit;color:var(--ink);cursor:pointer;border-bottom:1px solid rgba(26,26,26,.35);transition:border-color .3s;}
-.wz-link:hover{border-bottom-color:var(--green);}
 .wz-guides{position:absolute;inset:0;pointer-events:none;font-family:ui-monospace,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);}
 .wz-guides > *{position:absolute;}
 .wz-ripple{position:absolute;border-radius:50%;pointer-events:none;transform:translate(-50%,-50%) scale(.06);opacity:0;
@@ -74,7 +93,6 @@ const CSS = `
   animation:wz-flow-b 9.5s ease-in-out infinite;}
 .wz-liquid i:nth-child(3){left:18%;width:40%;opacity:.5;background:radial-gradient(circle at 50% 50%, rgba(255,255,255,.8), rgba(255,255,255,0) 70%);
   animation:wz-flow-c 11s ease-in-out infinite;}
-.wz-btn:hover .wz-liquid i{animation-duration:3.8s, 4.8s, 5.5s;}
 .wz-label{position:relative;z-index:1;display:inherit;align-items:inherit;gap:inherit;}
 @keyframes wz-rim{to{--rim-a:360deg;}}
 @keyframes wz-flow-a{0%,100%{transform:translate(0,0) rotate(0deg) scale(1);border-radius:42% 58% 63% 37% / 45% 40% 60% 55%;}
@@ -86,7 +104,6 @@ const CSS = `
 @keyframes wz-flow-c{0%,100%{transform:translate(0,4%) scale(1);border-radius:50% 50% 45% 55% / 55% 45% 55% 45%;}
   50%{transform:translate(90%,-4%) scale(1.25,.85);border-radius:40% 60% 58% 42% / 45% 58% 42% 55%;}}
 @keyframes wz-breathe{0%,100%{box-shadow:var(--glass-highlight), var(--glass-shadow);}50%{box-shadow:inset 0 0 0 .5px rgba(255,255,255,.25), inset 0 0 16px rgba(255,255,255,.5), inset -3px 4px 3px -2px rgba(255,255,255,.8), inset 3px -4px 3px -2px rgba(255,255,255,.6), inset 0 -10px 18px -12px rgba(255,255,255,.55), var(--glass-shadow);}}
-.wz-btn:hover{animation-play-state:running;}
 @media (prefers-reduced-motion: reduce){.wz-ripple{animation-duration:.01s;}.wz-btn,.wz-liquid i{animation:none;transition:none;}}
 `;
 
@@ -153,9 +170,9 @@ export const WizepodLayoutStudy: React.FC<{ language: Language }> = ({ language 
           type="button"
           onClick={() => setGuides(g => !g)}
           aria-pressed={guides}
-          className="flex items-center gap-2 px-3.5 py-2.5 rounded-full border border-black/15 dark:border-white/15 font-mono text-[11px] uppercase tracking-widest"
+          className="wz-toggle"
         >
-          <span className="w-[7px] h-[7px] rounded-full" style={{ background: guides ? '#97B36C' : '#8A8782' }} />{c.study}
+          <span className="wz-switch" aria-hidden />{c.study}
         </button>
       </div>
 
