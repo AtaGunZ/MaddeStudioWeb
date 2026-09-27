@@ -1,14 +1,15 @@
 import React, { useEffect, useRef } from 'react';
 
 // A pane of frosted glass that appears over its parent on hover: a hairline rim, a corner
-// glint and a soft light that trails the pointer. The parent needs the "group" class and
+// glint and a clear round window that trails the pointer. The parent needs the "group" class and
 // position:relative; whatever sits behind it (a faded project image) shows through blurred.
 const CSS = `
 .wk-glass{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .6s ease;
   background:linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.02) 45%, rgba(255,255,255,.05));
   box-shadow:inset 0 1px 0 rgba(255,255,255,.35), inset 0 -1px 0 rgba(255,255,255,.08), inset 1px 0 0 rgba(255,255,255,.10), inset -1px 0 0 rgba(255,255,255,.06);}
-.wk-glass::before{content:'';position:absolute;inset:0;
-  background:radial-gradient(circle 240px at var(--x,50%) var(--y,50%), rgba(255,255,255,.07), rgba(255,255,255,0) 70%);}
+/* a clear round window follows the pointer: no frost, no tint, the image behind reads sharp */
+.wk-glass{--hole:radial-gradient(circle 230px at var(--x,50%) var(--y,50%), transparent 0, transparent 40%, #000 100%);
+  -webkit-mask-image:var(--hole);mask-image:var(--hole);}
 .wk-glass::after{content:'';position:absolute;inset:0;
   background:linear-gradient(125deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 18%),
              linear-gradient(305deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 12%);}
