@@ -95,8 +95,8 @@ export const BarcodeField: React.FC<{ dark: boolean; className?: string }> = ({ 
         if (top > H) continue;
         ctx.fillStyle = `rgba(${ink},${b.alpha.toFixed(3)})`;
         ctx.fillRect(b.x, top, b.w, L);
-        ctx.fillStyle = `rgba(${ink},${(b.alpha * 1.6).toFixed(3)})`;   // card edge
-        ctx.fillRect(b.x, top, Math.max(1, Math.min(3, b.w * 0.02)), L);
+        ctx.fillStyle = `rgba(${ink},${(b.alpha * 0.35).toFixed(3)})`;   // faint card edge, never reads as a gap
+        ctx.fillRect(b.x, top, 1, L);
       }
     };
 

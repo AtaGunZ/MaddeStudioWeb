@@ -23,12 +23,19 @@ interface ProjectDetailProps {
     language: Language;
 }
 
+// Title size: 60px / 128px at most, smaller when its longest word would not fit the width
+// (about 0.5em per letter in the tight bold face; 96px / 192px of side padding)
+const titleSize = (title: string) => {
+    const n = Math.max(...title.split(/\s+/).map(w => w.length)) * 0.53;
+    return { '--h1': `min(3.75rem, calc((100vw - 96px) / ${n}))`, '--h1md': `min(8rem, calc((100vw - 192px) / ${n}))` } as React.CSSProperties;
+};
+
 export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
     const { projectId } = useParams<{ projectId: string }>();
     const navigate = useNavigate();
     const { scrollY } = useScroll();
     const blur = useTransform(scrollY, [0, 800], ["blur(0px)", "blur(12px)"]);
-    const heroFade = useTransform(scrollY, [0, 800], [0.4, 0.12]);
+    const heroFade = useTransform(scrollY, [0, 800, 1400], [0.4, 0.12, 0]);
     const fine = typeof window !== 'undefined' && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     const { darkMode } = useApp();
 
@@ -93,7 +100,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                     >
                         {/* Title and Metadata */}
                         <div className="md:col-span-12 flex flex-col items-center text-center relative z-20">
-                            <h1 className="text-6xl md:text-9xl font-bold tracking-tighter mb-8 md:mb-12">
+                            <h1 className="text-[length:var(--h1)] md:text-[length:var(--h1md)] leading-[1.05] font-bold tracking-tighter mb-8 md:mb-12" style={titleSize(project.title)}>
                                 {project.title}
                             </h1>
 
@@ -228,7 +235,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                 tabIndex={0}
                 onClick={handleNextProject}
                 onKeyDown={e => { if (e.key === 'Enter') handleNextProject(); }}
-                className="group relative z-10 px-6 md:px-12 py-32 md:py-48 border-t border-black/5 dark:border-white/5 cursor-pointer"
+                className="group relative z-10 overflow-x-clip px-6 md:px-12 py-32 md:py-48 border-t border-black/5 dark:border-white/5 cursor-pointer"
                 onMouseEnter={() => fine && setIsNextHovered(true)}
                 onMouseLeave={() => setIsNextHovered(false)}
             >
@@ -242,10 +249,10 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                         {TEXTS.projectDetail.nextProject[language]}
                     </span>
                     <span className="flex items-center gap-4 md:gap-8 text-4xl md:text-6xl lg:text-8xl font-bold tracking-tighter text-right">
-                        <span className="group-hover:translate-x-4 transition-transform duration-500 will-change-transform">
+                        <span className="lg:group-hover:translate-x-4 transition-transform duration-500">
                             {nextProject.title}
                         </span>
-                        <span className="group-hover:translate-x-8 transition-transform duration-500 delay-75 text-madde-red">→</span>
+                        <span className="lg:group-hover:translate-x-8 transition-transform duration-500 delay-75 text-madde-red">→</span>
                     </span>
                 </div>
             </div>
