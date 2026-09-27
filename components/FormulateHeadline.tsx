@@ -47,21 +47,34 @@ export const FormulateHeadline: React.FC<{ language: Language; className?: strin
     if (fine) { window.addEventListener('pointermove', onMove); document.addEventListener('pointerleave', onLeave); }
 
     const state = chars.map(() => ({ fill: 0, lift: 0 }));
+    let centers: { x: number; y: number }[] = [];
+    let fontSize = 16;
+    const measure = () => {
+      fontSize = parseFloat(getComputedStyle(h).fontSize);
+      centers = chars.map(c => { const r = c.getBoundingClientRect(); return { x: r.left + r.width / 2, y: r.top + r.height / 2 }; });
+    };
+    measure();
+    const measureSoon = () => requestAnimationFrame(measure);
+    window.addEventListener('scroll', measureSoon, { passive: true });
+    window.addEventListener('resize', measureSoon);
+    const ro = new ResizeObserver(measureSoon); ro.observe(h);
     let raf = 0, visible = true;
     const io = new IntersectionObserver(([en]) => { visible = en.isIntersecting; });
     io.observe(h);
 
+    chars.forEach(c => { if (!c.dataset.role) c.style.setProperty('--f', '1'); });
+    let odd = false;
     const frame = (now: number) => {
       raf = requestAnimationFrame(frame);
       if (!visible) return;
+      if (!fine) { odd = !odd; if (odd) return; }                       // ~30 fps is plenty for the slow wave
+      if (fine && !pointer.on && now - t0 > realStart + 2500 && state.every(s => s.lift < 0.002)) return;
       const t = now - t0;
-      const size = parseFloat(getComputedStyle(h).fontSize);
-      const radius = size * 1.6;
+      const radius = fontSize * 1.6;
       const realIdx = chars.filter(c => c.dataset.role === 'real');
       chars.forEach((c, i) => {
         const role = c.dataset.role;
-        const r = c.getBoundingClientRect();
-        const d = Math.hypot(pointer.x - (r.left + r.width / 2), pointer.y - (r.top + r.height / 2));
+        const d = Math.hypot(pointer.x - centers[i].x, pointer.y - centers[i].y);
         const near = pointer.on ? Math.max(0, 1 - d / radius) : 0;
         const s = state[i];
         let fillTarget = 1;
@@ -76,14 +89,15 @@ export const FormulateHeadline: React.FC<{ language: Language; className?: strin
         }
         s.fill += (fillTarget - s.fill) * (role === 'real' ? 0.35 : 0.12);
         s.lift += (near - s.lift) * 0.14;
-        c.style.setProperty('--f', role ? s.fill.toFixed(3) : '1');
+        if (role) c.style.setProperty('--f', s.fill.toFixed(3));
         c.style.setProperty('--lift', reduce ? '0' : s.lift.toFixed(3));
       });
     };
     raf = requestAnimationFrame(frame);
 
     return () => {
-      cancelAnimationFrame(raf); io.disconnect(); window.clearTimeout(inTimer);
+      cancelAnimationFrame(raf); io.disconnect(); ro.disconnect(); window.clearTimeout(inTimer);
+      window.removeEventListener('scroll', measureSoon); window.removeEventListener('resize', measureSoon);
       window.removeEventListener('pointermove', onMove); document.removeEventListener('pointerleave', onLeave);
       h.classList.remove('fh-in');
     };

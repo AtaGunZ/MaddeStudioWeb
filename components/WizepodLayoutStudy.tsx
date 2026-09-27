@@ -104,6 +104,11 @@ html:not(.dark) .wz-switch::after{background:#fff;}
 @keyframes wz-flow-c{0%,100%{transform:translate(0,4%) scale(1);border-radius:50% 50% 45% 55% / 55% 45% 55% 45%;}
   50%{transform:translate(90%,-4%) scale(1.25,.85);border-radius:40% 60% 58% 42% / 45% 58% 42% 55%;}}
 @keyframes wz-breathe{0%,100%{box-shadow:var(--glass-highlight), var(--glass-shadow);}50%{box-shadow:inset 0 0 0 .5px rgba(255,255,255,.25), inset 0 0 16px rgba(255,255,255,.5), inset -3px 4px 3px -2px rgba(255,255,255,.8), inset 3px -4px 3px -2px rgba(255,255,255,.6), inset 0 -10px 18px -12px rgba(255,255,255,.55), var(--glass-shadow);}}
+@media (hover: none){
+  .wz-btn{animation:none;}
+  .wz-liquid i{filter:none;will-change:transform;animation-name:wz-glide !important;border-radius:50%;}
+}
+@keyframes wz-glide{0%,100%{transform:translateX(0)}50%{transform:translateX(70%)}}
 @media (prefers-reduced-motion: reduce){.wz-ripple{animation-duration:.01s;}.wz-btn,.wz-liquid i{animation:none;transition:none;}}
 `;
 
@@ -126,7 +131,7 @@ const Frame: React.FC<{ aspect: string; pos: string; label: string; ringSize: st
   }, []);
   return (
     <section aria-label={label} onClick={onClick} className={`wz-frame ${aspect} ${className ?? ''}`} style={style}>
-      <img src={IMG} alt="" className="wz-img" style={{ objectPosition: pos }} />
+      <img loading="lazy" decoding="async" src={IMG} alt="" className="wz-img" style={{ objectPosition: pos }} />
       {children}
       {ripples.map(r => (
         <span
@@ -190,9 +195,10 @@ export const WizepodLayoutStudy: React.FC<{ language: Language }> = ({ language 
               <button type="button" data-ripple className="wz-glass wz-btn" style={{ gap: '.7cqw', padding: '1.15cqw 2.5cqw' }}><Liquid /><span className="wz-label">{c.buy}</span></button>
               <button type="button" data-ripple className="wz-link" style={{ paddingBottom: '.2cqw' }}>{c.how}</button>
             </div>
-          </div>
-          <div className="wz-glass" style={{ position: 'absolute', left: '62%', top: '33%', display: 'flex', alignItems: 'center', gap: '.6cqw', padding: '.55cqw 1.2cqw', fontSize: '.9cqw', color: 'var(--ink-2)', letterSpacing: '.02em' }}>
-            <span className="wz-dot" style={{ width: '.45cqw', height: '.45cqw' }} />{c.tag}
+            {/* in the column's flow, so a longer (Turkish) body line pushes it down instead of overlapping */}
+            <div className="wz-glass" style={{ marginTop: '-.4cqw', display: 'flex', alignItems: 'center', gap: '.6cqw', padding: '.55cqw 1.2cqw', fontSize: '.9cqw', color: 'var(--ink-2)', letterSpacing: '.02em' }}>
+              <span className="wz-dot" style={{ width: '.45cqw', height: '.45cqw' }} />{c.tag}
+            </div>
           </div>
           <svg viewBox="0 0 100 100" preserveAspectRatio="none" style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', pointerEvents: 'none' }}>
             <path d="M 23.5 51.8 Q 29.5 51.5 31.6 58.5" fill="none" stroke="#1A1A1A" strokeOpacity=".6" strokeWidth="1" vectorEffect="non-scaling-stroke" />

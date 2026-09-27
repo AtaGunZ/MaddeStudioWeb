@@ -26,18 +26,22 @@ export const GalleryVideo: React.FC<{ item: VideoItem; isWide: boolean; language
         if (videoRef.current) videoRef.current.muted = muted;
     }, [muted]);
 
-    // Start once the video scrolls into view, then keep playing
+    // Nothing is downloaded until the video nears the viewport. Reels (playOnView) start once
+    // visible and keep playing; looping clips play only while on screen, so a long page never
+    // decodes a stack of videos at once (matters most on phones).
+    const [near, setNear] = useState(false);
     useEffect(() => {
         const video = videoRef.current;
-        if (!video || !item.playOnView) return;
-        const observer = new IntersectionObserver(([entry]) => {
-            if (entry.isIntersecting) {
-                video.play().catch(() => {});
-                observer.disconnect();
-            }
-        }, { threshold: 0.5 });
-        observer.observe(video);
-        return () => observer.disconnect();
+        if (!video) return;
+        const nearObs = new IntersectionObserver(([e]) => { if (e.isIntersecting) { setNear(true); nearObs.disconnect(); } }, { rootMargin: '600px 0px' });
+        nearObs.observe(video);
+        let started = false;
+        const playObs = new IntersectionObserver(([e]) => {
+            if (e.isIntersecting) { video.play().catch(() => {}); started = true; }
+            else if (!(item.playOnView && started) && video.muted) video.pause();
+        }, { threshold: 0.25 });
+        playObs.observe(video);
+        return () => { nearObs.disconnect(); playObs.disconnect(); };
     }, [item.playOnView]);
 
     useEffect(() => {
@@ -61,7 +65,7 @@ export const GalleryVideo: React.FC<{ item: VideoItem; isWide: boolean; language
 
     return (
         <div className={`relative overflow-hidden w-full ${item.customAspect ? item.customAspect : (isWide ? 'aspect-[16/9]' : 'aspect-[4/5] md:aspect-[3/4]')}`}>
-            <video ref={videoRef} src={item.src} poster={item.poster} autoPlay={item.playOnView ? false : (item.autoPlay ?? true)} preload={item.playOnView ? 'auto' : undefined} loop={item.loop ?? true} muted={muted} playsInline className="w-full h-full object-cover" />
+            <video ref={videoRef} src={near ? item.src : undefined} poster={item.poster} preload={near ? 'auto' : 'none'} loop={item.loop ?? true} muted={muted} playsInline className="w-full h-full object-cover" />
             {item.soundToggle && (
                 <button
                     onClick={toggleSound}

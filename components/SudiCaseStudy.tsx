@@ -1,7 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { ContentText, Language } from '../types';
-import { BallDivider } from './BallDivider';
+import { BallDivider, pickSlots, useDividerBudget } from './BallDivider';
 import { GalleryVideo } from './GalleryVideo';
 
 // Case-study body for the 'sudi-reels' project. The shared header (title, meta,
@@ -46,12 +46,14 @@ const Reveal: React.FC<{ children: React.ReactNode; className?: string }> = ({ c
   </motion.div>
 );
 
-const BALL_SECTIONS = ['03', '05', '07'];
+const SECTIONS = 8;   // 01…08; 02…08 can open with a divider
 
-const SectionHead: React.FC<{ num: string; title: string; kicker?: string; lead?: string }> = ({ num, title, kicker, lead }) => (
+const SectionHead: React.FC<{ num: string; title: string; kicker?: string; lead?: string }> = ({ num, title, kicker, lead }) => {
+  const ball = pickSlots(SECTIONS - 1, useDividerBudget()).has(Number(num) - 1);
+  return (
   <>
-  {BALL_SECTIONS.includes(num) && <BallDivider className="-mx-6 md:-mx-12 mb-4" />}
-  <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-end pt-6 ${BALL_SECTIONS.includes(num) ? '' : `border-t ${LINE}`}`}>
+  {ball && <BallDivider className="-mx-6 md:-mx-12 mb-4" />}
+  <div className={`grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8 items-end pt-6 ${ball ? '' : `border-t ${LINE}`}`}>
     <div>
       <div className={`flex gap-3 ${MONO}`}>
         <span className={ACCENT}>{num}</span>
@@ -62,7 +64,8 @@ const SectionHead: React.FC<{ num: string; title: string; kicker?: string; lead?
     {lead && <p className="text-lg md:text-xl leading-relaxed max-w-2xl">{lead}</p>}
   </div>
   </>
-);
+  );
+};
 
 const Caption: React.FC<{ file: string; note?: string }> = ({ file, note }) => (
   <figcaption className={`mt-2 flex flex-wrap justify-between gap-2 ${MONO} ${MUTED}`}>
@@ -97,8 +100,8 @@ const BeforeAfter: React.FC<{ before: string; after: string; beforeLabel: string
       }}
       className={`relative aspect-[9/16] overflow-hidden bg-neutral-900 select-none touch-pan-y cursor-ew-resize outline-none focus-visible:ring-1 focus-visible:ring-madde-white ${className ?? ''}`}
     >
-      <img src={before} alt="" draggable={false} className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
-      <img src={after} alt="" draggable={false} className="absolute inset-0 w-full h-full object-cover pointer-events-none" style={{ clipPath: `inset(0 0 0 ${pos}%)` }} />
+      <img loading="lazy" decoding="async" src={before} alt="" draggable={false} className="absolute inset-0 w-full h-full object-cover pointer-events-none" />
+      <img loading="lazy" decoding="async" src={after} alt="" draggable={false} className="absolute inset-0 w-full h-full object-cover pointer-events-none" style={{ clipPath: `inset(0 0 0 ${pos}%)` }} />
       <div className="absolute top-0 bottom-0 w-px bg-madde-white pointer-events-none" style={{ left: `${pos}%` }} />
       <div className="absolute top-1/2 -mt-4 -ml-4 w-8 h-8 rounded-full border border-madde-white bg-black/60 flex items-center justify-center text-madde-white text-xs pointer-events-none" style={{ left: `${pos}%` }}>↔</div>
       <span className={`absolute top-3 left-3 px-2 py-1 bg-black/60 text-madde-white ${MONO} text-[10px] pointer-events-none`}>{beforeLabel}</span>
@@ -113,7 +116,7 @@ const UI_ZONE = { background: 'repeating-linear-gradient(135deg, rgba(255,255,25
 
 const SafeZoneFrame: React.FC<{ src: string; zoneLabels: { top: string; actions: string; bottom: string; clear: string; dish: string } }> = ({ src, zoneLabels }) => (
   <div className="relative aspect-[9/16] overflow-hidden bg-neutral-900 text-madde-white">
-    <img src={src} alt="" className="absolute inset-0 w-full h-full object-cover" />
+    <img loading="lazy" decoding="async" src={src} alt="" className="absolute inset-0 w-full h-full object-cover" />
     <div style={UI_ZONE} className={`absolute inset-x-0 top-0 h-[14%] border-b border-dashed border-white/60 flex items-end px-3 pb-2 ${MONO} text-[10px]`}>{zoneLabels.top}</div>
     <div style={UI_ZONE} className="absolute right-0 top-[14%] bottom-[35%] w-[16%] border-l border-dashed border-white/60 flex items-center justify-center">
       <span className={`${MONO} text-[10px] [writing-mode:vertical-rl]`}>{zoneLabels.actions}</span>
@@ -230,7 +233,7 @@ export const SudiCaseStudy: React.FC<{ language: Language }> = ({ language }) =>
               : 'Tek bir çekimin gerçek yükleme paketi: hareket referansından kareler, altı referans görsel ve prompt\'tan bir bölüm. Model üçünü birlikte alır.'}
           />
           <figure className="mt-8 md:mt-16">
-            <img src={`${DIR}/prompt_paket.jpg`} alt={isEN ? 'Upload package of one shot' : 'Tek çekimin yükleme paketi'} className="w-full h-auto" />
+            <img loading="lazy" decoding="async" src={`${DIR}/prompt_paket.jpg`} alt={isEN ? 'Upload package of one shot' : 'Tek çekimin yükleme paketi'} className="w-full h-auto" />
             <Caption file="prompt_paket.jpg" note="sudi_v4/YUKLE_TEK_SEFER" />
           </figure>
           <div className="mt-12 md:mt-24">
@@ -309,7 +312,7 @@ export const SudiCaseStudy: React.FC<{ language: Language }> = ({ language }) =>
           <div className="mt-8 md:mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
             {[1, 2, 3, 4].map(n => (
               <figure key={n}>
-                <img src={`${DIR}/repeat_0${n}.jpg`} alt="" className="w-full aspect-[9/16] object-cover bg-neutral-900" />
+                <img loading="lazy" decoding="async" src={`${DIR}/repeat_0${n}.jpg`} alt="" className="w-full aspect-[9/16] object-cover bg-neutral-900" />
                 <Caption file={`repeat_0${n}.jpg`} note={`${isEN ? 'Run' : 'Koşu'} ${n}`} />
               </figure>
             ))}
@@ -385,7 +388,7 @@ export const SudiCaseStudy: React.FC<{ language: Language }> = ({ language }) =>
                 {[['aspect-square', '1:1'], ['aspect-[4/5]', '4:5']].map(([cls, label]) => (
                   <figure key={label}>
                     <div className={`relative ${cls} overflow-hidden bg-neutral-900`}>
-                      <img src={`${DIR}/poster_01.jpg`} alt="" className="absolute inset-0 w-full h-full object-cover" />
+                      <img loading="lazy" decoding="async" src={`${DIR}/poster_01.jpg`} alt="" className="absolute inset-0 w-full h-full object-cover" />
                       <Crosshair />
                     </div>
                     <Caption file={label} note={isEN ? 'Grid thumb' : 'Izgara görseli'} />

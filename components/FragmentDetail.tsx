@@ -50,7 +50,7 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                         transition={{ duration: 1, ease: 'easeInOut' }}
                         className="w-full overflow-hidden"
                     >
-                        <img src={block.src} alt="" className="w-full h-auto object-cover" />
+                        <img loading="lazy" decoding="async" src={block.src} alt="" className="w-full h-auto object-cover" />
                     </motion.div>
                 );
 
@@ -66,7 +66,7 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                     >
                         {block.srcs.map((src, si) => (
                             <div key={si} className="overflow-hidden">
-                                <img src={src} alt="" className="w-full h-full object-cover" />
+                                <img loading="lazy" decoding="async" src={src} alt="" className="w-full h-full object-cover" />
                             </div>
                         ))}
                     </motion.div>

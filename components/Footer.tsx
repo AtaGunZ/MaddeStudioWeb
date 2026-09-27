@@ -23,7 +23,7 @@ export const Footer: React.FC = () => {
               onClick={() => navigate('/')}
               className="w-20 h-20 hover:opacity-100 transition-opacity"
             >
-              <img
+              <img loading="lazy" decoding="async"
                 src="/logos/LogoWhiteTransparent.svg"
                 alt="Madde Studio"
                 className="w-full h-full dark:invert-0 invert"

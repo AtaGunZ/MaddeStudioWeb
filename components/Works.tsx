@@ -24,7 +24,7 @@ const WorkRow: React.FC<{ project: Project; language: Language; onOpen: () => vo
     >
       {/* Background Image Fade In on Hover (Desktop) */}
       <div className={`hidden lg:block fixed inset-0 z-0 pointer-events-none transition-opacity duration-700 opacity-0 group-hover:opacity-20 ${project.heroFit === 'contain' ? 'bg-neutral-900 dark:bg-black' : ''}`}>
-        <img src={project.image} alt="" style={{ objectPosition: project.heroPosition }} className={`w-full h-full ${project.heroFit === 'contain' ? 'object-contain p-24' : 'object-cover grayscale'}`} />
+        <img loading="lazy" decoding="async" src={project.image} alt="" style={{ objectPosition: project.heroPosition }} className={`w-full h-full ${project.heroFit === 'contain' ? 'object-contain p-24' : 'object-cover grayscale'}`} />
       </div>
 
       <GlassHover className="hidden lg:block" />
@@ -46,7 +46,7 @@ const WorkRow: React.FC<{ project: Project; language: Language; onOpen: () => vo
 
       {/* Mobile Image */}
       <div className={`lg:hidden w-full h-64 overflow-hidden ${project.heroFit === 'contain' ? 'bg-neutral-900 dark:bg-black' : ''}`}>
-        <img src={project.image} alt={project.title} style={{ objectPosition: project.heroPosition }} className={`w-full h-full ${project.heroFit === 'contain' ? 'object-contain p-8' : 'object-cover'}`} />
+        <img loading="lazy" decoding="async" src={project.image} alt={project.title} style={{ objectPosition: project.heroPosition }} className={`w-full h-full ${project.heroFit === 'contain' ? 'object-contain p-8' : 'object-cover'}`} />
       </div>
     </div>
   );

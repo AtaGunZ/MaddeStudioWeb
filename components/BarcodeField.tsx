@@ -36,13 +36,13 @@ export const BarcodeField: React.FC<{ dark: boolean; className?: string }> = ({ 
     const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
 
     const build = (entrance: boolean) => {
-      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const dpr = 1;   // flat, faint bars: a 1x buffer keeps a full-width, 140vh canvas cheap
       W = cv.clientWidth; H = cv.clientHeight; L = H;
       cv.width = Math.round(W * dpr); cv.height = Math.round(H * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       bars = [];
       seed = 23;
-      // at most ten broad bars edge to edge: varied widths, alternating tone, scaled to fill it
+      // ten broad bars edge to edge (six on phones): varied widths, a clearly visible tone each
       const N = W < 640 ? 6 : 10;
       const widths = Array.from({ length: N }, () => [0.45, 0.8, 1.2, 1.8][Math.floor(rnd() * 4)]);
       const scale = W / widths.reduce((a, v) => a + v, 0);
@@ -51,7 +51,7 @@ export const BarcodeField: React.FC<{ dark: boolean; className?: string }> = ({ 
         const w = i === N - 1 ? Math.ceil(W - x) : Math.round(widths[i] * scale);
         const start = entrance && !reduce ? H + 40 + rnd() * H * 0.6 : 0;
         bars.push({
-          x, w, alpha: i % 2 ? 0.02 + rnd() * 0.02 : 0.05 + rnd() * 0.03,
+          x, w, alpha: 0.05 + rnd() * 0.025,
           y: start, v: 0, target: 0, k: 60, c: 11,
           // entrance: staggered at random, so the cards land one after another
           next: entrance ? 0.2 + rnd() * 2.4 : 4 + rnd() * 10,
@@ -100,12 +100,15 @@ export const BarcodeField: React.FC<{ dark: boolean; className?: string }> = ({ 
       }
     };
 
+    let lastInk = '';
     const frame = (now: number) => {
       raf = requestAnimationFrame(frame);
       const dt = Math.min(1 / 30, (now - last) / 1000); last = now;
       if (!visible) return;
       step((now - t0) / 1000, dt);
-      draw();
+      const ink = darkRef.current ? 'd' : 'l';
+      const moving = ink !== lastInk || bars.some(b => Math.abs(b.v) > 0.05 || Math.abs(b.target - b.y) > 0.3);
+      if (moving) { draw(); lastInk = ink; }
     };
 
     build(true);

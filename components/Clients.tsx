@@ -42,7 +42,7 @@ export const Clients: React.FC<ClientsProps> = ({ language }) => {
                             key={`${client.id}-${index}`}
                             className="w-40 md:w-56 h-24 md:h-32 flex items-center justify-center flex-shrink-0 opacity-40 hover:opacity-100 transition-opacity duration-300 cursor-grab active:cursor-grabbing"
                         >
-                            <img
+                            <img loading="lazy" decoding="async"
                                 src={client.logo}
                                 alt={client.name}
                                 className={`w-auto h-auto max-w-full max-h-12 md:max-h-20 object-contain select-none pointer-events-none grayscale dark:invert transition-transform duration-300

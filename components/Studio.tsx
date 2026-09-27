@@ -353,7 +353,7 @@ export const Studio: React.FC<StudioProps> = ({ language }) => {
                     className="group"
                   >
                     <div className="aspect-square mb-6 bg-gray-100 dark:bg-gray-800 overflow-hidden relative grayscale group-hover:grayscale-0 transition-all duration-700">
-                      <img src={member.image} alt={member.name} className="object-cover w-full h-full" />
+                      <img loading="lazy" decoding="async" src={member.image} alt={member.name} className="object-cover w-full h-full" />
                     </div>
 
                     <h3 className="text-xl font-medium mb-1">{member.name}</h3>

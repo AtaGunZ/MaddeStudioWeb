@@ -8,7 +8,7 @@ import { WizepodAICaseStudy } from './WizepodAICaseStudy';
 import { GlassHover } from './GlassHover';
 import { usePageTitle } from './usePageTitle';
 import { BarcodeField } from './BarcodeField';
-import { BallDivider } from './BallDivider';
+import { BallDivider, DividerBudget, dividerCount, pickSlots } from './BallDivider';
 import { useApp } from '../contexts/AppContext';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -27,12 +27,24 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
     const navigate = useNavigate();
     const { scrollY } = useScroll();
     const blur = useTransform(scrollY, [0, 800], ["blur(0px)", "blur(12px)"]);
+    const heroFade = useTransform(scrollY, [0, 800], [0.4, 0.12]);
+    const fine = typeof window !== 'undefined' && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
     const { darkMode } = useApp();
 
     // Derive directly — no useState so there's never a stale/undefined frame
     const project = PROJECTS.find(p => p.id === projectId);
     const [isNextHovered, setIsNextHovered] = useState(false);
     const contentRef = useRef<HTMLDivElement>(null);
+    const bodyRef = useRef<HTMLDivElement>(null);
+    const [budget, setBudget] = useState(0);
+    useEffect(() => {
+        const el = bodyRef.current;
+        if (!el) return;
+        // re-measure whenever the body grows (lazy images and videos arrive as the page is read)
+        const ro = new ResizeObserver(() => setBudget(dividerCount(el.offsetHeight)));
+        ro.observe(el);
+        return () => { ro.disconnect(); setBudget(0); };
+    }, [projectId]);
     usePageTitle(project?.title);
 
     useEffect(() => {
@@ -43,6 +55,9 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
 
     const currentIndex = PROJECTS.findIndex(p => p.id === project.id);
     const nextProject = PROJECTS[(currentIndex + 1) % PROJECTS.length];
+
+    // gallery items 1..n-1 are candidate spots for a divider (before that item)
+    const gallerySlots = pickSlots((project.gallery?.length ?? 1) - 1, budget);
 
     const handleNextProject = () => {
         navigate(`/works/${nextProject.id}`);
@@ -60,10 +75,10 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
             <div className="relative px-6 md:px-12">
                 <div className="fixed top-0 left-0 w-full h-[80vh] z-0 overflow-hidden pointer-events-none">
                     <motion.img
-                        style={{ filter: blur }}
+                        style={fine ? { filter: blur } : { opacity: heroFade }}
                         src={project.image}
                         alt=""
-                        className="absolute inset-0 w-full h-full object-cover opacity-40 dark:opacity-40 grayscale"
+                        className={`absolute inset-0 w-full h-full object-cover grayscale ${fine ? 'opacity-40' : ''}`}
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-transparent via-white/80 to-madde-white dark:via-black/80 dark:to-madde-black" />
                 </div>
@@ -83,7 +98,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
 
                             <div className="flex flex-wrap justify-center items-center gap-8 md:gap-16 text-sm font-mono uppercase tracking-widest text-madde-gray dark:text-gray-400">
                                 {project.clientLogo ? (
-                                    <img
+                                    <img loading="lazy" decoding="async"
                                         src={project.clientLogo}
                                         alt={project.client}
                                         className={`h-8 md:h-12 w-auto object-contain grayscale dark:invert opacity-90 transition-transform 
@@ -150,6 +165,8 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                 </div>
             )}
 
+            <DividerBudget.Provider value={budget}>
+            <div ref={bodyRef} key={project.id}>
             {project.id === 'sudi-reels' ? <SudiCaseStudy language={language} /> : project.id === 'wizepod' ? <WizepodAICaseStudy language={language} /> : (
             <div className="relative z-10 px-6 md:px-12 mb-24">
                 <div className="max-w-[1920px] mx-auto grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-8">
@@ -159,7 +176,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
 
                         return (
                             <React.Fragment key={index}>
-                            {index > 0 && index % 3 === 0 && index <= 6 && <BallDivider className="md:col-span-2 -mx-6 md:-mx-12 my-8 md:my-12" />}
+                            {gallerySlots.has(index) && <BallDivider className="md:col-span-2 -mx-6 md:-mx-12 my-8 md:my-12" />}
                             <motion.div
                                 initial={{ opacity: 0, y: 50 }}
                                 whileInView={{ opacity: 1, y: 0 }}
@@ -169,7 +186,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                             >
                                 {item.type === 'image' ? (
                                     <div className="overflow-hidden w-full">
-                                        <img src={item.src} alt={`Gallery ${index}`} className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700" />
+                                        <img loading="lazy" decoding="async" src={item.src} alt={`Gallery ${index}`} className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700" />
                                     </div>
                                 ) : item.type === 'video' ? (
                                     <GalleryVideo item={item} isWide={isWide} language={language} />
@@ -177,7 +194,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                                     <div className={`grid grid-cols-2 ${item.cols === 4 ? 'md:grid-cols-4' : ''} gap-4 md:gap-8 h-full`}>
                                         {item.items.map((subItem, i) => (
                                             <div key={i} className="overflow-hidden w-full">
-                                                <img src={subItem.src} alt={`Group ${index}-${i}`} className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700" />
+                                                <img loading="lazy" decoding="async" src={subItem.src} alt={`Group ${index}-${i}`} className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700" />
                                             </div>
                                         ))}
                                     </div>
@@ -197,6 +214,9 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
             </div>
             )}
 
+            </div>
+            </DividerBudget.Provider>
+
             <BallDivider className="mb-0" />
 
             {/* Next Project */}
@@ -206,7 +226,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                 onMouseLeave={() => setIsNextHovered(false)}
             >
                 <div className={`absolute inset-0 z-0 transition-opacity duration-700 ${isNextHovered ? 'opacity-20' : 'opacity-0'}`}>
-                    <img src={nextProject.image} alt="" className="w-full h-full object-cover grayscale" />
+                    <img loading="lazy" decoding="async" src={nextProject.image} alt="" className="w-full h-full object-cover grayscale" />
                     <div className="absolute inset-0 bg-gradient-to-t from-madde-white via-transparent to-transparent dark:from-madde-black" />
                 </div>
                 <GlassHover />

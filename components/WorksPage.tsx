@@ -34,7 +34,7 @@ export const WorksPage: React.FC<WorksPageProps> = ({ language }) => {
             onMouseLeave={() => setHovered(h => (h === project.id ? null : h))}
           >
             <div className={`w-full aspect-square overflow-hidden mb-4 ${project.heroFit === 'contain' ? 'bg-neutral-900 dark:bg-black' : 'bg-transparent'}`}>
-              <img
+              <img loading="lazy" decoding="async"
                 src={project.image}
                 style={{ objectPosition: project.heroPosition }}
                 alt={project.title}
