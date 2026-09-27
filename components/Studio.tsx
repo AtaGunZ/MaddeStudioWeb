@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { LayoutGroup, motion, useReducedMotion } from 'framer-motion';
 import { Language } from '../types';
 import { TEXTS, SERVICES, TEAM } from '../constants';
+import { FormulateHeadline } from './FormulateHeadline';
 
 interface StudioProps {
   language: Language;
@@ -122,14 +123,10 @@ export const Studio: React.FC<StudioProps> = ({ language }) => {
         {/* Centered Text */}
         <div className="flex-1 flex items-center justify-center relative z-10">
           <div className="w-full max-w-[1920px] mx-auto">
-            <motion.h1
-              initial={{ y: 50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+            <FormulateHeadline
+              language={language}
               className="text-6xl md:text-8xl lg:text-9xl font-bold tracking-tighter leading-none max-w-5xl"
-            >
-              {TEXTS.studio.hero[language]}
-            </motion.h1>
+            />
           </div>
         </div>
 
