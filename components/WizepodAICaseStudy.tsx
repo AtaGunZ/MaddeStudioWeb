@@ -204,7 +204,7 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
               <Caption file="video1.mp4" note={isEN ? 'Step 1 · the 3D model, part by part' : 'Adım 1 · 3D model, parça parça'} />
             </figure>
             <figure>
-              <img loading="lazy" decoding="async" src={`${DIR3D}/1.png`} alt="" className="w-full aspect-video object-cover bg-neutral-900" />
+              <img loading="lazy" decoding="async" src={`${DIR3D}/1.webp`} alt="" className="w-full aspect-video object-cover bg-neutral-900" />
               <Caption file="1.png" note={isEN ? 'Step 1 · render' : 'Adım 1 · render'} />
             </figure>
           </div>
@@ -270,9 +270,9 @@ export const WizepodAICaseStudy: React.FC<{ language: Language }> = ({ language 
               <img loading="lazy" decoding="async" src={`${DIR}/ref_package.jpg?v=${VER}`} alt={isEN ? 'Wizepod product sheet with four views' : 'Dört görünümlü Wizepod ürün föyü'} className="w-full h-auto" />
               <Caption file="ref_package.jpg" note={isEN ? 'Product sheet · built from our renders' : 'Ürün föyü · render\'larımızdan kuruldu'} />
               <div className="mt-4 md:mt-8 grid grid-cols-3 gap-4 md:gap-8">
-                {['2.png', '3.png', '4.png'].map(f => (
+                {['2', '3', '4'].map(n => `${n}.png`).map(f => (
                   <figure key={f}>
-                    <img loading="lazy" decoding="async" src={`${DIR3D}/${f}`} alt="" className="w-full aspect-square object-cover bg-neutral-900" />
+                    <img loading="lazy" decoding="async" src={`${DIR3D}/${f.replace('.png', '.webp')}`} alt="" className="w-full aspect-square object-cover bg-neutral-900" />
                     <Caption file={f} note="3D" />
                   </figure>
                 ))}

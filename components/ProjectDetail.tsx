@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { PROJECTS, TEXTS, SERVICE_TRANSLATIONS } from '../constants';
 import { Language } from '../types';
 import { GalleryVideo } from './GalleryVideo';
+import { GalleryMedia } from './GalleryMedia';
 import { SudiCaseStudy } from './SudiCaseStudy';
 import { WizepodAICaseStudy } from './WizepodAICaseStudy';
 import { GlassHover } from './GlassHover';
@@ -186,7 +187,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                             >
                                 {item.type === 'image' ? (
                                     <div className="overflow-hidden w-full">
-                                        <img loading="lazy" decoding="async" src={item.src} alt={`Gallery ${index}`} className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700" />
+                                        <GalleryMedia src={item.src} alt={`Gallery ${index}`} className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700" />
                                     </div>
                                 ) : item.type === 'video' ? (
                                     <GalleryVideo item={item} isWide={isWide} language={language} />
@@ -194,7 +195,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                                     <div className={`grid grid-cols-2 ${item.cols === 4 ? 'md:grid-cols-4' : ''} gap-4 md:gap-8 h-full`}>
                                         {item.items.map((subItem, i) => (
                                             <div key={i} className="overflow-hidden w-full">
-                                                <img loading="lazy" decoding="async" src={subItem.src} alt={`Group ${index}-${i}`} className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700" />
+                                                <GalleryMedia src={subItem.src} alt={`Group ${index}-${i}`} className="w-full h-auto object-contain hover:scale-105 transition-transform duration-700" />
                                             </div>
                                         ))}
                                     </div>

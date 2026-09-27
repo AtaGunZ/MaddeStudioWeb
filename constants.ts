@@ -4,7 +4,7 @@ export const CLIENTS: Client[] = [
   { id: 'wizepod', name: 'Wizepod', logo: '/works/Wizepod/Primewize Logo Kare.png' },
   { id: 'north', name: 'North', logo: '/works/North_Keyboard/north_logo.png' },
   { id: 'mehaz', name: 'Mehaz', logo: '/works/Mehaz_BrandGuide/mehaz_logo.png' },
-  { id: 'octopus', name: 'Octopus', logo: '/works/Octopus/octopus_Logo.png' },
+  { id: 'octopus', name: 'Octopus', logo: '/works/Octopus/octopus_Logo.webp' },
   { id: 'reeder', name: 'Reeder', logo: '/works/Reeder_Fancy/reeder-logo.png' },
   { id: 'o3', name: 'O3 Layer', logo: '/works/o3_Layer/o3_logo.png' },
   { id: 'hiltar', name: 'Hiltar', logo: '/works/Hiltar/Hiltar_Logo.png' },
@@ -350,7 +350,7 @@ export const PROJECTS: Project[] = [
       [Language.EN]: "Detailed 3D animation presenting the ACL reconstruction surgery technique.",
       [Language.TR]: "Ön çapraz bağ (ACL) onarım cerrahisi tekniğini sunan detaylı 3D animasyon."
     },
-    image: '/works/ACL_Reconstruction/1.png',
+    image: '/works/ACL_Reconstruction/1.webp',
     heroFit: 'cover',
     client: "Dr. Kürşat Teker (Özel Çankaya Hastanesi)",
     clientLogo: '/works/ACL_Reconstruction/cankaya_logo.png',
@@ -374,18 +374,18 @@ export const PROJECTS: Project[] = [
         colSpan: 2,
         customAspect: 'aspect-square'
       },
-      { type: 'image', src: '/works/ACL_Reconstruction/1.png', colSpan: 1 },
-      { type: 'image', src: '/works/ACL_Reconstruction/2.png', colSpan: 1 },
-      { type: 'image', src: '/works/ACL_Reconstruction/3.png', colSpan: 1 },
-      { type: 'image', src: '/works/ACL_Reconstruction/4.png', colSpan: 1 },
-      { type: 'image', src: '/works/ACL_Reconstruction/5.png', colSpan: 1 },
-      { type: 'image', src: '/works/ACL_Reconstruction/6.png', colSpan: 1 },
-      { type: 'image', src: '/works/ACL_Reconstruction/7.png', colSpan: 1 },
-      { type: 'image', src: '/works/ACL_Reconstruction/8.png', colSpan: 1 },
-      { type: 'image', src: '/works/ACL_Reconstruction/9.png', colSpan: 1 },
-      { type: 'image', src: '/works/ACL_Reconstruction/10.png', colSpan: 1 },
-      { type: 'image', src: '/works/ACL_Reconstruction/11.png', colSpan: 1 },
-      { type: 'image', src: '/works/ACL_Reconstruction/12.png', colSpan: 1 }
+      { type: 'image', src: '/works/ACL_Reconstruction/1.webp', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/2.webp', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/3.webp', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/4.webp', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/5.webp', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/6.webp', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/7.webp', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/8.webp', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/9.webp', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/10.webp', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/11.webp', colSpan: 1 },
+      { type: 'image', src: '/works/ACL_Reconstruction/12.webp', colSpan: 1 }
     ]
   },
   {
@@ -395,7 +395,7 @@ export const PROJECTS: Project[] = [
       [Language.EN]: "Industrial visualization and process animation for one of Turkey's leading dairy producers.",
       [Language.TR]: "Türkiye'nin önde gelen süt ürünleri üreticilerinden biri için endüstriyel görselleştirme ve süreç animasyonu."
     },
-    image: '/works/Hiltar/hero.png',
+    image: '/works/Hiltar/hero.webp',
     heroFit: 'cover',
     client: "Hiltar",
     clientLogo: '/works/Hiltar/Hiltar_Logo.png',
@@ -410,7 +410,7 @@ export const PROJECTS: Project[] = [
       [Language.TR]: "Bu kapsamda geliştirilen 3D görselleştirme ve animasyon çalışmasıyla makine sistemleri kontrollü şeffaflıkla sunulmuş, üretim süreci baştan sona akıcı ve anlaşılır bir yapıda kurgulanmıştır. Böylece fabrikanın teknolojik altyapısı ve üretim gücü profesyonel ve güven veren bir anlatımla görünür hale getirilmiştir."
     },
     gallery: [
-      { type: 'image', src: '/works/Hiltar/hero.png', colSpan: 2 },
+      { type: 'image', src: '/works/Hiltar/hero.webp', colSpan: 2 },
       {
         type: 'video',
         src: '/works/Hiltar/video1.mp4',
@@ -419,8 +419,8 @@ export const PROJECTS: Project[] = [
         muted: true,
         colSpan: 2
       },
-      { type: 'image', src: '/works/Hiltar/2.png', colSpan: 1 },
-      { type: 'image', src: '/works/Hiltar/3.png', colSpan: 1 },
+      { type: 'image', src: '/works/Hiltar/2.webp', colSpan: 1 },
+      { type: 'image', src: '/works/Hiltar/3.webp', colSpan: 1 },
       {
         type: 'video',
         src: '/works/Hiltar/video2.mp4',
@@ -437,7 +437,7 @@ export const PROJECTS: Project[] = [
         muted: true,
         colSpan: 1
       },
-      { type: 'image', src: '/works/Hiltar/4.png', colSpan: 2 },
+      { type: 'image', src: '/works/Hiltar/4.webp', colSpan: 2 },
       {
         type: 'video',
         src: '/works/Hiltar/video4.mp4',
@@ -446,8 +446,8 @@ export const PROJECTS: Project[] = [
         muted: true,
         colSpan: 2
       },
-      { type: 'image', src: '/works/Hiltar/5.png', colSpan: 1 },
-      { type: 'image', src: '/works/Hiltar/6.png', colSpan: 1 },
+      { type: 'image', src: '/works/Hiltar/5.webp', colSpan: 1 },
+      { type: 'image', src: '/works/Hiltar/6.webp', colSpan: 1 },
       {
         type: 'video',
         src: '/works/Hiltar/video5.mp4',
@@ -456,7 +456,7 @@ export const PROJECTS: Project[] = [
         muted: true,
         colSpan: 1
       },
-      { type: 'image', src: '/works/Hiltar/7.png', colSpan: 1 },
+      { type: 'image', src: '/works/Hiltar/7.webp', colSpan: 1 },
       {
         type: 'video',
         src: '/works/Hiltar/video6.mp4',
@@ -474,7 +474,7 @@ export const PROJECTS: Project[] = [
       [Language.EN]: "A selection of poster and editorial work: a typographic series on graphic design, an exhibited Yunus Emre poster and a Lars von Trier magazine practice.",
       [Language.TR]: "Afiş ve editoryal çalışmalardan bir seçki: grafik tasarım üzerine tipografik bir seri, sergilenen bir Yunus Emre afişi ve Lars von Trier üzerine bir dergi pratiği."
     },
-    image: '/works/Poster/hero.jpg',
+    image: '/works/Poster/hero.webp',
     heroFit: 'cover',
     client: "Self-initiated",
     year: "2021–2022",
@@ -488,7 +488,7 @@ export const PROJECTS: Project[] = [
       [Language.TR]: "'Graphic Design Is…' serisinde aynı cümle üç kez, her seferinde bir temel tasarım ilkesiyle tamamlanır: çizgi ve ritim, tekrar ve kontrast, renk ve bozulma. Şairin vefatının 700. yılı için hazırlanan Yunus Emre afişi jürili bir sergide sergilendi. Lars von Trier çalışması aynı düşünceyi bir dergiye taşır: ön kapak, arka kapak ve iç sayfa."
     },
     gallery: [
-      { type: 'image', src: '/works/Poster/graphic_design_is_psychedelic.jpg', colSpan: 1 },
+      { type: 'image', src: '/works/Poster/graphic_design_is_psychedelic.webp', colSpan: 1 },
       {
         type: 'text',
         colSpan: 1,
@@ -501,7 +501,7 @@ export const PROJECTS: Project[] = [
           [Language.TR]: "Tek cümle, üç cevap. Temel tasarım ilkeleri üzerine kurulu, cümleyi biçimin kendisinin tamamladığı bir afiş serisi."
         }
       },
-      { type: 'image', src: '/works/Poster/graphic_design_is_more_than_one_way.png', colSpan: 1 },
+      { type: 'image', src: '/works/Poster/graphic_design_is_more_than_one_way.webp', colSpan: 1 },
       { type: 'image', src: '/works/Poster/graphic_design_is_functional.png', colSpan: 1 },
       {
         type: 'text',
@@ -528,8 +528,8 @@ export const PROJECTS: Project[] = [
           [Language.TR]: "Bir dergi ve afiş pratiği: kapağı portre, hikâyeyi tipografi taşır."
         }
       },
-      { type: 'image', src: '/works/Poster/lapasse_cover.jpg', colSpan: 2 },
-      { type: 'image', src: '/works/Poster/lapasse_spread.jpg', colSpan: 2 }
+      { type: 'image', src: '/works/Poster/lapasse_cover.webp', colSpan: 2 },
+      { type: 'image', src: '/works/Poster/lapasse_spread.webp', colSpan: 2 }
     ]
   },
   {
@@ -539,7 +539,7 @@ export const PROJECTS: Project[] = [
       [Language.EN]: "Comprehensive digital rebranding and asset creation for Age Soft.",
       [Language.TR]: "Age Soft için kapsamlı dijital marka yenileme ve varlık üretimi."
     },
-    image: '/works/Age_Soft/hero.png',
+    image: '/works/Age_Soft/hero.webp',
     heroFit: 'cover',
     client: "Age Soft",
     clientLogo: '/works/Age_Soft/agesoft_logo.png',
@@ -554,7 +554,7 @@ export const PROJECTS: Project[] = [
       [Language.TR]: "Ortaya çıkan yapı; dinamizm, yenilik ve teknik yetkinlik duygusunu aynı anda taşıyan bir deneyim sunmaktadır. Görsel derinlik ve hareket kurgusu sayesinde marka anlatımı statik bir sunumdan çıkarılarak yaşayan bir dijital kimliğe dönüştürülmüş, Agesoft’un sektörel konumunu destekleyen modern ve prestijli bir web deneyimi oluşturulmuştur."
     },
     gallery: [
-      { type: 'image', src: '/works/Age_Soft/2.png', colSpan: 2 },
+      { type: 'image', src: '/works/Age_Soft/2.webp', colSpan: 2 },
       {
         type: 'video',
         src: '/works/Age_Soft/video1.mp4',
@@ -564,7 +564,7 @@ export const PROJECTS: Project[] = [
         colSpan: 2
       },
       { type: 'image', src: '/works/Age_Soft/1.png', colSpan: 2 },
-      { type: 'image', src: '/works/Age_Soft/gif1.gif', colSpan: 2 },
+      { type: 'image', src: '/works/Age_Soft/gif1.webp', colSpan: 2 },
       {
         type: 'video',
         src: '/works/Age_Soft/3.mp4',
@@ -573,7 +573,7 @@ export const PROJECTS: Project[] = [
         muted: true,
         colSpan: 2
       },
-      { type: 'image', src: '/works/Age_Soft/gif2.gif', colSpan: 2 }
+      { type: 'image', src: '/works/Age_Soft/gif2.webp', colSpan: 2 }
     ]
   },
   {
@@ -583,7 +583,7 @@ export const PROJECTS: Project[] = [
       [Language.EN]: "Product design visualization for Reeder's next-gen device.",
       [Language.TR]: "Reeder'ın yeni nesil cihazı için ürün tasarımı görselleştirmesi."
     },
-    image: '/works/Reeder_Fancy/hero.png',
+    image: '/works/Reeder_Fancy/hero.webp',
     heroFit: 'cover',
     client: "Reeder",
     clientLogo: '/works/Reeder_Fancy/reeder-logo.png',
@@ -617,7 +617,7 @@ export const PROJECTS: Project[] = [
         type: 'group',
         items: [
           { src: '/works/Reeder_Fancy/2.png' },
-          { src: '/works/Reeder_Fancy/3.png' }
+          { src: '/works/Reeder_Fancy/3.webp' }
         ]
       },
       {
@@ -641,7 +641,7 @@ export const PROJECTS: Project[] = [
         loop: true,
         muted: true
       },
-      { type: 'image', src: '/works/Reeder_Fancy/Fancy.png' }
+      { type: 'image', src: '/works/Reeder_Fancy/Fancy.webp' }
     ]
   },
   {
@@ -651,7 +651,7 @@ export const PROJECTS: Project[] = [
       [Language.EN]: "Product visualization for the North Odin Pro WL Gaming Mouse.",
       [Language.TR]: "North Odin Pro WL Gaming Mouse için ürün görselleştirmesi."
     },
-    image: '/works/North_GamingMouse/hero.png',
+    image: '/works/North_GamingMouse/hero.webp',
     heroFit: 'cover',
     client: "North",
     clientLogo: '/works/North_Keyboard/north_logo.png', // Reusing existing logo
@@ -674,9 +674,9 @@ export const PROJECTS: Project[] = [
         muted: true,
         colSpan: 1
       },
-      { type: 'image', src: '/works/North_GamingMouse/1.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_GamingMouse/2.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_GamingMouse/3.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_GamingMouse/1.webp', colSpan: 1 },
+      { type: 'image', src: '/works/North_GamingMouse/2.webp', colSpan: 1 },
+      { type: 'image', src: '/works/North_GamingMouse/3.webp', colSpan: 1 },
       {
         type: 'video',
         src: '/works/North_GamingMouse/video2.mp4',
@@ -685,10 +685,10 @@ export const PROJECTS: Project[] = [
         muted: true,
         colSpan: 2
       },
-      { type: 'image', src: '/works/North_GamingMouse/4.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_GamingMouse/5.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_GamingMouse/6.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_GamingMouse/7.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_GamingMouse/4.webp', colSpan: 1 },
+      { type: 'image', src: '/works/North_GamingMouse/5.webp', colSpan: 1 },
+      { type: 'image', src: '/works/North_GamingMouse/6.webp', colSpan: 1 },
+      { type: 'image', src: '/works/North_GamingMouse/7.webp', colSpan: 1 },
       {
         type: 'video',
         src: '/works/North_GamingMouse/video3.mp4',
@@ -755,7 +755,7 @@ export const PROJECTS: Project[] = [
       [Language.EN]: "Product visualization for the North Odin Pro WL68 Keyboard.",
       [Language.TR]: "North Odin Pro WL68 Klavye için ürün görselleştirmesi."
     },
-    image: '/works/North_Keyboard/hero.png',
+    image: '/works/North_Keyboard/hero.webp',
     heroFit: 'cover',
     client: "North",
     clientLogo: '/works/North_Keyboard/north_logo.png',
@@ -777,8 +777,8 @@ export const PROJECTS: Project[] = [
         loop: true,
         muted: true
       },
-      { type: 'image', src: '/works/North_Keyboard/1.png' },
-      { type: 'image', src: '/works/North_Keyboard/2.png' },
+      { type: 'image', src: '/works/North_Keyboard/1.webp' },
+      { type: 'image', src: '/works/North_Keyboard/2.webp' },
       {
         type: 'video',
         src: '/works/North_Keyboard/video2.mp4',
@@ -786,10 +786,10 @@ export const PROJECTS: Project[] = [
         loop: true,
         muted: true
       },
-      { type: 'image', src: '/works/North_Keyboard/3.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_Keyboard/4.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_Keyboard/5.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_Keyboard/6.png', colSpan: 1 },
+      { type: 'image', src: '/works/North_Keyboard/3.webp', colSpan: 1 },
+      { type: 'image', src: '/works/North_Keyboard/4.webp', colSpan: 1 },
+      { type: 'image', src: '/works/North_Keyboard/5.webp', colSpan: 1 },
+      { type: 'image', src: '/works/North_Keyboard/6.webp', colSpan: 1 },
       {
         type: 'video',
         src: '/works/North_Keyboard/video3.mp4',
@@ -798,9 +798,9 @@ export const PROJECTS: Project[] = [
         muted: true,
         colSpan: 2
       },
-      { type: 'image', src: '/works/North_Keyboard/7.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_Keyboard/8.png', colSpan: 1 },
-      { type: 'image', src: '/works/North_Keyboard/gif1.gif', colSpan: 1 },
+      { type: 'image', src: '/works/North_Keyboard/7.webp', colSpan: 1 },
+      { type: 'image', src: '/works/North_Keyboard/8.webp', colSpan: 1 },
+      { type: 'image', src: '/works/North_Keyboard/gif1.mp4', colSpan: 1 },
       {
         type: 'video',
         src: '/works/North_Keyboard/video4.mp4',
@@ -855,7 +855,7 @@ export const PROJECTS: Project[] = [
       { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-20.png', colSpan: 1 },
       { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-21.png', colSpan: 1 },
       { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-22.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-23.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-23.webp', colSpan: 1 },
       { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-24.png', colSpan: 1 },
       { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-25.png', colSpan: 1 },
       { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-26.png', colSpan: 1 },
@@ -864,13 +864,13 @@ export const PROJECTS: Project[] = [
       { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-29.png', colSpan: 1 },
       { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-30.png', colSpan: 1 },
       { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-31.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-32.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-33.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-32.webp', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-33.webp', colSpan: 1 },
       { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-34.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-35.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-35.webp', colSpan: 1 },
       { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-36.png', colSpan: 1 },
       { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-37.png', colSpan: 1 },
-      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-38.png', colSpan: 1 },
+      { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-38.webp', colSpan: 1 },
       { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-39.png', colSpan: 1 },
       { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-40.png', colSpan: 1 },
       { type: 'image', src: '/works/Mehaz_BrandGuide/a9d27a52-41.png', colSpan: 1 },
@@ -907,8 +907,8 @@ export const PROJECTS: Project[] = [
         type: 'group',
         colSpan: 1,
         items: [
-          { src: '/works/o3_Layer/gif1.gif' },
-          { src: '/works/o3_Layer/gif2.gif' }
+          { src: '/works/o3_Layer/gif1.webp' },
+          { src: '/works/o3_Layer/gif2.webp' }
         ]
       },
       {
@@ -931,7 +931,7 @@ export const PROJECTS: Project[] = [
         type: 'group',
         colSpan: 1,
         items: [
-          { src: '/works/o3_Layer/2.png' },
+          { src: '/works/o3_Layer/2.webp' },
           { src: '/works/o3_Layer/1.jpg' }
         ]
       }
@@ -944,10 +944,10 @@ export const PROJECTS: Project[] = [
       [Language.EN]: "Brand identity and motion design for Octopus Bridge.",
       [Language.TR]: "Octopus Bridge için marka kimliği ve hareket tasarımı."
     },
-    image: '/works/Octopus/hero.png',
+    image: '/works/Octopus/hero.webp',
     heroFit: 'cover',
     client: "Octopus",
-    clientLogo: '/works/Octopus/octopus_Logo.png',
+    clientLogo: '/works/Octopus/octopus_Logo.webp',
     year: "2024",
     services: ["Brand Strategy", "Motion Design"],
     challenge: {
@@ -959,17 +959,17 @@ export const PROJECTS: Project[] = [
       [Language.TR]: "Lottie animasyonlar ve hareketli tasarım öğeleriyle dijital deneyime dinamizm kazandırılırken, Telegram sticker setleri gibi yan iletişim araçlarıyla marka etkileşimi farklı platformlara taşındı. Ortaya çıkan çalışma, Octopus Bridge’i yalnızca görsel olarak değil, stratejik ve iletişimsel açıdan da güçlü, bütünlüklü ve modern bir marka yapısına taşıyan kapsamlı bir dönüşüm sundu."
     },
     gallery: [
-      { type: 'image', src: '/works/Octopus/1.png', colSpan: 2 },
-      { type: 'image', src: '/works/Octopus/big_anim.gif', colSpan: 2 },
+      { type: 'image', src: '/works/Octopus/1.webp', colSpan: 2 },
+      { type: 'image', src: '/works/Octopus/big_anim.webp', colSpan: 2 },
       {
         type: 'group',
         colSpan: 2,
         cols: 4,
         items: [
           { src: '/works/Octopus/Head.png' },
-          { src: '/works/Octopus/beher.gif' },
-          { src: '/works/Octopus/buyutec.gif' },
-          { src: '/works/Octopus/merkeziyetsiz.gif' }
+          { src: '/works/Octopus/beher.webp' },
+          { src: '/works/Octopus/buyutec.webp' },
+          { src: '/works/Octopus/merkeziyetsiz.webp' }
         ]
       },
       {
@@ -977,10 +977,10 @@ export const PROJECTS: Project[] = [
         colSpan: 2,
         cols: 4,
         items: [
-          { src: '/works/Octopus/portal.gif' },
-          { src: '/works/Octopus/ucan.gif' },
-          { src: '/works/Octopus/09345c204061893.66a24feeb86e1.gif' },
-          { src: '/works/Octopus/20518f204061893.66a24feebe41a.gif' }
+          { src: '/works/Octopus/portal.webp' },
+          { src: '/works/Octopus/ucan.webp' },
+          { src: '/works/Octopus/09345c204061893.66a24feeb86e1.mp4' },
+          { src: '/works/Octopus/20518f204061893.66a24feebe41a.mp4' }
         ]
       },
       {
@@ -988,10 +988,10 @@ export const PROJECTS: Project[] = [
         colSpan: 2,
         cols: 4,
         items: [
-          { src: '/works/Octopus/2a51b2204061893.66a24feeb9fa9.gif' },
-          { src: '/works/Octopus/2f6196204061893.66a24feebc86d.gif' },
-          { src: '/works/Octopus/487c2c204061893.66a24feebeba5.gif' },
-          { src: '/works/Octopus/547947204061893.66a24feebfd57.gif' }
+          { src: '/works/Octopus/2a51b2204061893.66a24feeb9fa9.mp4' },
+          { src: '/works/Octopus/2f6196204061893.66a24feebc86d.mp4' },
+          { src: '/works/Octopus/487c2c204061893.66a24feebeba5.mp4' },
+          { src: '/works/Octopus/547947204061893.66a24feebfd57.mp4' }
         ]
       },
       {
@@ -999,10 +999,10 @@ export const PROJECTS: Project[] = [
         colSpan: 2,
         cols: 4,
         items: [
-          { src: '/works/Octopus/6c3c10204061893.66a24feec07a6.gif' },
-          { src: '/works/Octopus/76c0f4204061893.66a24feebd092.gif' },
-          { src: '/works/Octopus/98c260204061893.66a24feeb9a62.gif' },
-          { src: '/works/Octopus/990381204061893.66a24feebf40b.gif' }
+          { src: '/works/Octopus/6c3c10204061893.66a24feec07a6.mp4' },
+          { src: '/works/Octopus/76c0f4204061893.66a24feebd092.mp4' },
+          { src: '/works/Octopus/98c260204061893.66a24feeb9a62.mp4' },
+          { src: '/works/Octopus/990381204061893.66a24feebf40b.mp4' }
         ]
       },
       {
@@ -1010,10 +1010,10 @@ export const PROJECTS: Project[] = [
         colSpan: 2,
         cols: 4,
         items: [
-          { src: '/works/Octopus/e42db6204061893.66a24feec0f75.gif' },
-          { src: '/works/Octopus/ebefc1204061893.66a24feec185f.gif' },
-          { src: '/works/Octopus/eccbd3204061893.66a24feebda5d.gif' },
-          { src: '/works/Octopus/ed5814204061893.66a24feeb8cab.gif' }
+          { src: '/works/Octopus/e42db6204061893.66a24feec0f75.mp4' },
+          { src: '/works/Octopus/ebefc1204061893.66a24feec185f.mp4' },
+          { src: '/works/Octopus/eccbd3204061893.66a24feebda5d.mp4' },
+          { src: '/works/Octopus/ed5814204061893.66a24feeb8cab.mp4' }
         ]
       }
     ]
