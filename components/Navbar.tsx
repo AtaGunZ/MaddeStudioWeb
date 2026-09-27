@@ -45,23 +45,23 @@ export const Navbar: React.FC = () => {
         className="fixed top-0 left-0 right-0 z-50"
       >
         <div className={`relative transition-all duration-500 ${scrolled ? 'bg-madde-white/60 dark:bg-madde-black/60 backdrop-blur-lg' : 'bg-transparent'}`}>
-          <div className="max-w-[1920px] mx-auto px-6 md:px-12 py-6 flex justify-between items-center">
+          <div className="max-w-[1920px] mx-auto px-5 md:px-12 py-3.5 md:py-6 flex justify-between items-center">
 
             {/* Logo */}
             <button
               onClick={() => { navigate('/'); setIsMobileMenuOpen(false); }}
-              className="relative h-10 transition-all duration-300 hover:opacity-70 z-50"
+              className="relative h-8 md:h-10 transition-all duration-300 hover:opacity-70 z-50"
             >
               <AnimatePresence mode="wait">
                 {scrolled ? (
                   <motion.img key="logo-small" src="/logos/LogoWhiteTransparent.svg" alt="Madde Studio"
-                    className="h-10 w-auto dark:invert-0 invert"
+                    className="h-8 md:h-10 w-auto dark:invert-0 invert"
                     initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.8 }} transition={{ duration: 0.3 }}
                   />
                 ) : (
                   <motion.img key="logo-full" src="/logos/LogoTextWhiteTransparent.svg" alt="Madde Studio"
-                    className="h-10 w-auto dark:invert-0 invert"
+                    className="h-8 md:h-10 w-auto dark:invert-0 invert"
                     initial={{ opacity: 0, scale: 0.8 }} animate={{ opacity: 1, scale: 1 }}
                     exit={{ opacity: 0, scale: 0.8 }} transition={{ duration: 0.3 }}
                   />

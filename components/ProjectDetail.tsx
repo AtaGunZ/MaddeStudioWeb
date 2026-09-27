@@ -5,6 +5,7 @@ import { Language } from '../types';
 import { GalleryVideo } from './GalleryVideo';
 import { SudiCaseStudy } from './SudiCaseStudy';
 import { WizepodAICaseStudy } from './WizepodAICaseStudy';
+import { GlassHover } from './GlassHover';
 import { usePageTitle } from './usePageTitle';
 import { useNavigate, useParams } from 'react-router-dom';
 
@@ -182,7 +183,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
 
             {/* Next Project */}
             <div
-                className="relative z-10 px-6 md:px-12 py-32 md:py-48 border-t border-black/5 dark:border-white/5 overflow-hidden transition-colors duration-500 bg-madde-white dark:bg-madde-black"
+                className="group relative z-10 px-6 md:px-12 py-32 md:py-48 border-t border-black/5 dark:border-white/5 overflow-hidden transition-colors duration-500 bg-madde-white dark:bg-madde-black"
                 onMouseEnter={() => setIsNextHovered(true)}
                 onMouseLeave={() => setIsNextHovered(false)}
             >
@@ -190,6 +191,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                     <img src={nextProject.image} alt="" className="w-full h-full object-cover grayscale" />
                     <div className="absolute inset-0 bg-gradient-to-t from-madde-white via-transparent to-transparent dark:from-madde-black" />
                 </div>
+                <GlassHover />
 
                 <div className="relative z-10 max-w-[1920px] mx-auto flex flex-col items-end">
                     <span className="text-xs text-madde-gray uppercase tracking-widest mb-8">
