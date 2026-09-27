@@ -220,31 +220,33 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
 
             <BallDivider className="mb-0" />
 
-            {/* Next Project */}
+            {/* Next Project: same behaviour as the home works rows. On hover (mouse only) the next
+                project's image fades in behind the page and the row turns to frosted glass; the whole
+                row is one link, so a single tap on a phone navigates. */}
             <div
-                className="group relative z-10 px-6 md:px-12 py-32 md:py-48 border-t border-black/5 dark:border-white/5 overflow-hidden transition-colors duration-500 bg-madde-white dark:bg-madde-black"
-                onMouseEnter={() => setIsNextHovered(true)}
+                role="link"
+                tabIndex={0}
+                onClick={handleNextProject}
+                onKeyDown={e => { if (e.key === 'Enter') handleNextProject(); }}
+                className="group relative z-10 px-6 md:px-12 py-32 md:py-48 border-t border-black/5 dark:border-white/5 cursor-pointer"
+                onMouseEnter={() => fine && setIsNextHovered(true)}
                 onMouseLeave={() => setIsNextHovered(false)}
             >
-                <div className={`absolute inset-0 z-0 transition-opacity duration-700 ${isNextHovered ? 'opacity-20' : 'opacity-0'}`}>
-                    <img loading="lazy" decoding="async" src={nextProject.image} alt="" className="w-full h-full object-cover grayscale" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-madde-white via-transparent to-transparent dark:from-madde-black" />
+                <div className={`hidden lg:block fixed inset-0 z-0 pointer-events-none transition-opacity duration-700 ${isNextHovered ? 'opacity-20' : 'opacity-0'} ${nextProject.heroFit === 'contain' ? 'bg-neutral-900 dark:bg-black' : ''}`}>
+                    <img loading="lazy" decoding="async" src={nextProject.image} alt="" style={{ objectPosition: nextProject.heroPosition }} className={`w-full h-full ${nextProject.heroFit === 'contain' ? 'object-contain p-24' : 'object-cover grayscale'}`} />
                 </div>
-                <GlassHover />
+                <GlassHover className="hidden lg:block" />
 
                 <div className="relative z-10 max-w-[1920px] mx-auto flex flex-col items-end">
                     <span className="text-xs text-madde-gray uppercase tracking-widest mb-8">
                         {TEXTS.projectDetail.nextProject[language]}
                     </span>
-                    <button
-                        onClick={handleNextProject}
-                        className="group flex items-center gap-4 md:gap-8 text-4xl md:text-6xl lg:text-8xl font-bold tracking-tighter"
-                    >
+                    <span className="flex items-center gap-4 md:gap-8 text-4xl md:text-6xl lg:text-8xl font-bold tracking-tighter text-right">
                         <span className="group-hover:translate-x-4 transition-transform duration-500 will-change-transform">
                             {nextProject.title}
                         </span>
                         <span className="group-hover:translate-x-8 transition-transform duration-500 delay-75 text-madde-red">→</span>
-                    </button>
+                    </span>
                 </div>
             </div>
         </motion.article>

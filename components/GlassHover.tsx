@@ -8,7 +8,7 @@ const CSS = `
   background:linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.02) 45%, rgba(255,255,255,.05));
   box-shadow:inset 0 1px 0 rgba(255,255,255,.35), inset 0 -1px 0 rgba(255,255,255,.08), inset 1px 0 0 rgba(255,255,255,.10), inset -1px 0 0 rgba(255,255,255,.06);}
 .wk-glass::before{content:'';position:absolute;inset:0;
-  background:radial-gradient(420px 260px at var(--x,50%) var(--y,50%), rgba(255,255,255,.16), rgba(255,255,255,0) 70%);}
+  background:radial-gradient(circle 240px at var(--x,50%) var(--y,50%), rgba(255,255,255,.07), rgba(255,255,255,0) 70%);}
 .wk-glass::after{content:'';position:absolute;inset:0;
   background:linear-gradient(125deg, rgba(255,255,255,.18) 0%, rgba(255,255,255,0) 18%),
              linear-gradient(305deg, rgba(255,255,255,.10) 0%, rgba(255,255,255,0) 12%);}
