@@ -17,7 +17,7 @@ const LINES: { key: 'p1' | 'p2' | 'p3'; className: string }[] = [
   { key: 'p3', className: 'md:pl-48 text-madde-gray dark:text-gray-400' },
 ];
 
-const ease = (t: number) => 1 - Math.pow(1 - t, 3);
+const easeInOut = (t: number) => (t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2);
 
 export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
   const section = useRef<HTMLElement>(null);
@@ -32,29 +32,40 @@ export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
     // depth > 0 comes towards the viewer (bigger, blurrier), < 0 falls behind
     const scatter = letters.map(() => ({
       x: (rnd() - 0.5) * 1.2, y: (rnd() - 0.5) * 0.9, r: (rnd() - 0.5) * 70,
-      depth: rnd() * 2 - 0.6, delay: rnd() * 0.35,
+      depth: rnd() * 2 - 0.6, delay: rnd() * 0.3,
     }));
-    let raf = 0, last = -1;
-    const update = () => {
-      raf = 0;
-      const vh = window.innerHeight, vw = window.innerWidth, r = root.getBoundingClientRect();
-      // 0 as the section enters from below … 1 once its middle reaches the middle of the screen
-      const p = Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.5 + r.height / 2)));
-      if (Math.abs(p - last) < 0.001) return;
-      last = p;
+    // p follows the scroll with a soft lag, so wheel steps glide instead of jumping
+    let raf = 0, p = -1, drawn = -1;
+    const target = () => {
+      const vh = window.innerHeight, r = root.getBoundingClientRect();
+      // 0 as the section enters from below … 1 exactly when its middle reaches the middle of the screen
+      return Math.min(1, Math.max(0, (vh - r.top) / (vh * 0.5 + r.height / 2)));
+    };
+    const render = () => {
+      const vh = window.innerHeight, vw = window.innerWidth;
       letters.forEach((el, i) => {
         const s = scatter[i];
-        const t = ease(Math.min(1, Math.max(0, (p - s.delay) / 0.65)));
-        if (t >= 1) { el.style.transform = ''; el.style.filter = ''; el.style.opacity = ''; return; }
-        const k = 1 - t;
+        const u = Math.min(1, Math.max(0, (p - s.delay) / (1 - s.delay)));   // every letter lands at p = 1
+        if (u >= 1) { el.style.transform = ''; el.style.filter = ''; el.style.opacity = ''; return; }
+        const k = 1 - easeInOut(u);
         const scale = 1 + s.depth * 0.9 * k;
         el.style.transform = `translate3d(${(s.x * vw * 0.5 * k).toFixed(1)}px, ${(s.y * vh * 0.6 * k).toFixed(1)}px, 0) rotate(${(s.r * k).toFixed(1)}deg) scale(${scale.toFixed(3)})`;
-        el.style.filter = touch ? '' : `blur(${(Math.abs(s.depth) * 9 * k).toFixed(1)}px)`;
-        el.style.opacity = (0.35 + 0.65 * t).toFixed(3);
+        // the blur clears slowly and evenly, only reaching sharp as the letter lands
+        el.style.filter = touch ? '' : `blur(${(Math.abs(s.depth) * 9 * Math.pow(1 - u, 1.4)).toFixed(2)}px)`;
+        el.style.opacity = (0.35 + 0.65 * (1 - k)).toFixed(3);
       });
+      drawn = p;
     };
-    const onScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
-    update();
+    const tick = () => {
+      raf = 0;
+      const goal = target();
+      p = p < 0 ? goal : p + (goal - p) * 0.14;
+      if (Math.abs(goal - p) < 0.0008) p = goal;
+      if (Math.abs(p - drawn) > 0.0004) render();
+      if (p !== goal) raf = requestAnimationFrame(tick);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(tick); };
+    tick();
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
     return () => { cancelAnimationFrame(raf); window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll); };
