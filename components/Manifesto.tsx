@@ -6,12 +6,11 @@ interface ManifestoProps {
   language: Language;
 }
 
-// The manifesto waits slightly scattered and blurred, and when it comes into view it slowly
-// gathers into place, once. Each letter sits a little off its spot (a short offset and tilt) and
-// settles at its own moment; the blur lifts last. Everything runs on CSS transitions, so the
-// browser animates it on the compositor with no per-frame script, which keeps phones smooth.
-// Blur: each paragraph is blurred as a whole (three filters instead of ~180, which is what both
-// phones and desktops choked on), and it lifts slowly after the letters start moving.
+// The manifesto is tied to the scroll: slightly scattered and blurred below, it gathers into
+// place as it scrolls up the screen, and scatters again when scrolled back. Each letter sits a
+// little off its spot (a short offset and tilt) and has its own moment to settle; the blur lifts
+// last. Kept light for phones: letters only move and fade (compositor work), the blur is one
+// filter per paragraph (three instead of ~180), and styles are written only when they change.
 // Reduced motion shows the text set.
 
 const LINES: { key: 'p1' | 'p2' | 'p3'; className: string }[] = [
@@ -20,8 +19,8 @@ const LINES: { key: 'p1' | 'p2' | 'p3'; className: string }[] = [
   { key: 'p3', className: 'md:pl-48 text-madde-gray dark:text-gray-400' },
 ];
 
-const MOVE = 3.2;     // s, how long each letter takes to settle
-const STAGGER = 1.2;  // s, spread of the letters' start times
+// gentle at both ends: letters leave their spots slowly and settle slowly, no snap
+const easeSine = (t: number) => 0.5 - 0.5 * Math.cos(Math.PI * t);
 
 export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
   const section = useRef<HTMLElement>(null);
@@ -31,52 +30,64 @@ export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
     const letters = Array.from(root.querySelectorAll('[data-l]')) as HTMLElement[];
     const paras = Array.from(root.querySelectorAll('p')) as HTMLElement[];
+    const text = root.firstElementChild as HTMLElement;
     const touch = window.matchMedia('(hover: none)').matches;
+    const narrow = window.innerWidth < 768;
+    const maxBlur = touch ? 5 : 6;
     let seed = 7;
     const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
+    // a light scatter: a few dozen px of offset, a small tilt, and each letter's own start
+    const plan = letters.map(() => ({ x: (rnd() - 0.5) * 56, y: (rnd() - 0.5) * 40, r: (rnd() - 0.5) * 24, delay: rnd() * 0.35 }));
+    const lastT = letters.map(() => ''), lastO = letters.map(() => '');
+    let lastBlur = '', layered = false;
 
-    // the waiting state: a light scatter
-    const plan = letters.map(el => {
-      const s = { x: (rnd() - 0.5) * 56, y: (rnd() - 0.5) * 40, r: (rnd() - 0.5) * 24, delay: rnd() * STAGGER };
-      el.style.transform = `translate(${s.x.toFixed(1)}px, ${s.y.toFixed(1)}px) rotate(${s.r.toFixed(1)}deg)`;
-      el.style.opacity = '0.35';
-      return s;
-    });
-    // blur per paragraph (three filters) on every screen: per-letter filters are too heavy even on desktop
-    paras.forEach(p => { p.style.filter = `blur(${touch ? 5 : 6}px)`; });
-
-    let done = 0;
-    const settle = () => {
-      letters.forEach((el, i) => {
-        const d = plan[i].delay;
-        el.style.transition = `transform ${MOVE}s cubic-bezier(.25,.1,.25,1) ${d.toFixed(2)}s, opacity ${MOVE * 0.8}s ease ${d.toFixed(2)}s`;
-        el.style.willChange = 'transform, opacity';   // moved by the compositor while it settles
-      });
-      paras.forEach(p => { p.style.transition = `filter ${MOVE + STAGGER}s ease ${(MOVE * 0.3).toFixed(2)}s`; });
-      // next frame, so the transitions start from the waiting state
-      requestAnimationFrame(() => requestAnimationFrame(() => {
-        letters.forEach(el => { el.style.transform = ''; el.style.opacity = ''; });
-        paras.forEach(p => { p.style.filter = ''; });
-      }));
-      // tidy up once everything has landed
-      done = window.setTimeout(() => {
-        letters.forEach(el => { el.style.transition = ''; el.style.willChange = ''; });
-        paras.forEach(p => { p.style.transition = ''; });
-      }, (MOVE + STAGGER + MOVE * 0.3) * 1000 + 200);
+    // 0 while the text's middle is well below the screen … 1 once it reaches 67% of the height
+    // (55% on phones, where the text is taller): a long stretch of scroll, so the gathering is slow
+    const target = () => {
+      const r = text.getBoundingClientRect(), c = (r.top + r.height / 2) / window.innerHeight;
+      const end = narrow ? 0.55 : 0.67, start = end + 0.6;
+      return Math.min(1, Math.max(0, (start - c) / (start - end)));
     };
 
-    // play once, as the text reaches a little above the bottom third of the screen
-    const io = new IntersectionObserver(([e]) => {
-      if (!e.isIntersecting) return;
-      io.disconnect();
-      settle();
-    }, { rootMargin: '0px 0px -30% 0px' });
-    io.observe(root.firstElementChild as HTMLElement);
+    const render = (p: number) => {
+      // letters on their own layers only while they move
+      const moving = p > 0 && p < 1;
+      if (moving !== layered) { letters.forEach(el => { el.style.willChange = moving ? 'transform, opacity' : ''; }); layered = moving; }
+      letters.forEach((el, i) => {
+        const s = plan[i];
+        const u = Math.min(1, Math.max(0, (p - s.delay) / (1 - s.delay)));   // every letter lands at p = 1
+        const k = 1 - easeSine(u);
+        const t = k < 0.001 ? '' : `translate(${(s.x * k).toFixed(1)}px, ${(s.y * k).toFixed(1)}px) rotate(${(s.r * k).toFixed(1)}deg)`;
+        const o = k < 0.001 ? '' : (0.35 + 0.65 * (1 - k)).toFixed(2);
+        if (t !== lastT[i]) { el.style.transform = t; lastT[i] = t; }
+        if (o !== lastO[i]) { el.style.opacity = o; lastO[i] = o; }
+      });
+      // the blur holds while the letters travel and lifts over the last part of the scroll
+      const clear = easeSine(Math.min(1, Math.max(0, (p - 0.45) / 0.55)));
+      const b = Math.round(maxBlur * (1 - clear) * 4) / 4;
+      const f = b > 0 ? `blur(${b}px)` : '';
+      if (f !== lastBlur) { paras.forEach(el => { el.style.filter = f; }); lastBlur = f; }
+    };
 
+    // p follows the scroll with a soft lag, so wheel steps and flicks glide instead of jumping
+    let raf = 0, p = -1;
+    const tick = () => {
+      raf = 0;
+      const goal = target();
+      p = p < 0 ? goal : p + (goal - p) * 0.12;
+      if (Math.abs(goal - p) < 0.001) p = goal;
+      render(p);
+      if (p !== goal) raf = requestAnimationFrame(tick);
+    };
+    const onScroll = () => { if (!raf) raf = requestAnimationFrame(tick); };
+    tick();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
     return () => {
-      io.disconnect(); window.clearTimeout(done);
-      letters.forEach(el => { el.style.transform = ''; el.style.opacity = ''; el.style.transition = ''; el.style.willChange = ''; });
-      paras.forEach(p => { p.style.filter = ''; p.style.transition = ''; });
+      cancelAnimationFrame(raf);
+      window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll);
+      letters.forEach(el => { el.style.transform = ''; el.style.opacity = ''; el.style.willChange = ''; });
+      paras.forEach(el => { el.style.filter = ''; });
     };
   }, [language]);
 
