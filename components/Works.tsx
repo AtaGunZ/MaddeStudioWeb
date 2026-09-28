@@ -23,7 +23,8 @@ const WorkRow: React.FC<{ project: Project; language: Language; onOpen: () => vo
       onMouseLeave={() => setHover(false)}
     >
       {/* Background image fades in on hover (desktop) or while the row crosses mid-screen (touch, via is-active) */}
-      <div className={`fixed inset-0 z-0 pointer-events-none transition-opacity duration-700 opacity-0 lg:group-hover:opacity-20 group-[.is-active]:opacity-20 ${project.heroFit === 'contain' ? 'bg-neutral-900 dark:bg-black' : ''}`}>
+      {/* leaving is quick (150 ms) and arriving soft (700 ms), so moving between rows never stacks two images */}
+      <div className={`fixed inset-0 z-0 pointer-events-none transition-opacity duration-150 lg:group-hover:duration-700 group-[.is-active]:duration-700 opacity-0 lg:group-hover:opacity-20 group-[.is-active]:opacity-20 ${project.heroFit === 'contain' ? 'bg-neutral-900 dark:bg-black' : ''}`}>
         <img loading="lazy" decoding="async" src={project.image} alt="" style={{ objectPosition: project.heroPosition }} className={`w-full h-full ${project.heroFit === 'contain' ? 'object-contain p-24' : 'object-cover grayscale'}`} />
       </div>
 
