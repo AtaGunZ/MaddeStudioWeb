@@ -22,6 +22,10 @@ export const Hero: React.FC<HeroProps> = ({ text, currentLang }) => {
   const scale = useTransform(scrollY, [0, 460], [1, 0.62]);
   const y = useTransform(scrollY, [60, 480], [0, up]);
   const opacity = useTransform(scrollY, [300, 520], [1, 0]);
+  // phones keep the original, lighter effect: one bold slogan that drifts down and fades out
+  const touch = typeof window !== 'undefined' && window.matchMedia('(hover: none)').matches;
+  const yTouch = useTransform(scrollY, [0, 500], [0, 200]);
+  const opacityTouch = useTransform(scrollY, [0, 300], [1, 0]);
   const { darkMode } = useApp();
 
   // Colors for the animation
@@ -37,6 +41,7 @@ export const Hero: React.FC<HeroProps> = ({ text, currentLang }) => {
   const [blurLayer, setBlurLayer] = useState(false);
   useEffect(() => {
     if (!ready) return;
+    if (touch) return;   // phones never use it
     const t = window.setTimeout(() => setBlurLayer(true), 2600);
     return () => window.clearTimeout(t);
   }, [ready]);
@@ -126,6 +131,25 @@ export const Hero: React.FC<HeroProps> = ({ text, currentLang }) => {
           </div>
         </div>
 
+        {touch ? (
+          // phones: the original slogan, bold, drifting down and fading (transform + opacity only)
+          <motion.h1
+            style={{ y: yTouch, opacity: opacityTouch }}
+            className="relative z-10 text-4xl md:text-6xl lg:text-7xl font-bold tracking-tighter text-center max-w-4xl px-4 will-change-transform"
+          >
+            {text[currentLang as keyof ContentText].split(" ").map((word, i) => (
+              <motion.span
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.9 + (i * 0.08), duration: 0.7 }}
+                className="inline-block mx-2"
+              >
+                {word}
+              </motion.span>
+            ))}
+          </motion.h1>
+        ) : (
         <motion.h1
           style={{ y, scale, opacity, '--bold': boldOp, '--thin': thinOp, '--blur': blurOp } as React.CSSProperties & Record<string, unknown>}
           className="relative z-10 text-4xl md:text-6xl lg:text-7xl tracking-tighter text-center max-w-4xl px-4"
@@ -146,6 +170,7 @@ export const Hero: React.FC<HeroProps> = ({ text, currentLang }) => {
             </motion.span>
           ))}
         </motion.h1>
+        )}
       </div>
 
       <motion.div
