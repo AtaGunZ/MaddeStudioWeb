@@ -21,7 +21,8 @@ export const Hero: React.FC<HeroProps> = ({ text, currentLang }) => {
 
   // Colors for the animation
   const positiveColor = darkMode ? '#FAFAFA' : '#0A0A0A'; // White in dark mode, black in light mode
-  const negativeColor = darkMode ? '#0A0A0A' : '#FAFAFA'; // Black in dark mode, white in light mode
+  // the dot inside the square is a hole: exactly the page colour of each theme (madde-black / madde-paper)
+  const negativeColor = darkMode ? '#121212' : '#E2E1E1';
 
   return (
     <section className="h-screen w-full flex flex-col items-center justify-center relative overflow-hidden">

@@ -10,8 +10,8 @@ interface ManifestoProps {
 // gathers into place, once. Each letter sits a little off its spot (a short offset and tilt) and
 // settles at its own moment; the blur lifts last. Everything runs on CSS transitions, so the
 // browser animates it on the compositor with no per-frame script, which keeps phones smooth.
-// Blur: on desktop every letter has its own random amount; on touch screens each paragraph is
-// blurred as a whole (three filters instead of ~180, which is what phones choke on).
+// Blur: each paragraph is blurred as a whole (three filters instead of ~180, which is what both
+// phones and desktops choked on), and it lifts slowly after the letters start moving.
 // Reduced motion shows the text set.
 
 const LINES: { key: 'p1' | 'p2' | 'p3'; className: string }[] = [
@@ -37,31 +37,32 @@ export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
 
     // the waiting state: a light scatter
     const plan = letters.map(el => {
-      const s = { x: (rnd() - 0.5) * 56, y: (rnd() - 0.5) * 40, r: (rnd() - 0.5) * 24, delay: rnd() * STAGGER, blur: 2 + rnd() * 6 };
+      const s = { x: (rnd() - 0.5) * 56, y: (rnd() - 0.5) * 40, r: (rnd() - 0.5) * 24, delay: rnd() * STAGGER };
       el.style.transform = `translate(${s.x.toFixed(1)}px, ${s.y.toFixed(1)}px) rotate(${s.r.toFixed(1)}deg)`;
       el.style.opacity = '0.35';
-      if (!touch) el.style.filter = `blur(${s.blur.toFixed(1)}px)`;
       return s;
     });
-    if (touch) paras.forEach(p => { p.style.filter = 'blur(5px)'; });
+    // blur per paragraph (three filters) on every screen: per-letter filters are too heavy even on desktop
+    paras.forEach(p => { p.style.filter = `blur(${touch ? 5 : 6}px)`; });
 
     let done = 0;
     const settle = () => {
       letters.forEach((el, i) => {
         const d = plan[i].delay;
-        el.style.transition = `transform ${MOVE}s cubic-bezier(.25,.1,.25,1) ${d.toFixed(2)}s, opacity ${MOVE * 0.8}s ease ${d.toFixed(2)}s, filter ${MOVE * 0.9}s ease ${(d + MOVE * 0.35).toFixed(2)}s`;
+        el.style.transition = `transform ${MOVE}s cubic-bezier(.25,.1,.25,1) ${d.toFixed(2)}s, opacity ${MOVE * 0.8}s ease ${d.toFixed(2)}s`;
+        el.style.willChange = 'transform, opacity';   // moved by the compositor while it settles
       });
       paras.forEach(p => { p.style.transition = `filter ${MOVE + STAGGER}s ease ${(MOVE * 0.3).toFixed(2)}s`; });
       // next frame, so the transitions start from the waiting state
       requestAnimationFrame(() => requestAnimationFrame(() => {
-        letters.forEach(el => { el.style.transform = ''; el.style.opacity = ''; el.style.filter = ''; });
+        letters.forEach(el => { el.style.transform = ''; el.style.opacity = ''; });
         paras.forEach(p => { p.style.filter = ''; });
       }));
       // tidy up once everything has landed
       done = window.setTimeout(() => {
-        letters.forEach(el => { el.style.transition = ''; });
+        letters.forEach(el => { el.style.transition = ''; el.style.willChange = ''; });
         paras.forEach(p => { p.style.transition = ''; });
-      }, (MOVE + STAGGER + MOVE * 0.4) * 1000 + 200);
+      }, (MOVE + STAGGER + MOVE * 0.3) * 1000 + 200);
     };
 
     // play once, as the text reaches a little above the bottom third of the screen
@@ -74,7 +75,7 @@ export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
 
     return () => {
       io.disconnect(); window.clearTimeout(done);
-      letters.forEach(el => { el.style.transform = ''; el.style.opacity = ''; el.style.filter = ''; el.style.transition = ''; });
+      letters.forEach(el => { el.style.transform = ''; el.style.opacity = ''; el.style.transition = ''; el.style.willChange = ''; });
       paras.forEach(p => { p.style.filter = ''; p.style.transition = ''; });
     };
   }, [language]);
