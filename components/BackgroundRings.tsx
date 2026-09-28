@@ -15,19 +15,19 @@ const KINDS: Kind[] = ['ring', 'square', 'arc', 'double', 'line'];
 
 const Shape: React.FC<{ kind: Kind; size: number; x: number; y: number; rot: number }> = ({ kind, size, x, y, rot }) => {
   const box: React.CSSProperties = { position: 'absolute', left: `${x}%`, top: y, width: `${size}vw`, height: `${size}vw`, transform: `translate(-50%, -50%) rotate(${rot}deg)` };
-  if (kind === 'ring') return <div style={box} className="border border-current rounded-full" />;
+  if (kind === 'ring') return <div style={box} className="border border-black/5 dark:border-white/10 rounded-full" />;
   if (kind === 'double') return (
-    <div style={box} className="border border-current rounded-full">
-      <div className="absolute inset-[18%] border border-current rounded-full" />
+    <div style={box} className="border border-black/5 dark:border-white/10 rounded-full">
+      <div className="absolute inset-[18%] border border-black/5 dark:border-white/10 rounded-full" />
     </div>
   );
   if (kind === 'square') return (
-    <div style={{ ...box, width: `${size * 0.6}vw`, height: `${size * 0.6}vw` }} className="border border-current">
-      <div className="absolute left-0 bottom-0 w-1/3 h-1/3 -translate-x-1/2 translate-y-1/2 border border-current rounded-full" />
+    <div style={{ ...box, width: `${size * 0.6}vw`, height: `${size * 0.6}vw` }} className="border border-black/5 dark:border-white/10">
+      <div className="absolute left-0 bottom-0 w-1/3 h-1/3 -translate-x-1/2 translate-y-1/2 border border-black/5 dark:border-white/10 rounded-full" />
     </div>
   );
-  if (kind === 'arc') return <div style={box} className="border-t border-l border-current rounded-full" />;
-  return <div style={{ position: 'absolute', left: '-10%', top: y, width: '120%', height: 1, transform: `rotate(${rot / 6}deg)` }} className="bg-current" />;
+  if (kind === 'arc') return <div style={box} className="border-t border-l border-black/5 dark:border-white/10 rounded-full" />;
+  return <div style={{ position: 'absolute', left: '-10%', top: y, width: '120%', height: 1, transform: `rotate(${rot / 6}deg)` }} className="bg-black/5 dark:bg-white/10" />;
 };
 
 export const BackgroundRings: React.FC = () => {
@@ -67,11 +67,11 @@ export const BackgroundRings: React.FC = () => {
   });
 
   return (
-    <div ref={layer} aria-hidden className="absolute inset-0 -z-10 overflow-hidden pointer-events-none opacity-5 dark:opacity-10">
+    <div ref={layer} aria-hidden className="absolute inset-0 -z-10 overflow-hidden pointer-events-none">
       {home && (
         <>
-          <div className="absolute -right-[20vw] -top-[20vw] w-[80vw] h-[80vw] border border-current rounded-full" />
-          <div className="absolute -left-[15vw] top-[calc(100vh-45vw)] w-[60vw] h-[60vw] border border-current rounded-full" />
+          <div className="absolute -right-[20vw] -top-[20vw] w-[80vw] h-[80vw] border border-black/5 dark:border-white/10 rounded-full" />
+          <div className="absolute -left-[15vw] top-[calc(100vh-45vw)] w-[60vw] h-[60vw] border border-black/5 dark:border-white/10 rounded-full" />
         </>
       )}
       {shapes.map((s, i) => <Shape key={i} {...s} />)}

@@ -28,12 +28,14 @@ export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
   useEffect(() => {
     const root = section.current!;
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-    const letters = Array.from(root.querySelectorAll('[data-l]')) as HTMLElement[];
+    const touch = window.matchMedia('(hover: none)').matches;
+    // phones move whole words (~30 pieces) and skip the blur: iOS Safari stutters with ~180 layered
+    // letters under a blur filter, even while only the page around them scrolls
+    const letters = Array.from(root.querySelectorAll(touch ? 'p > span' : '[data-l]')) as HTMLElement[];
     const paras = Array.from(root.querySelectorAll('p')) as HTMLElement[];
     const text = root.firstElementChild as HTMLElement;
-    const touch = window.matchMedia('(hover: none)').matches;
     const narrow = window.innerWidth < 768;
-    const maxBlur = touch ? 5 : 6;
+    const maxBlur = touch ? 0 : 6;
     let seed = 7;
     const rnd = () => { seed = (seed * 16807) % 2147483647; return seed / 2147483647; };
     // a light scatter: a few dozen px of offset, a small tilt, and each letter's own start
