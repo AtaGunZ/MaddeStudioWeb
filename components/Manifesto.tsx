@@ -35,10 +35,11 @@ export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
     const scatter = letters.map(() => ({
       x: (rnd() - 0.5) * 1.2, y: (rnd() - 0.5) * 0.9, r: (rnd() - 0.5) * 70,
       depth: rnd() * 2 - 0.6, delay: rnd() * 0.25,
-      blur: (2 + rnd() * 10) * (touch ? 0.6 : 1),   // each letter its own amount of blur while scattered
+      blur: (2 + rnd() * 10) * (touch ? 0.5 : 1),   // each letter its own amount of blur while scattered
     }));
     // p follows the scroll with a soft lag, so wheel steps glide instead of jumping
     let raf = 0, p = -1, drawn = -1;
+    const last: string[] = letters.map(() => '');   // the filter each letter was last given
     const text = root.firstElementChild as HTMLElement;
     const target = () => {
       const vh = window.innerHeight, r = text.getBoundingClientRect();
@@ -53,7 +54,10 @@ export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
       letters.forEach((el, i) => {
         const s = scatter[i];
         const u = Math.min(1, Math.max(0, (p - s.delay) / (1 - s.delay)));   // every letter lands at p = 1
-        if (u >= 1) { el.style.transform = ''; el.style.filter = ''; el.style.opacity = ''; return; }
+        if (u >= 1) {
+          if (last[i] !== 'done') { el.style.transform = ''; el.style.filter = ''; el.style.opacity = ''; el.style.willChange = ''; last[i] = 'done'; }
+          return;
+        }
         const k = 1 - easeSine(u);
         const scale = 1 + s.depth * 0.9 * k;
         const sx = narrow ? 0.35 : 0.5, sy = narrow ? 0.35 : 0.6;   // phones: a tighter scatter
@@ -61,7 +65,11 @@ export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
         // blurred at full strength while scattered; the blur only starts to lift in the second half of
         // the letter's travel and clears slowly, reaching sharp as the letter lands
         const clear = easeSine(Math.min(1, Math.max(0, (u - 0.5) / 0.5)));
-        el.style.filter = `blur(${(s.blur * (1 - clear)).toFixed(2)}px)`;
+        // phones: the blur moves in 2px steps and is only written when it changes, so each letter is
+        // re-rasterised a handful of times instead of every frame (the moving layer itself is cached)
+        const b = touch ? Math.round((s.blur * (1 - clear)) / 2) * 2 : s.blur * (1 - clear);
+        const f = `blur(${touch ? b : b.toFixed(2)}px)`;
+        if (last[i] !== f) { el.style.filter = f; last[i] = f; if (touch) el.style.willChange = 'transform'; }
         // phones: letters fade in from nothing, so no loose pile waits at the bottom of the screen
         el.style.opacity = (narrow ? Math.min(1, u * 1.6) : 0.35 + 0.65 * (1 - k)).toFixed(3);
       });
