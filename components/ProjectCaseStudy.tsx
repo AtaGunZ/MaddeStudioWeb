@@ -141,8 +141,8 @@ export const ProjectCaseStudy: React.FC<{ project: Project; language: Language }
       const list = all.filter(m => m.kind === k);
       return (
         <div key={k} className="flex flex-wrap items-center gap-x-4 gap-y-3">
-          <div className={`basis-32 shrink-0 ${MONO} ${MUTED}`}>{t(PLURAL[k])}</div>
-          <div className="basis-12 shrink-0 font-mono text-sm">{count[k]}</div>
+          <div className={`md:basis-32 shrink-0 ${MONO} ${MUTED}`}>{t(PLURAL[k])}</div>
+          <div className="md:basis-12 shrink-0 font-mono text-sm">{count[k]}</div>
           <div className="flex-1 min-w-[16rem] flex flex-wrap gap-1.5">
             {k === 'still'
               ? list.slice(0, 8).map(m => <img key={m.src} loading="lazy" decoding="async" src={m.src} alt="" className="h-12 w-16 object-cover bg-neutral-900" />)
@@ -153,8 +153,8 @@ export const ProjectCaseStudy: React.FC<{ project: Project; language: Language }
       );
     }),
     <div key="scope" className="flex flex-wrap items-center gap-x-4 gap-y-3">
-      <div className={`basis-32 shrink-0 ${MONO} ${MUTED}`}>{isEN ? 'Scope' : 'Kapsam'}</div>
-      <div className="basis-12 shrink-0 font-mono text-sm">{scope.length}</div>
+      <div className={`md:basis-32 shrink-0 ${MONO} ${MUTED}`}>{isEN ? 'Scope' : 'Kapsam'}</div>
+      <div className="md:basis-12 shrink-0 font-mono text-sm">{scope.length}</div>
       <div className="flex-1 min-w-[16rem] flex flex-wrap gap-1.5">
         {scope.map(s => <span key={s} className={`border ${LINE} px-2 py-1 font-mono text-[10px] uppercase tracking-widest`}>{s}</span>)}
       </div>

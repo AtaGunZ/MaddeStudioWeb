@@ -272,8 +272,8 @@ export const SudiCaseStudy: React.FC<{ language: Language }> = ({ language }) =>
                 )],
               ].map(([label, count, body]) => (
                 <div key={(label as ContentText)[Language.EN]} className="flex flex-wrap gap-x-4 gap-y-2">
-                  <div className={`basis-32 shrink-0 ${MONO} ${MUTED}`}>{t(label as ContentText)}</div>
-                  <div className="basis-12 shrink-0 font-mono text-sm">{count as string}</div>
+                  <div className={`md:basis-32 shrink-0 ${MONO} ${MUTED}`}>{t(label as ContentText)}</div>
+                  <div className="md:basis-12 shrink-0 font-mono text-sm">{count as string}</div>
                   <div className="flex-1 min-w-[16rem] text-base leading-relaxed">{body as React.ReactNode}</div>
                 </div>
               ))}
