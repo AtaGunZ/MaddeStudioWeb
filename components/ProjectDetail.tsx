@@ -197,9 +197,9 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
 
             <BallDivider className="mb-0" />
 
-            {/* Next Project: same behaviour as the home works rows. On hover (mouse only) the next
-                project's image fades in behind the page and the row turns to frosted glass; the whole
-                row is one link, so a single tap on a phone navigates. */}
+            {/* Next Project: same behaviour as the home works rows. On hover (mouse), or on a phone
+                while the row crosses mid-screen, the next project's image fades in behind the page and
+                the row turns to frosted glass; the whole row is one link, so a single tap navigates. */}
             <div
                 role="link"
                 tabIndex={0}
@@ -209,10 +209,10 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
                 onMouseEnter={() => fine && setIsNextHovered(true)}
                 onMouseLeave={() => setIsNextHovered(false)}
             >
-                <div className={`hidden lg:block fixed inset-0 z-0 pointer-events-none transition-opacity duration-700 ${isNextHovered ? 'opacity-20' : 'opacity-0'} ${nextProject.heroFit === 'contain' ? 'bg-neutral-900 dark:bg-black' : ''}`}>
+                <div className={`fixed inset-0 z-0 pointer-events-none transition-opacity duration-700 ${isNextHovered ? 'opacity-20' : 'opacity-0'} group-[.is-active]:opacity-20 ${nextProject.heroFit === 'contain' ? 'bg-neutral-900 dark:bg-black' : ''}`}>
                     <img loading="lazy" decoding="async" src={nextProject.image} alt="" style={{ objectPosition: nextProject.heroPosition }} className={`w-full h-full ${nextProject.heroFit === 'contain' ? 'object-contain p-24' : 'object-cover grayscale'}`} />
                 </div>
-                <GlassHover className="hidden lg:block" />
+                <GlassHover />
 
                 <div className="relative z-10 max-w-[1920px] mx-auto flex flex-col items-end">
                     <span className="text-xs text-madde-gray uppercase tracking-widest mb-8">

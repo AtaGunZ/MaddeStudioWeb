@@ -35,6 +35,7 @@ export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
     const scatter = letters.map(() => ({
       x: (rnd() - 0.5) * 1.2, y: (rnd() - 0.5) * 0.9, r: (rnd() - 0.5) * 70,
       depth: rnd() * 2 - 0.6, delay: rnd() * 0.25,
+      blur: (2 + rnd() * 10) * (touch ? 0.6 : 1),   // each letter its own amount of blur while scattered
     }));
     // p follows the scroll with a soft lag, so wheel steps glide instead of jumping
     let raf = 0, p = -1, drawn = -1;
@@ -57,8 +58,10 @@ export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
         const scale = 1 + s.depth * 0.9 * k;
         const sx = narrow ? 0.35 : 0.5, sy = narrow ? 0.35 : 0.6;   // phones: a tighter scatter
         el.style.transform = `translate3d(${(s.x * vw * sx * k).toFixed(1)}px, ${(s.y * vh * sy * k).toFixed(1)}px, 0) rotate(${(s.r * k).toFixed(1)}deg) scale(${scale.toFixed(3)})`;
-        // the blur clears slowly and evenly, only reaching sharp as the letter lands
-        el.style.filter = touch ? '' : `blur(${(Math.abs(s.depth) * 9 * Math.pow(1 - u, 1.2)).toFixed(2)}px)`;
+        // blurred at full strength while scattered; the blur only starts to lift in the second half of
+        // the letter's travel and clears slowly, reaching sharp as the letter lands
+        const clear = easeSine(Math.min(1, Math.max(0, (u - 0.5) / 0.5)));
+        el.style.filter = `blur(${(s.blur * (1 - clear)).toFixed(2)}px)`;
         // phones: letters fade in from nothing, so no loose pile waits at the bottom of the screen
         el.style.opacity = (narrow ? Math.min(1, u * 1.6) : 0.35 + 0.65 * (1 - k)).toFixed(3);
       });

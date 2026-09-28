@@ -15,6 +15,7 @@ type Bar = {
   k: number;                               // spring stiffness for the current move
   next: number;                            // time of the next move (s)
   kick: boolean; knext: number;            // clicked: rising now, gliding back at `knext`
+  entering: boolean;                       // still waiting above the screen for its first drop
   ky: number; kv: number; kt: number; kk: number;   // the click's own lift (not held down by folding)
   c: number; cv: number; ct: number;       // scroll descent (0 free … 1 settled on the line), its speed and goal
   delay: number; kc: number;               // when in the scroll this card starts coming down; how quickly it follows
@@ -75,18 +76,21 @@ export const BarcodeField: React.FC<{ dark: boolean; className?: string; tint?: 
       seed = 23;
       // ten broad cards edge to edge (six on phones), varied widths
       const N = W < 640 ? 6 : 10;
+      const top0 = Math.max(0, -cv.getBoundingClientRect().top);   // canvas y of the screen's top edge
       const widths = Array.from({ length: N }, () => [0.45, 0.8, 1.2, 1.8][Math.floor(rnd() * 4)]);
       const scale = W / widths.reduce((a, v) => a + v, 0);
       let x = 0;
       for (let i = 0; i < N; i++) {
         const w = i === N - 1 ? Math.ceil(W - x) : Math.round(widths[i] * scale);
-        const start = entrance && !reduce ? H + 40 + rnd() * H * 0.6 : 0;
+        // entrance: each card waits just above the top edge of the screen (not far up the canvas),
+        // so the drop is visible the moment the page opens
+        const start = entrance && !reduce ? H - top0 + 30 + rnd() * 140 : 0;
         bars.push({
           x, w, alpha: 0.05 + rnd() * 0.025,
-          y: start, v: 0, target: 0, k: 60, kick: false, knext: 0, ky: 0, kv: 0, kt: 0, kk: 26,
+          y: start, v: 0, target: 0, k: 60, kick: false, knext: 0, entering: entrance && !reduce, ky: 0, kv: 0, kt: 0, kk: 26,
           c: 0, cv: 0, ct: 0, delay: rnd() * 0.3, kc: 14 + rnd() * 16,
-          // entrance: staggered at random, so the cards land one after another
-          next: entrance ? 0.2 + rnd() * 2.4 : 4 + rnd() * 10,
+          // entrance: staggered over the first moments, so the cards start falling as the page opens
+          next: entrance ? rnd() * 0.7 : 4 + rnd() * 10,
         });
         x += w;
       }
@@ -113,8 +117,8 @@ export const BarcodeField: React.FC<{ dark: boolean; className?: string; tint?: 
         if (b.kick && t >= b.knext) { b.kick = false; b.kt = 0; b.kk = 0.32; }
         { const a = b.kk * (b.kt - b.ky) - 2 * Math.sqrt(b.kk) * b.kv; b.kv += a * dt; b.ky += b.kv * dt; }
         if (t >= b.next) {
-          if (b.target > 0 && b.y > L * 0.9) {     // drop in (entrance)
-            b.target = 0; b.k = 3.2 + rnd() * 1.6;
+          if (b.entering) {                        // drop in (entrance)
+            b.entering = false; b.target = 0; b.k = 3.2 + rnd() * 1.6;
             b.next = t + 6 + rnd() * 8;
           } else if (b.target === 0) {                    // drift up a little…
             b.target = L * (0.05 + rnd() * 0.22); b.k = 0.6 + rnd() * 0.5;

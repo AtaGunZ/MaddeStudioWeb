@@ -3,6 +3,7 @@ import React, { useEffect, useRef } from 'react';
 // A pane of frosted glass that appears over its parent on hover: a hairline rim, a corner
 // glint and a clear round window that trails the pointer. The parent needs the "group" class and
 // position:relative; whatever sits behind it (a faded project image) shows through blurred.
+// On touch screens there is no hover, so the row lights up while it crosses the middle of the screen.
 const CSS = `
 .wk-glass{position:absolute;inset:0;z-index:0;pointer-events:none;opacity:0;transition:opacity .6s ease;
   background:linear-gradient(135deg, rgba(255,255,255,.10), rgba(255,255,255,.02) 45%, rgba(255,255,255,.05));
@@ -16,6 +17,8 @@ const CSS = `
 html:not(.dark) .wk-glass{background:linear-gradient(135deg, rgba(255,255,255,.55), rgba(255,255,255,.25) 45%, rgba(255,255,255,.4));
   box-shadow:inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 0 rgba(0,0,0,.05);}
 @media (hover:hover) and (pointer:fine){ .group:hover > .wk-glass{opacity:1;backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);} }
+/* touch screens: the row lights up while it crosses the middle of the screen (no pointer, no clear window) */
+.group.is-active > .wk-glass{opacity:1;backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);-webkit-mask-image:none;mask-image:none;}
 @media (prefers-reduced-motion: reduce){ .wk-glass{transition:none;} }
 `;
 
@@ -31,7 +34,13 @@ export const GlassHover: React.FC<{ className?: string }> = ({ className }) => {
   useEffect(() => {
     injectCSS();
     const el = glass.current!, row = el.parentElement!;
-    if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) return;
+    if (!window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+      // no hover on touch: mark the row `is-active` while it sits in the middle band of the screen,
+      // which shows this pane and (through `group-[.is-active]:`) the row's faded background image
+      const io = new IntersectionObserver(([e]) => row.classList.toggle('is-active', e.isIntersecting), { rootMargin: '-38% 0px -38% 0px' });
+      io.observe(row);
+      return () => { io.disconnect(); row.classList.remove('is-active'); };
+    }
     let raf = 0;
     const target = { x: 0, y: 0 }, pos = { x: 0, y: 0 };
     const loop = () => {

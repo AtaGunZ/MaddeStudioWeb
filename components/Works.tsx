@@ -22,12 +22,12 @@ const WorkRow: React.FC<{ project: Project; language: Language; onOpen: () => vo
       onMouseEnter={() => setHover(true)}
       onMouseLeave={() => setHover(false)}
     >
-      {/* Background Image Fade In on Hover (Desktop) */}
-      <div className={`hidden lg:block fixed inset-0 z-0 pointer-events-none transition-opacity duration-700 opacity-0 group-hover:opacity-20 ${project.heroFit === 'contain' ? 'bg-neutral-900 dark:bg-black' : ''}`}>
+      {/* Background image fades in on hover (desktop) or while the row crosses mid-screen (touch, via is-active) */}
+      <div className={`fixed inset-0 z-0 pointer-events-none transition-opacity duration-700 opacity-0 lg:group-hover:opacity-20 group-[.is-active]:opacity-20 ${project.heroFit === 'contain' ? 'bg-neutral-900 dark:bg-black' : ''}`}>
         <img loading="lazy" decoding="async" src={project.image} alt="" style={{ objectPosition: project.heroPosition }} className={`w-full h-full ${project.heroFit === 'contain' ? 'object-contain p-24' : 'object-cover grayscale'}`} />
       </div>
 
-      <GlassHover className="hidden lg:block" />
+      <GlassHover />
 
       <div className="relative z-10 px-6 md:px-12 py-12 md:py-24 flex flex-col md:flex-row md:items-end justify-between bg-transparent">
         <div className="mb-6 md:mb-0">
@@ -42,11 +42,6 @@ const WorkRow: React.FC<{ project: Project; language: Language; onOpen: () => vo
             {language === Language.EN ? 'More' : 'Daha Fazlası'} &rarr;
           </div>
         </div>
-      </div>
-
-      {/* Mobile Image */}
-      <div className={`lg:hidden w-full h-64 overflow-hidden ${project.heroFit === 'contain' ? 'bg-neutral-900 dark:bg-black' : ''}`}>
-        <img loading="lazy" decoding="async" src={project.image} alt={project.title} style={{ objectPosition: project.heroPosition }} className={`w-full h-full ${project.heroFit === 'contain' ? 'object-contain p-8' : 'object-cover'}`} />
       </div>
     </div>
   );
