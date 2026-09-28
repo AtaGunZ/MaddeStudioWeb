@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Hero } from './components/Hero';
 import { BackgroundRings } from './components/BackgroundRings';
+import { IntroReady } from './components/IntroContext';
 import { Manifesto } from './components/Manifesto';
 import { Services } from './components/Services';
 import { Works } from './components/Works';
@@ -74,28 +75,37 @@ function AnimatedRoutes({ language }: { language: Language }) {
   );
 }
 
-const App: React.FC = () => {
-  const { language } = useApp();
+// The opening spinner. The page is built behind it from the start, so its first (heavy) render is
+// done while the spinner turns, not in the middle of the hero's intro; the hero waits for IntroReady.
+// The loading state lives here, not in App, so ending it re-renders only what reads IntroReady
+// (the hero), not the whole page.
+const IntroGate: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [loading, setLoading] = useState(true);
-
   useEffect(() => {
     const timer = setTimeout(() => setLoading(false), 1500);
     return () => clearTimeout(timer);
   }, []);
+  return (
+    <IntroReady.Provider value={!loading}>
+      {loading && (
+        <div className="fixed inset-0 z-[200] flex items-center justify-center bg-madde-paper text-madde-black dark:bg-madde-black dark:text-madde-white">
+          <motion.div
+            initial={{ scale: 0.8, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            className="w-12 h-12 bg-current animate-spin"
+          />
+        </div>
+      )}
+      {children}
+    </IntroReady.Provider>
+  );
+};
 
-  if (loading) {
-    return (
-      <div className="fixed inset-0 z-[100] flex items-center justify-center bg-madde-paper text-madde-black dark:bg-madde-black dark:text-madde-white">
-        <motion.div
-          initial={{ scale: 0.8, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
-          className="w-12 h-12 bg-current animate-spin"
-        />
-      </div>
-    );
-  }
+const App: React.FC = () => {
+  const { language } = useApp();
 
   return (
+    <IntroGate>
     <div className="min-h-screen w-full relative selection:bg-black selection:text-white dark:selection:bg-white dark:selection:text-black">
       <ScrollToTop />
       <BackgroundRings />
@@ -111,6 +121,7 @@ const App: React.FC = () => {
         style={{ backgroundSize: '200px 200px', backgroundImage: 'url("data:image/svg+xml,%3Csvg viewBox=\'0 0 200 200\' xmlns=\'http://www.w3.org/2000/svg\'%3E%3Cfilter id=\'noiseFilter\'%3E%3CfeTurbulence type=\'fractalNoise\' baseFrequency=\'0.65\' numOctaves=\'3\' stitchTiles=\'stitch\'/%3E%3C/filter%3E%3Crect width=\'100%25\' height=\'100%25\' filter=\'url(%23noiseFilter)\'/%3E%3C/svg%3E")' }}
       />
     </div>
+    </IntroGate>
   );
 };
 

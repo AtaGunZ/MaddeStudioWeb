@@ -18,7 +18,8 @@ html:not(.dark) .wk-glass{background:linear-gradient(135deg, rgba(255,255,255,.5
   box-shadow:inset 0 1px 0 rgba(255,255,255,.9), inset 0 -1px 0 rgba(0,0,0,.05);}
 @media (hover:hover) and (pointer:fine){ .group:hover > .wk-glass{opacity:1;backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);} }
 /* touch screens: the row lights up while it crosses the middle of the screen (no pointer, no clear window) */
-.group.is-active > .wk-glass{opacity:1;backdrop-filter:blur(14px) saturate(140%);-webkit-backdrop-filter:blur(14px) saturate(140%);-webkit-mask-image:none;mask-image:none;}
+/* no backdrop blur here: on a phone it re-blurs the moving page under the row on every scroll frame */
+.group.is-active > .wk-glass{opacity:1;-webkit-mask-image:none;mask-image:none;}
 @media (prefers-reduced-motion: reduce){ .wk-glass{transition:none;} }
 `;
 

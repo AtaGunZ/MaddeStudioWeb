@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { ContentText } from '../types';
 import { useApp } from '../contexts/AppContext';
+import { useIntroReady } from './IntroContext';
 
 interface HeroProps {
   text: ContentText;
@@ -10,12 +11,16 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = ({ text, currentLang }) => {
   const { scrollY } = useScroll();
-  // on scroll the slogan thins out and shrinks, then slides up behind the logo, blurring away
+  // on scroll the slogan thins out and shrinks, then slides up behind the logo, blurring away.
+  // Thinning and blurring are cross-fades between three ready-made layers of every word (bold,
+  // thin, thin blurred), so scrolling only changes opacity and transform: no text is re-laid out
+  // or re-blurred per frame, which is what made phones stutter.
   const up = typeof window !== 'undefined' && window.innerWidth < 768 ? -150 : -190;
-  const weight = useTransform(scrollY, [0, 320], [700, 200]);
+  const boldOp = useTransform(scrollY, [0, 250], [1, 0]);
+  const thinOp = useTransform(scrollY, [0, 250, 480], [0, 1, 0]);
+  const blurOp = useTransform(scrollY, [180, 480], [0, 1]);
   const scale = useTransform(scrollY, [0, 460], [1, 0.62]);
   const y = useTransform(scrollY, [60, 480], [0, up]);
-  const blur = useTransform(scrollY, [180, 480], ['blur(0px)', 'blur(10px)']);
   const opacity = useTransform(scrollY, [300, 520], [1, 0]);
   const { darkMode } = useApp();
 
@@ -23,6 +28,19 @@ export const Hero: React.FC<HeroProps> = ({ text, currentLang }) => {
   const positiveColor = darkMode ? '#FAFAFA' : '#0A0A0A'; // White in dark mode, black in light mode
   // the dot inside the square is a hole: exactly the page colour of each theme (madde-black / madde-paper)
   const negativeColor = darkMode ? '#121212' : '#E2E1E1';
+
+  // the intro starts when the loader is gone (the logo grows out of its square); until then the
+  // hero only holds its place
+  const ready = useIntroReady();
+  // the blurred copy of the slogan is only needed once scrolling starts; adding it after the intro
+  // keeps its one-off blur rasterising out of the opening frames
+  const [blurLayer, setBlurLayer] = useState(false);
+  useEffect(() => {
+    if (!ready) return;
+    const t = window.setTimeout(() => setBlurLayer(true), 2600);
+    return () => window.clearTimeout(t);
+  }, [ready]);
+  if (!ready) return <section className="h-screen w-full" />;
 
   return (
     <section className="h-screen w-full flex flex-col items-center justify-center relative overflow-hidden">
@@ -109,19 +127,22 @@ export const Hero: React.FC<HeroProps> = ({ text, currentLang }) => {
         </div>
 
         <motion.h1
-          style={{ y, scale, opacity, fontWeight: weight, filter: blur }}
+          style={{ y, scale, opacity, '--bold': boldOp, '--thin': thinOp, '--blur': blurOp } as React.CSSProperties & Record<string, unknown>}
           className="relative z-10 text-4xl md:text-6xl lg:text-7xl tracking-tighter text-center max-w-4xl px-4"
         >
-          {/* Split text for reveal effect */}
+          {/* Split text for reveal effect; each word stacks its three layers in one grid cell,
+              sized by the bold one so line breaks never move */}
           {text[currentLang as keyof ContentText].split(" ").map((word, i) => (
             <motion.span
               key={i}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.9 + (i * 0.08), duration: 0.7 }}
-              className="inline-block mx-2"
+              className="inline-grid justify-items-center mx-2"
             >
-              {word}
+              <span className="[grid-area:1/1] font-bold will-change-[opacity]" style={{ opacity: 'var(--bold)' }}>{word}</span>
+              <span aria-hidden className="[grid-area:1/1] font-extralight will-change-[opacity]" style={{ opacity: 'var(--thin)' }}>{word}</span>
+              {blurLayer && <span aria-hidden className="[grid-area:1/1] font-extralight blur-[10px] will-change-[opacity]" style={{ opacity: 'var(--blur)' }}>{word}</span>}
             </motion.span>
           ))}
         </motion.h1>

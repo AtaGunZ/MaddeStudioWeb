@@ -1,5 +1,4 @@
 import React from 'react';
-import { motion } from 'framer-motion';
 import { CLIENTS, TEXTS } from '../constants';
 import { Language } from '../types';
 
@@ -26,17 +25,9 @@ export const Clients: React.FC<ClientsProps> = ({ language }) => {
                     WebkitMaskImage: 'linear-gradient(to right, transparent, black 10%, black 90%, transparent)'
                 }}
             >
-                <motion.div
-                    className="flex gap-16 md:gap-32 items-center min-w-max px-8"
-                    initial={{ x: 0 }}
-                    animate={{ x: "-33.33%" }} // Moves exactly one full set width (since we have 3 sets, 1/3 is one set)
-                    transition={{
-                        duration: 30,
-                        repeat: Infinity,
-                        ease: "linear",
-                        repeatType: "loop"
-                    }}
-                >
+                {/* a CSS animation (run by the compositor, no script per frame) moves exactly one set's
+                    width, a third of the tripled strip, then loops */}
+                <div className="flex gap-16 md:gap-32 items-center min-w-max px-8 animate-marquee motion-reduce:animate-none">
                     {items.map((client, index) => (
                         <div
                             key={`${client.id}-${index}`}
@@ -53,7 +44,7 @@ export const Clients: React.FC<ClientsProps> = ({ language }) => {
                             />
                         </div>
                     ))}
-                </motion.div>
+                </div>
             </div>
         </section>
     );

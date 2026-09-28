@@ -49,10 +49,16 @@ export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
       return Math.min(1, Math.max(0, (start - c) / (start - end)));
     };
 
+    // letters get their own layers while the section is near the screen: set up a screen ahead,
+    // so the one-off cost of creating ~180 layers never lands in the middle of the gathering
+    const near = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting === layered) return;
+      layered = e.isIntersecting;
+      letters.forEach(el => { el.style.willChange = layered ? 'transform, opacity' : ''; });
+    }, { rootMargin: '100% 0px' });
+    near.observe(root);
+
     const render = (p: number) => {
-      // letters on their own layers only while they move
-      const moving = p > 0 && p < 1;
-      if (moving !== layered) { letters.forEach(el => { el.style.willChange = moving ? 'transform, opacity' : ''; }); layered = moving; }
       letters.forEach((el, i) => {
         const s = plan[i];
         const u = Math.min(1, Math.max(0, (p - s.delay) / (1 - s.delay)));   // every letter lands at p = 1
@@ -84,7 +90,7 @@ export const Manifesto: React.FC<ManifestoProps> = ({ language }) => {
     window.addEventListener('scroll', onScroll, { passive: true });
     window.addEventListener('resize', onScroll);
     return () => {
-      cancelAnimationFrame(raf);
+      cancelAnimationFrame(raf); near.disconnect();
       window.removeEventListener('scroll', onScroll); window.removeEventListener('resize', onScroll);
       letters.forEach(el => { el.style.transform = ''; el.style.opacity = ''; el.style.willChange = ''; });
       paras.forEach(el => { el.style.filter = ''; });

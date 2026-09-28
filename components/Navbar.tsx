@@ -18,10 +18,13 @@ export const Navbar: React.FC = () => {
   const [scrolled, setScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  // read the scroll once per frame at most, and only re-render when the state actually flips
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    let raf = 0;
+    const update = () => { raf = 0; const s = window.scrollY > 50; setScrolled(prev => (prev === s ? prev : s)); };
+    const handleScroll = () => { if (!raf) raf = requestAnimationFrame(update); };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => { cancelAnimationFrame(raf); window.removeEventListener('scroll', handleScroll); };
   }, []);
 
   useEffect(() => {
@@ -44,7 +47,8 @@ export const Navbar: React.FC = () => {
         transition={{ duration: 0.8, ease: "circOut" }}
         className="fixed top-0 left-0 right-0 z-50"
       >
-        <div className={`relative transition-all duration-500 ${scrolled ? 'bg-madde-paper/60 dark:bg-madde-black/60 backdrop-blur-lg' : 'bg-transparent'}`}>
+        {/* phones get a near-solid bar: a backdrop blur there re-blurs the page under it on every scroll frame */}
+        <div className={`relative transition-colors duration-500 ${scrolled ? 'bg-madde-paper/95 dark:bg-madde-black/95 md:bg-madde-paper/60 md:dark:bg-madde-black/60 md:backdrop-blur-lg' : 'bg-transparent'}`}>
           <div className="max-w-[1920px] mx-auto px-5 md:px-12 py-3.5 md:py-6 flex justify-between items-center">
 
             {/* Logo */}
