@@ -174,7 +174,7 @@ export const ProjectDetail: React.FC<ProjectDetailProps> = ({ language }) => {
             <div ref={contentRef} className="scroll-mt-24 mb-8 md:mb-12" />
 
             {/* Full Image Hero */}
-            {project.id !== 'north-keyboard' && project.id !== 'octopus-bridge' && project.id !== 'acl-reconstruction' && project.id !== 'age-soft' && project.id !== 'hiltar-sutas' && project.id !== 'sudi-reels' && (
+            {project.id !== 'north-keyboard' && project.id !== 'octopus-bridge' && project.id !== 'acl-reconstruction' && project.id !== 'age-soft' && project.id !== 'hiltar-sutas' && project.id !== 'sudi-reels' && project.id !== 'poster' && (
                 <div className="relative z-10 w-full h-[60vh] md:h-[80vh] overflow-hidden mb-4 md:mb-8 px-6 md:px-12">
                     <motion.img
                         initial={{ scale: 1.1, opacity: 0 }}
