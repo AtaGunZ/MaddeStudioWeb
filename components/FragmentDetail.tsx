@@ -72,6 +72,25 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                     </motion.div>
                 );
 
+            case 'figure':
+                return (
+                    <motion.figure
+                        key={i}
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true, margin: '-4%' }}
+                        transition={{ duration: 1, ease: 'easeInOut' }}
+                        className="w-full"
+                    >
+                        <img loading="lazy" decoding="async" src={block.src[language]} alt={block.caption?.[language] ?? ''} className="w-full h-auto" />
+                        {block.caption && (
+                            <figcaption className="mt-3 text-xs font-mono text-madde-gray leading-relaxed">
+                                {block.caption[language]}
+                            </figcaption>
+                        )}
+                    </motion.figure>
+                );
+
             case 'credits':
                 return (
                     <motion.div

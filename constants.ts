@@ -1022,6 +1022,140 @@ export const PROJECTS: Project[] = [
 
 export const FRAGMENTS: Fragment[] = [
   {
+    id: 'Anamorphic_Corner_LED',
+    title: {
+      [Language.EN]: 'One File, One Eye Point',
+      [Language.TR]: 'Tek Dosya, Tek Bakış Noktası'
+    },
+    type: {
+      [Language.EN]: 'Technical Note',
+      [Language.TR]: 'Teknik Not'
+    },
+    date: '11.2026',
+    image: '/fragments/Anamorphic_Corner_LED/cover.svg',
+    blocks: [
+      {
+        kind: 'text',
+        content: {
+          [Language.TR]: `Bu notta, iki köşe LED ekran için kurduğumuz anamorfik üretim düzenini paylaşıyoruz. İçerikten çok, görüntünün ekrana nasıl oturduğunu anlatıyoruz: ölçüler, bakış noktası, warp ve teslim.
+
+Köşe LED'de izleyici düz bir görüntü değil, kırılmış bir yüzey görür. İki yüz ve aradaki kavis aynı anda okunur; bir nesnenin ekrandan dışarı taşıyormuş gibi görünmesi de tam bu kırılmadan gelir. Bu yüzden görüntüyü ekrana göre değil, izleyicinin gözüne göre kuruyoruz.`,
+          [Language.EN]: `In this note, we share the anamorphic production setup we built for two corner LED screens. It is less about the content and more about how an image sits on the screen: measurements, eye point, warp and delivery.
+
+On a corner LED, the viewer does not see a flat picture but a folded surface. Both faces and the curve between them are read at once, and the feeling that an object is breaking out of the screen comes precisely from that fold. So we build the image not for the screen, but for the viewer's eye.`
+        }
+      },
+      {
+        kind: 'figure',
+        src: {
+          [Language.EN]: '/fragments/Anamorphic_Corner_LED/01_file_en.svg',
+          [Language.TR]: '/fragments/Anamorphic_Corner_LED/01_file_tr.svg'
+        }
+      },
+      {
+        kind: 'text',
+        content: {
+          [Language.TR]: `Her şey ekran ölçüsüyle başlıyor. İki ekran da P5, yani 1 metre 200 piksel. Teslim dosyası açılmış ekranın kendisi: sol yüz, 320 piksellik kavis ve sağ yüz tek bir videoda yan yana duruyor ve yüzler ayrı dosyalara bölünmüyor.
+
+İki ekranda uzun yüzler ters tarafta. Köşe birinde soldan yüzde 35'te, diğerinde yüzde 57'de. Bu yüzden tek bir render'ı ölçekleyip iki ekranda kullanamıyoruz. Sahne aynı kalıyor; kamera, warp ve render her ekran için ayrı.`,
+          [Language.EN]: `Everything starts with the screen's measurements. Both screens are P5, meaning 1 metre equals 200 pixels. The delivery file is the unfolded screen itself: the left face, the 320-pixel curve and the right face sit side by side in one video, and the faces are never split into separate files.
+
+The long faces are on opposite sides of the two screens. The corner sits at 35% from the left on one and at 57% on the other, so a single render cannot simply be rescaled for both. The scene stays the same; the camera, warp and render are made for each screen separately.`
+        }
+      },
+      {
+        kind: 'figure',
+        src: {
+          [Language.EN]: '/fragments/Anamorphic_Corner_LED/02_plan_en.svg',
+          [Language.TR]: '/fragments/Anamorphic_Corner_LED/02_plan_tr.svg'
+        }
+      },
+      {
+        kind: 'figure',
+        src: {
+          [Language.EN]: '/fragments/Anamorphic_Corner_LED/03_section_en.svg',
+          [Language.TR]: '/fragments/Anamorphic_Corner_LED/03_section_tr.svg'
+        }
+      },
+      {
+        kind: 'text',
+        content: {
+          [Language.TR]: `Anamorfik bir görüntünün tek bir doğru noktası var. Göz noktasını planda ve kesitte sabitledik: yerden 1,60 metre, köşeye yaklaşık 27 metre. Ekranın alt kenarı yerden 9 metre yukarıda, izleyici ekrana 16 ile 29 derece arasında yukarı bakıyor. Bu açı, sahnedeki hacimlerin nasıl dizileceğini ve ne kadar yükseleceğini de belirliyor.
+
+Göz noktası sahada fotoğraf ve ölçüyle netleştiğinde yalnızca warp yeniden hesaplanıyor; içerik sahnesine dokunmuyoruz.`,
+          [Language.EN]: `An anamorphic image has exactly one correct point. We fixed the eye point in plan and in section: 1.60 metres above the ground and roughly 27 metres from the corner. The bottom edge of the screen is 9 metres up, so the viewer looks up at the screen between 16 and 29 degrees. That angle also decides how the volumes in the scene are staggered and how high they rise.
+
+When the eye point is confirmed on site with photographs and measurements, only the warp is recalculated; the content scene stays untouched.`
+        }
+      },
+      {
+        kind: 'figure',
+        src: {
+          [Language.EN]: '/fragments/Anamorphic_Corner_LED/04_warp_en.svg',
+          [Language.TR]: '/fragments/Anamorphic_Corner_LED/04_warp_tr.svg'
+        }
+      },
+      {
+        kind: 'text',
+        content: {
+          [Language.TR]: `Warp, gözden ekrana çizilen bir doğrudan ibaret. Gözle nesneyi birleştiren çizgi LED'in neresine değiyorsa, nesnenin rengi oraya basılıyor. Düz bir monitörde dosya eğri büğrü görünüyor: küp köşenin iki yanına yayılıyor, zemin ızgarası kavis boyunca bükülüyor. Aynı dosyaya göz noktasından bakınca küp düzgün bir küpe dönüyor ve çerçevenin önüne taşıyor.
+
+Bu pafta bir test hacmi. Köşeden dışarı itilmiş 2,4 metrelik bir küp ve ekran düzleminin arkasına gömülmüş bir zemin ızgarası, aynı karenin iki bakışını yan yana koymak için yeterli.`,
+          [Language.EN]: `Warp is nothing more than a straight line drawn from the eye to the screen. Wherever the line joining the eye and an object meets the LED, the object's colour is printed there. On a flat monitor the file looks bent out of shape: the cube spreads across both sides of the corner and the floor grid bends along the curve. Seen from the eye point, the same file turns back into a clean cube that steps out in front of the frame.
+
+This sheet uses a test volume. A 2.4-metre cube pushed out of the corner and a floor grid recessed behind the screen plane are enough to put two views of the same frame side by side.`
+        }
+      },
+      {
+        kind: 'figure',
+        src: {
+          [Language.EN]: '/fragments/Anamorphic_Corner_LED/05_pipeline_en.svg',
+          [Language.TR]: '/fragments/Anamorphic_Corner_LED/05_pipeline_tr.svg'
+        }
+      },
+      {
+        kind: 'text',
+        content: {
+          [Language.TR]: `Üretimi Blender'da üç sahneye ayırdık. İçerik sahnesi gerçek 3D sahne; göz kamerasından render alınıyor. Warp sahnesi bu render'ı ölçülü LED yüzeyine yansıtıyor ve ortografik bir kamerayla düz dosyaya açıyor. Her LED tepe noktası göz kamerasındaki konumunu bir öznitelik olarak taşıyor, yüzeyin geri kalanı bu değerlerden hesaplanıyor. Sokak sahnesi ise çıkan dosyayı gerçek ölçülü ekranda oynatıyor; sonucu hem yandan hem gözden kontrol ediyoruz.
+
+Shader'ın hesabını Blender'ın kendi projeksiyonuyla karşılaştırdık; en büyük fark 5 × 10⁻⁸.`,
+          [Language.EN]: `We split production into three scenes in Blender. The content scene is the real 3D scene, rendered from the eye camera. The warp scene projects that render onto the measured LED surface and unfolds it into a flat file with an orthographic camera. Every LED vertex carries its position in the eye camera as an attribute, and the rest of the surface is computed from those values. The street scene then plays the resulting file on the screen at real scale, and we check the result both from the side and from the eye.
+
+We compared the shader's maths against Blender's own projection; the largest difference is 5 × 10⁻⁸.`
+        }
+      },
+      {
+        kind: 'figure',
+        src: {
+          [Language.EN]: '/fragments/Anamorphic_Corner_LED/06_frame_en.svg',
+          [Language.TR]: '/fragments/Anamorphic_Corner_LED/06_frame_tr.svg'
+        }
+      },
+      {
+        kind: 'text',
+        content: {
+          [Language.TR]: `Ekranın kendi kenarı aşılamıyor; taşma hissini sahte bir çerçeve kuruyor. LED kenarından 1 metre içeride 0,30 metre kalınlığında bir çerçeve çubuğu çiziyor, onu ekran düzleminin 0,12 metre önüne koyuyoruz. Çerçevenin dışı siyah kalıyor.
+
+Ekran düzleminin arkasındaki her şey derinlik olarak okunuyor; önündeki her şey göze yaklaştıkça büyüyor. Bu yüzden her üç karede bir, öndeki nesnelerin gözden bakınca LED sınırının içinde kalıp kalmadığını ve birbirine girip girmediğini ölçüyoruz.
+
+Teslim: 30 fps, 15 saniye (450 kare), H.264 mp4, ekran başına tek parça dosya. Yayından önce ekranda bir test oynatması yapılıyor.`,
+          [Language.EN]: `The screen's own edge cannot be crossed; the sense of breaking out is built with a false frame. We draw a 0.30-metre frame bar 1 metre inside the LED edge and place it 0.12 metres in front of the screen plane. Everything outside the frame stays black.
+
+Anything behind the screen plane reads as depth; anything in front of it grows as it comes closer to the eye. That is why, every third frame, we measure whether the objects in front stay inside the LED edge as seen from the eye, and whether any of them intersect.
+
+Delivery: 30 fps, 15 seconds (450 frames), H.264 mp4, one continuous file per screen. A test playback runs on the screen before broadcast.`
+        }
+      },
+      {
+        kind: 'credits',
+        content: {
+          [Language.TR]: `Anamorfik kurulum ve teknik çizimler: Nebil Erşan Elcenabi`,
+          [Language.EN]: `Anamorphic setup and technical drawings: Nebil Erşan Elcenabi`
+        }
+      }
+    ]
+  },
+  {
     id: 'The_Materialization_of_Madde',
     title: {
       [Language.EN]: 'The Materialization of Madde',
