@@ -43,6 +43,8 @@ export type FragmentBlock =
   | { kind: 'image'; src: string }
   | { kind: 'image-pair'; srcs: [string, string] }
   | { kind: 'figure'; src: ContentText; caption?: ContentText }
+  | { kind: 'heading'; id: string; title: ContentText; level?: 2 | 3 }
+  | { kind: 'specs'; rows: { label: ContentText; value: ContentText }[] }
   | { kind: 'credits'; content: ContentText };
 
 export interface Fragment {

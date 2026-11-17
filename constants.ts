@@ -1022,6 +1022,205 @@ export const PROJECTS: Project[] = [
 
 export const FRAGMENTS: Fragment[] = [
   {
+    id: 'Immersive_LED_Room',
+    title: {
+      [Language.EN]: 'Immersive LED Room: Technical Notes',
+      [Language.TR]: 'İmmersif LED Oda: Teknik Notlar'
+    },
+    type: {
+      [Language.EN]: 'Technical Document',
+      [Language.TR]: 'Teknik Doküman'
+    },
+    date: '11.2026',
+    image: '/fragments/Immersive_LED_Room/cover.svg',
+    blocks: [
+      {
+        kind: 'text',
+        content: {
+          [Language.EN]: `These notes document the engineering of an immersive room we are building: an L-shaped space where every surface is LED. Five walls, the ceiling and the floor all carry image, and visitors trigger the next moment by touching the main wall. The story told inside the room is left out on purpose. This page is about the room as a machine: how its pixels are counted, how the image reaches them and how a touch turns into a response.
+
+The six drawing sheets are generated from the same data file that drives our previews and render setup, so every number on them is the number we build to.`,
+          [Language.TR]: `Bu notlar, üzerinde çalıştığımız immersif bir odanın mühendisliğini anlatıyor: her yüzeyi LED olan L biçimli bir mekân. Beş duvar, tavan ve zemin görüntü taşıyor; ziyaretçi ana duvara dokunarak bir sonraki anı başlatıyor. Odada anlatılan hikâyeyi bilerek dışarıda bıraktık. Bu sayfa odayı bir makine olarak ele alıyor: pikselleri nasıl sayılıyor, görüntü onlara nasıl ulaşıyor, bir dokunuş nasıl tepkiye dönüşüyor.
+
+Altı teknik pafta, önizlemelerimizi ve render kurulumumuzu süren aynı veri dosyasından üretildi; üzerlerindeki her sayı, uyguladığımız sayıdır.`
+        }
+      },
+      {
+        kind: 'specs',
+        rows: [
+          { label: { [Language.EN]: 'Footprint', [Language.TR]: 'Taban' }, value: { [Language.EN]: 'L-shape · 736 × 384 cm main arm + 384 × 384 cm side arm', [Language.TR]: 'L biçimi · 736 × 384 cm ana kol + 384 × 384 cm yan kol' } },
+          { label: { [Language.EN]: 'Height', [Language.TR]: 'Yükseklik' }, value: { [Language.EN]: '256 cm', [Language.TR]: '256 cm' } },
+          { label: { [Language.EN]: 'Walls', [Language.TR]: 'Duvarlar' }, value: { [Language.EN]: '5 LED walls · 26.24 m run · P1.53 · 17056 × 1664 px · 28.38 MP', [Language.TR]: '5 LED duvar · 26,24 m · P1.53 · 17056 × 1664 px · 28,38 MP' } },
+          { label: { [Language.EN]: 'Ceiling, floor', [Language.TR]: 'Tavan, zemin' }, value: { [Language.EN]: 'L-shaped LED, P2.5 · 6.88 MP each · 840 modules each', [Language.TR]: 'L biçimli LED, P2.5 · her biri 6,88 MP · her biri 840 modül' } },
+          { label: { [Language.EN]: 'Whole room', [Language.TR]: 'Bütün oda' }, value: { [Language.EN]: '42.14 MP at 50 fps', [Language.TR]: '50 fps\'te 42,14 MP' } },
+          { label: { [Language.EN]: 'Content', [Language.TR]: 'İçerik' }, value: { [Language.EN]: 'Linear, rendered in Unreal Engine 5.8, played back as video', [Language.TR]: 'Doğrusal, Unreal Engine 5.8\'de üretilir, video olarak oynatılır' } },
+          { label: { [Language.EN]: 'Interaction', [Language.TR]: 'Etkileşim' }, value: { [Language.EN]: 'Touch to trigger · 2D LiDAR · TUIO · one or two people at a time', [Language.TR]: 'Dokunarak tetikleme · 2B LiDAR · TUIO · aynı anda bir ya da iki kişi' } }
+        ]
+      },
+      {
+        kind: 'heading',
+        id: 'geometry',
+        title: { [Language.EN]: 'Room geometry', [Language.TR]: 'Oda geometrisi' }
+      },
+      {
+        kind: 'text',
+        content: {
+          [Language.EN]: `The room is a closed L. The main arm holds the longest wall (W1, 736 cm), which is where visitors gather and where the touch zone sits. The 768 cm wall (W2) runs along both arms. A short wall (W3, 352 cm) faces W1 and turns an outer corner into the side arm, which is LED on three sides (W4 and W5, 384 cm each). The only plain surface is the entry wall, with a single 200 cm opening used for both entry and exit.
+
+Two viewpoints are fixed at 125 cm, average eye height for the group. The main viewpoint sees W1, W2 and W3. The side arm cannot be seen from there, so W4 and W5 are rendered from their own viewpoint inside the arm. Every wall knows which eye it is drawn for. That is what keeps perspective correct across corners.`,
+          [Language.TR]: `Oda kapalı bir L. Ana kolda en uzun duvar (D1, 736 cm) var; grup burada toplanıyor, dokunma alanı da burada. 768 cm'lik duvar (D2) iki kol boyunca uzanıyor. Kısa duvar (D3, 352 cm) D1'e bakıyor ve bir dış köşeyle yan kola dönüyor; yan kolun üç yanı LED (D4 ve D5, her biri 384 cm). Tek düz yüzey giriş duvarı; giriş ve çıkış aynı 200 cm'lik açıklıktan.
+
+İki bakış noktası 125 cm'de, yani grubun ortalama göz yüksekliğinde sabit. Ana bakış noktası D1, D2 ve D3'ü görür. Yan kol oradan görünmediği için D4 ve D5 kolun içindeki kendi bakış noktasından çizilir. Her duvar hangi göz için çizildiğini bilir; köşelerde perspektifi doğru tutan da budur.`
+        }
+      },
+      {
+        kind: 'figure',
+        src: { [Language.EN]: '/fragments/Immersive_LED_Room/01_plan_en.svg', [Language.TR]: '/fragments/Immersive_LED_Room/01_plan_tr.svg' },
+        caption: { [Language.EN]: 'Sheet 01. Plan with LED surfaces, touch zone, entry and the two viewpoints.', [Language.TR]: 'Pafta 01. LED yüzeyler, dokunma alanı, giriş ve iki bakış noktasıyla plan.' }
+      },
+      {
+        kind: 'heading',
+        id: 'pixel-map',
+        title: { [Language.EN]: 'Pixel map', [Language.TR]: 'Piksel haritası' }
+      },
+      {
+        kind: 'text',
+        content: {
+          [Language.EN]: `Unreal content has no resolution of its own. The scene is 3D, and the pixel count is decided at the output. So the job is not to scale an image onto the LED but to make five grids agree: the physical wall, the render viewport, the graphics output, the LED processor canvas and the cabinet map. When all five carry the same numbers, one rendered pixel lands on one LED pixel and nothing is resampled on the way.
+
+On the walls that number is 6.5 px per cm. A 32 × 16 cm module is exactly 208 × 104 px, the wall height of 256 cm is 1664 px, and every wall length is a whole number of modules. W1 is 23 modules wide (4784 px), W2 is 24 (4992 px), W3 is 11 (2288 px), W4 and W5 are 12 each (2496 px). Corners fall on module edges, so the seam between two walls is also a seam between two files.`,
+          [Language.TR]: `Unreal içeriğinin kendine ait bir çözünürlüğü yoktur. Sahne üç boyutludur; piksel sayısı çıkışta belirlenir. Bu yüzden iş, bir görüntüyü LED'e ölçeklemek değil, beş ızgarayı aynı sayılara bağlamaktır: fiziksel duvar, render viewport'u, ekran kartı çıkışı, LED işlemcisinin tuvali ve kabin haritası. Beşi aynı sayıyı taşıdığında render edilen bir piksel bir LED pikseline düşer ve yolda hiçbir şey yeniden örneklenmez.
+
+Duvarlarda bu sayı santimetre başına 6,5 piksel. 32 × 16 cm'lik bir modül tam olarak 208 × 104 piksel, 256 cm'lik duvar yüksekliği 1664 piksel ve her duvar boyu tam sayıda modül. D1 23 modül (4784 px), D2 24 (4992 px), D3 11 (2288 px), D4 ve D5 12'şer (2496 px). Köşeler modül kenarına denk gelir; iki duvar arasındaki dikiş aynı zamanda iki dosya arasındaki dikiştir.`
+        }
+      },
+      {
+        kind: 'figure',
+        src: { [Language.EN]: '/fragments/Immersive_LED_Room/02_unfold_en.svg', [Language.TR]: '/fragments/Immersive_LED_Room/02_unfold_tr.svg' },
+        caption: { [Language.EN]: 'Sheet 02. The five walls unfolded in perimeter order, with module grid and pixel width per wall.', [Language.TR]: 'Pafta 02. Beş duvar çevre sırasıyla açılmış hâlde; modül ızgarası ve duvar başına piksel genişliği.' }
+      },
+      {
+        kind: 'text',
+        content: {
+          [Language.EN]: `Ceiling and floor use a coarser pitch, P2.5 (4 px per cm), because nobody reads text on them at arm's length. Each is the same L as the floor plan, split into two outputs: 2944 × 1536 px over the main arm and 1536 × 1536 px over the side arm. The ceiling image is oriented as a visitor facing W1 sees it when looking up; the floor as seen in plan. Which corner the LED controller treats as pixel 0,0 is confirmed with the installer before anything is rendered.`,
+          [Language.TR]: `Tavan ve zemin daha kaba bir piksel aralığı kullanır, P2.5 (santimetre başına 4 piksel), çünkü kimse onların üzerindeki yazıyı kol mesafesinden okumaz. İkisi de taban planıyla aynı L ve iki çıkışa bölünür: ana kolda 2944 × 1536, yan kolda 1536 × 1536 piksel. Tavan görüntüsü, D1'e dönüp başını kaldıran ziyaretçinin gördüğü yönde; zemin plan görünüşünde. LED denetleyicisinin hangi köşeyi 0,0 pikseli saydığı, hiçbir şey render edilmeden önce kurulumcuyla teyit edilir.`
+        }
+      },
+      {
+        kind: 'figure',
+        src: { [Language.EN]: '/fragments/Immersive_LED_Room/04_ceiling_floor_en.svg', [Language.TR]: '/fragments/Immersive_LED_Room/04_ceiling_floor_tr.svg' },
+        caption: { [Language.EN]: 'Sheet 04. Ceiling and floor LED, two outputs each, with image orientation.', [Language.TR]: 'Pafta 04. Tavan ve zemin LED\'i, her biri iki çıkış; görüntü yönleriyle.' }
+      },
+      {
+        kind: 'heading',
+        id: 'video-not-realtime',
+        title: { [Language.EN]: 'Why video, not real time', [Language.TR]: 'Neden gerçek zamanlı değil, video' }
+      },
+      {
+        kind: 'text',
+        content: {
+          [Language.EN]: `We first planned the room as a live Unreal cluster with nDisplay. At this pixel count that means three or four render machines plus a spare, all locked together every frame. Consumer graphics cards cannot share a hardware frame clock, so each corner where two machines meet carries a drifting offset of up to one frame, 20 ms at 50 Hz. Hiding that takes professional cards with sync boards, and the cost and fragility grow with every node.
+
+Then the content brief settled: the flow is linear, touch only triggers, and one or at most two people use a touch point at a time. Under those rules nothing needs to be drawn live. Each scene is rendered once in Unreal, wall by wall at exact LED resolution, and played back. The show runs from one playback machine and an identical backup. No cluster, no barrier sync, no drifting corners. Anything that would need free camera movement or continuous steering goes back to the real-time path, scene by scene.`,
+          [Language.TR]: `Odayı önce nDisplay ile canlı çalışan bir Unreal kümesi olarak planladık. Bu piksel sayısında bu, üç ya da dört render bilgisayarı ve bir yedek demek; hepsi her karede birbirine kilitli. Tüketici ekran kartları ortak bir donanım kare saatini paylaşamaz; iki bilgisayarın buluştuğu her köşede bir kareye kadar, 50 Hz'de 20 ms'ye kadar kayan bir fark kalır. Bunu gizlemek senkron kartlı profesyonel ekran kartları ister; maliyet ve kırılganlık her düğümle büyür.
+
+Sonra içerik kararı netleşti: akış doğrusal, dokunuş yalnızca tetikliyor ve bir dokunma noktasını aynı anda bir, en çok iki kişi kullanıyor. Bu koşullarda hiçbir şeyin canlı çizilmesi gerekmez. Her sahne Unreal'da bir kez, duvar duvar ve tam LED çözünürlüğünde render edilip oynatılır. Gösterim tek bir oynatıcı bilgisayardan ve özdeş bir yedekten yürür. Küme yok, bariyer senkronu yok, kayan köşe yok. Serbest kamera ya da sürekli yönlendirme isteyen bir sahne olursa o sahne, tek başına, gerçek zamanlı yola döner.`
+        }
+      },
+      {
+        kind: 'heading',
+        id: 'touch',
+        title: { [Language.EN]: 'Touch layer', [Language.TR]: 'Dokunma katmanı' }
+      },
+      {
+        kind: 'text',
+        content: {
+          [Language.EN]: `Touch lives on one wall only: a 180 cm zone on W1, starting 100 cm from the inner corner. A 2D LiDAR scans a plane a few centimetres in front of the LED surface; a hand that breaks the plane becomes a coordinate, sent over TUIO to the playback machine. The active band runs from 60 to 125 cm above the floor. Target centres sit between 85 and 110 cm so that each Ø200 mm target and its invisible 50 mm margin stay inside the band. Targets are at least 300 mm apart, centre to centre. Nothing above 150 cm is ever touchable; that is where the group reads.
+
+Targets are not interface overlays. They are drawn as physical parts of the scene, at true scale on the wall plane, so the visitor presses something that belongs to the place rather than a glowing ring on a screen.`,
+          [Language.TR]: `Dokunma yalnızca tek duvarda: D1 üzerinde, iç köşeden 100 cm içeride başlayan 180 cm'lik bir alan. 2B bir LiDAR, LED yüzeyin birkaç santimetre önünde bir düzlemi tarar; düzlemi kesen el bir koordinata dönüşür ve TUIO ile oynatıcıya gider. Etkin bant yerden 60 ile 125 cm arası. Hedef merkezleri 85 ile 110 cm arasında; böylece Ø200 mm'lik her hedef ve çevresindeki 50 mm'lik görünmez pay bandın içinde kalır. Hedeflerin merkezleri arasında en az 300 mm var. 150 cm'nin üstünde dokunulacak hiçbir şey yok; orası grubun okuduğu yer.
+
+Hedefler arayüz katmanı değil. Sahnenin fiziksel bir parçası olarak, duvar düzleminde gerçek ölçüde çizilirler; ziyaretçi ekranda parlayan bir halkaya değil, o mekâna ait bir şeye basar.`
+        }
+      },
+      {
+        kind: 'figure',
+        src: { [Language.EN]: '/fragments/Immersive_LED_Room/03_section_en.svg', [Language.TR]: '/fragments/Immersive_LED_Room/03_section_tr.svg' },
+        caption: { [Language.EN]: 'Sheet 03. Section through W1 with height bands, and the touch zone in elevation.', [Language.TR]: 'Pafta 03. Yükseklik bantlarıyla D1 kesiti ve dokunma alanının görünüşü.' }
+      },
+      {
+        kind: 'heading',
+        id: 'signal-chain',
+        title: { [Language.EN]: 'Signal chain', [Language.TR]: 'Sinyal zinciri' }
+      },
+      {
+        kind: 'text',
+        content: {
+          [Language.EN]: `Production: scenes are built in Unreal Engine 5.8 and rendered through Movie Render Graph with its nDisplay node, one file per wall from that wall's viewpoint. Movie Render Graph does not write HAP, so frames go out as EXR or ProRes and an external encoder turns them into chunked HAP.
+
+Show: the playback machine reads all surfaces from local NVMe and drives every file from a single frame counter, so walls cannot slide against each other. Outputs go to the LED processors 1:1 at 50 Hz, 8-bit RGB 4:4:4, and from there to the cabinets with one port per cabinet column.
+
+Storage is simple arithmetic. HAP stores half a byte per pixel. At 50 fps the walls alone need 0.71 GB/s, about 42.6 GB per minute; the whole room with ceiling and floor needs 1.05 GB/s, about 63 GB per minute. HAP Q, which avoids banding in soft gradients like sky, water and haze, doubles both. A SATA SSD at around 550 MB/s cannot keep up in any of these cases, so playback runs from NVMe only, with an external copy of the set kept aside.`,
+          [Language.TR]: `Üretim: sahneler Unreal Engine 5.8'de kurulur ve Movie Render Graph'ın nDisplay düğümüyle render edilir; her duvar kendi bakış noktasından, kendi dosyasına. Movie Render Graph HAP yazmaz; kareler EXR ya da ProRes olarak çıkar ve harici bir kodlayıcı onları parçalı HAP'e çevirir.
+
+Gösterim: oynatıcı bilgisayar bütün yüzeyleri yerel NVMe'den okur ve her dosyayı tek bir kare sayacıyla sürer; duvarlar birbirine göre kayamaz. Çıkışlar LED işlemcilerine 50 Hz'de, 8-bit RGB 4:4:4 ve 1:1 gider; oradan kabinlere, her kabin sütununa bir port.
+
+Depolama düz bir hesap. HAP piksel başına yarım bayt tutar. 50 fps'te yalnızca duvarlar saniyede 0,71 GB, dakikada yaklaşık 42,6 GB ister; tavan ve zeminle bütün oda saniyede 1,05 GB, dakikada yaklaşık 63 GB. Gökyüzü, su ve sis gibi yumuşak geçişlerde bantlanmayı önleyen HAP Q ikisini de ikiye katlar. Yaklaşık 550 MB/s okuyan bir SATA SSD bu durumların hiçbirine yetişemez; oynatma yalnızca NVMe'den yapılır, setin harici bir kopyası ayrıca tutulur.`
+        }
+      },
+      {
+        kind: 'figure',
+        src: { [Language.EN]: '/fragments/Immersive_LED_Room/05_signal_en.svg', [Language.TR]: '/fragments/Immersive_LED_Room/05_signal_tr.svg' },
+        caption: { [Language.EN]: 'Sheet 05. From render to cabinet, with the touch path back into the player.', [Language.TR]: 'Pafta 05. Render\'dan kabine; dokunuşun oynatıcıya dönen yoluyla.' }
+      },
+      {
+        kind: 'heading',
+        id: 'interaction',
+        title: { [Language.EN]: 'Interaction logic', [Language.TR]: 'Etkileşim mantığı' }
+      },
+      {
+        kind: 'text',
+        content: {
+          [Language.EN]: `The player is a small state machine built from three kinds of clips. A linear clip plays to its end. A wait loop of 4 to 10 seconds repeats until someone touches the zone. A reaction clip starts on the touch and hands back to the linear flow when it ends.
+
+Two details make it feel immediate. The moment a hand is detected, the player draws a small live response at that exact point, independent of the video, so the wall answers before the reaction clip has even begun. And the reaction clip is already open on a second layer with its first frames read, so it starts on the next frame instead of stalling. After a touch the zone locks, so the same moment cannot be triggered twice. If nobody touches for 30 seconds the player moves on by itself, and staff have a physical advance button.`,
+          [Language.TR]: `Oynatıcı üç tür klipten kurulmuş küçük bir durum makinesi. Düz akış klibi sonuna kadar oynar. 4 ila 10 saniyelik bekleme döngüsü biri bölgeye dokunana kadar tekrar eder. Tepki klibi dokunuşla başlar, bitince akışı düz akışa geri verir.
+
+İki ayrıntı bunu anında hissettirir. El algılandığı anda oynatıcı tam o noktaya, videodan bağımsız, küçük bir canlı tepki çizer; duvar, tepki klibi başlamadan cevap verir. Tepki klibi de ikinci bir katmanda önceden açılmış ve ilk kareleri okunmuş durumdadır; takılmadan bir sonraki karede başlar. Dokunuştan sonra bölge kilitlenir, aynı an iki kez tetiklenemez. 30 saniye kimse dokunmazsa oynatıcı kendisi ilerler; görevli için fiziksel bir ilerletme düğmesi de vardır.`
+        }
+      },
+      {
+        kind: 'figure',
+        src: { [Language.EN]: '/fragments/Immersive_LED_Room/06_states_en.svg', [Language.TR]: '/fragments/Immersive_LED_Room/06_states_tr.svg' },
+        caption: { [Language.EN]: 'Sheet 06. Playback states and the events that move between them.', [Language.TR]: 'Pafta 06. Oynatıcı durumları ve aralarında geçişi sağlayan olaylar.' }
+      },
+      {
+        kind: 'heading',
+        id: 'reliability',
+        title: { [Language.EN]: 'Reliability', [Language.TR]: 'Güvenilirlik' }
+      },
+      {
+        kind: 'text',
+        content: {
+          [Language.EN]: `A frozen computer keeps sending a perfectly valid video signal, and the LED processors have no input failover of their own. So the switch to the backup cannot rely on the signal disappearing. The playback machine sends a heartbeat; when it stops, a watchdog recalls a preset on the processors that selects the backup input. The backup holds identical files, and a staff button can force the same switch by hand. Both machines restart every night.`,
+          [Language.TR]: `Donmuş bir bilgisayar kusursuz geçerli bir video sinyali göndermeyi sürdürür ve LED işlemcilerinin kendi giriş yedeklemesi yoktur. Bu yüzden yedeğe geçiş sinyalin kaybolmasına güvenemez. Oynatıcı bir kalp atışı gönderir; atış kesilince bir bekçi yazılım, işlemcilerde yedek girişi seçen ön ayarı çağırır. Yedekte özdeş dosyalar vardır ve görevli düğmesi aynı geçişi elle de yapabilir. İki bilgisayar da her gece yeniden başlar.`
+        }
+      },
+      {
+        kind: 'heading',
+        id: 'tests',
+        title: { [Language.EN]: 'Tests before ordering', [Language.TR]: 'Siparişten önceki testler' }
+      },
+      {
+        kind: 'text',
+        content: {
+          [Language.EN]: `Published render-time measurements for this kind of output disagree with each other by more than an order of magnitude, so no schedule or hardware order is fixed on paper. Four things are measured first: render speed on a representative scene at full wall resolution, full-resolution playback of every surface at once from a single machine, whether one graphics card can drive several outputs as one tear-free surface, and a two-sensor LiDAR test on site, including ghost touches from hands that enter the scan plane outside the zone.`,
+          [Language.TR]: `Bu tür bir çıktı için yayımlanmış render süresi ölçümleri birbirinden on kattan fazla ayrışıyor; bu yüzden hiçbir takvim ya da donanım siparişi kâğıt üzerinde kesinleştirilmiyor. Önce dört şey ölçülüyor: temsilî bir sahnenin tam duvar çözünürlüğünde render hızı; bütün yüzeylerin tek bilgisayardan aynı anda tam çözünürlükte oynatılması; tek bir ekran kartının birkaç çıkışı yırtılmasız tek bir yüzey gibi sürüp süremediği; ve sahada iki sensörle LiDAR testi, bölge dışında tarama düzlemine giren ellerin yarattığı hayalet dokunuşlar dahil.`
+        }
+      }
+    ]
+  },
+  {
     id: 'Anamorphic_Corner_LED',
     title: {
       [Language.EN]: 'One File, One Eye Point',

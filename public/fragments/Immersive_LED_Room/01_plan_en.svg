@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" width="1600" height="1000"><defs><marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#8A8A8A"/></marker><marker id="ara" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#E8B04A"/></marker><pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" stroke="#E8B04A" stroke-width="1.2" opacity="0.55"/></pattern></defs><rect width="1600" height="1000" fill="#121212"/>
+<path d="M250.00,165.00 L875.60,165.00 L875.60,491.40 L576.40,491.40 L576.40,817.80 L250.00,817.80 Z" stroke="none" stroke-width="1" fill="#181818" opacity="1"/>
+<line x1="250.00" y1="131.00" x2="250.00" y2="851.80" stroke="#2A2A2A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="335.00" y1="131.00" x2="335.00" y2="851.80" stroke="#2A2A2A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="420.00" y1="131.00" x2="420.00" y2="851.80" stroke="#2A2A2A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="505.00" y1="131.00" x2="505.00" y2="851.80" stroke="#2A2A2A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="590.00" y1="131.00" x2="590.00" y2="851.80" stroke="#2A2A2A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="675.00" y1="131.00" x2="675.00" y2="851.80" stroke="#2A2A2A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="760.00" y1="131.00" x2="760.00" y2="851.80" stroke="#2A2A2A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="845.00" y1="131.00" x2="845.00" y2="851.80" stroke="#2A2A2A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="930.00" y1="131.00" x2="930.00" y2="851.80" stroke="#2A2A2A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="216.00" y1="165.00" x2="909.60" y2="165.00" stroke="#2A2A2A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="216.00" y1="250.00" x2="909.60" y2="250.00" stroke="#2A2A2A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="216.00" y1="335.00" x2="909.60" y2="335.00" stroke="#2A2A2A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="216.00" y1="420.00" x2="909.60" y2="420.00" stroke="#2A2A2A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="216.00" y1="505.00" x2="909.60" y2="505.00" stroke="#2A2A2A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="216.00" y1="590.00" x2="909.60" y2="590.00" stroke="#2A2A2A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="216.00" y1="675.00" x2="909.60" y2="675.00" stroke="#2A2A2A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="216.00" y1="760.00" x2="909.60" y2="760.00" stroke="#2A2A2A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="216.00" y1="845.00" x2="909.60" y2="845.00" stroke="#2A2A2A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="875.60" y1="165.00" x2="875.60" y2="258.50" stroke="#8A8A8A" stroke-width="5" opacity="1" stroke-linecap="butt"/>
+<line x1="875.60" y1="428.50" x2="875.60" y2="491.40" stroke="#8A8A8A" stroke-width="5" opacity="1" stroke-linecap="butt"/>
+<line x1="250.00" y1="165.00" x2="875.60" y2="165.00" stroke="#F5F5F7" stroke-width="7" opacity="1" stroke-linecap="square"/>
+<line x1="250.00" y1="817.80" x2="250.00" y2="165.00" stroke="#F5F5F7" stroke-width="7" opacity="1" stroke-linecap="square"/>
+<line x1="875.60" y1="491.40" x2="576.40" y2="491.40" stroke="#F5F5F7" stroke-width="7" opacity="1" stroke-linecap="square"/>
+<line x1="576.40" y1="491.40" x2="576.40" y2="817.80" stroke="#F5F5F7" stroke-width="7" opacity="1" stroke-linecap="square"/>
+<line x1="576.40" y1="817.80" x2="250.00" y2="817.80" stroke="#F5F5F7" stroke-width="7" opacity="1" stroke-linecap="square"/>
+<rect x="540.80" y="172.10" width="44.00" height="28.00" rx="0" fill="#121212" opacity="1" stroke="#F5F5F7" stroke-width="1"/>
+<text x="562.80" y="193.10" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" fill="#F5F5F7" text-anchor="middle" font-weight="700" letter-spacing="0" opacity="1">W1</text>
+<rect x="250.10" y="476.40" width="44.00" height="28.00" rx="0" fill="#121212" opacity="1" stroke="#F5F5F7" stroke-width="1"/>
+<text x="272.10" y="497.40" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" fill="#F5F5F7" text-anchor="middle" font-weight="700" letter-spacing="0" opacity="1">W2</text>
+<rect x="704.00" y="454.30" width="44.00" height="28.00" rx="0" fill="#121212" opacity="1" stroke="#F5F5F7" stroke-width="1"/>
+<text x="726.00" y="475.30" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" fill="#F5F5F7" text-anchor="middle" font-weight="700" letter-spacing="0" opacity="1">W3</text>
+<rect x="532.30" y="639.60" width="44.00" height="28.00" rx="0" fill="#121212" opacity="1" stroke="#F5F5F7" stroke-width="1"/>
+<text x="554.30" y="660.60" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" fill="#F5F5F7" text-anchor="middle" font-weight="700" letter-spacing="0" opacity="1">W4</text>
+<rect x="391.20" y="780.70" width="44.00" height="28.00" rx="0" fill="#121212" opacity="1" stroke="#F5F5F7" stroke-width="1"/>
+<text x="413.20" y="801.70" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="16" fill="#F5F5F7" text-anchor="middle" font-weight="700" letter-spacing="0" opacity="1">W5</text>
+<rect x="335.00" y="169.00" width="153.00" height="81.00" rx="0" fill="url(#hatch)" opacity="1" stroke="#E8B04A" stroke-width="1.2"/>
+<line x1="335.00" y1="175.00" x2="488.00" y2="175.00" stroke="#E8B04A" stroke-width="2" opacity="1" stroke-linecap="butt" stroke-dasharray="2 4"/>
+<rect x="349.50" y="195.50" width="124.00" height="26.00" rx="0" fill="#121212" opacity="1"/>
+<text x="411.50" y="213.50" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="13" fill="#E8B04A" text-anchor="middle" font-weight="400" letter-spacing="0.6" opacity="1">TOUCH ZONE</text>
+<path d="M915.60,343.50 L825.60,343.50" stroke="#8A8A8A" stroke-width="1.4" fill="none" opacity="1" marker-end="url(#ar)"/>
+<text x="815.60" y="348.50" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="14" fill="#F5F5F7" text-anchor="end" font-weight="400" letter-spacing="0.6" opacity="1">ENTRY / EXIT</text>
+<circle cx="607.00" cy="403.00" r="9.00" fill="none" opacity="1" stroke="#5FC4D9" stroke-width="1.6"/>
+<circle cx="607.00" cy="403.00" r="2.50" fill="#5FC4D9" opacity="1"/>
+<text x="607.00" y="433.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="13" fill="#5FC4D9" text-anchor="middle" font-weight="400" letter-spacing="0.6" opacity="1">MAIN VIEWPOINT</text>
+<circle cx="413.20" cy="654.60" r="9.00" fill="none" opacity="1" stroke="#5FC4D9" stroke-width="1.6"/>
+<circle cx="413.20" cy="654.60" r="2.50" fill="#5FC4D9" opacity="1"/>
+<text x="413.20" y="684.60" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="13" fill="#5FC4D9" text-anchor="middle" font-weight="400" letter-spacing="0.6" opacity="1">SIDE ARM VIEWPOINT</text>
+<text x="649.50" y="292.50" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" fill="#8A8A8A" text-anchor="start" font-weight="600" letter-spacing="0" opacity="1">MAIN ARM 736 × 384</text>
+<text x="301.00" y="564.50" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="15" fill="#8A8A8A" text-anchor="start" font-weight="600" letter-spacing="0" opacity="1">SIDE ARM 384 × 384</text>
+<line x1="250.00" y1="159.00" x2="250.00" y2="109.25" stroke="#8A8A8A" stroke-width="0.8" opacity="0.6" stroke-linecap="butt"/>
+<line x1="875.60" y1="159.00" x2="875.60" y2="109.25" stroke="#8A8A8A" stroke-width="0.8" opacity="0.6" stroke-linecap="butt"/>
+<line x1="250.00" y1="101.25" x2="875.60" y2="101.25" stroke="#8A8A8A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="244.00" y1="107.25" x2="256.00" y2="95.25" stroke="#8A8A8A" stroke-width="1.4" opacity="1" stroke-linecap="butt"/>
+<line x1="869.60" y1="107.25" x2="881.60" y2="95.25" stroke="#8A8A8A" stroke-width="1.4" opacity="1" stroke-linecap="butt"/>
+<text x="562.80" y="93.25" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#F5F5F7" text-anchor="middle" font-weight="400" letter-spacing="0.6" opacity="1">736</text>
+<text x="562.80" y="121.25" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="13" fill="#8A8A8A" text-anchor="middle" font-weight="400" letter-spacing="0.6" opacity="1">4784 px</text>
+<line x1="244.00" y1="165.00" x2="190.00" y2="165.00" stroke="#8A8A8A" stroke-width="0.8" opacity="0.6" stroke-linecap="butt"/>
+<line x1="244.00" y1="817.80" x2="190.00" y2="817.80" stroke="#8A8A8A" stroke-width="0.8" opacity="0.6" stroke-linecap="butt"/>
+<line x1="182.00" y1="165.00" x2="182.00" y2="817.80" stroke="#8A8A8A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="176.00" y1="171.00" x2="188.00" y2="159.00" stroke="#8A8A8A" stroke-width="1.4" opacity="1" stroke-linecap="butt"/>
+<line x1="176.00" y1="823.80" x2="188.00" y2="811.80" stroke="#8A8A8A" stroke-width="1.4" opacity="1" stroke-linecap="butt"/>
+<text x="172.00" y="491.40" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#F5F5F7" text-anchor="middle" font-weight="400" letter-spacing="0.6" opacity="1" transform="rotate(-90 172.00 491.40)">768 · 4992 px</text>
+<line x1="576.40" y1="497.40" x2="576.40" y2="555.50" stroke="#8A8A8A" stroke-width="0.8" opacity="0.6" stroke-linecap="butt"/>
+<line x1="875.60" y1="497.40" x2="875.60" y2="555.50" stroke="#8A8A8A" stroke-width="0.8" opacity="0.6" stroke-linecap="butt"/>
+<line x1="576.40" y1="547.50" x2="875.60" y2="547.50" stroke="#8A8A8A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="570.40" y1="553.50" x2="582.40" y2="541.50" stroke="#8A8A8A" stroke-width="1.4" opacity="1" stroke-linecap="butt"/>
+<line x1="869.60" y1="553.50" x2="881.60" y2="541.50" stroke="#8A8A8A" stroke-width="1.4" opacity="1" stroke-linecap="butt"/>
+<text x="726.00" y="539.50" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#F5F5F7" text-anchor="middle" font-weight="400" letter-spacing="0.6" opacity="1">352</text>
+<text x="726.00" y="567.50" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="13" fill="#8A8A8A" text-anchor="middle" font-weight="400" letter-spacing="0.6" opacity="1">2288 px</text>
+<line x1="582.40" y1="491.40" x2="624.50" y2="491.40" stroke="#8A8A8A" stroke-width="0.8" opacity="0.6" stroke-linecap="butt"/>
+<line x1="582.40" y1="817.80" x2="624.50" y2="817.80" stroke="#8A8A8A" stroke-width="0.8" opacity="0.6" stroke-linecap="butt"/>
+<line x1="632.50" y1="491.40" x2="632.50" y2="817.80" stroke="#8A8A8A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="626.50" y1="497.40" x2="638.50" y2="485.40" stroke="#8A8A8A" stroke-width="1.4" opacity="1" stroke-linecap="butt"/>
+<line x1="626.50" y1="823.80" x2="638.50" y2="811.80" stroke="#8A8A8A" stroke-width="1.4" opacity="1" stroke-linecap="butt"/>
+<text x="642.50" y="654.60" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#F5F5F7" text-anchor="middle" font-weight="400" letter-spacing="0.6" opacity="1" transform="rotate(90 642.50 654.60)">384 · 2496 px</text>
+<line x1="250.00" y1="823.80" x2="250.00" y2="882.75" stroke="#8A8A8A" stroke-width="0.8" opacity="0.6" stroke-linecap="butt"/>
+<line x1="576.40" y1="823.80" x2="576.40" y2="882.75" stroke="#8A8A8A" stroke-width="0.8" opacity="0.6" stroke-linecap="butt"/>
+<line x1="250.00" y1="874.75" x2="576.40" y2="874.75" stroke="#8A8A8A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="244.00" y1="880.75" x2="256.00" y2="868.75" stroke="#8A8A8A" stroke-width="1.4" opacity="1" stroke-linecap="butt"/>
+<line x1="570.40" y1="880.75" x2="582.40" y2="868.75" stroke="#8A8A8A" stroke-width="1.4" opacity="1" stroke-linecap="butt"/>
+<text x="413.20" y="866.75" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#F5F5F7" text-anchor="middle" font-weight="400" letter-spacing="0.6" opacity="1">384</text>
+<text x="413.20" y="894.75" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="13" fill="#8A8A8A" text-anchor="middle" font-weight="400" letter-spacing="0.6" opacity="1">2496 px</text>
+<line x1="881.60" y1="258.50" x2="922.00" y2="258.50" stroke="#8A8A8A" stroke-width="0.8" opacity="0.6" stroke-linecap="butt"/>
+<line x1="881.60" y1="428.50" x2="922.00" y2="428.50" stroke="#8A8A8A" stroke-width="0.8" opacity="0.6" stroke-linecap="butt"/>
+<line x1="930.00" y1="258.50" x2="930.00" y2="428.50" stroke="#8A8A8A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="924.00" y1="264.50" x2="936.00" y2="252.50" stroke="#8A8A8A" stroke-width="1.4" opacity="1" stroke-linecap="butt"/>
+<line x1="924.00" y1="434.50" x2="936.00" y2="422.50" stroke="#8A8A8A" stroke-width="1.4" opacity="1" stroke-linecap="butt"/>
+<text x="940.00" y="343.50" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#F5F5F7" text-anchor="middle" font-weight="400" letter-spacing="0.6" opacity="1" transform="rotate(90 940.00 343.50)">200</text>
+<line x1="335.00" y1="284.00" x2="488.00" y2="284.00" stroke="#E8B04A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="329.00" y1="290.00" x2="341.00" y2="278.00" stroke="#E8B04A" stroke-width="1.4" opacity="1" stroke-linecap="butt"/>
+<line x1="482.00" y1="290.00" x2="494.00" y2="278.00" stroke="#E8B04A" stroke-width="1.4" opacity="1" stroke-linecap="butt"/>
+<text x="411.50" y="276.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#F5F5F7" text-anchor="middle" font-weight="400" letter-spacing="0.6" opacity="1">180</text>
+<text x="256.00" y="307.80" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="12" fill="#E8B04A" text-anchor="start" font-weight="400" letter-spacing="0.6" opacity="1">100 from inner corner</text>
+<circle cx="576.40" cy="491.40" r="14.00" fill="none" opacity="1" stroke="#8A8A8A" stroke-width="1" stroke-dasharray="3 3"/>
+<text x="596.40" y="523.40" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="12" fill="#8A8A8A" text-anchor="start" font-weight="400" letter-spacing="0.6" opacity="1">outer corner</text>
+<line x1="1130.00" y1="200.00" x2="1176.00" y2="200.00" stroke="#F5F5F7" stroke-width="7" opacity="1" stroke-linecap="butt"/>
+<text x="1192.00" y="205.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="14" fill="#F5F5F7" text-anchor="start" font-weight="400" letter-spacing="0.6" opacity="1">LED wall</text>
+<line x1="1130.00" y1="236.00" x2="1176.00" y2="236.00" stroke="#8A8A8A" stroke-width="5" opacity="1" stroke-linecap="butt"/>
+<text x="1192.00" y="241.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="14" fill="#F5F5F7" text-anchor="start" font-weight="400" letter-spacing="0.6" opacity="1">plain wall</text>
+<rect x="1130.00" y="262.00" width="46.00" height="22.00" rx="0" fill="url(#hatch)" opacity="1" stroke="#E8B04A" stroke-width="1"/>
+<text x="1192.00" y="279.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="14" fill="#F5F5F7" text-anchor="start" font-weight="400" letter-spacing="0.6" opacity="1">TOUCH ZONE</text>
+<circle cx="1153.00" cy="312.00" r="9.00" fill="none" opacity="1" stroke="#5FC4D9" stroke-width="1.6"/>
+<text x="1192.00" y="317.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="14" fill="#F5F5F7" text-anchor="start" font-weight="400" letter-spacing="0.6" opacity="1">VIEWPOINT h 125</text>
+<line x1="1130.00" y1="350.00" x2="1530.00" y2="350.00" stroke="#4A4A4A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<text x="1130.00" y="386.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#F5F5F7" text-anchor="start" font-weight="400" letter-spacing="0.6" opacity="1">W1</text>
+<text x="1200.00" y="386.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#8A8A8A" text-anchor="start" font-weight="400" letter-spacing="0.6" opacity="1">736 cm</text>
+<text x="1530.00" y="386.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#F5F5F7" text-anchor="end" font-weight="400" letter-spacing="0.6" opacity="1">4784 × 1664 px</text>
+<text x="1130.00" y="418.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#F5F5F7" text-anchor="start" font-weight="400" letter-spacing="0.6" opacity="1">W2</text>
+<text x="1200.00" y="418.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#8A8A8A" text-anchor="start" font-weight="400" letter-spacing="0.6" opacity="1">768 cm</text>
+<text x="1530.00" y="418.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#F5F5F7" text-anchor="end" font-weight="400" letter-spacing="0.6" opacity="1">4992 × 1664 px</text>
+<text x="1130.00" y="450.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#F5F5F7" text-anchor="start" font-weight="400" letter-spacing="0.6" opacity="1">W3</text>
+<text x="1200.00" y="450.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#8A8A8A" text-anchor="start" font-weight="400" letter-spacing="0.6" opacity="1">352 cm</text>
+<text x="1530.00" y="450.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#F5F5F7" text-anchor="end" font-weight="400" letter-spacing="0.6" opacity="1">2288 × 1664 px</text>
+<text x="1130.00" y="482.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#F5F5F7" text-anchor="start" font-weight="400" letter-spacing="0.6" opacity="1">W4</text>
+<text x="1200.00" y="482.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#8A8A8A" text-anchor="start" font-weight="400" letter-spacing="0.6" opacity="1">384 cm</text>
+<text x="1530.00" y="482.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#F5F5F7" text-anchor="end" font-weight="400" letter-spacing="0.6" opacity="1">2496 × 1664 px</text>
+<text x="1130.00" y="514.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#F5F5F7" text-anchor="start" font-weight="400" letter-spacing="0.6" opacity="1">W5</text>
+<text x="1200.00" y="514.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#8A8A8A" text-anchor="start" font-weight="400" letter-spacing="0.6" opacity="1">384 cm</text>
+<text x="1530.00" y="514.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#F5F5F7" text-anchor="end" font-weight="400" letter-spacing="0.6" opacity="1">2496 × 1664 px</text>
+<line x1="1130.00" y1="532.00" x2="1530.00" y2="532.00" stroke="#4A4A4A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<text x="1130.00" y="558.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#F5F5F7" text-anchor="start" font-weight="400" letter-spacing="0.6" opacity="1">WALLS TOTAL</text>
+<text x="1530.00" y="558.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#F5F5F7" text-anchor="end" font-weight="400" letter-spacing="0.6" opacity="1">17056 × 1664</text>
+<text x="1530.00" y="586.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="15" fill="#E8B04A" text-anchor="end" font-weight="400" letter-spacing="0.6" opacity="1">28.38 MP · 67.2 m²</text>
+<text x="1130.00" y="636.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="13" fill="#8A8A8A" text-anchor="start" font-weight="400" letter-spacing="0.6" opacity="1">height 256 cm on all walls</text>
+<text x="1130.00" y="660.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="13" fill="#8A8A8A" text-anchor="start" font-weight="400" letter-spacing="0.6" opacity="1">module 32 × 16 cm = 208 × 104 px</text>
+<rect x="16.00" y="16.00" width="1568.00" height="968.00" rx="0" fill="none" opacity="1" stroke="#4A4A4A" stroke-width="1"/>
+<text x="40.00" y="64.00" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="26" fill="#F5F5F7" text-anchor="start" font-weight="700" letter-spacing="-0.5" opacity="1">PLAN · LED SURFACES</text>
+<text x="1560.00" y="60.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="14" fill="#8A8A8A" text-anchor="end" font-weight="400" letter-spacing="0.6" opacity="1">SHEET 01 / 06</text>
+<line x1="40.00" y1="84.00" x2="1560.00" y2="84.00" stroke="#4A4A4A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<line x1="40.00" y1="936.00" x2="1560.00" y2="936.00" stroke="#4A4A4A" stroke-width="1" opacity="1" stroke-linecap="butt"/>
+<text x="40.00" y="966.00" font-family="'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="13" fill="#8A8A8A" text-anchor="start" font-weight="400" letter-spacing="0.6" opacity="1">UNITS: cm · LED P1.53 (650 px/m) on walls · P2.5 (400 px/m) on ceiling and floor</text>
+<text x="1560.00" y="968.00" font-family="Inter, 'Helvetica Neue', Arial, sans-serif" font-size="22" fill="#F5F5F7" text-anchor="end" font-weight="800" letter-spacing="-0.8" opacity="1">madde</text></svg>

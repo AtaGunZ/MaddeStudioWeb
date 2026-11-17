@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FRAGMENTS, TEXTS } from '../constants';
 import { FragmentBlock, Language } from '../types';
@@ -15,6 +15,39 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
     // Derive directly — no useState so there's never a stale/undefined frame
     const fragment = FRAGMENTS.find(f => f.id === fragmentId);
     usePageTitle(fragment?.title[language]);
+
+    // Table of contents: built from heading blocks, active item follows the scroll
+    const headings = (fragment?.blocks ?? []).filter(
+        (b): b is Extract<FragmentBlock, { kind: 'heading' }> => b.kind === 'heading'
+    );
+    const hasToc = headings.length > 0;
+    const [activeId, setActiveId] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (!hasToc) return;
+        const els = headings.map(h => document.getElementById(h.id)).filter(Boolean) as HTMLElement[];
+        const onScroll = () => {
+            const line = window.innerHeight * 0.3;
+            let current: string | null = els[0]?.id ?? null;
+            for (const el of els) {
+                if (el.getBoundingClientRect().top <= line) current = el.id;
+            }
+            setActiveId(current);
+        };
+        onScroll();
+        window.addEventListener('scroll', onScroll, { passive: true });
+        return () => window.removeEventListener('scroll', onScroll);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [fragmentId, hasToc]);
+
+    const goTo = (id: string) => (e: React.MouseEvent) => {
+        e.preventDefault();
+        const el = document.getElementById(id);
+        if (!el) return;
+        window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 110, behavior: 'smooth' });
+    };
+
+    const tocLabel = language === Language.TR ? 'İçindekiler' : 'Contents';
 
     if (!fragment) return null;
 
@@ -82,13 +115,42 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                         transition={{ duration: 1, ease: 'easeInOut' }}
                         className="w-full"
                     >
-                        <img loading="lazy" decoding="async" src={block.src[language]} alt={block.caption?.[language] ?? ''} className="w-full h-auto" />
+                        <a href={block.src[language]} target="_blank" rel="noopener" className="block cursor-zoom-in">
+                            <img decoding="async" src={block.src[language]} alt={block.caption?.[language] ?? ''} className="w-full h-auto" />
+                        </a>
                         {block.caption && (
                             <figcaption className="mt-3 text-xs font-mono text-madde-gray leading-relaxed">
                                 {block.caption[language]}
                             </figcaption>
                         )}
                     </motion.figure>
+                );
+
+            case 'heading': {
+                const sub = block.level === 3;
+                return (
+                    <h2
+                        key={i}
+                        id={block.id}
+                        className={sub
+                            ? 'scroll-mt-28 text-xl md:text-2xl font-bold tracking-tight -mb-8 md:-mb-14'
+                            : 'scroll-mt-28 text-2xl md:text-4xl font-bold tracking-tighter pt-10 md:pt-14 -mb-6 md:-mb-12 border-t border-black/10 dark:border-white/10'}
+                    >
+                        {block.title[language]}
+                    </h2>
+                );
+            }
+
+            case 'specs':
+                return (
+                    <dl key={i} className="w-full border-t border-black/10 dark:border-white/10 font-mono text-sm">
+                        {block.rows.map((row, ri) => (
+                            <div key={ri} className="grid grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] gap-4 py-3 border-b border-black/10 dark:border-white/10">
+                                <dt className="text-madde-gray">{row.label[language]}</dt>
+                                <dd className="text-madde-black dark:text-madde-white">{row.value[language]}</dd>
+                            </div>
+                        ))}
+                    </dl>
                 );
 
             case 'credits':
@@ -121,7 +183,8 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0, transition: { duration: 0.5 } }}
         >
-            <div className="max-w-4xl mx-auto flex flex-col gap-16 md:gap-24">
+            <div className={hasToc ? 'max-w-6xl mx-auto lg:grid lg:grid-cols-[minmax(0,1fr)_14rem] lg:gap-16' : ''}>
+            <div className="max-w-4xl mx-auto w-full flex flex-col gap-16 md:gap-24">
 
                 {/* Header */}
                 <div>
@@ -136,6 +199,21 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                     </span>
                 </div>
 
+                {hasToc && (
+                    <details className="lg:hidden -mt-8 border-y border-black/10 dark:border-white/10 font-mono text-sm">
+                        <summary className="cursor-pointer py-4 uppercase tracking-widest text-xs text-madde-gray">{tocLabel}</summary>
+                        <ul className="pb-4">
+                            {headings.map(h => (
+                                <li key={h.id}>
+                                    <a href={`#${h.id}`} onClick={goTo(h.id)} className={`block py-1.5 text-madde-gray hover:text-madde-black dark:hover:text-madde-white ${h.level === 3 ? 'pl-4' : ''}`}>
+                                        {h.title[language]}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </details>
+                )}
+
                 {/* Rich blocks */}
                 {fragment.blocks?.map((block, i) => renderBlock(block, i))}
 
@@ -146,6 +224,30 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                     </p>
                 )}
 
+            </div>
+
+            {hasToc && (
+                <aside className="hidden lg:block">
+                    <nav className="sticky top-32 font-mono text-xs" aria-label={tocLabel}>
+                        <p className="uppercase tracking-widest text-madde-gray mb-4">{tocLabel}</p>
+                        <ul className="border-l border-black/10 dark:border-white/10">
+                            {headings.map(h => (
+                                <li key={h.id}>
+                                    <a
+                                        href={`#${h.id}`}
+                                        onClick={goTo(h.id)}
+                                        className={`block py-1.5 -ml-px border-l transition-colors ${h.level === 3 ? 'pl-7' : 'pl-4'} ${activeId === h.id
+                                            ? 'border-madde-black dark:border-madde-white text-madde-black dark:text-madde-white'
+                                            : 'border-transparent text-madde-gray hover:text-madde-black dark:hover:text-madde-white'}`}
+                                    >
+                                        {h.title[language]}
+                                    </a>
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
+                </aside>
+            )}
             </div>
         </motion.article>
     );
