@@ -5790,7 +5790,7 @@ Karma kurulum da mümkün: sahnelerin çoğu video, bir ya da ikisi gerçek zama
       [Language.EN]: 'Technical Note',
       [Language.TR]: 'Teknik Not'
     },
-    date: '11.2026',
+    date: '07.2026',
     image: '/fragments/Anamorphic_Corner_LED/cover.svg',
     blocks: [
       {
