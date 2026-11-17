@@ -47,9 +47,28 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
         window.scrollTo({ top: el.getBoundingClientRect().top + window.scrollY - 110, behavior: 'smooth' });
     };
 
+    const activeSection = activeId ? activeId.split('-')[0] : null;
     const tocLabel = language === Language.TR ? 'İçindekiler' : 'Contents';
 
     if (!fragment) return null;
+
+    // [label](https://...) becomes a link; everything else stays plain text
+    const inline = (txt: string) => {
+        const out: React.ReactNode[] = [];
+        const re = /\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g;
+        let last = 0; let m: RegExpExecArray | null; let k = 0;
+        while ((m = re.exec(txt))) {
+            if (m.index > last) out.push(txt.slice(last, m.index));
+            out.push(
+                <a key={k++} href={m[2]} target="_blank" rel="noopener noreferrer" className="underline underline-offset-4 decoration-black/30 dark:decoration-white/30 hover:decoration-current">
+                    {m[1]}
+                </a>
+            );
+            last = m.index + m[0].length;
+        }
+        if (last < txt.length) out.push(txt.slice(last));
+        return out;
+    };
 
     const renderBlock = (block: FragmentBlock, i: number) => {
         switch (block.kind) {
@@ -63,11 +82,25 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                         transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
                         className="w-full"
                     >
-                        {block.content[language].split('\n\n').map((para, pi) => (
-                            <p key={pi} className="text-base md:text-lg leading-[1.9] text-madde-gray dark:text-gray-300 font-light mb-6 last:mb-0 whitespace-pre-line">
-                                {para}
-                            </p>
-                        ))}
+                        {block.content[language].split('\n\n').map((para, pi) => {
+                            const lines = para.split('\n');
+                            if (lines.every(l => l.startsWith('- '))) {
+                                return (
+                                    <ul key={pi} className="list-none mb-6 last:mb-0 space-y-2">
+                                        {lines.map((l, li) => (
+                                            <li key={li} className="relative pl-5 text-base md:text-lg leading-[1.8] text-madde-gray dark:text-gray-300 font-light before:content-['–'] before:absolute before:left-0">
+                                                {inline(l.slice(2))}
+                                            </li>
+                                        ))}
+                                    </ul>
+                                );
+                            }
+                            return (
+                                <p key={pi} className="text-base md:text-lg leading-[1.9] text-madde-gray dark:text-gray-300 font-light mb-6 last:mb-0 whitespace-pre-line">
+                                    {inline(para)}
+                                </p>
+                            );
+                        })}
                     </motion.div>
                 );
 
@@ -133,8 +166,8 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                         key={i}
                         id={block.id}
                         className={sub
-                            ? 'scroll-mt-28 text-xl md:text-2xl font-bold tracking-tight -mb-8 md:-mb-14'
-                            : 'scroll-mt-28 text-2xl md:text-4xl font-bold tracking-tighter pt-10 md:pt-14 -mb-6 md:-mb-12 border-t border-black/10 dark:border-white/10'}
+                            ? 'scroll-mt-28 text-xl md:text-2xl font-bold tracking-tight pt-4 -mb-2'
+                            : 'scroll-mt-28 text-2xl md:text-4xl font-bold tracking-tighter mt-10 md:mt-16 pt-10 md:pt-14 border-t border-black/10 dark:border-white/10'}
                     >
                         {block.title[language]}
                     </h2>
@@ -151,6 +184,35 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                             </div>
                         ))}
                     </dl>
+                );
+
+            case 'table':
+                return (
+                    <figure key={i} className="w-full">
+                        <div className="w-full overflow-x-auto">
+                            <table className="w-full min-w-[34rem] text-left font-mono text-xs md:text-[13px] leading-relaxed border-collapse">
+                                <thead>
+                                    <tr className="border-b border-black/20 dark:border-white/20">
+                                        {block.columns.map((c, ci) => (
+                                            <th key={ci} className="py-3 pr-4 font-normal uppercase tracking-wider text-madde-gray align-bottom">{c[language]}</th>
+                                        ))}
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {block.rows.map((row, ri) => (
+                                        <tr key={ri} className="border-b border-black/10 dark:border-white/10 align-top">
+                                            {row.map((cell, ci) => (
+                                                <td key={ci} className={`py-3 pr-4 ${ci === 0 ? 'text-madde-black dark:text-madde-white' : 'text-madde-gray dark:text-gray-300'}`}>{inline(cell[language])}</td>
+                                            ))}
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                        {block.caption && (
+                            <figcaption className="mt-3 text-xs font-mono text-madde-gray leading-relaxed">{block.caption[language]}</figcaption>
+                        )}
+                    </figure>
                 );
 
             case 'credits':
@@ -184,7 +246,7 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
             exit={{ opacity: 0, transition: { duration: 0.5 } }}
         >
             <div className={hasToc ? 'max-w-6xl mx-auto lg:grid lg:grid-cols-[minmax(0,1fr)_14rem] lg:gap-16' : ''}>
-            <div className="max-w-4xl mx-auto w-full flex flex-col gap-16 md:gap-24">
+            <div className={`max-w-4xl mx-auto w-full flex flex-col ${hasToc ? 'gap-8 md:gap-10' : 'gap-16 md:gap-24'}`}>
 
                 {/* Header */}
                 <div>
@@ -203,7 +265,7 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                     <details className="lg:hidden -mt-8 border-y border-black/10 dark:border-white/10 font-mono text-sm">
                         <summary className="cursor-pointer py-4 uppercase tracking-widest text-xs text-madde-gray">{tocLabel}</summary>
                         <ul className="pb-4">
-                            {headings.map(h => (
+                            {headings.filter(h => h.level !== 3).map(h => (
                                 <li key={h.id}>
                                     <a href={`#${h.id}`} onClick={goTo(h.id)} className={`block py-1.5 text-madde-gray hover:text-madde-black dark:hover:text-madde-white ${h.level === 3 ? 'pl-4' : ''}`}>
                                         {h.title[language]}
@@ -230,20 +292,24 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                 <aside className="hidden lg:block">
                     <nav className="sticky top-32 font-mono text-xs" aria-label={tocLabel}>
                         <p className="uppercase tracking-widest text-madde-gray mb-4">{tocLabel}</p>
-                        <ul className="border-l border-black/10 dark:border-white/10">
-                            {headings.map(h => (
-                                <li key={h.id}>
-                                    <a
-                                        href={`#${h.id}`}
-                                        onClick={goTo(h.id)}
-                                        className={`block py-1.5 -ml-px border-l transition-colors ${h.level === 3 ? 'pl-7' : 'pl-4'} ${activeId === h.id
-                                            ? 'border-madde-black dark:border-madde-white text-madde-black dark:text-madde-white'
-                                            : 'border-transparent text-madde-gray hover:text-madde-black dark:hover:text-madde-white'}`}
-                                    >
-                                        {h.title[language]}
-                                    </a>
-                                </li>
-                            ))}
+                        <ul className="border-l border-black/10 dark:border-white/10 max-h-[calc(100vh-12rem)] overflow-y-auto overscroll-contain pr-2">
+                            {headings.map(h => {
+                                if (h.level === 3 && h.id.split('-')[0] !== activeSection) return null;
+                                const on = activeId === h.id;
+                                return (
+                                    <li key={h.id}>
+                                        <a
+                                            href={`#${h.id}`}
+                                            onClick={goTo(h.id)}
+                                            className={`block py-1.5 -ml-px border-l transition-colors ${h.level === 3 ? 'pl-7 text-[11px]' : 'pl-4'} ${on
+                                                ? 'border-madde-black dark:border-madde-white text-madde-black dark:text-madde-white'
+                                                : 'border-transparent text-madde-gray hover:text-madde-black dark:hover:text-madde-white'}`}
+                                        >
+                                            {h.title[language]}
+                                        </a>
+                                    </li>
+                                );
+                            })}
                         </ul>
                     </nav>
                 </aside>

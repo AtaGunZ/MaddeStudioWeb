@@ -45,6 +45,7 @@ export type FragmentBlock =
   | { kind: 'figure'; src: ContentText; caption?: ContentText }
   | { kind: 'heading'; id: string; title: ContentText; level?: 2 | 3 }
   | { kind: 'specs'; rows: { label: ContentText; value: ContentText }[] }
+  | { kind: 'table'; columns: ContentText[]; rows: ContentText[][]; caption?: ContentText }
   | { kind: 'credits'; content: ContentText };
 
 export interface Fragment {
