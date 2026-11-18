@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'framer-motion';
 import { FRAGMENTS, TEXTS } from '../constants';
 import { FragmentBlock, Language } from '../types';
@@ -48,6 +48,20 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
     };
 
     const activeSection = activeId ? activeId.split('-')[0] : null;
+    const tocRef = useRef<HTMLUListElement>(null);
+
+    // keep the active entry in view inside the contents list, without moving the page
+    useEffect(() => {
+        const list = tocRef.current;
+        if (!list || !activeId) return;
+        const item = list.querySelector<HTMLElement>(`[data-toc="${activeId}"]`);
+        if (!item) return;
+        const top = item.offsetTop - list.offsetTop;
+        const pad = list.clientHeight * 0.3;
+        if (top < list.scrollTop + pad || top + item.offsetHeight > list.scrollTop + list.clientHeight - pad) {
+            list.scrollTo({ top: Math.max(0, top - pad), behavior: 'smooth' });
+        }
+    }, [activeId]);
     const tocLabel = language === Language.TR ? 'İçindekiler' : 'Contents';
 
     if (!fragment) return null;
@@ -292,16 +306,17 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                 <aside className="hidden lg:block">
                     <nav className="sticky top-32 font-mono text-xs" aria-label={tocLabel}>
                         <p className="uppercase tracking-widest text-madde-gray mb-4">{tocLabel}</p>
-                        <ul className="border-l border-black/10 dark:border-white/10 max-h-[calc(100vh-12rem)] overflow-y-auto overscroll-contain pr-2">
+                        <ul ref={tocRef} className="relative border-l border-black/10 dark:border-white/10 max-h-[calc(100vh-12rem)] overflow-y-auto overscroll-contain pb-10 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [mask-image:linear-gradient(to_bottom,black_calc(100%-4rem),transparent)]">
                             {headings.map(h => {
                                 if (h.level === 3 && h.id.split('-')[0] !== activeSection) return null;
                                 const on = activeId === h.id;
                                 return (
-                                    <li key={h.id}>
+                                    <li key={h.id} data-toc={h.id}>
                                         <a
                                             href={`#${h.id}`}
                                             onClick={goTo(h.id)}
-                                            className={`block py-1.5 -ml-px border-l transition-colors ${h.level === 3 ? 'pl-7 text-[11px]' : 'pl-4'} ${on
+                                            title={h.title[language]}
+                                            className={`block py-1.5 -ml-px border-l transition-colors ${h.level === 3 ? 'pl-7 text-[11px] truncate' : 'pl-4'} ${on
                                                 ? 'border-madde-black dark:border-madde-white text-madde-black dark:text-madde-white'
                                                 : 'border-transparent text-madde-gray hover:text-madde-black dark:hover:text-madde-white'}`}
                                         >
