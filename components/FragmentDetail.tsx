@@ -98,6 +98,26 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                     >
                         {block.content[language].split('\n\n').map((para, pi) => {
                             const lines = para.split('\n');
+                            // numbered items ("- 1. …", "- 4 and 5, …", "1. …"): the number is the marker, no dash
+                            const NUM = /^(?:- )?(\d+(?:\s*(?:and|ve|&)\s*\d+)?)[.,:]?\s+([\s\S]*)$/;
+                            const numbered = lines.length > 1 && lines.every(l => (l.startsWith('- ') || /^\d+\.\s/.test(l)) && NUM.test(l));
+                            if (numbered) {
+                                return (
+                                    <ol key={pi} className="list-none mb-6 last:mb-0 space-y-3">
+                                        {lines.map((l, li) => {
+                                            const m = l.match(NUM)!;
+                                            return (
+                                                <li key={li} className="flex gap-4 text-base md:text-lg leading-[1.8] text-madde-gray dark:text-gray-300 font-light">
+                                                    <span className="shrink-0 min-w-[2.75rem] font-mono text-xs md:text-[13px] pt-[0.4em] text-madde-black dark:text-madde-white tabular-nums">
+                                                        {m[1].replace(/\s*(and|ve|&)\s*/, '–')}
+                                                    </span>
+                                                    <span>{inline(m[2])}</span>
+                                                </li>
+                                            );
+                                        })}
+                                    </ol>
+                                );
+                            }
                             if (lines.every(l => l.startsWith('- '))) {
                                 return (
                                     <ul key={pi} className="list-none mb-6 last:mb-0 space-y-2">
