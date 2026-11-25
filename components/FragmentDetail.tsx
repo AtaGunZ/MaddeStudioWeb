@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
+import { createPortal } from 'react-dom';
 import { FRAGMENTS, TEXTS } from '../constants';
 import { FragmentBlock, Language } from '../types';
 import { useParams } from 'react-router-dom';
@@ -63,6 +64,37 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
         }
     }, [activeId]);
     const tocLabel = language === Language.TR ? 'İçindekiler' : 'Contents';
+
+    // Lightbox: every zoomable image on the page, in reading order
+    const shots: { src: string; label?: string; caption?: string }[] = [];
+    for (const b of fragment?.blocks ?? []) {
+        if (b.kind === 'figure') shots.push({ src: b.src[language], caption: b.caption?.[language] });
+        if (b.kind === 'cards') for (const c of b.items) {
+            if (c.media.type === 'image') shots.push({ src: c.media.src, label: c.label[language], caption: c.caption?.[language] });
+            if (c.media.type === 'sequence') for (const f of c.media.frames) shots.push({ src: f.src, label: `${c.label[language]} · ${f.label}` });
+        }
+    }
+    const [lb, setLb] = useState<number | null>(null);
+    const openShot = (src: string) => (e: React.MouseEvent) => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button !== 0) return; // keep "open in new tab" on modifier clicks
+        e.preventDefault();
+        const idx = shots.findIndex(s => s.src === src);
+        if (idx >= 0) setLb(idx);
+    };
+    useEffect(() => {
+        if (lb === null) return;
+        const onKey = (e: KeyboardEvent) => {
+            if (e.key === 'Escape') setLb(null);
+            if (e.key === 'ArrowRight') setLb(i => (i === null ? i : (i + 1) % shots.length));
+            if (e.key === 'ArrowLeft') setLb(i => (i === null ? i : (i - 1 + shots.length) % shots.length));
+        };
+        const prev = document.body.style.overflow;
+        document.body.style.overflow = 'hidden';
+        window.addEventListener('keydown', onKey);
+        return () => { window.removeEventListener('keydown', onKey); document.body.style.overflow = prev; };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [lb === null, shots.length]);
+    const step = (d: number) => (e: React.MouseEvent) => { e.stopPropagation(); setLb(i => (i === null ? i : (i + d + shots.length) % shots.length)); };
 
     if (!fragment) return null;
 
@@ -182,7 +214,7 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                         transition={{ duration: 1, ease: 'easeInOut' }}
                         className="w-full"
                     >
-                        <a href={block.src[language]} target="_blank" rel="noopener" className="block cursor-zoom-in">
+                        <a href={block.src[language]} onClick={openShot(block.src[language])} className="block cursor-zoom-in">
                             <img decoding="async" src={block.src[language]} alt={block.caption?.[language] ?? ''} className="w-full h-auto" />
                         </a>
                         {block.caption && (
@@ -209,7 +241,7 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                                     className={`group flex flex-col border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 transition-colors duration-500 ${card.wide ? 'md:col-span-2' : ''}`}
                                 >
                                     {card.media.type === 'image' && (
-                                        <a href={card.media.src} target="_blank" rel="noopener" className="block aspect-video overflow-hidden bg-black cursor-zoom-in">
+                                        <a href={card.media.src} onClick={openShot(card.media.src)} className="block aspect-video overflow-hidden bg-black cursor-zoom-in">
                                             <img decoding="async" src={card.media.src} alt={card.label[language]} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" />
                                         </a>
                                     )}
@@ -221,7 +253,7 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                                     {card.media.type === 'sequence' && (
                                         <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-black/10 dark:bg-white/10">
                                             {card.media.frames.map(f => (
-                                                <a key={f.src} href={f.src} target="_blank" rel="noopener" className="relative block aspect-video overflow-hidden bg-black cursor-zoom-in">
+                                                <a key={f.src} href={f.src} onClick={openShot(f.src)} className="relative block aspect-video overflow-hidden bg-black cursor-zoom-in">
                                                     <img loading="lazy" decoding="async" src={f.src} alt={f.label} className="w-full h-full object-cover" />
                                                     <span className="absolute left-2 bottom-1.5 font-mono text-[10px] tracking-wider text-white/70 tabular-nums">{f.label}</span>
                                                 </a>
@@ -400,6 +432,54 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                 </aside>
             )}
             </div>
+
+            {createPortal(
+                <AnimatePresence>
+                    {lb !== null && shots[lb] && (
+                        <motion.div
+                            key="lightbox"
+                            role="dialog"
+                            aria-modal="true"
+                            initial={{ opacity: 0 }}
+                            animate={{ opacity: 1 }}
+                            exit={{ opacity: 0 }}
+                            transition={{ duration: 0.35, ease: 'easeOut' }}
+                            onClick={() => setLb(null)}
+                            className="fixed inset-0 z-[200] flex flex-col bg-madde-paper dark:bg-madde-black text-madde-black dark:text-madde-white cursor-zoom-out"
+                        >
+                            <div className="flex items-center justify-between px-6 md:px-10 py-5 font-mono text-xs text-madde-gray">
+                                <span className="tabular-nums">{String(lb + 1).padStart(2, '0')} / {String(shots.length).padStart(2, '0')}</span>
+                                <button type="button" onClick={() => setLb(null)} aria-label="Close" className="uppercase tracking-widest hover:text-madde-black dark:hover:text-madde-white transition-colors">
+                                    {language === Language.TR ? 'Kapat' : 'Close'} ✕
+                                </button>
+                            </div>
+                            <div className="relative flex-1 min-h-0 flex items-center justify-center px-4 md:px-20">
+                                <motion.img
+                                    key={shots[lb].src}
+                                    initial={{ opacity: 0, scale: 0.985 }}
+                                    animate={{ opacity: 1, scale: 1 }}
+                                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                                    src={shots[lb].src}
+                                    alt={shots[lb].label ?? shots[lb].caption ?? ''}
+                                    onClick={e => e.stopPropagation()}
+                                    className="max-w-full max-h-full object-contain cursor-default select-none"
+                                />
+                                {shots.length > 1 && (
+                                    <>
+                                        <button type="button" onClick={step(-1)} aria-label="Previous" className="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center font-mono text-lg text-madde-gray hover:text-madde-black dark:hover:text-madde-white transition-colors">←</button>
+                                        <button type="button" onClick={step(1)} aria-label="Next" className="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 w-10 h-10 flex items-center justify-center font-mono text-lg text-madde-gray hover:text-madde-black dark:hover:text-madde-white transition-colors">→</button>
+                                    </>
+                                )}
+                            </div>
+                            <div className="px-6 md:px-10 py-5 min-h-[4.5rem] max-w-4xl" onClick={e => e.stopPropagation()}>
+                                {shots[lb].label && <p className="font-mono text-xs uppercase tracking-widest mb-1.5">{shots[lb].label}</p>}
+                                {shots[lb].caption && <p className="text-sm leading-relaxed text-madde-gray dark:text-gray-400 font-light">{shots[lb].caption}</p>}
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>,
+                document.body
+            )}
         </motion.article>
     );
 };

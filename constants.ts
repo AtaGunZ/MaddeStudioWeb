@@ -1051,8 +1051,8 @@ export const FRAGMENTS: Fragment[] = [
           },
           {
             media: { type: 'video', src: '/fragments/Immersive_LED_Room/visuals/transition.mp4', poster: '/fragments/Immersive_LED_Room/visuals/transition_poster.jpg' },
-            label: { [Language.EN]: 'Transition, close-up', [Language.TR]: 'Geçiş, yakın plan' },
-            caption: { [Language.EN]: 'Six seconds around the switch: the cold flow builds, flares, drops to dark and comes back as gold. The wide angle of the same moment is in the frames below.', [Language.TR]: 'Geçişin çevresindeki altı saniye: soğuk akış birikiyor, parlıyor, kararıyor ve altın olarak geri dönüyor. Aynı anın geniş açısı aşağıdaki karelerde.' }
+            label: { [Language.EN]: 'Light flow, transition', [Language.TR]: 'Işık akışı, geçiş' },
+            caption: { [Language.EN]: 'Six seconds around the switch: the cold flow builds, flares, drops to dark and comes back as gold. The frames at the bottom break the same move down.', [Language.TR]: 'Geçişin çevresindeki altı saniye: soğuk akış birikiyor, parlıyor, kararıyor ve altın olarak geri dönüyor. En alttaki kareler aynı hareketi tek tek gösteriyor.' }
           },
           {
             media: { type: 'image', src: '/fragments/Immersive_LED_Room/visuals/02_panel.jpg' },
