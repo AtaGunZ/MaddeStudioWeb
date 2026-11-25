@@ -193,6 +193,56 @@ export const FragmentDetail: React.FC<FragmentDetailProps> = ({ language }) => {
                     </motion.figure>
                 );
 
+            case 'cards':
+                return (
+                    <section key={i} className="w-full">
+                        {block.title && (
+                            <p className="mb-4 font-mono text-xs uppercase tracking-widest text-madde-gray">{block.title[language]}</p>
+                        )}
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
+                            {block.items.map((card, ci) => (
+                                <motion.figure
+                                    key={ci}
+                                    initial={{ opacity: 0, y: 12 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    transition={{ duration: 0.9, delay: 0.08 * ci, ease: [0.16, 1, 0.3, 1] }}
+                                    className={`group flex flex-col border border-black/10 dark:border-white/10 hover:border-black/30 dark:hover:border-white/30 transition-colors duration-500 ${card.wide ? 'md:col-span-2' : ''}`}
+                                >
+                                    {card.media.type === 'image' && (
+                                        <a href={card.media.src} target="_blank" rel="noopener" className="block aspect-video overflow-hidden bg-black cursor-zoom-in">
+                                            <img decoding="async" src={card.media.src} alt={card.label[language]} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-[1.02]" />
+                                        </a>
+                                    )}
+                                    {card.media.type === 'video' && (
+                                        <div className="aspect-video overflow-hidden bg-black">
+                                            <video src={card.media.src} poster={card.media.poster} autoPlay muted loop playsInline preload="metadata" className="w-full h-full object-cover" />
+                                        </div>
+                                    )}
+                                    {card.media.type === 'sequence' && (
+                                        <div className="grid grid-cols-2 md:grid-cols-4 gap-px bg-black/10 dark:bg-white/10">
+                                            {card.media.frames.map(f => (
+                                                <a key={f.src} href={f.src} target="_blank" rel="noopener" className="relative block aspect-video overflow-hidden bg-black cursor-zoom-in">
+                                                    <img loading="lazy" decoding="async" src={f.src} alt={f.label} className="w-full h-full object-cover" />
+                                                    <span className="absolute left-2 bottom-1.5 font-mono text-[10px] tracking-wider text-white/70 tabular-nums">{f.label}</span>
+                                                </a>
+                                            ))}
+                                        </div>
+                                    )}
+                                    <figcaption className="flex gap-4 p-4 md:p-5 border-t border-black/10 dark:border-white/10">
+                                        <span className="shrink-0 font-mono text-xs text-madde-gray tabular-nums pt-px">{String(ci + 1).padStart(2, '0')}</span>
+                                        <span className="flex flex-col gap-1.5">
+                                            <span className="font-mono text-xs uppercase tracking-widest text-madde-black dark:text-madde-white">{card.label[language]}</span>
+                                            {card.caption && (
+                                                <span className="text-sm leading-relaxed text-madde-gray dark:text-gray-400 font-light">{card.caption[language]}</span>
+                                            )}
+                                        </span>
+                                    </figcaption>
+                                </motion.figure>
+                            ))}
+                        </div>
+                    </section>
+                );
+
             case 'heading': {
                 const sub = block.level === 3;
                 return (

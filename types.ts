@@ -38,8 +38,19 @@ export interface Service {
   image: string;
 }
 
+export type VisualCard = {
+  media:
+    | { type: 'image'; src: string }
+    | { type: 'video'; src: string; poster?: string }
+    | { type: 'sequence'; frames: { src: string; label: string }[] };
+  label: ContentText;
+  caption?: ContentText;
+  wide?: boolean;
+};
+
 export type FragmentBlock =
   | { kind: 'text'; content: ContentText }
+  | { kind: 'cards'; title?: ContentText; items: VisualCard[] }
   | { kind: 'image'; src: string }
   | { kind: 'image-pair'; srcs: [string, string] }
   | { kind: 'figure'; src: ContentText; caption?: ContentText }

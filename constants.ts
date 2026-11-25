@@ -1035,14 +1035,61 @@ export const FRAGMENTS: Fragment[] = [
     image: '/fragments/Immersive_LED_Room/cover.svg',
     blocks: [
       {
+        kind: 'cards',
+        title: { [Language.EN]: 'From the scenes · Unreal Engine 5.8', [Language.TR]: 'Sahnelerden · Unreal Engine 5.8' },
+        items: [
+          {
+            media: { type: 'image', src: '/fragments/Immersive_LED_Room/visuals/01_core.jpg' },
+            label: { [Language.EN]: 'Core hall', [Language.TR]: 'Çekirdek salonu' },
+            caption: { [Language.EN]: 'The central scene. The brightest light sits in the core and its feed lines; the columns behind set the depth.', [Language.TR]: 'Merkez sahne. En parlak ışık çekirdekte ve besleme hatlarında; arkadaki kolonlar derinliği kuruyor.' },
+            wide: true
+          },
+          {
+            media: { type: 'video', src: '/fragments/Immersive_LED_Room/visuals/floor_pass.mp4' },
+            label: { [Language.EN]: 'Core hall, motion preview', [Language.TR]: 'Çekirdek salonu, hareket önizlemesi' },
+            caption: { [Language.EN]: '1080p preview of the camera move. Final files are rendered surface by surface at exact LED resolution (section 11).', [Language.TR]: 'Kamera hareketinin 1080p önizlemesi. Teslim dosyaları yüzey yüzey, tam LED çözünürlüğünde render edilir (bölüm 11).' }
+          },
+          {
+            media: { type: 'video', src: '/fragments/Immersive_LED_Room/visuals/transition.mp4', poster: '/fragments/Immersive_LED_Room/visuals/transition_poster.jpg' },
+            label: { [Language.EN]: 'Transition, close-up', [Language.TR]: 'Geçiş, yakın plan' },
+            caption: { [Language.EN]: 'Six seconds around the switch: the cold flow builds, flares, drops to dark and comes back as gold. The wide angle of the same moment is in the frames below.', [Language.TR]: 'Geçişin çevresindeki altı saniye: soğuk akış birikiyor, parlıyor, kararıyor ve altın olarak geri dönüyor. Aynı anın geniş açısı aşağıdaki karelerde.' }
+          },
+          {
+            media: { type: 'image', src: '/fragments/Immersive_LED_Room/visuals/02_panel.jpg' },
+            label: { [Language.EN]: 'Control panel', [Language.TR]: 'Kontrol paneli' },
+            caption: { [Language.EN]: 'The touch point lives inside the scene as a real panel: power down, power up, confirm.', [Language.TR]: 'Dokunma noktası sahnenin içinde gerçek bir panel olarak duruyor: güç azalt, güç artır, onay.' }
+          },
+          {
+            media: { type: 'image', src: '/fragments/Immersive_LED_Room/visuals/03_corridor.jpg' },
+            label: { [Language.EN]: 'Gallery walkway', [Language.TR]: 'Galeri koridoru' },
+            caption: { [Language.EN]: 'Practical strip lights and a glass wall onto the hall; glow from under the grating ties the levels together.', [Language.TR]: 'Sahnedeki şerit lambalar ve salona bakan cam duvar; ızgaranın altından gelen ışık katları birbirine bağlıyor.' }
+          },
+          {
+            media: { type: 'image', src: '/fragments/Immersive_LED_Room/visuals/04_grating.jpg' },
+            label: { [Language.EN]: 'Upper deck', [Language.TR]: 'Üst güverte' },
+            caption: { [Language.EN]: 'Looking down through the grating. Low key: warm pipes against cold light from below.', [Language.TR]: 'Izgaradan aşağı bakış. Düşük ışık: sıcak borular, alttan gelen soğuk ışığa karşı.' },
+            wide: true
+          },
+          {
+            media: {
+              type: 'sequence',
+              frames: ['0000', '0001', '0440', '0524', '0526', '0540', '0575', '0900'].map(n => ({ src: `/fragments/Immersive_LED_Room/visuals/frame_${n}.jpg`, label: n }))
+            },
+            label: { [Language.EN]: 'Light flow, frames 0000–0900', [Language.TR]: 'Işık akışı, kare 0000–0900' },
+            caption: { [Language.EN]: 'One camera, eight frames. Streams run from every side into the core while the room turns from cold blue to warm gold.', [Language.TR]: 'Tek kamera, sekiz kare. Akışlar her yönden çekirdeğe ilerliyor; oda soğuk maviden sıcak altına dönüyor.' },
+            wide: true
+          }
+        ]
+      },
+      {
         kind: 'text',
         content: {
-          [Language.EN]: `These notes document the engineering of an immersive room we are building: an L-shaped space where every surface is LED. Five walls, the ceiling and the floor all carry image, and visitors trigger the next moment by touching the main wall. The story told inside the room is left out on purpose. This document is about the room as a machine: how its pixels are counted, how the image reaches them, how a touch turns into a response, and what it takes to keep it running all day.
+          [Language.EN]: `These notes document the engineering of an immersive room we are building for [TENMAK](https://www.tenmak.gov.tr/), the Turkish Energy, Nuclear and Mineral Research Agency: an L-shaped space where every surface is LED. Five walls, the ceiling and the floor all carry image, and visitors trigger the next moment by touching the main wall. The story told inside the room is left out on purpose. This document is about the room as a machine: how its pixels are counted, how the image reaches them, how a touch turns into a response, and what it takes to keep it running all day.
 
 It is the web edition of a longer research study, with every number recomputed for the room as it is now built. Every finding carries a short marker so you can see how solid it is: (verified) means a primary document was read or a second reviewer confirmed it; (single source) means one unreviewed pass; (estimate) means our own calculation or reading; (unknown) means an open point. No hardware was measured for this study. All GPU timings are model results, and all video sources were read as transcripts.
 
 The six drawing sheets are generated from the same data file that drives our previews and render setup, so every number on them is the number we build to. Click any sheet to open it at full size.`,
-          [Language.TR]: `Bu notlar, üzerinde çalıştığımız immersif bir odanın mühendisliğini anlatıyor: her yüzeyi LED olan L biçimli bir mekân. Beş duvar, tavan ve zemin görüntü taşıyor; ziyaretçi ana duvara dokunarak bir sonraki anı başlatıyor. Odada anlatılan hikâyeyi bilerek dışarıda bıraktık. Bu doküman odayı bir makine olarak ele alıyor: pikselleri nasıl sayılıyor, görüntü onlara nasıl ulaşıyor, bir dokunuş nasıl tepkiye dönüşüyor ve bütün gün çalışır kalması için ne gerekiyor.
+          [Language.TR]: `Bu notlar, [TENMAK](https://www.tenmak.gov.tr/) (Türkiye Enerji, Nükleer ve Maden Araştırma Kurumu) için kurduğumuz immersif bir odanın mühendisliğini anlatıyor: her yüzeyi LED olan L biçimli bir mekân. Beş duvar, tavan ve zemin görüntü taşıyor; ziyaretçi ana duvara dokunarak bir sonraki anı başlatıyor. Odada anlatılan hikâyeyi bilerek dışarıda bıraktık. Bu doküman odayı bir makine olarak ele alıyor: pikselleri nasıl sayılıyor, görüntü onlara nasıl ulaşıyor, bir dokunuş nasıl tepkiye dönüşüyor ve bütün gün çalışır kalması için ne gerekiyor.
 
 Daha uzun bir araştırma çalışmasının web baskısı; bütün sayılar odanın bugünkü ölçülerine göre yeniden hesaplandı. Her bulgunun yanında ne kadar sağlam olduğunu gösteren kısa bir işaret var: (doğrulandı) birincil belge okundu ya da ikinci bir gözden geçiren onayladı; (tek kaynak) denetlenmemiş tek geçiş; (çıkarım) kendi hesabımız ya da yorumumuz; (bilinmiyor) açık nokta. Bu çalışma için hiçbir donanımda ölçüm yapılmadı. Bütün GPU süreleri modeldir; videoların yalnızca dökümleri okundu.
 
