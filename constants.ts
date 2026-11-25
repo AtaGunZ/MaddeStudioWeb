@@ -1032,7 +1032,7 @@ export const FRAGMENTS: Fragment[] = [
       [Language.TR]: 'Teknik Doküman'
     },
     date: '11.2026',
-    image: '/fragments/Immersive_LED_Room/cover.svg',
+    image: '/fragments/Immersive_LED_Room/cover.jpg',
     blocks: [
       {
         kind: 'cards',
